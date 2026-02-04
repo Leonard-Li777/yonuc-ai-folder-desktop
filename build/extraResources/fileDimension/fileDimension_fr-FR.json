@@ -1,0 +1,826 @@
+{
+  "file_dimensions": [
+    {
+      "name": "Type de fichier",
+      "level": 1,
+      "tags": [
+        "Document",
+        "E-book",
+        "Image",
+        "Vidéo",
+        "Audio",
+        "Archive",
+        "Code source",
+        "Script",
+        "Programme",
+        "Raccourci",
+        "Police",
+        "Fichier système",
+        "Machine virtuelle",
+        "Base de données",
+        "Image disque"
+      ],
+      "description": "Classification du format de base du fichier",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Extension",
+        "Type MIME",
+        "Signature de fichier"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Usage du fichier",
+      "level": 1,
+      "tags": [
+        "Document de travail",
+        "Matériel d'étude",
+        "Jeu et divertissement",
+        "Projet créatif",
+        "Récit de voyage",
+        "Archives financières",
+        "Maintenance système",
+        "Archives de communication",
+        "Note personnelle"
+      ],
+      "description": "Scénario d'utilisation principal du fichier",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Chemin de stockage",
+        "Modèle de nommage",
+        "Application associée"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Source du fichier",
+      "level": 1,
+      "tags": [
+        "Créé localement",
+        "Téléchargement Web",
+        "Importation d'appareil",
+        "Communication reçue",
+        "Sync Cloud",
+        "Généré automatiquement",
+        "Numérisé",
+        "Pièce jointe d'e-mail"
+      ],
+      "description": "Méthode d'acquisition originale du fichier",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Caractéristiques du chemin",
+        "Journal de transfert"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Auteur",
+      "level": 1,
+      "tags": [],
+      "description": "Créateur ou contributeur du fichier",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "Métadonnées",
+        "Signature numérique",
+        "Filigrane"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Sous-type de document",
+      "level": 2,
+      "tags": [
+        "Document texte",
+        "Feuille de calcul",
+        "Présentation",
+        "PDF",
+        "Note",
+        "Formulaire"
+      ],
+      "description": "Classification professionnelle des documents de bureau",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Caractéristiques du format",
+        "Identifiant logiciel"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Document"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sous-type d'image",
+      "level": 2,
+      "tags": [
+        "Photographie",
+        "Capture d'écran",
+        "Projet de design",
+        "Icône d'application",
+        "Mème",
+        "Image médicale",
+        "Dessin CAD"
+      ],
+      "description": "Classification professionnelle du contenu d'image",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Données EXIF",
+        "Reconnaissance de contenu"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sous-type vidéo",
+      "level": 2,
+      "tags": [
+        "Cinéma et TV",
+        "Vidéo éducative",
+        "Capture d'écran",
+        "Vidéo courte",
+        "Surveillance",
+        "Enregistrement de réunion"
+      ],
+      "description": "Classification professionnelle du contenu vidéo",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "Caractéristiques de durée",
+        "Analyse d'images clés"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Vidéo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sous-type audio",
+      "level": 2,
+      "tags": [
+        "Musique",
+        "Podcast",
+        "Livre audio",
+        "Mémo vocal",
+        "Effet sonore",
+        "Enregistrement de réunion"
+      ],
+      "description": "Classification professionnelle du contenu audio",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Caractéristiques spectrales",
+        "Métadonnées"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Audio"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Format d'archive",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "Classification technique des archives",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "Algorithme de compression",
+        "Signature d'en-tête de fichier"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Archive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plateforme",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "Pilote"
+      ],
+      "description": "Plateforme cible du fichier exécutable",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "Caractéristiques de la plateforme",
+        "Certificat de signature"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Programme"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Langage de script",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "Batch",
+        "SQL"
+      ],
+      "description": "Classification technique des fichiers de script",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "Caractéristiques syntaxiques",
+        "Chemin de l'interpréteur"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Script"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Type de fichier système",
+      "level": 2,
+      "tags": [
+        "Fichier de config",
+        "Log",
+        "Cache",
+        "Fichier temporaire",
+        "Secteur de boot",
+        "Registre"
+      ],
+      "description": "Classification fonctionnelle des fichiers système clés",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "Emplacement du chemin",
+        "Caractéristiques des permissions"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Fichier système"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plateforme VM",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "Plateforme technique de l'environnement de virtualisation",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "Caractéristiques du fichier",
+        "Signature de plateforme"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Machine virtuelle"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Format de base de données",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "Sauvegarde de données"
+      ],
+      "description": "Format technique des fichiers de base de données",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "Signature de fichier",
+        "Caractéristiques structurelles"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Base de données"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Type d'image disque",
+      "level": 2,
+      "tags": [
+        "Image système",
+        "Image de données",
+        "Image disque optique"
+      ],
+      "description": "Classification de l'usage des images disque",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "Nom du volume",
+        "Structure de partition"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Image disque"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Emplacement",
+      "level": 2,
+      "tags": [],
+      "description": "Lieu géographique associé au contenu",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "Coordonnées GPS",
+        "Reconnaissance de monuments"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "Image",
+            "Vidéo"
+          ]
+        },
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Récit de voyage",
+            "Projet créatif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Niveau de sécurité",
+      "level": 2,
+      "tags": [
+        "Public",
+        "Interne",
+        "Confidentiel",
+        "Top Secret"
+      ],
+      "description": "Classification du niveau de confidentialité du fichier",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "État du cryptage",
+        "Paramètres de permissions"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Document de travail",
+            "Archives financières"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Statut de traitement",
+      "level": 2,
+      "tags": [
+        "Brouillon",
+        "En révision",
+        "Terminé",
+        "Archivé",
+        "À réviser"
+      ],
+      "description": "Statut du workflow du fichier",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "Heure de modification",
+        "Marque de version"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Document de travail",
+            "Projet créatif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Statut de copyright",
+      "level": 2,
+      "tags": [
+        "Original",
+        "Sous licence",
+        "Domaine public",
+        "Droits restreints"
+      ],
+      "description": "Statut de propriété du copyright du fichier",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "Fichier de licence",
+        "Détection de filigrane"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Projet créatif",
+            "Matériel d'étude"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Contenu de voyage",
+      "level": 2,
+      "tags": [
+        "Paysage naturel",
+        "Architecture urbaine",
+        "Activité humaine",
+        "Gastronomie locale",
+        "Site historique",
+        "Activité de plein air"
+      ],
+      "description": "Classification du contenu des récits de voyage",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "Reconnaissance de scène",
+        "Caractéristiques temporelles"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Récit de voyage"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Type financier",
+      "level": 2,
+      "tags": [
+        "Justificatif de revenus",
+        "Justificatif de dépenses",
+        "Preuve d'actifs",
+        "Document fiscal",
+        "Contrat",
+        "Facture"
+      ],
+      "description": "Type d'activité des fichiers financiers",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Reconnaissance de reçu",
+        "Modèle de montant"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Archives financières"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Type de jeu",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "Aventure",
+        "Puzzle",
+        "Tower Defense",
+        "Stratégie",
+        "Gestion",
+        "Romance",
+        "Compétition",
+        "MOBA",
+        "Combat",
+        "Tir",
+        "Action",
+        "Roguelike",
+        "Rural",
+        "Simulation"
+      ],
+      "description": "Type de jeu",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "Jeu"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Jeu et divertissement"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Domaine académique",
+      "level": 2,
+      "tags": [
+        "Mathématiques",
+        "Physique",
+        "Chimie",
+        "Biologie",
+        "Informatique",
+        "Apprentissage des langues",
+        "Histoire",
+        "Art et Design",
+        "Ingénierie",
+        "Économie"
+      ],
+      "description": "Classification du domaine académique des matériels d'étude",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "Densité de termes académiques",
+        "Structure de manuel",
+        "ID plateforme de cours"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Usage du fichier",
+          "triggerTags": [
+            "Matériel d'étude"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Type d'e-book",
+      "level": 2,
+      "tags": [
+        "Roman",
+        "Livre technique",
+        "Magazine",
+        "Manuel scolaire",
+        "Livre du domaine public"
+      ],
+      "description": "Classification du contenu des e-books",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "Structure des chapitres",
+        "Statut DRM"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Type de fichier",
+          "triggerTags": [
+            "E-book"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Genre / Thème",
+      "level": 3,
+      "tags": [
+        "Romance",
+        "Science-fiction",
+        "Fantaisie",
+        "Mystère",
+        "Suspense/Thriller",
+        "Voyage dans le temps",
+        "Xianxia",
+        "Histoire",
+        "Urbain",
+        "Famille",
+        "Lieu de travail",
+        "Idole",
+        "Wuxia",
+        "Drame",
+        "Biographie",
+        "Comédie",
+        "Policier",
+        "Horreur",
+        "Conte de fées",
+        "Animation",
+        "Documentaire",
+        "Nature",
+        "Humanités",
+        "Sports",
+        "Guérison",
+        "Vie",
+        "Voyage",
+        "Vulgarisation scientifique",
+        "Gastronomie",
+        "Court-métrage",
+        "Histoires de fantômes",
+        "Pornographie"
+      ],
+      "description": "Classification professionnelle des genres",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "Caractéristiques de durée",
+        "Analyse d'images clés",
+        "Caractéristiques de contenu"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Sous-type vidéo",
+          "triggerTags": [
+            "Cinéma et TV"
+          ]
+        },
+        {
+          "parentDimension": "Sous-type d'image",
+          "triggerTags": [
+            "Capture d'écran"
+          ]
+        },
+        {
+          "parentDimension": "Type d'e-book",
+          "triggerTags": [
+            "Roman"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Genre musical",
+      "level": 3,
+      "tags": [
+        "Pop",
+        "Rock",
+        "Électronique",
+        "Hip-Hop",
+        "Folk",
+        "Classique",
+        "Jazz",
+        "Blues",
+        "Métal",
+        "Punk",
+        "Country",
+        "Rap",
+        "Style ancien",
+        "Instrumental",
+        "Latin",
+        "Symphonie"
+      ],
+      "description": "Genre de musique",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Caractéristiques de durée",
+        "Caractéristiques de contenu"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Sous-type audio",
+          "triggerTags": [
+            "Musique"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Qualité du fichier",
+      "level": 1,
+      "tags": [
+        "Haute qualité",
+        "Qualité moyenne",
+        "Basse qualité"
+      ],
+      "description": "Évaluation de la qualité du contenu du fichier",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Qualité du contenu",
+        "Qualité technique",
+        "Qualité esthétique"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Tags de contenu",
+      "level": 1,
+      "tags": [],
+      "description": "Mots-clés extraits du contenu du fichier ou des descriptions multimodales",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Contenu textuel",
+        "Description visuelle",
+        "Transcription vocale"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}

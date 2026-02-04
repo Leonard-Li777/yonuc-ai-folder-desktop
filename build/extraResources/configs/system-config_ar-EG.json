@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [
+    4,
+    28
+  ],
+  "latestNews": [
+    {
+      "text": "رسالة اختبار محلية: مرحبًا بك في نظام إدارة المجلدات Yonuc AI!",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "رسالة اختبار محلية: تم إصدار إصدار جديد، يدعم نظام العلامات متعدد اللغات",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "رسالة اختبار محلية: راجع الوثائق لمعرفة المزيد من الميزات",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

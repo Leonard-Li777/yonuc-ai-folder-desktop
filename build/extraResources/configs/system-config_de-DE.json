@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [4, 28],
+  "latestNews": [
+    {
+      "text": "Lokale Testnachricht: Willkommen beim Yonuc AI Ordner-Verwaltungssystem!",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "Lokale Testnachricht: Neue Version veröffentlicht, unterstützt mehrsprachiges Tag-System",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "Lokale Testnachricht: Weitere Funktionen finden Sie in der Dokumentation",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

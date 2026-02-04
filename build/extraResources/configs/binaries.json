@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "llamaCppVersion": "b7868",
+  "lastUpdated": "2026-01-29T04:54:16.963Z",
+  "downloadedAt": "2026-01-29T04:54:16.964Z",
+  "platforms": {
+    "win32": {
+      "x64": [
+        {
+          "name": "llama-bin-win-cuda-x64",
+          "patterns": [
+            "llama-*-bin-win-cuda-13.*-x64.zip",
+            "cudart-llama-bin-win-cuda-13.*-x64.zip"
+          ],
+          "description": "Windows x64 CUDA 13.x 版本"
+        },
+        {
+          "name": "llama-bin-win-vulkan-x64",
+          "patterns": [
+            "llama-*-bin-win-vulkan-x64.zip",
+            "llama-*-bin-win-*vulkan*-x64.zip"
+          ],
+          "description": "Windows x64 Vulkan 版本"
+        }
+      ]
+    },
+    "darwin": {
+      "arm64": [
+        {
+          "name": "llama-bin-macos-arm64",
+          "patterns": [
+            "llama-*-bin-macos-arm64.zip",
+            "llama-*-bin-darwin-arm64.zip"
+          ],
+          "description": "macOS Apple Silicon 版本"
+        }
+      ],
+      "x64": [
+        {
+          "name": "llama-bin-macos-x64",
+          "patterns": [
+            "llama-*-bin-macos-x64.zip",
+            "llama-*-bin-darwin-x64.zip"
+          ],
+          "description": "macOS Intel 版本"
+        }
+      ]
+    },
+    "linux": {
+      "x64": [
+        {
+          "name": "llama-bin-ubuntu-vulkan-x64",
+          "patterns": [
+            "llama-*-bin-ubuntu-x64.zip",
+            "llama-*-bin-linux-x64.zip"
+          ],
+          "description": "Ubuntu x64 Vulkan 版本"
+        }
+      ]
+    }
+  }
+}

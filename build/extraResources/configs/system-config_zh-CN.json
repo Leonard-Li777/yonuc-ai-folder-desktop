@@ -1,0 +1,19 @@
+﻿{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [4, 28],
+  "latestNews": [
+    {
+      "text": "本地测试消息: 欢迎使用 Yonuc AI 文件夹管理系统!",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "本地测试消息: 新版本已发布,支持多语言标签系统",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "本地测试消息: 查看使用文档了解更多功能",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

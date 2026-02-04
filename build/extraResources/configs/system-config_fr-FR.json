@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [4, 28],
+  "latestNews": [
+    {
+      "text": "Message de test local : Bienvenue dans le système de gestion de dossiers Yonuc AI !",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "Message de test local : Nouvelle version publiée, supporte le système de tags multilingue",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "Message de test local : Consultez la documentation pour plus de fonctionnalités",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

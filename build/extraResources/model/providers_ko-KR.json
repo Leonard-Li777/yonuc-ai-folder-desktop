@@ -1,0 +1,1483 @@
+[
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "baseUrl": "https://api.openai.com",
+    "models": [
+      {
+        "id": "gpt-4o",
+        "name": "GPT-4o (멀티모달)",
+        "description": "OpenAI의 최신 멀티모달 모델, 텍스트, 이미지, 오디오 처리 지원",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "gpt-4o-realtime-preview",
+        "name": "GPT-4o 실시간 프리뷰",
+        "description": "실시간 오디오 및 비디오 처리를 지원하는 멀티모달 모델",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "비디오",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "high",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "500ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      },
+      {
+        "id": "gpt-4-turbo",
+        "name": "GPT-4 Turbo",
+        "description": "OpenAI의 고효율 텍스트 처리 모델",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "baseUrl": "https://api.anthropic.com",
+    "models": [
+      {
+        "id": "claude-sonnet-4-5",
+        "name": "Claude Sonnet 4.5",
+        "description": "Anthropic의 고성능 멀티모달 모델",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "claude-haiku-4-5",
+        "name": "Claude Haiku 4.5",
+        "description": "Anthropic의 경량 멀티모달 모델",
+        "company": "Anthropic",
+        "parameterSize": "34B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "claude-opus-4-5",
+        "name": "Claude Opus 4.5",
+        "description": "Anthropic의 가장 강력한 멀티모달 모델",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      }
+    ]
+  },
+  {
+    "id": "gemini",
+    "name": "Google",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/",
+    "models": [
+      {
+        "id": "gemini-3-pro-preview",
+        "name": "Gemini 3 Pro 프리뷰",
+        "description": "Google의 최신 멀티모달 모델",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "비디오",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "350ms/1k tokens",
+          "quality": "excellent",
+          "score": 97
+        }
+      },
+      {
+        "id": "gemini-2.5-pro",
+        "name": "Gemini 2.5 Pro",
+        "description": "성능과 비용의 균형을 맞춘 Google의 멀티모달 모델",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "name": "Gemini 2.5 Flash",
+        "description": "Google의 고속 추론 모델",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      }
+    ]
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "baseUrl": "https://api.x.ai",
+    "models": [
+      {
+        "id": "grok-4",
+        "name": "Grok-4",
+        "description": "xAI의 고속 추론 모델",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "excellent",
+          "score": 90
+        }
+      },
+      {
+        "id": "grok-3",
+        "name": "Grok-3",
+        "description": "xAI의 표준 추론 모델",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 88
+        }
+      }
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "baseUrl": "https://openrouter.ai/api",
+    "models": []
+  },
+  {
+    "id": "iflow",
+    "name": "iFlow (무료)",
+    "baseUrl": "https://apis.iflow.cn",
+    "models": [
+      {
+        "id": "qwen3-max",
+        "name": "Qwen 3 Max",
+        "description": "알리바바 클라우드의 가장 강력한 텍스트 처리 모델",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen3-vl-plus",
+        "name": "Qwen 3 VL Plus",
+        "description": "알리바바 클라우드의 시각 언어 처리 모델",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "alibaba",
+    "name": "알리바바 클라우드",
+    "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "models": [
+      {
+        "id": "qwen-max",
+        "name": "Qwen Max",
+        "description": "알리바바 클라우드의 가장 강력한 텍스트 처리 모델",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen-omni",
+        "name": "Qwen Omni",
+        "description": "알리바바 클라우드의 전 모달 처리 모델",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg",
+              "pcm"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "비디오",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "qwen-vl",
+        "name": "Qwen VL",
+        "description": "알리바바 클라우드의 시각 언어 처리 모델",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "volcengine",
+    "name": "화산엔진 (제한된 무료 할당량)",
+    "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+    "models": [
+      {
+        "id": "doubao-seed-1-6-251015",
+        "name": "두바오 Seed 1.6",
+        "description": "화산엔진의 가장 강력한 시각 처리 모델",
+        "company": "Volcengine",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "deepseek-r1-250528",
+        "name": "Deepseek R1",
+        "description": "강력한 텍스트 처리 모델",
+        "company": "Volcengine",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "tencent",
+    "name": "텐센트 클라우드",
+    "baseUrl": "https://api.hunyuan.cloud.tencent.com",
+    "models": [
+      {
+        "id": "hunyuan-pro",
+        "name": "혼원 Pro",
+        "description": "텐센트 클라우드의 가장 강력한 텍스트 처리 모델",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "hunyuan-vl",
+        "name": "혼원 VL",
+        "description": "텐센트 클라우드의 시각 언어 처리 모델",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "hunyuan-turbo",
+        "name": "혼원 Turbo",
+        "description": "텐센트 클라우드의 이미지 생성 모델",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "siliconflow",
+    "name": "SiliconFlow (일부 10B 이하는 무료)",
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "models": [
+      {
+        "id": "THUDM/GLM-4.1V-9B-Thinking",
+        "name": "GLM-4.1V-9B-Thinking (무료)",
+        "description": "SiliconFlow의 전 모달 처리 모델",
+        "company": "SiliconFlow",
+        "parameterSize": "8B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "modelscope",
+    "name": "ModelScope",
+    "baseUrl": "https://api-inference.modelscope.cn/v1",
+    "models": [
+      {
+        "id": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
+        "description": "ModelScope의 시각 언어 처리 모델",
+        "company": "ModelScope",
+        "parameterSize": "72B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "deepseek-ai/DeepSeek-R1",
+        "name": "DeepSeek-R1",
+        "description": "ModelScope의 텍스트 처리 모델",
+        "company": "ModelScope",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "deepseek",
+    "name": "Deepseek",
+    "baseUrl": "https://api.deepseek.com",
+    "models": [
+      {
+        "id": "deepseek-chat",
+        "name": "DeepSeek Chat",
+        "description": "Deepseek의 최상위 추론 모델",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "deepseek-reasoner",
+        "name": "DeepSeek Reasoner",
+        "description": "Deepseek의 희소 주의 모델",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "120ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "kimi",
+    "name": "Kimi",
+    "baseUrl": "https://api.moonshot.cn",
+    "models": [
+      {
+        "id": "kimi-k2-0711-preview",
+        "name": "Kimi K2 0711 프리뷰",
+        "description": "Kimi의 전 모달 처리 모델",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "오디오",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "비디오",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "moonshot-v1-auto",
+        "name": "Moonshot v1 자동",
+        "description": "Kimi의 최적화 모델 버전",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "zhipuai",
+    "name": "지푸 AI",
+    "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+    "models": [
+      {
+        "id": "glm-4.5-flash",
+        "name": "GLM-4.5-Flash",
+        "description": "지푸 AI의 기업급 텍스트 처리 모델",
+        "company": "Zhipu AI",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      },
+      {
+        "id": "glm-4.6v",
+        "name": "GLM-4.6V",
+        "description": "지푸 AI의 시각 추론 모델",
+        "company": "Zhipu AI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "이미지",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "비디오",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama (로컬)",
+    "baseUrl": "http://localhost:11434",
+    "models": [
+      {
+        "id": "goonsai/qwen2.5-3b-goonsai-nsfw-100k:latest",
+        "name": "Qwen2.5 3B NSFW",
+        "description": "Qwen2.5 기반 3B 모델, NSFW 콘텐츠 식별에 특화됨",
+        "company": "GoonsAI",
+        "parameterSize": "3B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "superdrew100/llama3-abliterated:latest",
+        "name": "Llama3 Abliterated",
+        "description": "추론 능력이 강화된 특수 훈련된 Llama3 모델",
+        "company": "SuperDrew100",
+        "parameterSize": "8B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "good",
+          "score": 87
+        }
+      },
+      {
+        "id": "nidumai/nidum-gemma-3-4b-it-uncensored:q6_k",
+        "name": "Gemma 3 4B Uncensored",
+        "description": "검열되지 않은 Gemma 3 모델, 개방형 대화 시나리오에 적합",
+        "company": "NidumAI",
+        "parameterSize": "4B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "텍스트",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "good",
+          "score": 86
+        }
+      }
+    ]
+  },
+  {
+    "id": "nvidia",
+    "baseUrl": "https://integrate.api.nvidia.com/v1",
+    "models": [
+      {
+        "id": "qwen/qwen3-coder-480b-a35b-instruct",
+        "company": "Alibaba Cloud",
+        "parameterSize": "480B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "텍스트"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "이미지"
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        },
+        "name": "Qwen3 Coder 480B (무료)",
+        "description": "NVIDIA 호스팅 Qwen3 Coder 모델"
+      },
+      {
+        "id": "nvidia/nemotron-nano-12b-v2-vl",
+        "company": "NVIDIA",
+        "parameterSize": "12B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "텍스트"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "이미지"
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 88
+        },
+        "name": "Nemotron Nano 12B VL (무료)",
+        "description": "NVIDIA 경량 시각 언어 모델"
+      },
+      {
+        "id": "microsoft/phi-4-multimodal-instruct",
+        "company": "Microsoft",
+        "parameterSize": "14B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "텍스트"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "이미지"
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 90
+        },
+        "name": "Phi-4 Multimodal (무료)",
+        "description": "Microsoft 다중 모달 Instruct 모델"
+      },
+      {
+        "id": "google/gemma-3-27b-it",
+        "company": "Google",
+        "parameterSize": "27B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "텍스트"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "이미지"
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        },
+        "name": "Gemma 3 27B IT (무료)",
+        "description": "Google Gemma 3 지시 미세 조정 모델"
+      }
+    ],
+    "name": "NVIDIA (무료)"
+  }
+]

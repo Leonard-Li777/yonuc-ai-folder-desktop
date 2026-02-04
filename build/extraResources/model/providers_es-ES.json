@@ -1,0 +1,1483 @@
+[
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "baseUrl": "https://api.openai.com",
+    "models": [
+      {
+        "id": "gpt-4o",
+        "name": "GPT-4o (Multimodal)",
+        "description": "El último modelo multimodal de OpenAI, soporta procesamiento de texto, imagen y audio",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "gpt-4o-realtime-preview",
+        "name": "GPT-4o Realtime Preview",
+        "description": "Modelo multimodal que soporta procesamiento de audio y vídeo en tiempo real",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Vídeo",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "high",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "500ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      },
+      {
+        "id": "gpt-4-turbo",
+        "name": "GPT-4 Turbo",
+        "description": "Modelo de procesamiento de texto de alta eficiencia de OpenAI",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "baseUrl": "https://api.anthropic.com",
+    "models": [
+      {
+        "id": "claude-sonnet-4-5",
+        "name": "Claude Sonnet 4.5",
+        "description": "Modelo multimodal de alto rendimiento de Anthropic",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "claude-haiku-4-5",
+        "name": "Claude Haiku 4.5",
+        "description": "Modelo multimodal ligero de Anthropic",
+        "company": "Anthropic",
+        "parameterSize": "34B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "claude-opus-4-5",
+        "name": "Claude Opus 4.5",
+        "description": "El modelo multimodal más potente de Anthropic",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      }
+    ]
+  },
+  {
+    "id": "gemini",
+    "name": "Google",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/",
+    "models": [
+      {
+        "id": "gemini-3-pro-preview",
+        "name": "Gemini 3 Pro Preview",
+        "description": "El último modelo multimodal de Google",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Vídeo",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "350ms/1k tokens",
+          "quality": "excellent",
+          "score": 97
+        }
+      },
+      {
+        "id": "gemini-2.5-pro",
+        "name": "Gemini 2.5 Pro",
+        "description": "Modelo multimodal equilibrado de Google para rendimiento y coste",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "name": "Gemini 2.5 Flash",
+        "description": "Modelo de inferencia rápida de Google",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      }
+    ]
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "baseUrl": "https://api.x.ai",
+    "models": [
+      {
+        "id": "grok-4",
+        "name": "Grok-4",
+        "description": "Modelo de inferencia rápida de xAI",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "excellent",
+          "score": 90
+        }
+      },
+      {
+        "id": "grok-3",
+        "name": "Grok-3",
+        "description": "Modelo de inferencia estándar de xAI",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 88
+        }
+      }
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "baseUrl": "https://openrouter.ai/api",
+    "models": []
+  },
+  {
+    "id": "iflow",
+    "name": "iFlow (Gratis)",
+    "baseUrl": "https://apis.iflow.cn",
+    "models": [
+      {
+        "id": "qwen3-max",
+        "name": "Qwen 3 Max",
+        "description": "El modelo de procesamiento de texto más potente de Alibaba Cloud",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen3-vl-plus",
+        "name": "Qwen 3 VL Plus",
+        "description": "Modelo de visión-lenguaje de Alibaba Cloud",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "alibaba",
+    "name": "Alibaba Cloud",
+    "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "models": [
+      {
+        "id": "qwen-max",
+        "name": "Qwen Max",
+        "description": "El modelo de procesamiento de texto más potente de Alibaba Cloud",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen-omni",
+        "name": "Qwen Omni",
+        "description": "Modelo de procesamiento omni-modal de Alibaba Cloud",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg",
+              "pcm"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Vídeo",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "qwen-vl",
+        "name": "Qwen VL",
+        "description": "Modelo de visión-lenguaje de Alibaba Cloud",
+        "company": "Alibaba",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "volcengine",
+    "name": "Volcengine (Cuota gratuita limitada)",
+    "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+    "models": [
+      {
+        "id": "doubao-seed-1-6-251015",
+        "name": "Doubao Seed 1.6",
+        "description": "El modelo de procesamiento de visión más potente de Volcengine",
+        "company": "Volcengine",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "deepseek-r1-250528",
+        "name": "Deepseek R1",
+        "description": "Potente modelo de procesamiento de texto",
+        "company": "Volcengine",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "tencent",
+    "name": "Tencent Cloud",
+    "baseUrl": "https://api.hunyuan.cloud.tencent.com",
+    "models": [
+      {
+        "id": "hunyuan-pro",
+        "name": "Hunyuan Pro",
+        "description": "El modelo de procesamiento de texto más potente de Tencent Cloud",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "hunyuan-vl",
+        "name": "Hunyuan VL",
+        "description": "Modelo de procesamiento de visión-lenguaje de Tencent Cloud",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "hunyuan-turbo",
+        "name": "Hunyuan Turbo",
+        "description": "Modelo de generación de imágenes de Tencent Cloud",
+        "company": "Tencent",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "siliconflow",
+    "name": "SiliconFlow (Algunos gratis bajo 10B)",
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "models": [
+      {
+        "id": "THUDM/GLM-4.1V-9B-Thinking",
+        "name": "GLM-4.1V-9B-Thinking (Gratis)",
+        "description": "Modelo de procesamiento omni-modal de SiliconFlow",
+        "company": "SiliconFlow",
+        "parameterSize": "8B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "modelscope",
+    "name": "ModelScope",
+    "baseUrl": "https://api-inference.modelscope.cn/v1",
+    "models": [
+      {
+        "id": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
+        "description": "Modelo de procesamiento de visión-lenguaje de ModelScope",
+        "company": "ModelScope",
+        "parameterSize": "72B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "deepseek-ai/DeepSeek-R1",
+        "name": "DeepSeek-R1",
+        "description": "Modelo de procesamiento de texto de ModelScope",
+        "company": "ModelScope",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "deepseek",
+    "name": "Deepseek",
+    "baseUrl": "https://api.deepseek.com",
+    "models": [
+      {
+        "id": "deepseek-chat",
+        "name": "DeepSeek Chat",
+        "description": "Modelo de inferencia de alto nivel de Deepseek",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "deepseek-reasoner",
+        "name": "DeepSeek Reasoner",
+        "description": "Modelo de atención dispersa de Deepseek",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "120ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "kimi",
+    "name": "Kimi",
+    "baseUrl": "https://api.moonshot.cn",
+    "models": [
+      {
+        "id": "kimi-k2-0711-preview",
+        "name": "Kimi K2 0711 Preview",
+        "description": "Modelo de procesamiento omni-modal de Kimi",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Audio",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Vídeo",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "moonshot-v1-auto",
+        "name": "Moonshot v1 Auto",
+        "description": "Versión optimizada del modelo de Kimi",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "zhipuai",
+    "name": "Zhipu AI",
+    "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+    "models": [
+      {
+        "id": "glm-4.5-flash",
+        "name": "GLM-4.5-Flash",
+        "description": "Modelo de procesamiento de texto de nivel empresarial de Zhipu AI",
+        "company": "Zhipu AI",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      },
+      {
+        "id": "glm-4.6v",
+        "name": "GLM-4.6V",
+        "description": "Modelo de razonamiento visual de Zhipu AI",
+        "company": "Zhipu AI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Imagen",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "Vídeo",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama (Local)",
+    "baseUrl": "http://localhost:11434",
+    "models": [
+      {
+        "id": "goonsai/qwen2.5-3b-goonsai-nsfw-100k:latest",
+        "name": "Qwen2.5 3B NSFW",
+        "description": "Modelo de parámetros 3B basado en Qwen2.5, especializado en la identificación de contenido NSFW",
+        "company": "GoonsAI",
+        "parameterSize": "3B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "superdrew100/llama3-abliterated:latest",
+        "name": "Llama3 Abliterated",
+        "description": "Modelo Llama3 especialmente entrenado con capacidades de razonamiento mejoradas",
+        "company": "SuperDrew100",
+        "parameterSize": "8B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "good",
+          "score": 87
+        }
+      },
+      {
+        "id": "nidumai/nidum-gemma-3-4b-it-uncensored:q6_k",
+        "name": "Gemma 3 4B Uncensored",
+        "description": "Modelo Gemma 3 sin censura, adecuado para escenarios de conversación abierta",
+        "company": "NidumAI",
+        "parameterSize": "4B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "Texto",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "good",
+          "score": 86
+        }
+      }
+    ]
+  },
+  {
+    "id": "nvidia",
+    "baseUrl": "https://integrate.api.nvidia.com/v1",
+    "models": [
+      {
+        "id": "qwen/qwen3-coder-480b-a35b-instruct",
+        "company": "Alibaba Cloud",
+        "parameterSize": "480B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "Texto"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "Imagen"
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        },
+        "name": "Qwen3 Coder 480B (Gratis)",
+        "description": "Modelo Qwen3 Coder alojado en NVIDIA"
+      },
+      {
+        "id": "nvidia/nemotron-nano-12b-v2-vl",
+        "company": "NVIDIA",
+        "parameterSize": "12B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "Texto"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "Imagen"
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 88
+        },
+        "name": "Nemotron Nano 12B VL (Gratis)",
+        "description": "Modelo de lenguaje visual ligero de NVIDIA"
+      },
+      {
+        "id": "microsoft/phi-4-multimodal-instruct",
+        "company": "Microsoft",
+        "parameterSize": "14B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "Texto"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true,
+            "type": "Imagen"
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 90
+        },
+        "name": "Phi-4 Multimodal (Gratis)",
+        "description": "Modelo Instruct multimodal de Microsoft"
+      },
+      {
+        "id": "google/gemma-3-27b-it",
+        "company": "Google",
+        "parameterSize": "27B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "Texto"
+          },
+          {
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true,
+            "type": "Imagen"
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        },
+        "name": "Gemma 3 27B IT (Gratis)",
+        "description": "Modelo Gemma 3 de Google ajustado por instrucciones"
+      }
+    ],
+    "name": "NVIDIA (Gratis)"
+  }
+]

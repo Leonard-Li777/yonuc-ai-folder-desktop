@@ -1,0 +1,826 @@
+{
+  "file_dimensions": [
+    {
+      "name": "نوع الملف",
+      "level": 1,
+      "tags": [
+        "مستند",
+        "كتاب إلكتروني",
+        "صورة",
+        "فيديو",
+        "صوت",
+        "أرشيف مضغوط",
+        "كود مصدر",
+        "نص برمجي",
+        "برنامج",
+        "اختصار",
+        "خط",
+        "ملف نظام",
+        "جهاز افتراضي",
+        "قاعدة بيانات",
+        "صورة قرص"
+      ],
+      "description": "التصنيف الأساسي لتنسيق الملف",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "الامتداد",
+        "نوع MIME",
+        "توقيع الملف"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "استخدام الملف",
+      "level": 1,
+      "tags": [
+        "مستند عمل",
+        "مواد تعليمية",
+        "ألعاب وترفيه",
+        "مشروع إبداعي",
+        "سجل سفر",
+        "أرشيف مالي",
+        "صيانة النظام",
+        "أرشيف اتصالات",
+        "ملاحظات شخصية"
+      ],
+      "description": "سيناريوهات الاستخدام الأساسية للملف",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "مسار التخزين",
+        "نمط التسمية",
+        "التطبيق المرتبط"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "مصدر الملف",
+      "level": 1,
+      "tags": [
+        "إنشاء محلي",
+        "تنزيل من الشبكة",
+        "استيراد من جهاز",
+        "استقبال اتصالات",
+        "مزامنة سحابية",
+        "إنتاج تلقائي",
+        "إنشاء بالمسح الضوئي",
+        "مرفق بريد إلكتروني"
+      ],
+      "description": "طريقة الحصول الأصلية على الملف",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "خصائص المسار",
+        "سجل النقل"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "المؤلف",
+      "level": 1,
+      "tags": [],
+      "description": "منشئ الملف أو المساهم فيه",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "البيانات الوصفية",
+        "التوقيع الرقمي",
+        "العلامة المائية"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "تفاصيل المستند",
+      "level": 2,
+      "tags": [
+        "مستند نصي",
+        "جدول بيانات",
+        "عرض تقديمي",
+        "PDF",
+        "ملاحظة",
+        "نموذج"
+      ],
+      "description": "التصنيف المهني لمستندات المكتب",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "خصائص التنسيق",
+        "معرف البرنامج"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "مستند"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "تفاصيل الصورة",
+      "level": 2,
+      "tags": [
+        "صورة فوتوغرافية",
+        "لقطة شاشة",
+        "مسودة تصميم",
+        "أيقونة تطبيق",
+        "حزمة رموز تعبيرية",
+        "صورة طبية",
+        "رسم CAD"
+      ],
+      "description": "التصنيف المهني لمحتوى الصور",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "بيانات EXIF",
+        "التعرف على المحتوى"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "صورة"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "تفاصيل الفيديو",
+      "level": 2,
+      "tags": [
+        "فيلم وتلفزيون",
+        "فيديو تعليمي",
+        "تسجيل شاشة",
+        "فيديو قصير",
+        "فيديو مراقبة",
+        "تسجيل اجتماع"
+      ],
+      "description": "التصنيف المهني لمحتوى الفيديو",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "خصائص المدة",
+        "تحليل الإطار الرئيسي"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "فيديو"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "تفاصيل الصوت",
+      "level": 2,
+      "tags": [
+        "موسيقى",
+        "بودكاست",
+        "كتاب صوتي",
+        "مذكرة صوتية",
+        "مؤثر صوتي",
+        "تسجيل اجتماع"
+      ],
+      "description": "التصنيف المهني لمحتوى الصوت",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "خصائص الطيف",
+        "البيانات الوصفية"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "صوت"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "تنسيق الضغط",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "التصنيف الفني لتنسيق الأرشيف المضغوط",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "خوارزمية الضغط",
+        "توقيع رأس الملف"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "أرشيف مضغوط"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "منصة البرنامج",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "برنامج تشغيل"
+      ],
+      "description": "المنصة المستهدفة للملف القابل للتنفيذ",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "خصائص المنصة",
+        "شهادة التوقيع"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "برنامج"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "لغة النص البرمجي",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "Batch",
+        "SQL"
+      ],
+      "description": "التصنيف الفني للغة الملف النصي",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "خصائص النحو",
+        "مسار المفسر"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "نص برمجي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "نوع ملف النظام",
+      "level": 2,
+      "tags": [
+        "ملف تكوين",
+        "سجل",
+        "ذاكرة مؤقتة",
+        "ملف مؤقت",
+        "قطاع التمهيد",
+        "سجل النظام"
+      ],
+      "description": "التصنيف الوظيفي لملفات النظام المهمة",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "موقع المسار",
+        "خصائص الإذن"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "ملف نظام"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "منصة الجهاز الافتراضي",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "المنصة الفنية لبيئة المحاكاة الافتراضية",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "خصائص الملف",
+        "توقيع المنصة"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "جهاز افتراضي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "تنسيق قاعدة البيانات",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "نسخ احتياطي للبيانات"
+      ],
+      "description": "التنسيق الفني لملف قاعدة البيانات",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "توقيع الملف",
+        "خصائص الهيكل"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "قاعدة بيانات"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "نوع صورة القرص",
+      "level": 2,
+      "tags": [
+        "صورة النظام",
+        "صورة البيانات",
+        "صورة القرص المضغوط"
+      ],
+      "description": "تصنيف الاستخدام لصورة القرص",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "معلومات التسمية",
+        "هيكل القسم"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "صورة قرص"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "الموقع الجغرافي",
+      "level": 2,
+      "tags": [],
+      "description": "الموقع الجغرافي المرتبط بالمحتوى",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "إحداثيات GPS",
+        "التعرف على المعالم"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "صورة",
+            "فيديو"
+          ]
+        },
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "سجل سفر",
+            "مشروع إبداعي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "مستوى الأمان",
+      "level": 2,
+      "tags": [
+        "عام",
+        "داخلي",
+        "سري",
+        "سري للغاية"
+      ],
+      "description": "تصنيف مستوى سرية الملف",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "حالة التشفير",
+        "إعدادات الإذن"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "مستند عمل",
+            "أرشيف مالي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "حالة المعالجة",
+      "level": 2,
+      "tags": [
+        "مسودة",
+        "قيد المراجعة",
+        "مكتمل",
+        "مؤرشف",
+        "بانتظار المراجعة"
+      ],
+      "description": "حالة سير عمل الملف",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "وقت التعديل",
+        "علامة الإصدار"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "مستند عمل",
+            "مشروع إبداعي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "حالة حقوق النشر",
+      "level": 2,
+      "tags": [
+        "أصلي",
+        "مرخص",
+        "المالك العام",
+        "محمي بحقوق النشر"
+      ],
+      "description": "حالة ملكية حقوق النشر للملف",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "ملف الترخيص",
+        "كشف العلامة المائية"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "مشروع إبداعي",
+            "مواد تعليمية"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "محتوى السفر",
+      "level": 2,
+      "tags": [
+        "مناظر طبيعية",
+        "عمارة حضرية",
+        "أنشطة ثقافية",
+        "مأكولات محلية",
+        "آثار تاريخية",
+        "أنشطة خارجية"
+      ],
+      "description": "تصنيف محتوى سجلات السفر",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "التعرف على المشهد",
+        "خصائص الوقت"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "سجل سفر"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "النوع المالي",
+      "level": 2,
+      "tags": [
+        "قسيمة دخل",
+        "قسيمة مصاريف",
+        "شهادة أصول",
+        "ملف ضريبي",
+        "عقد",
+        "فاتورة"
+      ],
+      "description": "النوع التجاري للملفات المالية",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "التعرف على الفواتير",
+        "نمط المبلغ"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "أرشيف مالي"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "نوع اللعبة",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "مغامرة",
+        "ألغاز",
+        "دفاع عن البرج",
+        "استراتيجية",
+        "إدارة",
+        "رومانسية",
+        "تنافسية",
+        "MOBA",
+        "قتال",
+        "رماية",
+        "أكشن",
+        "روجلايك",
+        "زراعة",
+        "تربية"
+      ],
+      "description": "نوع اللعبة",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "لعبة"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "ألعاب وترفيه"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "المجال الدراسي",
+      "level": 2,
+      "tags": [
+        "رياضيات",
+        "فيزياء",
+        "كيمياء",
+        "أحياء",
+        "علوم الحاسب",
+        "تعلم اللغات",
+        "تاريخ",
+        "فن وتصميم",
+        "هندسة وتكنولوجيا",
+        "اقتصاد"
+      ],
+      "description": "تصنيف المجال الدراسي للمواد التعليمية",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "كثافة المصطلحات",
+        "هيكل الفصل",
+        "معرف منصة الدورة"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "استخدام الملف",
+          "triggerTags": [
+            "مواد تعليمية"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "نوع الكتاب الإلكتروني",
+      "level": 2,
+      "tags": [
+        "رواية",
+        "كتاب تقني",
+        "مجلة",
+        "كتاب مدرسي",
+        "كتاب ملكية عامة"
+      ],
+      "description": "تصنيف محتوى الكتاب الإلكتروني",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "هيكل الفصل",
+        "حالة DRM"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "نوع الملف",
+          "triggerTags": [
+            "كتاب إلكتروني"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "الموضوع",
+      "level": 3,
+      "tags": [
+        "رومانسي",
+        "خيال علمي",
+        "سحر وخيال",
+        "تشويق",
+        "غموض",
+        "سفر عبر الزمن",
+        "فانتازيا شرقية",
+        "تاريخي",
+        "حضري",
+        "عائلي",
+        "مكان العمل",
+        "آيدول",
+        "فنون قتالية",
+        "دراما",
+        "سيرة ذاتية",
+        "كوميديا",
+        "شرطة وجريمة",
+        "إثارة",
+        "حكاية خرافية",
+        "رسوم متحركة",
+        "وثائقي",
+        "طبيعة",
+        "إنسانيات",
+        "رياضة",
+        "مريح للأعصاب",
+        "حياة",
+        "سفر",
+        "علوم مبسطة",
+        "طعام",
+        "مسرحية قصيرة",
+        "قصص أشباح",
+        "إباحي"
+      ],
+      "description": "التصنيف المهني للموضوع",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "خصائص المدة",
+        "تحليل الإطار الرئيسي",
+        "خصائص المحتوى"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "تفاصيل الفيديو",
+          "triggerTags": [
+            "فيلم وتلفزيون"
+          ]
+        },
+        {
+          "parentDimension": "تفاصيل الصورة",
+          "triggerTags": [
+            "لقطة شاشة"
+          ]
+        },
+        {
+          "parentDimension": "نوع الكتاب الإلكتروني",
+          "triggerTags": [
+            "رواية"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "نوع الموسيقى",
+      "level": 3,
+      "tags": [
+        "بوب",
+        "روك",
+        "إلكتروني",
+        "هيب هوب",
+        "فلكلور",
+        "كلاسيكي",
+        "جاز",
+        "بلوز",
+        "ميتال",
+        "بانك",
+        "كانتري",
+        "راب",
+        "قديم",
+        "موسيقى بحتة",
+        "لاتيني",
+        "سيمفونية"
+      ],
+      "description": "نوع الموسيقى",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "خصائص المدة",
+        "خصائص المحتوى"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "تفاصيل الصوت",
+          "triggerTags": [
+            "موسيقى"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "جودة الملف",
+      "level": 1,
+      "tags": [
+        "جودة عالية",
+        "جودة متوسطة",
+        "جودة منخفضة"
+      ],
+      "description": "تقييم جودة محتوى الملف",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "جودة المحتوى",
+        "الجودة الفنية",
+        "الجودة الجمالية"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "وسوم المحتوى",
+      "level": 1,
+      "tags": [],
+      "description": "الكلمات المفتاحية الأساسية المستخرجة من محتوى الملف أو الوصف متعدد الوسائط",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "محتوى النص",
+        "الوصف المرئي",
+        "نسخ الصوت"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}

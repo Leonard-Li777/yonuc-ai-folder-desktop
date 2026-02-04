@@ -1,0 +1,826 @@
+{
+  "file_dimensions": [
+    {
+      "name": "Dateityp",
+      "level": 1,
+      "tags": [
+        "Dokument",
+        "E-Book",
+        "Bild",
+        "Video",
+        "Audio",
+        "Archiv",
+        "Quellcode",
+        "Skript",
+        "Programm",
+        "Verknüpfung",
+        "Schriftart",
+        "Systemdatei",
+        "Virtuelle Maschine",
+        "Datenbank",
+        "Disk-Image"
+      ],
+      "description": "Grundlegende Formatklassifizierung der Datei",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Dateiendung",
+        "MIME-Typ",
+        "Dateisignatur"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Dateizweck",
+      "level": 1,
+      "tags": [
+        "Arbeitsdokument",
+        "Lernmaterial",
+        "Spiel & Unterhaltung",
+        "Kreativprojekt",
+        "Reisebericht",
+        "Finanzarchiv",
+        "Systemwartung",
+        "Kommunikationsarchiv",
+        "Persönliche Notiz"
+      ],
+      "description": "Kernnutzungsszenario der Datei",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Speicherpfad",
+        "Namensmuster",
+        "Zugehörige App"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Dateiquelle",
+      "level": 1,
+      "tags": [
+        "Lokal erstellt",
+        "Web-Download",
+        "Geräteimport",
+        "Kommunikation empfangen",
+        "Cloud-Sync",
+        "Automatisch generiert",
+        "Gescannt",
+        "E-Mail-Anhang"
+      ],
+      "description": "Ursprüngliche Erwerbsmethode der Datei",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Pfadmerkmale",
+        "Übertragungsprotokoll"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Autor",
+      "level": 1,
+      "tags": [],
+      "description": "Ersteller oder Mitwirkender der Datei",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "Metadaten",
+        "Digitale Signatur",
+        "Wasserzeichen"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Dokument-Untertyp",
+      "level": 2,
+      "tags": [
+        "Textdokument",
+        "Tabellenkalkulation",
+        "Präsentation",
+        "PDF",
+        "Notiz",
+        "Formular"
+      ],
+      "description": "Professionelle Klassifizierung von Büro-Dokumenten",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Formatmerkmale",
+        "Software-ID"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Dokument"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bild-Untertyp",
+      "level": 2,
+      "tags": [
+        "Fotografie",
+        "Screenshot",
+        "Design-Entwurf",
+        "App-Icon",
+        "Meme",
+        "Medizinisches Bild",
+        "CAD-Zeichnung"
+      ],
+      "description": "Professionelle Klassifizierung von Bildinhalten",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "EXIF-Daten",
+        "Inhaltserkennung"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Bild"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Video-Untertyp",
+      "level": 2,
+      "tags": [
+        "Film & TV",
+        "Lehrvideo",
+        "Bildschirmaufnahme",
+        "Kurzvideo",
+        "Überwachung",
+        "Meeting-Aufzeichnung"
+      ],
+      "description": "Professionelle Klassifizierung von Videoinhalten",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "Dauermerkmale",
+        "Keyframe-Analyse"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Video"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio-Untertyp",
+      "level": 2,
+      "tags": [
+        "Musik",
+        "Podcast",
+        "Hörbuch",
+        "Sprachnotiz",
+        "Soundeffekt",
+        "Meeting-Aufzeichnung"
+      ],
+      "description": "Professionelle Klassifizierung von Audioinhalten",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Spektralmerkmale",
+        "Metadaten"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Audio"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Archivformat",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "Technische Formatklassifizierung von Archiven",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "Komprimierungsalgorithmus",
+        "Datei-Header-Signatur"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Archiv"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Plattform",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "Treiber"
+      ],
+      "description": "Zielplattform der ausführbaren Datei",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "Plattformmerkmale",
+        "Signaturzertifikat"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Programm"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Skriptsprache",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "Batch",
+        "SQL"
+      ],
+      "description": "Technische Sprachklassifizierung von Skriptdateien",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "Syntaxmerkmale",
+        "Interpreter-Pfad"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Skript"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Systemdateityp",
+      "level": 2,
+      "tags": [
+        "Konfigurationsdatei",
+        "Log",
+        "Cache",
+        "Temporäre Datei",
+        "Boot-Sektor",
+        "Registrierungsdatenbank"
+      ],
+      "description": "Funktionale Klassifizierung wichtiger Systemdateien",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "Pfadspeicherort",
+        "Berechtigungsmerkmale"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Systemdatei"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VM-Plattform",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "Technische Plattform der Virtualisierungsumgebung",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "Dateimerkmale",
+        "Plattform-Signatur"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Virtuelle Maschine"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Datenbankformat",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "Datensicherung"
+      ],
+      "description": "Technisches Format von Datenbankdateien",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "Dateisignatur",
+        "Strukturmerkmale"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Datenbank"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disk-Image-Typ",
+      "level": 2,
+      "tags": [
+        "System-Image",
+        "Daten-Image",
+        "Disc-Image"
+      ],
+      "description": "Nutzungsklassifizierung von Disk-Images",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "Volume-Label",
+        "Partition-Struktur"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Disk-Image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Standort",
+      "level": 2,
+      "tags": [],
+      "description": "Geografischer Standort, der mit dem Inhalt verknüpft ist",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "GPS-Koordinaten",
+        "Wahrzeichenerkennung"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "Bild",
+            "Video"
+          ]
+        },
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Reisebericht",
+            "Kreativprojekt"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sicherheitsstufe",
+      "level": 2,
+      "tags": [
+        "Öffentlich",
+        "Intern",
+        "Vertraulich",
+        "Streng geheim"
+      ],
+      "description": "Klassifizierung der Vertraulichkeitsstufe der Datei",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "Verschlüsselungsstatus",
+        "Berechtigungseinstellungen"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Arbeitsdokument",
+            "Finanzarchiv"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bearbeitungsstatus",
+      "level": 2,
+      "tags": [
+        "Entwurf",
+        "In Prüfung",
+        "Abgeschlossen",
+        "Archiviert",
+        "Zu überarbeiten"
+      ],
+      "description": "Workflow-Status der Datei",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "Änderungszeitpunkt",
+        "Versionskennzeichnung"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Arbeitsdokument",
+            "Kreativprojekt"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Urheberrechtsstatus",
+      "level": 2,
+      "tags": [
+        "Original",
+        "Lizenziert",
+        "Gemeinfrei",
+        "Urheberrechtlich geschützt"
+      ],
+      "description": "Urheberrechtlicher Status der Datei",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "Lizenzdatei",
+        "Wasserzeichenerkennung"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Kreativprojekt",
+            "Lernmaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Reiseinhalt",
+      "level": 2,
+      "tags": [
+        "Naturlandschaft",
+        "Stadtarchitektur",
+        "Menschliche Aktivitäten",
+        "Lokale Spezialitäten",
+        "Historische Stätte",
+        "Outdoor-Aktivität"
+      ],
+      "description": "Inhaltsklassifizierung von Reiseberichten",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "Szenenerkennung",
+        "Zeitmerkmale"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Reisebericht"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Finanztyp",
+      "level": 2,
+      "tags": [
+        "Einnahmebeleg",
+        "Ausgabebeleg",
+        "Vermögensnachweis",
+        "Steuerdokument",
+        "Vertrag",
+        "Rechnung"
+      ],
+      "description": "Geschäftstyp von Finanzdateien",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Belegerkennung",
+        "Betragsmuster"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Finanzarchiv"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spieltyp",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "Abenteuer",
+        "Rätsel",
+        "Tower Defense",
+        "Strategie",
+        "Management",
+        "Romantik",
+        "Wettbewerb",
+        "MOBA",
+        "Kampfspiel",
+        "Shooter",
+        "Action",
+        "Roguelike",
+        "Ländlich",
+        "Simulation"
+      ],
+      "description": "Spielgenre",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "Spiel"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Spiel & Unterhaltung"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fachbereich",
+      "level": 2,
+      "tags": [
+        "Mathematik",
+        "Physik",
+        "Chemie",
+        "Biologie",
+        "Informatik",
+        "Sprachenlernen",
+        "Geschichte",
+        "Kunst & Design",
+        "Ingenieurwesen",
+        "Wirtschaftswissenschaften"
+      ],
+      "description": "Fachbereichsklassifizierung von Lernmaterialien",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "Dichte an Fachbegriffen",
+        "Lehrbuchstruktur",
+        "Kursplattform-ID"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateizweck",
+          "triggerTags": [
+            "Lernmaterial"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "E-Book-Typ",
+      "level": 2,
+      "tags": [
+        "Roman",
+        "Fachbuch",
+        "Magazin",
+        "Lehrbuch",
+        "Gemeinfreies Buch"
+      ],
+      "description": "Inhaltsklassifizierung von E-Books",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "Kapitelstruktur",
+        "DRM-Status"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Dateityp",
+          "triggerTags": [
+            "E-Book"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Genre / Thema",
+      "level": 3,
+      "tags": [
+        "Romantik",
+        "Science-Fiction",
+        "Fantasy",
+        "Mystery",
+        "Spannung/Thriller",
+        "Zeitreise",
+        "Xianxia",
+        "Geschichte",
+        "Städtisch",
+        "Familie",
+        "Arbeitswelt",
+        "Idol",
+        "Wuxia",
+        "Drama",
+        "Biografie",
+        "Komödie",
+        "Krimi",
+        "Horror",
+        "Märchen",
+        "Animation",
+        "Dokumentation",
+        "Natur",
+        "Geisteswissenschaften",
+        "Sport",
+        "Heilung",
+        "Leben",
+        "Reise",
+        "Populärwissenschaft",
+        "Essen & Trinken",
+        "Kurzdrama",
+        "Geistergeschichten",
+        "Pornografie"
+      ],
+      "description": "Professionelle Klassifizierung von Genres",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "Dauermerkmale",
+        "Keyframe-Analyse",
+        "Inhaltsmerkmale"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Video-Untertyp",
+          "triggerTags": [
+            "Film & TV"
+          ]
+        },
+        {
+          "parentDimension": "Bild-Untertyp",
+          "triggerTags": [
+            "Screenshot"
+          ]
+        },
+        {
+          "parentDimension": "E-Book-Typ",
+          "triggerTags": [
+            "Roman"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Musikgenre",
+      "level": 3,
+      "tags": [
+        "Pop",
+        "Rock",
+        "Electronic",
+        "Hip-Hop",
+        "Folk",
+        "Klassik",
+        "Jazz",
+        "Blues",
+        "Metal",
+        "Punk",
+        "Country",
+        "Rap",
+        "Antiker Stil",
+        "Instrumental",
+        "Latein",
+        "Sinfonie"
+      ],
+      "description": "Musikrichtung",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Dauermerkmale",
+        "Inhaltsmerkmale"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Audio-Untertyp",
+          "triggerTags": [
+            "Musik"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dateiqualität",
+      "level": 1,
+      "tags": [
+        "Hohe Qualität",
+        "Mittlere Qualität",
+        "Niedrige Qualität"
+      ],
+      "description": "Qualitätsbewertung des Dateiinhalts",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Inhaltsqualität",
+        "Technische Qualität",
+        "Ästhetische Qualität"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Inhalts-Tags",
+      "level": 1,
+      "tags": [],
+      "description": "Aus Dateiinhalten oder multimodalen Beschreibungen extrahierte Kernschlüsselwörter",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Textinhalt",
+        "Visuelle Beschreibung",
+        "Sprachtranskription"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}

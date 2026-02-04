@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [4, 28],
+  "latestNews": [
+    {
+      "text": "Mensagem de teste local: Bem-vindo ao sistema de gerenciamento de pastas Yonuc AI!",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "Mensagem de teste local: Nova versão lançada, suporta sistema de etiquetas multilíngue",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "Mensagem de teste local: Verifique a documentação para mais recursos",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

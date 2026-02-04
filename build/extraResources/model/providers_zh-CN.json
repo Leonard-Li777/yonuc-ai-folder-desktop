@@ -1,0 +1,1483 @@
+[
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "baseUrl": "https://api.openai.com",
+    "models": [
+      {
+        "id": "gpt-4o",
+        "name": "GPT-4o (多模态)",
+        "description": "OpenAI最新多模态模型，支持文本、图像、音频处理",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "gpt-4o-realtime-preview",
+        "name": "GPT-4o 实时预览版",
+        "description": "支持实时音视频处理的多模态模型",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "视频",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "high",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "500ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      },
+      {
+        "id": "gpt-4-turbo",
+        "name": "GPT-4 Turbo",
+        "description": "OpenAI的高效文本处理模型",
+        "company": "OpenAI",
+        "parameterSize": "89B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "baseUrl": "https://api.anthropic.com",
+    "models": [
+      {
+        "id": "claude-sonnet-4-5",
+        "name": "Claude Sonnet 4.5",
+        "description": "Anthropic的高性能多模态模型",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "claude-haiku-4-5",
+        "name": "Claude Haiku 4.5",
+        "description": "Anthropic轻量级多模态模型",
+        "company": "Anthropic",
+        "parameterSize": "34B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "claude-opus-4-5",
+        "name": "Claude Opus 4.5",
+        "description": "Anthropic最强大的多模态模型",
+        "company": "Anthropic",
+        "parameterSize": "200B",
+        "isMultiModal": true,
+        "contextLength": "200k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 98
+        }
+      }
+    ]
+  },
+  {
+    "id": "gemini",
+    "name": "Google",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta/",
+    "models": [
+      {
+        "id": "gemini-3-pro-preview",
+        "name": "Gemini 3 Pro 预览版",
+        "description": "Google最新的多模态模型",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "视频",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "350ms/1k tokens",
+          "quality": "excellent",
+          "score": 97
+        }
+      },
+      {
+        "id": "gemini-2.5-pro",
+        "name": "Gemini 2.5 Pro",
+        "description": "Google的平衡性能与成本的多模态模型",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "gemini-2.5-flash",
+        "name": "Gemini 2.5 Flash",
+        "description": "Google的快速推理模型",
+        "company": "Google",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "1M",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      }
+    ]
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "baseUrl": "https://api.x.ai",
+    "models": [
+      {
+        "id": "grok-4",
+        "name": "Grok-4",
+        "description": "xAI的快速推理模型",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "very_fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "excellent",
+          "score": 90
+        }
+      },
+      {
+        "id": "grok-3",
+        "name": "Grok-3",
+        "description": "xAI的标准推理模型",
+        "company": "xAI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "excellent",
+          "score": 88
+        }
+      }
+    ]
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "baseUrl": "https://openrouter.ai/api",
+    "models": []
+  },
+  {
+    "id": "iflow",
+    "name": "心流（免费）",
+    "baseUrl": "https://apis.iflow.cn",
+    "models": [
+      {
+        "id": "qwen3-max",
+        "name": "通义千问3 Max",
+        "description": "阿里云最强大的文本处理模型",
+        "company": "阿里巴巴",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen3-vl-plus",
+        "name": "通义千问3 VL Plus",
+        "description": "阿里云视觉语言处理模型",
+        "company": "阿里巴巴",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "alibaba",
+    "name": "阿里云",
+    "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "models": [
+      {
+        "id": "qwen-max",
+        "name": "通义千问 Max",
+        "description": "阿里云最强大的文本处理模型",
+        "company": "阿里巴巴",
+        "parameterSize": "110B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "qwen-omni",
+        "name": "通义千问 Omni",
+        "description": "阿里云全模态处理模型",
+        "company": "阿里巴巴",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg",
+              "pcm"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "视频",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "qwen-vl",
+        "name": "通义千问 VL",
+        "description": "阿里云视觉语言处理模型",
+        "company": "阿里巴巴",
+        "parameterSize": "110B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "volcengine",
+    "name": "火山引擎(有限免费额度)",
+    "baseUrl": "https://ark.cn-beijing.volces.com/api/v3",
+    "models": [
+      {
+        "id": "doubao-seed-1-6-251015",
+        "name": "豆包Seed 1.6",
+        "description": "火山引擎最强大的视觉处理模型",
+        "company": "火山引擎",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "deepseek-r1-250528",
+        "name": "Deepseek R1",
+        "description": "强大的文本处理模型",
+        "company": "火山引擎",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "tencent",
+    "name": "腾讯云",
+    "baseUrl": "https://api.hunyuan.cloud.tencent.com",
+    "models": [
+      {
+        "id": "hunyuan-pro",
+        "name": "混元 Pro",
+        "description": "腾讯云最强大的文本处理模型",
+        "company": "腾讯",
+        "parameterSize": "389B",
+        "isMultiModal": false,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      },
+      {
+        "id": "hunyuan-vl",
+        "name": "混元 VL",
+        "description": "腾讯云的视觉语言处理模型",
+        "company": "腾讯",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "md"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "hunyuan-turbo",
+        "name": "混元 Turbo",
+        "description": "腾讯云的图像生成模型",
+        "company": "腾讯",
+        "parameterSize": "389B",
+        "isMultiModal": true,
+        "contextLength": "16k",
+        "capabilities": [
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "siliconflow",
+    "name": "硅基流动(个别10B以下免费)",
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "models": [
+      {
+        "id": "THUDM/GLM-4.1V-9B-Thinking",
+        "name": "GLM-4.1V-9B-Thinking(免费)",
+        "description": "硅基流动的全模态处理模型",
+        "company": "硅基流动",
+        "parameterSize": "8B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      }
+    ]
+  },
+  {
+    "id": "modelscope",
+    "name": "魔搭社区",
+    "baseUrl": "https://api-inference.modelscope.cn/v1",
+    "models": [
+      {
+        "id": "Qwen/Qwen2.5-72B-Instruct",
+        "name": "Qwen2.5-72B-Instruct",
+        "description": "魔搭社区的视觉语言处理模型",
+        "company": "魔搭社区",
+        "parameterSize": "72B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "deepseek-ai/DeepSeek-R1",
+        "name": "DeepSeek-R1",
+        "description": "魔搭社区的文本处理模型",
+        "company": "魔搭社区",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  },
+  {
+    "id": "deepseek",
+    "name": "Deepseek",
+    "baseUrl": "https://api.deepseek.com",
+    "models": [
+      {
+        "id": "deepseek-chat",
+        "name": "DeepSeek Chat",
+        "description": "Deepseek的顶级推理模型",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "deepseek-reasoner",
+        "name": "DeepSeek Reasoner",
+        "description": "Deepseek的稀疏注意力模型",
+        "company": "Deepseek",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "120ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "kimi",
+    "name": "Kimi",
+    "baseUrl": "https://api.moonshot.cn",
+    "models": [
+      {
+        "id": "kimi-k2-0711-preview",
+        "name": "Kimi K2 0711 预览版",
+        "description": "Kimi的全模态处理模型",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "音频",
+            "supportedFormats": [
+              "mp3",
+              "wav",
+              "ogg"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "视频",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      },
+      {
+        "id": "moonshot-v1-auto",
+        "name": "Moonshot v1 自动",
+        "description": "Kimi的优化版本模型",
+        "company": "Kimi",
+        "parameterSize": "100B+",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 93
+        }
+      }
+    ]
+  },
+  {
+    "id": "zhipuai",
+    "name": "智谱AI",
+    "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+    "models": [
+      {
+        "id": "glm-4.5-flash",
+        "name": "GLM-4.5-Flash",
+        "description": "智谱AI的企业级文本处理模型",
+        "company": "智谱AI",
+        "parameterSize": "175B",
+        "isMultiModal": false,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      },
+      {
+        "id": "glm-4.6v",
+        "name": "GLM-4.6V",
+        "description": "智谱AI的视觉推理模型",
+        "company": "智谱AI",
+        "parameterSize": "175B",
+        "isMultiModal": true,
+        "contextLength": "128k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "视频",
+            "supportedFormats": [
+              "mp4",
+              "avi",
+              "mov"
+            ],
+            "quality": "ultra",
+            "speed": "slow",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "250ms/1k tokens",
+          "quality": "excellent",
+          "score": 94
+        }
+      }
+    ]
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama(本地)",
+    "baseUrl": "http://localhost:11434",
+    "models": [
+      {
+        "id": "goonsai/qwen2.5-3b-goonsai-nsfw-100k:latest",
+        "name": "Qwen2.5 3B NSFW",
+        "description": "基于Qwen2.5的3B参数模型，专为NSFW内容识别优化",
+        "company": "GoonsAI",
+        "parameterSize": "3B",
+        "isMultiModal": false,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 85
+        }
+      },
+      {
+        "id": "superdrew100/llama3-abliterated:latest",
+        "name": "Llama3 Abliterated",
+        "description": "经过特殊训练的Llama3模型，具有增强的推理能力",
+        "company": "SuperDrew100",
+        "parameterSize": "8B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "good",
+          "score": 87
+        }
+      },
+      {
+        "id": "nidumai/nidum-gemma-3-4b-it-uncensored:q6_k",
+        "name": "Gemma 3 4B Uncensored",
+        "description": "未经审查的Gemma 3模型，适用于开放性对话场景",
+        "company": "NidumAI",
+        "parameterSize": "4B",
+        "isMultiModal": false,
+        "contextLength": "8k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "180ms/1k tokens",
+          "quality": "good",
+          "score": 86
+        }
+      }
+    ]
+  },
+  {
+    "id": "nvidia",
+    "name": "NVIDIA(免费)",
+    "baseUrl": "https://integrate.api.nvidia.com/v1",
+    "models": [
+      {
+        "id": "qwen/qwen3-coder-480b-a35b-instruct",
+        "name": "Qwen3 Coder 480B(免费)",
+        "description": "NVIDIA托管的通义千问3代码模型",
+        "company": "Alibaba Cloud",
+        "parameterSize": "480B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "300ms/1k tokens",
+          "quality": "excellent",
+          "score": 95
+        }
+      },
+      {
+        "id": "nvidia/nemotron-nano-12b-v2-vl",
+        "name": "Nemotron Nano 12B VL(免费)",
+        "description": "NVIDIA轻量级视觉语言模型",
+        "company": "NVIDIA",
+        "parameterSize": "12B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "100ms/1k tokens",
+          "quality": "good",
+          "score": 88
+        }
+      },
+      {
+        "id": "microsoft/phi-4-multimodal-instruct",
+        "name": "Phi-4 Multimodal(免费)",
+        "description": "Microsoft的多模态Instruct模型",
+        "company": "Microsoft",
+        "parameterSize": "14B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "high",
+            "speed": "fast",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "150ms/1k tokens",
+          "quality": "good",
+          "score": 90
+        }
+      },
+      {
+        "id": "google/gemma-3-27b-it",
+        "name": "Gemma 3 27B IT(免费)",
+        "description": "Google的Gemma 3指令微调模型",
+        "company": "Google",
+        "parameterSize": "27B",
+        "isMultiModal": true,
+        "contextLength": "32k",
+        "capabilities": [
+          {
+            "type": "文本",
+            "supportedFormats": [
+              "txt",
+              "pdf"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          },
+          {
+            "type": "图像",
+            "supportedFormats": [
+              "jpeg",
+              "jpg",
+              "png",
+              "gif"
+            ],
+            "quality": "ultra",
+            "speed": "medium",
+            "isPrimary": true
+          }
+        ],
+        "performance": {
+          "speed": "200ms/1k tokens",
+          "quality": "excellent",
+          "score": 92
+        }
+      }
+    ]
+  }
+]

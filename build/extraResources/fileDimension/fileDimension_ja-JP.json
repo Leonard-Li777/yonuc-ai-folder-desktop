@@ -1,0 +1,827 @@
+{
+  "file_dimensions": [
+    {
+      "name": "ファイル形式",
+      "level": 1,
+      "tags": [
+        "ドキュメント",
+        "電子書籍",
+        "画像",
+        "動画",
+        "音声",
+        "アーカイブ",
+        "ソースコード",
+        "スクリプト",
+        "プログラム",
+        "ショートカット",
+        "フォント",
+        "システムファイル",
+        "仮想マシン",
+        "データベース",
+        "ディスクイメージ"
+      ],
+      "description": "ファイルの基本的なフォーマット分類",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "拡張子",
+        "MIMEタイプ",
+        "ファイル署名"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "ファイルの用途",
+      "level": 1,
+      "tags": [
+        "仕事用ドキュメント",
+        "学習資料",
+        "ゲーム・エンターテイメント",
+        "クリエイティブプロジェクト",
+        "旅行記",
+        "財務アーカイブ",
+        "システムメンテナンス",
+        "通信アーカイブ",
+        "個人用メモ"
+      ],
+      "description": "ファイルの主な使用シナリオ",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "保存パス",
+        "命名パターン",
+        "関連アプリ"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "ファイルのソース",
+      "level": 1,
+      "tags": [
+        "ローカルで作成",
+        "ネットからダウンロード",
+        "デバイスからインポート",
+        "受信メッセージ",
+        "クラウド同期",
+        "自動生成",
+        "スキャン生成",
+        "メール添付ファイル"
+      ],
+      "description": "ファイルの元の取得方法",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "パスの特徴",
+        "転送ログ"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "作成者",
+      "level": 1,
+      "tags": [],
+      "description": "ファイルの作成者または貢献者",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "メタデータ",
+        "電子署名",
+        "ウォーターマーク"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "ドキュメント詳細",
+      "level": 2,
+      "tags": [
+        "テキスト文書",
+        "スプレッドシート",
+        "プレゼンテーション",
+        "PDF",
+        "メモ",
+        "フォーム"
+      ],
+      "description": "ビジネスドキュメントの専門分類",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "形式の特徴",
+        "ソフトウェア識別子"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "ドキュメント"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "画像詳細",
+      "level": 2,
+      "tags": [
+        "写真",
+        "スクリーンショット",
+        "デザイン案",
+        "アイコン",
+        "ミーム",
+        "医学画像",
+        "CAD図面"
+      ],
+      "description": "画像内容の専門分類",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "EXIFデータ",
+        "内容認識"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "画像"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "動画詳細",
+      "level": 2,
+      "tags": [
+        "映画・ドラマ",
+        "教育ビデオ",
+        "画面録画",
+        "ショート動画",
+        "監視カメラ",
+        "会議録画"
+      ],
+      "description": "動画内容の専門分類",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "長さの特徴",
+        "キーフレーム分析"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "動画"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "音声詳細",
+      "level": 2,
+      "tags": [
+        "音楽",
+        "ポッドキャスト",
+        "オーディオブック",
+        "ボイスメモ",
+        "効果音",
+        "会議録音"
+      ],
+      "description": "音声内容の専門分類",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "スペクトル特徴",
+        "メタデータ"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "音声"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "圧縮形式",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "アーカイブの技術的な形式分類",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "圧縮アルゴリズム",
+        "ファイルヘッダー署名"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "アーカイブ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "プラットフォーム",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "ドライバー"
+      ],
+      "description": "実行ファイルの対象プラットフォーム",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "プラットフォームの特徴",
+        "署名証明書"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "プログラム"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "スクリプト言語",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "バッチファイル",
+        "SQL"
+      ],
+      "description": "スクリプトファイルの技術的な言語分類",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "構文の特徴",
+        "インタプリタパス"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "スクリプト"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "システムファイル種類",
+      "level": 2,
+      "tags": [
+        "設定ファイル",
+        "ログ",
+        "キャッシュ",
+        "一時ファイル",
+        "ブートセクタ",
+        "レジストリ"
+      ],
+      "description": "重要なシステムファイルの機能分類",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "保存場所",
+        "権限の特徴"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "システムファイル"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "仮想マシン",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "仮想化環境の技術プラットフォーム",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "ファイルの特徴",
+        "プラットフォーム署名"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "仮想マシン"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "データベース形式",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "データバックアップ"
+      ],
+      "description": "データベースファイルの技術形式",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "ファイル署名",
+        "構造の特徴"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "データベース"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ディスクイメージ",
+      "level": 2,
+      "tags": [
+        "システムイメージ",
+        "データイメージ",
+        "光ディスクイメージ"
+      ],
+      "description": "ディスクイメージの用途分類",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "ボリュームラベル",
+        "パーティション構造"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "ディスクイメージ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "地理的位置",
+      "level": 2,
+      "tags": [],
+      "description": "内容に関連付けられた地理的位置",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "GPS座標",
+        "ランドマーク認識"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "画像",
+            "動画"
+          ]
+        },
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "旅行記",
+            "クリエイティブプロジェクト"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "セキュリティレベル",
+      "level": 2,
+      "tags": [
+        "公開",
+        "内部",
+        "秘密",
+        "機密"
+      ],
+      "description": "ファイルの機密保持レベルの分類",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "暗号化状態",
+        "権限設定"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "仕事用ドキュメント",
+            "財務アーカイブ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "処理ステータス",
+      "level": 2,
+      "tags": [
+        "下書き",
+        "レビュー中",
+        "完了",
+        "アーカイブ済み",
+        "要修正"
+      ],
+      "description": "ファイルのワークフローステータス",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "更新日時",
+        "バージョン記号"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "仕事用ドキュメント",
+            "クリエイティブプロジェクト"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "著作権ステータス",
+      "level": 2,
+      "tags": [
+        "オリジナル",
+        "ライセンスあり",
+        "パブリックドメイン",
+        "著作権制限あり"
+      ],
+      "description": "ファイルの著作権帰属ステータス",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "ライセンスファイル",
+        "ウォーターマーク検出"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "クリエイティブプロジェクト",
+            "学習資料"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "旅行の内容",
+      "level": 2,
+      "tags": [
+        "自然景観",
+        "都市建築",
+        "人文活動",
+        "ご当地グルメ",
+        "史跡",
+        "アウトドア"
+      ],
+      "description": "旅行記の内容分類",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "シーン認識",
+        "時間の特定",
+        "場所の特徴"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "旅行記"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "財務の種類",
+      "level": 2,
+      "tags": [
+        "収入証明",
+        "支出証明",
+        "資産証明",
+        "税務書類",
+        "契約書",
+        "請求書"
+      ],
+      "description": "財務ファイルの業務タイプ",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "伝票認識",
+        "金額パターン"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "財務アーカイブ"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ゲームジャンル",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "アドベンチャー",
+        "パズル",
+        "タワーディフェンス",
+        "戦略",
+        "経営",
+        "恋愛",
+        "競技",
+        "MOBA",
+        "格闘",
+        "シューティング",
+        "アクション",
+        "ローグライク",
+        "田園",
+        "育成"
+      ],
+      "description": "ゲームのジャンル",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "ゲーム"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "ゲーム・エンターテイメント"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "学問分野",
+      "level": 2,
+      "tags": [
+        "数学",
+        "物理",
+        "化学",
+        "生物",
+        "コンピュータサイエンス",
+        "語学学習",
+        "歴史",
+        "アート・デザイン",
+        "工学技術",
+        "経済学"
+      ],
+      "description": "学習資料の学問分野の分類",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "専門用語の密度",
+        "教材の構成",
+        "講座プラットフォーム識別子"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイルの用途",
+          "triggerTags": [
+            "学習資料"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "電子書籍の種類",
+      "level": 2,
+      "tags": [
+        "小説",
+        "技術書",
+        "雑誌",
+        "教材",
+        "公刊本"
+      ],
+      "description": "電子書籍の内容分類",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "章の構成",
+        "DRMステータス"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "ファイル形式",
+          "triggerTags": [
+            "電子書籍"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "題材",
+      "level": 3,
+      "tags": [
+        "恋愛",
+        "SF",
+        "ファンタジー",
+        "サスペンス",
+        "推理",
+        "タイムトラベル",
+        "仙侠",
+        "歴史",
+        "都市",
+        "家庭",
+        "職場",
+        "アイドル",
+        "武侠",
+        "ドラマ",
+        "伝記",
+        "コメディ",
+        "刑事",
+        "スリラー",
+        "童話",
+        "アニメ",
+        "ドキュメンタリー",
+        "自然",
+        "人文",
+        "スポーツ",
+        "癒やし",
+        "生活",
+        "旅行",
+        "ポピュラーサイエンス",
+        "グルメ",
+        "短編ドラマ",
+        "怪談",
+        "アダルト"
+      ],
+      "description": "題材の詳細な分類",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "長さの特徴",
+        "キーフレーム分析",
+        "内容の特徴"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "動画詳細",
+          "triggerTags": [
+            "映画・ドラマ"
+          ]
+        },
+        {
+          "parentDimension": "画像詳細",
+          "triggerTags": [
+            "スクリーンショット"
+          ]
+        },
+        {
+          "parentDimension": "電子書籍の種類",
+          "triggerTags": [
+            "小説"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "音楽ジャンル",
+      "level": 3,
+      "tags": [
+        "ポップス",
+        "ロック",
+        "エレクトロニック",
+        "ヒップホップ",
+        "フォーク",
+        "クラシック",
+        "ジャズ",
+        "ブルース",
+        "メタル",
+        "パンク",
+        "カントリー",
+        "ラップ",
+        "古風",
+        "インストゥルメンタル",
+        "ラテン",
+        "交響曲"
+      ],
+      "description": "音楽のジャンル",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "長さの特徴",
+        "内容の特徴"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "音声詳細",
+          "triggerTags": [
+            "音楽"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ファイル品質",
+      "level": 1,
+      "tags": [
+        "高品質",
+        "中品質",
+        "低品質"
+      ],
+      "description": "ファイル内容の品質評価",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "内容品質",
+        "技術品質",
+        "美的品質"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "内容タグ",
+      "level": 1,
+      "tags": [],
+      "description": "ファイル内容またはマルチモーダル記述から抽出されたキーワード",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "テキスト内容",
+        "視覚的記述",
+        "音声書き起こし"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}

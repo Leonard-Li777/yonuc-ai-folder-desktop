@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "llamaCppVersion": "b7868",
+  "defaults": {
+    "port": 8172,
+    "threads": 9,
+    "contextSize": 2048,
+    "batchSize": 512,
+    "timeout": 30000,
+    "maxRetries": 3,
+    "healthCheckInterval": 10000
+  },
+  "platformOptimizations": {
+    "win32": {
+      "processPriority": "normal",
+      "enableLargePages": true,
+      "enableNUMAOptimization": true
+    },
+    "darwin": {
+      "processPriority": "normal",
+      "enableLargePages": false,
+      "enableNUMAOptimization": false
+    },
+    "linux": {
+      "processPriority": "normal",
+      "enableLargePages": true,
+      "enableNUMAOptimization": true
+    }
+  }
+}

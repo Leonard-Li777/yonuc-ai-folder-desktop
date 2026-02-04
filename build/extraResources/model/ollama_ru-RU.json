@@ -1,0 +1,383 @@
+{
+  "version": "1.0.0",
+  "language": "ru",
+  "lastUpdated": "2025-01-26",
+  "platform": "ollama",
+  "models": [
+    {
+      "id": "adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+      "name": "Qwen3-VL-4B-Instruct",
+      "company": "Alibaba",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "Визуально-языковая модель Alibaba Qwen. Поддерживает понимание изображений и генерацию текста. Отличная работа с китайским языком. Без рассуждений, высокая скорость. Настоятельно рекомендуется.",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+        "installTime": "Ок. 1-2 мин"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 95,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "Текст",
+        "Изображение",
+        "Оптимизировано для китайского",
+        "Мультимодальный"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "gemma3:4b",
+      "name": "Gemma-3-4B",
+      "company": "Google",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "Новейшее поколение многоязычной модели визуального понимания от Google. Поддерживает обработку изображений и текста.",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull gemma3:4b",
+        "installTime": "Ок. 1-2 мин"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "Оптимизировано для английского",
+        "Текст",
+        "Изображение",
+        "Многоязычный",
+        "Мультимодальный"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:12b",
+      "name": "Gemma3-Instruct-Abliterated-12B",
+      "company": "Сообщество",
+      "parameterSize": "12B",
+      "totalSize": "7.3GB",
+      "totalSizeBytes": 7838315315,
+      "description": "Разблокированная версия Gemma3 Instruct. Только текст.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:12b",
+        "installTime": "Ок. 3-5 мин"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 88,
+        "minMemoryGB": 10,
+        "recommendedMemoryGB": 16
+      },
+      "tags": [
+        "Оптимизировано для английского",
+        "NSFW",
+        "Без цензуры",
+        "Без ограничений контента",
+        "Текст"
+      ],
+      "recommendedConfig": {
+        "numThread": 6,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:27b",
+      "name": "Gemma3-Instruct-Abliterated-27B",
+      "company": "Сообщество",
+      "parameterSize": "27B",
+      "totalSize": "17GB",
+      "totalSizeBytes": 18253611008,
+      "description": "Разблокированная версия Gemma3 Instruct 27B. Поддерживает графику и текст.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": true,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:27b",
+        "installTime": "Ок. 5-10 мин"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 20,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "Оптимизировано для английского",
+        "NSFW",
+        "Без цензуры",
+        "Без ограничений контента",
+        "Текст",
+        "Изображение",
+        "Многоязычный",
+        "Мультимодальный"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "huihui_ai/glm-4.7-flash-abliterated",
+      "name": "GLM-4.7-Flash-Abliterated",
+      "company": "Сообщество",
+      "parameterSize": "30B",
+      "totalSize": "19GB",
+      "totalSizeBytes": 20396941312,
+      "description": "Разблокированная версия GLM-4.7-Flash. Без цензуры.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 202752,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull huihui_ai/glm-4.7-flash-abliterated",
+        "installTime": "Ок. 5-10 мин"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 90,
+        "minMemoryGB": 22,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "NSFW",
+        "Без цензуры",
+        "Без ограничений контента",
+        "Текст"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 32768
+      }
+    },
+    {
+      "id": "alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+      "name": "Huihui-GLM-4.6V-Flash-Abliterated",
+      "company": "Сообщество",
+      "parameterSize": "9B",
+      "totalSize": "4.0GB",
+      "totalSizeBytes": 4294967296,
+      "description": "Huihui-GLM-4.6V-Flash. Поддержка текста не ограничена, но анализ изображений по-прежнему ограничен.",
+      "format": "safetensors",
+      "quantization": "q2_k",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+        "installTime": "Ок. 2-5 мин"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "medium",
+        "score": 80,
+        "minMemoryGB": 5,
+        "recommendedMemoryGB": 8
+      },
+      "tags": [
+        "Оптимизировано для китайского",
+        "NSFW",
+        "Без цензуры",
+        "Без цензуры",
+        "Изображение",
+        "Текст"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 8192
+      }
+    },
+    {
+      "id": "tomng/lfm2.5-instruct",
+      "name": "LFM-2.5-Instruct",
+      "company": "Сообщество",
+      "parameterSize": "Ок. 2.5B",
+      "totalSize": "2.3GB",
+      "totalSizeBytes": 2469606195,
+      "description": "Легковесная модель, оптимизированная сообществом и настроенная на инструкции. Подходит для быстрой генерации текста и диалогов.",
+      "format": "safetensors",
+      "quantization": "Q4_K_M",
+      "isMultiModal": false,
+      "contextLength": 8192,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull tomng/lfm2.5-instruct",
+        "installTime": "Ок. 1 мин"
+      },
+      "performance": {
+        "speed": "very_fast",
+        "quality": "medium",
+        "score": 78,
+        "minMemoryGB": 3,
+        "recommendedMemoryGB": 4
+      },
+      "tags": [
+        "Текст",
+        "Легковесный",
+        "Быстрый"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 4096
+      }
+    }
+  ]
+}

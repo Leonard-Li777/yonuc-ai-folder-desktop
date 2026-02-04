@@ -1,0 +1,383 @@
+{
+  "version": "1.0.0",
+  "language": "ko",
+  "lastUpdated": "2025-01-26",
+  "platform": "ollama",
+  "models": [
+    {
+      "id": "adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+      "name": "Qwen3-VL-4B-Instruct",
+      "company": "알리바바 (Alibaba)",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "알리바바 Qwen 시각 언어 모델. 이미지 이해 및 텍스트 생성 지원. 중국어 성능 우수. 추론 없음, 빠른 속도. 강력 추천.",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+        "installTime": "약 1-2 분"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 95,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "텍스트",
+        "이미지",
+        "중국어 최적화",
+        "멀티모달"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "gemma3:4b",
+      "name": "Gemma-3-4B",
+      "company": "Google",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "Google 최신 세대 다국어 시각 이해 모델. 이미지 및 텍스트 처리 지원.",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull gemma3:4b",
+        "installTime": "약 1-2 분"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "영어 최적화",
+        "텍스트",
+        "이미지",
+        "다국어",
+        "멀티모달"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:12b",
+      "name": "Gemma3-Instruct-Abliterated-12B",
+      "company": "커뮤니티 (Community)",
+      "parameterSize": "12B",
+      "totalSize": "7.3GB",
+      "totalSizeBytes": 7838315315,
+      "description": "Gemma3 Instruct 제한 해제 버전. 텍스트만 지원.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:12b",
+        "installTime": "약 3-5 분"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 88,
+        "minMemoryGB": 10,
+        "recommendedMemoryGB": 16
+      },
+      "tags": [
+        "영어 최적화",
+        "NSFW",
+        "무검열",
+        "콘텐츠 제한 없음",
+        "텍스트"
+      ],
+      "recommendedConfig": {
+        "numThread": 6,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:27b",
+      "name": "Gemma3-Instruct-Abliterated-27B",
+      "company": "커뮤니티 (Community)",
+      "parameterSize": "27B",
+      "totalSize": "17GB",
+      "totalSizeBytes": 18253611008,
+      "description": "Gemma3 Instruct 제한 해제 버전 27B. 그래픽 및 텍스트 모두 지원.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": true,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:27b",
+        "installTime": "약 5-10 분"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 20,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "영어 최적화",
+        "NSFW",
+        "무검열",
+        "콘텐츠 제한 없음",
+        "텍스트",
+        "이미지",
+        "다국어",
+        "멀티모달"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "huihui_ai/glm-4.7-flash-abliterated",
+      "name": "GLM-4.7-Flash-Abliterated",
+      "company": "커뮤니티 (Community)",
+      "parameterSize": "30B",
+      "totalSize": "19GB",
+      "totalSizeBytes": 20396941312,
+      "description": "GLM-4.7-Flash 제한 해제 버전. 미심사.",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 202752,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull huihui_ai/glm-4.7-flash-abliterated",
+        "installTime": "약 5-10 분"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 90,
+        "minMemoryGB": 22,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "NSFW",
+        "무검열",
+        "콘텐츠 제한 없음",
+        "텍스트"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 32768
+      }
+    },
+    {
+      "id": "alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+      "name": "Huihui-GLM-4.6V-Flash-Abliterated",
+      "company": "커뮤니티 (Community)",
+      "parameterSize": "9B",
+      "totalSize": "4.0GB",
+      "totalSizeBytes": 4294967296,
+      "description": "Huihui-GLM-4.6V-Flash. 텍스트 제한은 해제되었으나 이미지 분석은 여전히 제한됨.",
+      "format": "safetensors",
+      "quantization": "q2_k",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+        "installTime": "약 2-5 분"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "medium",
+        "score": 80,
+        "minMemoryGB": 5,
+        "recommendedMemoryGB": 8
+      },
+      "tags": [
+        "중국어 최적화",
+        "NSFW",
+        "무검열",
+        "미심사",
+        "이미지",
+        "텍스트"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 8192
+      }
+    },
+    {
+      "id": "tomng/lfm2.5-instruct",
+      "name": "LFM-2.5-Instruct",
+      "company": "커뮤니티 (Community)",
+      "parameterSize": "약 2.5B",
+      "totalSize": "2.3GB",
+      "totalSizeBytes": 2469606195,
+      "description": "커뮤니티 최적화 경량 지시 조정 모델. 빠른 텍스트 생성 및 대화에 적합.",
+      "format": "safetensors",
+      "quantization": "Q4_K_M",
+      "isMultiModal": false,
+      "contextLength": 8192,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull tomng/lfm2.5-instruct",
+        "installTime": "약 1 분"
+      },
+      "performance": {
+        "speed": "very_fast",
+        "quality": "medium",
+        "score": 78,
+        "minMemoryGB": 3,
+        "recommendedMemoryGB": 4
+      },
+      "tags": [
+        "텍스트",
+        "경량",
+        "고속"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 4096
+      }
+    }
+  ]
+}

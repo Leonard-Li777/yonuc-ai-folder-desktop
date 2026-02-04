@@ -1,0 +1,826 @@
+{
+  "file_dimensions": [
+    {
+      "name": "文件类型",
+      "level": 1,
+      "tags": [
+        "文档",
+        "电子书",
+        "图片",
+        "视频",
+        "音频",
+        "压缩包",
+        "源代码",
+        "脚本",
+        "程序",
+        "快捷方式",
+        "字体",
+        "系统文件",
+        "虚拟机",
+        "数据库",
+        "磁盘映像"
+      ],
+      "description": "文件的基础格式分类",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "扩展名",
+        "MIME类型",
+        "文件签名"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "文件用途",
+      "level": 1,
+      "tags": [
+        "工作文档",
+        "学习资料",
+        "游戏娱乐",
+        "创意项目",
+        "旅行记录",
+        "财务档案",
+        "系统维护",
+        "通讯存档",
+        "个人笔记"
+      ],
+      "description": "文件的核心使用场景",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "存储路径",
+        "命名模式",
+        "关联应用"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "文件来源",
+      "level": 1,
+      "tags": [
+        "本地创建",
+        "网络下载",
+        "设备导入",
+        "通讯接收",
+        "云同步",
+        "自动生产",
+        "扫描生成",
+        "邮件附件"
+      ],
+      "description": "文件的原始获取途径",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "路径特征",
+        "传输日志"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "作者",
+      "level": 1,
+      "tags": [],
+      "description": "文件的创建者或贡献者",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "元数据",
+        "数字签名",
+        "水印"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "文档细分",
+      "level": 2,
+      "tags": [
+        "文本文档",
+        "电子表格",
+        "演示文稿",
+        "PDF",
+        "笔记",
+        "表单"
+      ],
+      "description": "办公文档的专业分类",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "格式特征",
+        "软件标识"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "文档"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "图片细分",
+      "level": 2,
+      "tags": [
+        "摄影照片",
+        "截图",
+        "设计稿",
+        "应用图标",
+        "表情包",
+        "医学影像",
+        "CAD图纸"
+      ],
+      "description": "图像内容的专业分类",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "EXIF数据",
+        "内容识别"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "视频细分",
+      "level": 2,
+      "tags": [
+        "影视",
+        "教学视频",
+        "录屏",
+        "短视频",
+        "监控录像",
+        "会议录像"
+      ],
+      "description": "视频内容的专业分类",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "时长特征",
+        "关键帧分析"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "视频"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "音频细分",
+      "level": 2,
+      "tags": [
+        "音乐",
+        "播客",
+        "有声书",
+        "语音备忘",
+        "音效",
+        "会议录音"
+      ],
+      "description": "音频内容的专业分类",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "频谱特征",
+        "元数据"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "音频"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "压缩格式",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "压缩包的技术格式分类",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "压缩算法",
+        "文件头签名"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "压缩包"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "程序平台",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "驱动程序"
+      ],
+      "description": "可执行文件的目标平台",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "平台特征",
+        "签名证书"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "程序"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "脚本语言",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "批处理",
+        "SQL"
+      ],
+      "description": "脚本文件的技术语言分类",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "语法特征",
+        "解释器路径"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "脚本"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "系统文件类型",
+      "level": 2,
+      "tags": [
+        "配置文件",
+        "日志",
+        "缓存",
+        "临时文件",
+        "引导扇区",
+        "注册表"
+      ],
+      "description": "系统关键文件的功能分类",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "路径位置",
+        "权限特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "系统文件"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "虚拟机平台",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "虚拟化环境的技术平台",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "文件特征",
+        "平台签名"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "虚拟机"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "数据库格式",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "数据备份"
+      ],
+      "description": "数据库文件的技术格式",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "文件签名",
+        "结构特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "数据库"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "磁盘映像类型",
+      "level": 2,
+      "tags": [
+        "系统镜像",
+        "数据镜像",
+        "光盘镜像"
+      ],
+      "description": "磁盘映像的用途分类",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "卷标信息",
+        "分区结构"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "磁盘映像"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "地理位置",
+      "level": 2,
+      "tags": [],
+      "description": "内容关联的地理位置",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "GPS坐标",
+        "地标识别"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片",
+            "视频"
+          ]
+        },
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "旅行记录",
+            "创意项目"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "安全等级",
+      "level": 2,
+      "tags": [
+        "公开",
+        "内部",
+        "机密",
+        "绝密"
+      ],
+      "description": "文件的保密级别分类",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "加密状态",
+        "权限设置"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "工作文档",
+            "财务档案"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "处理状态",
+      "level": 2,
+      "tags": [
+        "草稿",
+        "审核中",
+        "已完成",
+        "已归档",
+        "待修订"
+      ],
+      "description": "文件的工作流状态",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "修改时间",
+        "版本标记"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "工作文档",
+            "创意项目"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "版权状态",
+      "level": 2,
+      "tags": [
+        "原创",
+        "授权使用",
+        "公共领域",
+        "版权限制"
+      ],
+      "description": "文件的版权归属状态",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "许可证文件",
+        "水印检测"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "创意项目",
+            "学习资料"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "旅行内容",
+      "level": 2,
+      "tags": [
+        "自然景观",
+        "城市建筑",
+        "人文活动",
+        "各地美食",
+        "历史遗迹",
+        "户外活动"
+      ],
+      "description": "旅行记录的内容分类",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "场景识别",
+        "时间特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "旅行记录"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "财务类型",
+      "level": 2,
+      "tags": [
+        "收入凭证",
+        "支出凭证",
+        "资产证明",
+        "税务文件",
+        "合同",
+        "发票"
+      ],
+      "description": "财务文件的业务类型",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "票据识别",
+        "金额模式"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "财务档案"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "游戏类型",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "冒险",
+        "解谜",
+        "塔防",
+        "策略",
+        "经营",
+        "恋爱",
+        "竞技",
+        "MOBA",
+        "格斗",
+        "射击",
+        "动作",
+        "肉鸽",
+        "田园",
+        "养成"
+      ],
+      "description": "游戏的类型",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "游戏"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "游戏娱乐"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "学科领域",
+      "level": 2,
+      "tags": [
+        "数学",
+        "物理",
+        "化学",
+        "生物",
+        "计算机科学",
+        "语言学习",
+        "历史",
+        "艺术设计",
+        "工程技术",
+        "经济学"
+      ],
+      "description": "学习资料的学科领域分类",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "学科术语密度",
+        "教材章节结构",
+        "课程平台标识"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "学习资料"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "电子书类型",
+      "level": 2,
+      "tags": [
+        "小说",
+        "技术书籍",
+        "杂志",
+        "教材",
+        "公版书"
+      ],
+      "description": "电子书的内容分类",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "章节结构",
+        "DRM状态"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "电子书"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "题材",
+      "level": 3,
+      "tags": [
+        "言情",
+        "科幻",
+        "魔幻",
+        "悬疑",
+        "推理",
+        "穿越",
+        "仙侠",
+        "历史",
+        "都市",
+        "家庭",
+        "职场",
+        "偶像",
+        "武侠",
+        "剧情",
+        "传记",
+        "喜剧",
+        "警匪",
+        "惊悚",
+        "童话",
+        "动画",
+        "纪录",
+        "自然",
+        "人文",
+        "体育",
+        "治愈",
+        "生活",
+        "旅行",
+        "科普",
+        "美食",
+        "短剧",
+        "怪谈",
+        "色情"
+      ],
+      "description": "题材的专业分类",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "时长特征",
+        "关键帧分析",
+        "内容特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "视频细分",
+          "triggerTags": [
+            "影视"
+          ]
+        },
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "截图"
+          ]
+        },
+        {
+          "parentDimension": "电子书类型",
+          "triggerTags": [
+            "小说"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "音乐类型",
+      "level": 3,
+      "tags": [
+        "流行",
+        "摇滚",
+        "电子",
+        "嘻哈",
+        "民谣",
+        "古典",
+        "爵士",
+        "蓝调",
+        "金属",
+        "朋克",
+        "乡村",
+        "说唱",
+        "古风",
+        "纯音",
+        "拉丁",
+        "交响"
+      ],
+      "description": "音乐类型",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "时长特征",
+        "内容特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "音频细分",
+          "triggerTags": [
+            "音乐"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "文件质量",
+      "level": 1,
+      "tags": [
+        "高质量",
+        "中等质量",
+        "低质量"
+      ],
+      "description": "文件内容的质量评级",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "内容质量",
+        "技术质量",
+        "美学质量"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "内容标签",
+      "level": 1,
+      "tags": [],
+      "description": "从文件内容或多模态描述中提取的核心关键词",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "文本内容",
+        "视觉描述",
+        "语音转录"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}

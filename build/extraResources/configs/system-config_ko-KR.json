@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-06T14:48:00.000Z",
+  "panDimensionIds": [4, 28],
+  "latestNews": [
+    {
+      "text": "로컬 테스트 메시지: Yonuc AI 폴더 관리 시스템에 오신 것을 환영합니다!",
+      "url": "https://github.com/yonuc/ai-folder"
+    },
+    {
+      "text": "로컬 테스트 메시지: 새 버전이 출시되었습니다. 다국어 태그 시스템을 지원합니다",
+      "url": "https://github.com/yonuc/ai-folder/releases"
+    },
+    {
+      "text": "로컬 테스트 메시지: 더 많은 기능을 보려면 문서를 확인하세요",
+      "url": "https://docs.yonuc.com"
+    }
+  ]
+}

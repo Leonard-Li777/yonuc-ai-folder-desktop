@@ -1,0 +1,138 @@
+{
+    "正在准备启动应用...": {
+        "en-US": "Preparing to launch the application...",
+        "es-ES": "Preparando el inicio de la aplicación...",
+        "ar-EG": "جارٍ الاستعداد لبدء تشغيل التطبيق...",
+        "pt-PT": "A preparar o lançamento da aplicação...",
+        "ru-RU": "Подготовка к запуску приложения...",
+        "ja-JP": "アプリケーションの起動準備中...",
+        "de-DE": "Die Anwendung wird vorbereitet...",
+        "fr-FR": "Préparation du lancement de l'application...",
+        "ko-KR": "앱 시작 준비 중...",
+        "$files": [
+            "renderer/App.tsx(1693-1708)"
+        ],
+        "$id": 6219
+    },
+    "正在检测应用配置...": {
+        "en-US": "Detecting application configuration...",
+        "es-ES": "Detectando la configuración de la aplicación...",
+        "ar-EG": "جارٍ اكتشاف إعدادات التطبيق...",
+        "pt-PT": "A detetar a configuração da aplicação...",
+        "ru-RU": "Обнаружение конфигурации приложения...",
+        "ja-JP": "アプリケーション設定を検出中...",
+        "de-DE": "Die Anwendungskonfiguration wird erkannt...",
+        "fr-FR": "Détection de la configuration de l'application...",
+        "ko-KR": "앱 설정 감지 중...",
+        "$files": [
+            "renderer/App.tsx(2207-2222)"
+        ],
+        "$id": 6223
+    },
+    "正在初始化AI服务...": {
+        "en-US": "Initializing AI services...",
+        "es-ES": "Inicializando el servicio de IA...",
+        "ar-EG": "جارٍ تهيئة خدمة الذكاء الاصطناعي...",
+        "pt-PT": "A inicializar o serviço de IA...",
+        "ru-RU": "Инициализация ИИ сервиса...",
+        "ja-JP": "AIサービスを初期化中...",
+        "de-DE": "Der KI-Dienst wird initialisiert...",
+        "fr-FR": "Initialisation du service IA...",
+        "ko-KR": "AI 서비스 초기화 중...",
+        "$files": [
+            "renderer/App.tsx(8987-9003)"
+        ],
+        "$id": 6220
+    },
+    "正在加载应用配置...": {
+        "en-US": "Loading application configuration...",
+        "es-ES": "Cargando la configuración de la aplicación...",
+        "ar-EG": "جارٍ تحميل إعدادات التطبيق...",
+        "pt-PT": "A carregar a configuração da aplicação...",
+        "ru-RU": "Загрузка конфигурации приложения...",
+        "ja-JP": "アプリケーション設定を読み込み中...",
+        "de-DE": "Die Anwendungskonfiguration wird geladen...",
+        "fr-FR": "Chargement de la configuration de l'application...",
+        "ko-KR": "앱 설정 로드 중...",
+        "$files": [
+            "renderer/App.tsx(9274-9289)"
+        ],
+        "$id": 6221
+    },
+    "正在检查 AI 状态...": {
+        "en-US": "Checking AI status...",
+        "es-ES": "Comprobando el estado de la IA...",
+        "ar-EG": "جارٍ التحقق من حالة الذكاء الاصطناعي...",
+        "pt-PT": "A verificar o estado da IA...",
+        "ru-RU": "Проверка состояния ИИ...",
+        "ja-JP": "AI状態を確認中...",
+        "de-DE": "Der KI-Status wird überprüft...",
+        "fr-FR": "Vérification de l'état de l'IA...",
+        "ko-KR": "AI 상태 확인 중...",
+        "$files": [
+            "renderer/App.tsx(9342-9359)"
+        ],
+        "$id": 6222
+    },
+    "正在初始化应用": {
+        "en-US": "Initializing application",
+        "es-ES": "Inicializando la aplicación",
+        "ar-EG": "جارٍ تهيئة التطبيق",
+        "pt-PT": "A inicializar a aplicação",
+        "ru-RU": "Инициализация приложения",
+        "ja-JP": "アプリケーションを初期化中",
+        "de-DE": "Die Anwendung wird initialisiert",
+        "fr-FR": "Initialisation de l'application",
+        "ko-KR": "앱 초기화 중",
+        "$files": [
+            "renderer/App.tsx(10520-10531)",
+            "renderer/App.tsx(10631-10642)"
+        ],
+        "$id": 6224
+    },
+    "检测配置阶段...": {
+        "en-US": "Configuration detection phase...",
+        "es-ES": "Fase de detección de configuración...",
+        "ar-EG": "مرحلة اكتشاف الإعدادات...",
+        "pt-PT": "Fase de deteção de configuração...",
+        "ru-RU": "Этап обнаружения конфигурации...",
+        "ja-JP": "設定検出フェーズ...",
+        "de-DE": "Konfigurationsprüfungsphase...",
+        "fr-FR": "Phase de détection de configuration...",
+        "ko-KR": "설정 감지 단계...",
+        "$files": [
+            "renderer/App.tsx(10534-10547)"
+        ],
+        "$id": 6225
+    },
+    "准备加载文件与 AI 服务...": {
+        "en-US": "Preparing to load files and AI services...",
+        "es-ES": "Preparando la carga de archivos y servicios de IA...",
+        "ar-EG": "جارٍ الاستعداد لتحميل الملفات وخدمة الذكاء الاصطناعي...",
+        "pt-PT": "A preparar para carregar ficheiros e serviços de IA...",
+        "ru-RU": "Подготовка к загрузке файлов и ИИ сервиса...",
+        "ja-JP": "ファイルとAIサービスの読み込み準備中...",
+        "de-DE": "Das Laden von Dateien und KI-Diensten wird vorbereitet...",
+        "fr-FR": "Préparation du chargement des fichiers et du service IA...",
+        "ko-KR": "파일 및 AI 서비스 로드 준비 중...",
+        "$files": [
+            "renderer/App.tsx(10645-10665)"
+        ],
+        "$id": 6226
+    },
+    "正在处理中，请等待当前任务完成": {
+        "en-US": "Processing, please wait for the current task to complete",
+        "es-ES": "Procesando, por favor espere a que se complete la tarea actual",
+        "ar-EG": "قيد المعالجة، يُرجى الانتظار حتى يكتمل المهمة الحالية",
+        "pt-PT": "A processar, aguarde até que a tarefa atual seja concluída",
+        "ru-RU": "Обработка выполняется, пожалуйста, дождитесь завершения текущей задачи",
+        "ja-JP": "処理中です。現在のタスクが完了するまでお待ちください。",
+        "de-DE": "Wird verarbeitet, bitte warten Sie, bis die aktuelle Aufgabe abgeschlossen ist",
+        "fr-FR": "Traitement en cours, veuillez attendre la fin de la tâche actuelle",
+        "ko-KR": "처리 중입니다. 현재 작업이 완료될 때까지 기다려 주세요.",
+        "$files": [
+            "electron/runtime-services/integration/file-scanner-integration.ts(2728-2747)"
+        ],
+        "$id": 2921
+    }
+}

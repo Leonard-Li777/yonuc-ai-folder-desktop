@@ -1,0 +1,430 @@
+{
+  "version": "1.0.0",
+  "language": "zh",
+  "lastUpdated": "2025-01-26",
+  "platform": "ollama",
+  "models": [
+    {
+      "id": "adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+      "name": "Qwen3-VL-4B-Instruct",
+      "company": "阿里巴巴 (Alibaba)",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "阿里千问视觉语言模型，支持图像理解、文本生成，中文效果优秀，无思考，速度快，强烈推荐",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull adelnazmy2002/Qwen3-VL-4B-Instruct:Q4_K_M",
+        "installTime": "约 1-2 分钟"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 95,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "文本",
+        "图像",
+        "中文优化",
+        "多模态"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "gemma3:4b",
+      "name": "Gemma-3-4B",
+      "company": "Google",
+      "parameterSize": "4B",
+      "totalSize": "3.3GB",
+      "totalSizeBytes": 3543348019,
+      "description": "Google 最新一代多语言视觉理解模型，支持图像和文本处理",
+      "format": "safetensors",
+      "quantization": "BF16",
+      "isMultiModal": true,
+      "contextLength": 32768,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull gemma3:4b",
+        "installTime": "约 1-2 分钟"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 4,
+        "recommendedMemoryGB": 6
+      },
+      "tags": [
+        "英文优化",
+        "文本",
+        "图像",
+        "多语言",
+        "多模态"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:12b",
+      "name": "Gemma3-Instruct-Abliterated-12B",
+      "company": "社区 (Community)",
+      "parameterSize": "12B",
+      "totalSize": "7.3GB",
+      "totalSizeBytes": 7838315315,
+      "description": "Gemma3 Instruct 去除限制版，但仅支持文本",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:12b",
+        "installTime": "约 3-5 分钟"
+      },
+      "performance": {
+        "speed": "fast",
+        "quality": "high",
+        "score": 88,
+        "minMemoryGB": 10,
+        "recommendedMemoryGB": 16
+      },
+      "tags": [
+        "英文优化",
+        "NSFW",
+        "uncensored",
+        "无敏感内容限制",
+        "文本"
+      ],
+      "recommendedConfig": {
+        "numThread": 6,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "mdq100/Gemma3-Instruct-Abliterated:27b",
+      "name": "Gemma3-Instruct-Abliterated-27B",
+      "company": "社区 (Community)",
+      "parameterSize": "27B",
+      "totalSize": "17GB",
+      "totalSizeBytes": 18253611008,
+      "description": "Gemma3 Instruct 去除限制版 27B，同时支持图形和文本",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": true,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "png",
+            "bmp",
+            "webp",
+            "gif"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull mdq100/Gemma3-Instruct-Abliterated:27b",
+        "installTime": "约 5-10 分钟"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 92,
+        "minMemoryGB": 20,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "英文优化",
+        "NSFW",
+        "uncensored",
+        "无敏感内容限制",
+        "文本",
+        "图像",
+        "多语言",
+        "多模态"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 16384
+      }
+    },
+    {
+      "id": "glm-4.7-flash",
+      "name": "GLM-4.7-Flash",
+      "company": "智谱 AI (Zhipu AI)",
+      "parameterSize": "7B",
+      "totalSize": "19GB",
+      "totalSizeBytes": 20396941312,
+      "description": "智谱 AI 推出的超长上下文文本模型，支持 128K 上下文窗口，适合处理长文档",
+      "format": "safetensors",
+      "quantization": "FP16",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md",
+            "pdf",
+            "doc"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull glm-4.7-flash",
+        "installTime": "约 5-10 分钟"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 90,
+        "minMemoryGB": 20,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "中文优化",
+        "文本",
+        "超长上下文",
+        "中文优化"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 32768
+      }
+    },
+    {
+      "id": "huihui_ai/glm-4.7-flash-abliterated",
+      "name": "GLM-4.7-Flash-Abliterated",
+      "company": "社区 (Community)",
+      "parameterSize": "30B",
+      "totalSize": "19GB",
+      "totalSizeBytes": 20396941312,
+      "description": "GLM-4.7-Flash 去除限制版本。未审查。",
+      "format": "safetensors",
+      "quantization": "Unknown",
+      "isMultiModal": false,
+      "contextLength": 202752,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "high",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull huihui_ai/glm-4.7-flash-abliterated",
+        "installTime": "约 5-10 分钟"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "high",
+        "score": 90,
+        "minMemoryGB": 22,
+        "recommendedMemoryGB": 32
+      },
+      "tags": [
+        "NSFW",
+        "uncensored",
+        "无敏感内容限制",
+        "文本"
+      ],
+      "recommendedConfig": {
+        "numThread": 8,
+        "numCtx": 32768
+      }
+    },
+    {
+      "id": "alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+      "name": "Huihui-GLM-4.6V-Flash-Abliterated",
+      "company": "社区 (Community)",
+      "parameterSize": "9B",
+      "totalSize": "4.0GB",
+      "totalSizeBytes": 4294967296,
+      "description": "Huihui-GLM-4.6V-Flash 支持文本去除限制，图像分析依然有限制。",
+      "format": "safetensors",
+      "quantization": "q2_k",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        },
+        {
+          "type": "IMAGE",
+          "supportedFormats": [
+            "jpg",
+            "jpeg",
+            "png",
+            "bmp",
+            "webp",
+            "gif",
+            "tiff"
+          ],
+          "quality": "high",
+          "isPrimary": false
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull alibilge/Huihui-GLM-4.6V-Flash-abliterated:q2_k",
+        "installTime": "约 2-5 分钟"
+      },
+      "performance": {
+        "speed": "medium",
+        "quality": "medium",
+        "score": 80,
+        "minMemoryGB": 5,
+        "recommendedMemoryGB": 8
+      },
+      "tags": [
+        "中文优化",
+        "NSFW",
+        "uncensored",
+        "未审查",
+        "图像",
+        "文本"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 8192
+      }
+    },
+    {
+      "id": "tomng/lfm2.5-instruct",
+      "name": "LFM-2.5-Instruct",
+      "company": "社区 (Community)",
+      "parameterSize": "约 2.5B",
+      "totalSize": "2.3GB",
+      "totalSizeBytes": 2469606195,
+      "description": "社区优化的轻量级指令微调模型，适合快速文本生成和对话",
+      "format": "safetensors",
+      "quantization": "Q4_K_M",
+      "isMultiModal": false,
+      "contextLength": 8192,
+      "capabilities": [
+        {
+          "type": "TEXT",
+          "supportedFormats": [
+            "txt",
+            "md"
+          ],
+          "quality": "medium",
+          "isPrimary": true
+        }
+      ],
+      "ollama": {
+        "pullCommand": "ollama pull tomng/lfm2.5-instruct",
+        "installTime": "约 1 分钟"
+      },
+      "performance": {
+        "speed": "very_fast",
+        "quality": "medium",
+        "score": 78,
+        "minMemoryGB": 3,
+        "recommendedMemoryGB": 4
+      },
+      "tags": [
+        "文本",
+        "轻量",
+        "快速"
+      ],
+      "recommendedConfig": {
+        "numThread": 4,
+        "numCtx": 4096
+      }
+    }
+  ]
+}

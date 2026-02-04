@@ -1,0 +1,826 @@
+{
+  "file_dimensions": [
+    {
+      "name": "File Type",
+      "level": 1,
+      "tags": [
+        "Document",
+        "E-book",
+        "Image",
+        "Video",
+        "Audio",
+        "Archive",
+        "Source Code",
+        "Script",
+        "Program",
+        "Shortcut",
+        "Font",
+        "System File",
+        "Virtual Machine",
+        "Database",
+        "Disk Image"
+      ],
+      "description": "Basic format classification of the file",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Extension",
+        "MIME Type",
+        "File Signature"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "File Usage",
+      "level": 1,
+      "tags": [
+        "Work Document",
+        "Study Material",
+        "Game & Entertainment",
+        "Creative Project",
+        "Travel Record",
+        "Financial Archive",
+        "System Maintenance",
+        "Communication Archive",
+        "Personal Note"
+      ],
+      "description": "Core usage scenario of the file",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Storage Path",
+        "Naming Pattern",
+        "Associated App"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "File Source",
+      "level": 1,
+      "tags": [
+        "Locally Created",
+        "Web Download",
+        "Device Import",
+        "Communication Received",
+        "Cloud Sync",
+        "Auto Generated",
+        "Scanned",
+        "Email Attachment"
+      ],
+      "description": "Original acquisition method of the file",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Path Characteristics",
+        "Transfer Log"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Author",
+      "level": 1,
+      "tags": [],
+      "description": "Creator or contributor of the file",
+      "applicableFileTypes": [
+        "document",
+        "ebook",
+        "image",
+        "source",
+        "script"
+      ],
+      "contextHints": [
+        "Metadata",
+        "Digital Signature",
+        "Watermark"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Document Subtype",
+      "level": 2,
+      "tags": [
+        "Text Document",
+        "Spreadsheet",
+        "Presentation",
+        "PDF",
+        "Note",
+        "Form"
+      ],
+      "description": "Professional classification of office documents",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Format Characteristics",
+        "Software ID"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Document"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Image Subtype",
+      "level": 2,
+      "tags": [
+        "Photography",
+        "Screenshot",
+        "Design Draft",
+        "App Icon",
+        "Meme",
+        "Medical Image",
+        "CAD Drawing"
+      ],
+      "description": "Professional classification of image content",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "EXIF Data",
+        "Content Recognition"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Video Subtype",
+      "level": 2,
+      "tags": [
+        "Movie & TV",
+        "Educational Video",
+        "Screen Recording",
+        "Short Video",
+        "Surveillance",
+        "Meeting Recording"
+      ],
+      "description": "Professional classification of video content",
+      "applicableFileTypes": [
+        "video"
+      ],
+      "contextHints": [
+        "Duration Characteristics",
+        "Keyframe Analysis"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Video"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Audio Subtype",
+      "level": 2,
+      "tags": [
+        "Music",
+        "Podcast",
+        "Audiobook",
+        "Voice Memo",
+        "Sound Effect",
+        "Meeting Recording"
+      ],
+      "description": "Professional classification of audio content",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Spectral Characteristics",
+        "Metadata"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Audio"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Archive Format",
+      "level": 2,
+      "tags": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ],
+      "description": "Technical format classification of archives",
+      "applicableFileTypes": [
+        "archive"
+      ],
+      "contextHints": [
+        "Compression Algorithm",
+        "File Header Signature"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Archive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Platform",
+      "level": 2,
+      "tags": [
+        "Windows",
+        "Linux",
+        "macOS",
+        "Android",
+        "iOS",
+        "Driver"
+      ],
+      "description": "Target platform of the executable file",
+      "applicableFileTypes": [
+        "executable"
+      ],
+      "contextHints": [
+        "Platform Characteristics",
+        "Signature Certificate"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Program"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Script Language",
+      "level": 2,
+      "tags": [
+        "Python",
+        "JavaScript",
+        "Bash",
+        "PowerShell",
+        "Batch",
+        "SQL"
+      ],
+      "description": "Technical language classification of script files",
+      "applicableFileTypes": [
+        "script"
+      ],
+      "contextHints": [
+        "Syntax Characteristics",
+        "Interpreter Path"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Script"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "System File Type",
+      "level": 2,
+      "tags": [
+        "Config File",
+        "Log",
+        "Cache",
+        "Temp File",
+        "Boot Sector",
+        "Registry"
+      ],
+      "description": "Functional classification of key system files",
+      "applicableFileTypes": [
+        "system"
+      ],
+      "contextHints": [
+        "Path Location",
+        "Permission Characteristics"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "System File"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "VM Platform",
+      "level": 2,
+      "tags": [
+        "VMware",
+        "VirtualBox",
+        "Hyper-V",
+        "Docker",
+        "KVM"
+      ],
+      "description": "Technical platform of the virtualization environment",
+      "applicableFileTypes": [
+        "virtual"
+      ],
+      "contextHints": [
+        "File Characteristics",
+        "Platform Signature"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Virtual Machine"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Database Format",
+      "level": 2,
+      "tags": [
+        "SQLite",
+        "MySQL",
+        "MongoDB",
+        "Access",
+        "Data Backup"
+      ],
+      "description": "Technical format of database files",
+      "applicableFileTypes": [
+        "database"
+      ],
+      "contextHints": [
+        "File Signature",
+        "Structural Characteristics"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Database"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disk Image Type",
+      "level": 2,
+      "tags": [
+        "System Image",
+        "Data Image",
+        "Disc Image"
+      ],
+      "description": "Usage classification of disk images",
+      "applicableFileTypes": [
+        "diskimage"
+      ],
+      "contextHints": [
+        "Volume Label",
+        "Partition Structure"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Disk Image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Location",
+      "level": 2,
+      "tags": [],
+      "description": "Geographical location associated with the content",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "GPS Coordinates",
+        "Landmark Recognition"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "Image",
+            "Video"
+          ]
+        },
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Travel Record",
+            "Creative Project"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Security Level",
+      "level": 2,
+      "tags": [
+        "Public",
+        "Internal",
+        "Confidential",
+        "Top Secret"
+      ],
+      "description": "Confidentiality level classification of the file",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "archive",
+        "database"
+      ],
+      "contextHints": [
+        "Encryption Status",
+        "Permission Settings"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Work Document",
+            "Financial Archive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Process Status",
+      "level": 2,
+      "tags": [
+        "Draft",
+        "In Review",
+        "Completed",
+        "Archived",
+        "To Revise"
+      ],
+      "description": "Workflow status of the file",
+      "applicableFileTypes": [
+        "document",
+        "source",
+        "design"
+      ],
+      "contextHints": [
+        "Modification Time",
+        "Version Mark"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Work Document",
+            "Creative Project"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Copyright Status",
+      "level": 2,
+      "tags": [
+        "Original",
+        "Licensed",
+        "Public Domain",
+        "Copyright Restricted"
+      ],
+      "description": "Copyright ownership status of the file",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "source",
+        "document"
+      ],
+      "contextHints": [
+        "License File",
+        "Watermark Detection"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Creative Project",
+            "Study Material"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Travel Content",
+      "level": 2,
+      "tags": [
+        "Natural Landscape",
+        "Urban Architecture",
+        "Human Activity",
+        "Local Food",
+        "Historical Site",
+        "Outdoor Activity"
+      ],
+      "description": "Content classification of travel records",
+      "applicableFileTypes": [
+        "image",
+        "video",
+        "document"
+      ],
+      "contextHints": [
+        "Scene Recognition",
+        "Time Characteristics"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Travel Record"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Finance Type",
+      "level": 2,
+      "tags": [
+        "Income Voucher",
+        "Expense Voucher",
+        "Asset Proof",
+        "Tax Document",
+        "Contract",
+        "Invoice"
+      ],
+      "description": "Business type of financial files",
+      "applicableFileTypes": [
+        "document"
+      ],
+      "contextHints": [
+        "Receipt Recognition",
+        "Amount Pattern"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Financial Archive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Game Type",
+      "level": 3,
+      "tags": [
+        "RPG",
+        "Adventure",
+        "Puzzle",
+        "Tower Defense",
+        "Strategy",
+        "Management",
+        "Romance",
+        "Competitive",
+        "MOBA",
+        "Fighting",
+        "Shooter",
+        "Action",
+        "Roguelike",
+        "Farming",
+        "Simulation"
+      ],
+      "description": "Type of the game",
+      "applicableFileTypes": [
+        "game",
+        "video",
+        "ebook"
+      ],
+      "contextHints": [
+        "Game"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Game & Entertainment"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Academic Field",
+      "level": 2,
+      "tags": [
+        "Mathematics",
+        "Physics",
+        "Chemistry",
+        "Biology",
+        "Computer Science",
+        "Language Learning",
+        "History",
+        "Art & Design",
+        "Engineering",
+        "Economics"
+      ],
+      "description": "Academic field classification of study materials",
+      "applicableFileTypes": [
+        "document",
+        "video",
+        "ebook",
+        "source"
+      ],
+      "contextHints": [
+        "Academic Term Density",
+        "Textbook Structure",
+        "Course Platform ID"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Usage",
+          "triggerTags": [
+            "Study Material"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "E-book Type",
+      "level": 2,
+      "tags": [
+        "Novel",
+        "Technical Book",
+        "Magazine",
+        "Textbook",
+        "Public Domain Book"
+      ],
+      "description": "Content classification of e-books",
+      "applicableFileTypes": [
+        "ebook"
+      ],
+      "contextHints": [
+        "Chapter Structure",
+        "DRM Status"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "File Type",
+          "triggerTags": [
+            "E-book"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Genre / Theme",
+      "level": 3,
+      "tags": [
+        "Romance",
+        "Sci-Fi",
+        "Fantasy",
+        "Mystery",
+        "Mystery/Thriller",
+        "Time Travel",
+        "Xianxia",
+        "History",
+        "Urban",
+        "Family",
+        "Workplace",
+        "Idol",
+        "Wuxia",
+        "Drama",
+        "Biography",
+        "Comedy",
+        "Crime",
+        "Thriller",
+        "Fairy Tale",
+        "Animation",
+        "Documentary",
+        "Nature",
+        "Humanities",
+        "Sports",
+        "Healing",
+        "Life",
+        "Travel",
+        "Popular Science",
+        "Food",
+        "Short Drama",
+        "Ghost Story",
+        "Pornography"
+      ],
+      "description": "Professional classification of genres",
+      "applicableFileTypes": [
+        "video",
+        "picture",
+        "ebook"
+      ],
+      "contextHints": [
+        "Duration Characteristics",
+        "Keyframe Analysis",
+        "Content Characteristics"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Video Subtype",
+          "triggerTags": [
+            "Movie & TV"
+          ]
+        },
+        {
+          "parentDimension": "Image Subtype",
+          "triggerTags": [
+            "Screenshot"
+          ]
+        },
+        {
+          "parentDimension": "E-book Type",
+          "triggerTags": [
+            "Novel"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Music Genre",
+      "level": 3,
+      "tags": [
+        "Pop",
+        "Rock",
+        "Electronic",
+        "Hip-Hop",
+        "Folk",
+        "Classical",
+        "Jazz",
+        "Blues",
+        "Metal",
+        "Punk",
+        "Country",
+        "Rap",
+        "Gu-Feng",
+        "Instrumental",
+        "Latin",
+        "Symphony"
+      ],
+      "description": "Genre of music",
+      "applicableFileTypes": [
+        "audio"
+      ],
+      "contextHints": [
+        "Duration Characteristics",
+        "Content Characteristics"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Audio Subtype",
+          "triggerTags": [
+            "Music"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "File Quality",
+      "level": 1,
+      "tags": [
+        "High Quality",
+        "Medium Quality",
+        "Low Quality"
+      ],
+      "description": "Quality rating of file content",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Content Quality",
+        "Technical Quality",
+        "Aesthetic Quality"
+      ],
+      "triggerConditions": []
+    },
+    {
+      "name": "Content Tags",
+      "level": 1,
+      "tags": [],
+      "description": "Core keywords extracted from file content or multimodal descriptions",
+      "applicableFileTypes": [
+        "*"
+      ],
+      "contextHints": [
+        "Text Content",
+        "Visual Description",
+        "Voice Transcription"
+      ],
+      "triggerConditions": []
+    }
+  ]
+}
