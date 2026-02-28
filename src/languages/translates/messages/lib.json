@@ -1,0 +1,186 @@
+{
+    "中性灰": {
+        "en-US": "Neutral Gray  ",
+        "es-ES": "Gris neutro",
+        "ar-EG": "رمادي محايد  ",
+        "pt-PT": "Cinza Neutro  ",
+        "ru-RU": "Нейтральный серый  ",
+        "ja-JP": "ニュートラルグレー  ",
+        "de-DE": "Neutrales Grau  ",
+        "fr-FR": "Gris neutre  ",
+        "ko-KR": "중성 회색  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8337-8344)",
+            "renderer/lib/theme-config.ts(9136-9143)"
+        ],
+        "$id": 5443
+    },
+    "专业优雅的中性配色": {
+        "en-US": "Professionally elegant neutral palette  ",
+        "es-ES": "Paleta neutra profesional y elegante",
+        "ar-EG": "مزيج ألوان محايد احترافي وأنيق  ",
+        "pt-PT": "Paleta neutra profissional e elegante  ",
+        "ru-RU": "Профессиональная и элегантная нейтральная палитра  ",
+        "ja-JP": "プロフェッショナルでエレガントなニュートラルカラー  ",
+        "de-DE": "Professionelle und elegante neutrale Farbgebung  ",
+        "fr-FR": "Palette neutre professionnelle et élégante  ",
+        "ko-KR": "전문적이고 우아한 중성 색상  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8365-8378)"
+        ],
+        "$id": 5444
+    },
+    "清新蓝": {
+        "en-US": "Fresh Blue  ",
+        "es-ES": "Azul fresco",
+        "ar-EG": "أزرق منعش  ",
+        "pt-PT": "Azul Fresco  ",
+        "ru-RU": "Свежий синий  ",
+        "ja-JP": "フレッシュブルー  ",
+        "de-DE": "Frisches Blau  ",
+        "fr-FR": "Bleu frais  ",
+        "ko-KR": "청량한 블루  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8425-8432)"
+        ],
+        "$id": 5445
+    },
+    "清新专业的蓝色主题": {
+        "en-US": "Fresh and professional blue theme  ",
+        "es-ES": "Tema azul fresco y profesional",
+        "ar-EG": "موضوع أزرق منعش واحترافي  ",
+        "pt-PT": "Tema azul fresco e profissional  ",
+        "ru-RU": "Свежая и профессиональная синяя тема  ",
+        "ja-JP": "爽やかでプロフェッショナルなブルーテーマ  ",
+        "de-DE": "Frisches und professionelles blaues Thema  ",
+        "fr-FR": "Thème bleu frais et professionnel  ",
+        "ko-KR": "청량하고 전문적인 블루 테마  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8453-8466)"
+        ],
+        "$id": 5446
+    },
+    "自然绿": {
+        "en-US": "Natural Green  ",
+        "es-ES": "Verde natural",
+        "ar-EG": "أخضر طبيعي  ",
+        "pt-PT": "Verde Natural  ",
+        "ru-RU": "Природный зеленый  ",
+        "ja-JP": "ナチュラルグリーン  ",
+        "de-DE": "Natürliches Grün  ",
+        "fr-FR": "Vert naturel  ",
+        "ko-KR": "내추럴 그린  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8515-8522)",
+            "renderer/lib/theme-config.ts(4201-4208)"
+        ],
+        "$id": 5447
+    },
+    "自然舒适的绿色主题": {
+        "en-US": "Naturally comfortable green theme  ",
+        "es-ES": "Tema verde natural y cómodo",
+        "ar-EG": "موضوع أخضر طبيعي ومريح  ",
+        "pt-PT": "Tema verde natural e confortável  ",
+        "ru-RU": "Естественная и комфортная зеленая тема  ",
+        "ja-JP": "自然で快適なグリーンテーマ  ",
+        "de-DE": "Natürliches und komfortables grünes Thema  ",
+        "fr-FR": "Thème vert naturel et confortable  ",
+        "ko-KR": "자연스럽고 편안한 그린 테마  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8543-8556)"
+        ],
+        "$id": 5448
+    },
+    "优雅紫": {
+        "en-US": "Elegant Purple  ",
+        "es-ES": "Púrpura elegante",
+        "ar-EG": "أرجواني أنيق  ",
+        "pt-PT": "Roxo Elegante  ",
+        "ru-RU": "Элегантный фиолетовый  ",
+        "ja-JP": "エレガントパープル  ",
+        "de-DE": "Elegantes Violett  ",
+        "fr-FR": "Violet élégant  ",
+        "ko-KR": "우아한 보라  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8606-8613)",
+            "renderer/lib/theme-config.ts(2549-2556)"
+        ],
+        "$id": 5449
+    },
+    "优雅神秘的紫色主题": {
+        "en-US": "Elegant and mysterious purple theme  ",
+        "es-ES": "Tema púrpura elegante y misterioso",
+        "ar-EG": "موضوع أرجواني أنيق وغامض  ",
+        "pt-PT": "Tema roxo elegante e misterioso  ",
+        "ru-RU": "Элегантная и загадочная фиолетовая тема  ",
+        "ja-JP": "エレガントでミステリアスなパープルテーマ  ",
+        "de-DE": "Elegantes und geheimnisvolles violettes Thema  ",
+        "fr-FR": "Thème violet élégant et mystérieux  ",
+        "ko-KR": "우아하고 신비로운 보라 테마  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8634-8647)"
+        ],
+        "$id": 5450
+    },
+    "玫瑰红": {
+        "en-US": "Rose Red  ",
+        "es-ES": "Rosa rojo",
+        "ar-EG": "أحمر وردي  ",
+        "pt-PT": "Vermelho Rosa  ",
+        "ru-RU": "Розово-красный  ",
+        "ja-JP": "ローズレッド  ",
+        "de-DE": "Rosarot  ",
+        "fr-FR": "Rouge rosé  ",
+        "ko-KR": "로즈 레드  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8695-8702)",
+            "renderer/lib/theme-config.ts(7484-7491)"
+        ],
+        "$id": 5451
+    },
+    "温暖活力的红色主题": {
+        "en-US": "Warm and vibrant red theme  ",
+        "es-ES": "Tema rojo cálido y enérgico",
+        "ar-EG": "موضوع أحمر دافئ وحيوي  ",
+        "pt-PT": "Tema vermelho quente e vibrante  ",
+        "ru-RU": "Теплая и энергичная красная тема  ",
+        "ja-JP": "温かみと活力あふれるレッドテーマ  ",
+        "de-DE": "Warmes und lebendiges rotes Thema  ",
+        "fr-FR": "Thème rouge chaleureux et dynamique  ",
+        "ko-KR": "따뜻하고 활력 넘치는 레드 테마  ",
+        "$files": [
+            "renderer/lib/theme-colors.ts(8723-8736)"
+        ],
+        "$id": 5452
+    },
+    "经典蓝": {
+        "en-US": "Classic Blue  ",
+        "es-ES": "Azul clásico",
+        "ar-EG": "أزرق كلاسيكي  ",
+        "pt-PT": "Azul Clássico  ",
+        "ru-RU": "Классический синий  ",
+        "ja-JP": "クラシックブルー  ",
+        "de-DE": "Klassisches Blau  ",
+        "fr-FR": "Bleu classique  ",
+        "ko-KR": "클래식 블루  ",
+        "$files": [
+            "renderer/lib/theme-config.ts(519-526)"
+        ],
+        "$id": 5453
+    },
+    "活力橙": {
+        "en-US": "Vibrant Orange",
+        "es-ES": "Naranja vibrante",
+        "ar-EG": "برتقالي حيوي",
+        "pt-PT": "Laranja Vibrante",
+        "ru-RU": "Энергичный оранжевый",
+        "ja-JP": "エネルギッシュオレンジ",
+        "de-DE": "Lebendiges Orange",
+        "fr-FR": "Orange dynamique",
+        "ko-KR": "활기찬 오렌지",
+        "$files": [
+            "renderer/lib/theme-config.ts(5855-5862)"
+        ],
+        "$id": 5454
+    }
+}

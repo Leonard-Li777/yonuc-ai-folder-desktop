@@ -1,0 +1,318 @@
+{
+    "正在准备启动应用...": {
+        "en-US": "Preparing to launch the application...",
+        "es-ES": "Preparando el inicio de la aplicación...",
+        "ar-EG": "جارٍ الاستعداد لبدء تشغيل التطبيق...",
+        "pt-PT": "A preparar o lançamento da aplicação...",
+        "ru-RU": "Подготовка к запуску приложения...",
+        "ja-JP": "アプリケーションの起動準備中...",
+        "de-DE": "Die Anwendung wird vorbereitet...",
+        "fr-FR": "Préparation du lancement de l'application...",
+        "ko-KR": "앱 시작 준비 중...",
+        "$files": [
+            "renderer/App.tsx(1804-1819)"
+        ],
+        "$id": 6219
+    },
+    "正在检测应用配置...": {
+        "en-US": "Detecting application configuration...",
+        "es-ES": "Detectando la configuración de la aplicación...",
+        "ar-EG": "جارٍ اكتشاف إعدادات التطبيق...",
+        "pt-PT": "A detetar a configuração da aplicação...",
+        "ru-RU": "Обнаружение конфигурации приложения...",
+        "ja-JP": "アプリケーション設定を検出中...",
+        "de-DE": "Die Anwendungskonfiguration wird erkannt...",
+        "fr-FR": "Détection de la configuration de l'application...",
+        "ko-KR": "앱 설정 감지 중...",
+        "$files": [
+            "renderer/App.tsx(2318-2333)"
+        ],
+        "$id": 6223
+    },
+    "正在初始化AI服务...": {
+        "en-US": "Initializing AI services...",
+        "es-ES": "Inicializando el servicio de IA...",
+        "ar-EG": "جارٍ تهيئة خدمة الذكاء الاصطناعي...",
+        "pt-PT": "A inicializar o serviço de IA...",
+        "ru-RU": "Инициализация ИИ сервиса...",
+        "ja-JP": "AIサービスを初期化中...",
+        "de-DE": "Der KI-Dienst wird initialisiert...",
+        "fr-FR": "Initialisation du service IA...",
+        "ko-KR": "AI 서비스 초기화 중...",
+        "$files": [
+            "renderer/App.tsx(9098-9114)"
+        ],
+        "$id": 6220
+    },
+    "正在加载应用配置...": {
+        "en-US": "Loading application configuration...",
+        "es-ES": "Cargando la configuración de la aplicación...",
+        "ar-EG": "جارٍ تحميل إعدادات التطبيق...",
+        "pt-PT": "A carregar a configuração da aplicação...",
+        "ru-RU": "Загрузка конфигурации приложения...",
+        "ja-JP": "アプリケーション設定を読み込み中...",
+        "de-DE": "Die Anwendungskonfiguration wird geladen...",
+        "fr-FR": "Chargement de la configuration de l'application...",
+        "ko-KR": "앱 설정 로드 중...",
+        "$files": [
+            "renderer/App.tsx(9385-9400)"
+        ],
+        "$id": 6221
+    },
+    "正在检查 AI 状态...": {
+        "en-US": "Checking AI status...",
+        "es-ES": "Comprobando el estado de la IA...",
+        "ar-EG": "جارٍ التحقق من حالة الذكاء الاصطناعي...",
+        "pt-PT": "A verificar o estado da IA...",
+        "ru-RU": "Проверка состояния ИИ...",
+        "ja-JP": "AI状態を確認中...",
+        "de-DE": "Der KI-Status wird überprüft...",
+        "fr-FR": "Vérification de l'état de l'IA...",
+        "ko-KR": "AI 상태 확인 중...",
+        "$files": [
+            "renderer/App.tsx(9453-9470)"
+        ],
+        "$id": 6222
+    },
+    "正在初始化应用": {
+        "en-US": "Initializing application",
+        "es-ES": "Inicializando la aplicación",
+        "ar-EG": "جارٍ تهيئة التطبيق",
+        "pt-PT": "A inicializar a aplicação",
+        "ru-RU": "Инициализация приложения",
+        "ja-JP": "アプリケーションを初期化中",
+        "de-DE": "Die Anwendung wird initialisiert",
+        "fr-FR": "Initialisation de l'application",
+        "ko-KR": "앱 초기화 중",
+        "$files": [
+            "renderer/App.tsx(10631-10642)",
+            "renderer/App.tsx(10742-10753)"
+        ],
+        "$id": 6224
+    },
+    "检测配置阶段...": {
+        "en-US": "Configuration detection phase...",
+        "es-ES": "Fase de detección de configuración...",
+        "ar-EG": "مرحلة اكتشاف الإعدادات...",
+        "pt-PT": "Fase de deteção de configuração...",
+        "ru-RU": "Этап обнаружения конфигурации...",
+        "ja-JP": "設定検出フェーズ...",
+        "de-DE": "Konfigurationsprüfungsphase...",
+        "fr-FR": "Phase de détection de configuration...",
+        "ko-KR": "설정 감지 단계...",
+        "$files": [
+            "renderer/App.tsx(10645-10658)"
+        ],
+        "$id": 6225
+    },
+    "准备加载文件与 AI 服务...": {
+        "en-US": "Preparing to load files and AI services...",
+        "es-ES": "Preparando la carga de archivos y servicios de IA...",
+        "ar-EG": "جارٍ الاستعداد لتحميل الملفات وخدمة الذكاء الاصطناعي...",
+        "pt-PT": "A preparar para carregar ficheiros e serviços de IA...",
+        "ru-RU": "Подготовка к загрузке файлов и ИИ сервиса...",
+        "ja-JP": "ファイルとAIサービスの読み込み準備中...",
+        "de-DE": "Das Laden von Dateien und KI-Diensten wird vorbereitet...",
+        "fr-FR": "Préparation du chargement des fichiers et du service IA...",
+        "ko-KR": "파일 및 AI 서비스 로드 준비 중...",
+        "$files": [
+            "renderer/App.tsx(10756-10776)"
+        ],
+        "$id": 6226
+    },
+    "正在处理中，请等待当前任务完成": {
+        "en-US": "Processing, please wait for the current task to complete",
+        "es-ES": "Procesando, por favor espere a que se complete la tarea actual",
+        "ar-EG": "قيد المعالجة، يُرجى الانتظار حتى يكتمل المهمة الحالية",
+        "pt-PT": "A processar, aguarde até que a tarefa atual seja concluída",
+        "ru-RU": "Обработка выполняется, пожалуйста, дождитесь завершения текущей задачи",
+        "ja-JP": "処理中です。現在のタスクが完了するまでお待ちください。",
+        "de-DE": "Wird verarbeitet, bitte warten Sie, bis die aktuelle Aufgabe abgeschlossen ist",
+        "fr-FR": "Traitement en cours, veuillez attendre la fin de la tâche actuelle",
+        "ko-KR": "처리 중입니다. 현재 작업이 완료될 때까지 기다려 주세요.",
+        "$files": [
+            "electron/runtime-services/integration/file-scanner-integration.ts(2728-2747)"
+        ],
+        "$id": 2921
+    },
+    "我发现一个超好用的开源免费AI文件整理工具，一键整理乱七八糟的桌面、下载目录等，文件自动打标！": {
+        "en-US": "I found an incredibly useful open-source and free AI file organization tool that can instantly organize messy desktops, download directories, and more, with automatic file tagging!",
+        "es-ES": "He encontrado una herramienta de organización de archivos con IA gratuita y de código abierto súper útil, que organiza con un solo clic el escritorio, la carpeta de descargas y otros lugares desordenados, ¡y etiqueta automáticamente los archivos!",
+        "ar-EG": "لقد وجدت أداة مفتوحة المصدر مجانية رائعة لتنظيم الملفات بالذكاء الاصطناعي، تنظم بضغطة زر سطح المكتب والمجلدات المحملة الفوضوية، وتضيف علامات تلقائية للملفات!",
+        "pt-PT": "Descobri uma ferramenta de organização de ficheiros AI de código aberto e gratuita, super útil, que organiza com um clique a bagunça da área de trabalho, pastas de transferências, etc., e marca automaticamente os ficheiros!",
+        "ru-RU": "Я нашел отличный инструмент с открытым исходным кодом для бесплатной организации файлов с помощью ИИ. Одним щелчком можно организовать беспорядочные рабочий стол, папку загрузок и т.д., автоматическая маркировка файлов!",
+        "ja-JP": "私は超便利なオープンソース無料AIファイル整理ツールを見つけました。ワンクリックでごちゃごちゃのデスクトップやダウンロードディレクトリなどを整理でき、ファイルに自動でタグ付けしてくれます！",
+        "de-DE": "Ich habe ein super praktisches Open-Source-KI-Tool zur kostenlosen Dateiorganisation entdeckt, das mit einem Klick unordentliche Desktops, Download-Verzeichnisse usw. organisiert und Dateien automatisch mit Tags versieht!",
+        "fr-FR": "J'ai découvert un outil open source gratuit de tri automatique de fichiers IA, qui permet d'organiser en un clic les bureaux et dossiers de téléchargement désordonnés, avec étiquetage automatique des fichiers !",
+        "ko-KR": "나는 매우 유용한 오픈소스 무료 AI 파일 정리 도구를 발견했다. 한 번의 클릭으로 엉망진창인 데스크톱, 다운로드 디렉토리 등을 정리할 수 있으며, 파일에 자동으로 태그를 붙여준다!",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(970-1021)"
+        ],
+        "$id": 2968
+    },
+    "邀请链接已复制": {
+        "en-US": "Invitation link copied",
+        "es-ES": "Enlace de invitación copiado",
+        "ar-EG": "تم نسخ رابط الدعوة",
+        "pt-PT": "Link de convite copiado",
+        "ru-RU": "Ссылка для приглашения скопирована",
+        "ja-JP": "招待リンクをコピーしました",
+        "de-DE": "Einladungslink wurde kopiert",
+        "fr-FR": "Lien d'invitation copié",
+        "ko-KR": "초대 링크가 복사되었습니다",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(1110-1121)"
+        ],
+        "$id": 2969
+    },
+    "复制失败": {
+        "en-US": "Copy failed",
+        "es-ES": "Error al copiar",
+        "ar-EG": "فشل النسخ",
+        "pt-PT": "Falha na cópia",
+        "ru-RU": "Ошибка копирования",
+        "ja-JP": "コピー失敗",
+        "de-DE": "Kopieren fehlgeschlagen",
+        "fr-FR": "Échec de la copie",
+        "ko-KR": "복사 실패",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(1164-1172)"
+        ],
+        "$id": 2985
+    },
+    "恭喜！高级功能已解锁": {
+        "en-US": "Congratulations! Advanced features unlocked",
+        "es-ES": "¡Felicidades! Funciones premium desbloqueadas",
+        "ar-EG": "مبروك! تم فتح الميزات المتقدمة",
+        "pt-PT": "Parabéns! Funções avançadas desbloqueadas",
+        "ru-RU": "Поздравляем! Расширенные функции разблокированы",
+        "ja-JP": "おめでとうございます！高度な機能がアンロックされました",
+        "de-DE": "Glückwunsch! Premium-Funktionen wurden freigeschaltet",
+        "fr-FR": "Félicitations ! Les fonctionnalités avancées ont été débloquées",
+        "ko-KR": "축하합니다! 고급 기능이 잠금 해제되었습니다",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(1770-1784)"
+        ],
+        "$id": 2986
+    },
+    "解锁高级功能": {
+        "en-US": "Unlock advanced features",
+        "es-ES": "Desbloquear funciones premium",
+        "ar-EG": "فتح الميزات المتقدمة",
+        "pt-PT": "Desbloquear funções avançadas",
+        "ru-RU": "Разблокировать расширенные функции",
+        "ja-JP": "高度な機能をアンロック",
+        "de-DE": "Premium-Funktionen freischalten",
+        "fr-FR": "Débloquer les fonctionnalités avancées",
+        "ko-KR": "고급 기능 잠금 해제",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(1788-1798)"
+        ],
+        "$id": 2987
+    },
+    "您已成功邀请 {count} 位好友，私有目录功能已永久解锁。": {
+        "en-US": "You have successfully invited {count} friends, and the private directory feature has been permanently unlocked.",
+        "es-ES": "Has invitado con éxito a {count} amigos, la función de directorio privado se ha desbloqueado permanentemente.",
+        "ar-EG": "لقد دعوت بنجاح {count} صديقًا، تم فتح ميزة الدليل الخاص بشكل دائم.",
+        "pt-PT": "Convidou com sucesso {count} amigos, a função de diretório privado foi desbloqueada permanentemente.",
+        "ru-RU": "Вы успешно пригласили {count} друзей, функция приватного каталога разблокирована навсегда.",
+        "ja-JP": "{count}人の友達を招待することに成功しました。プライベートディレクトリ機能が永続的にアンロックされました。",
+        "de-DE": "Sie haben erfolgreich {count} Freunde eingeladen, die Private-Ordner-Funktion ist dauerhaft freigeschaltet.",
+        "fr-FR": "Vous avez réussi à inviter {count} amis, la fonction de répertoire privé est désormais débloquée de manière permanente.",
+        "ko-KR": "성공적으로 {count}명의 친구를 초대하셨으며, 개인 디렉토리 기능이 영구적으로 잠금 해제되었습니다.",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(1940-1975)"
+        ],
+        "$id": 2988
+    },
+    "私有目录是高级功能，邀请 {count} 位好友下载并安装应用后即可永久解锁。": {
+        "en-US": "The private directory is an advanced feature that can be permanently unlocked after inviting {count} friends to download and install the app.",
+        "es-ES": "El directorio privado es una función premium, después de invitar a {count} amigos a descargar e instalar la aplicación, se desbloqueará permanentemente.",
+        "ar-EG": "الدليل الخاص هو ميزة متقدمة، بعد دعوة {count} صديق لتحميل وتثبيت التطبيق سيتم فتحها بشكل دائم.",
+        "pt-PT": "O diretório privado é uma função avançada, após convidar {count} amigos para transferir e instalar a aplicação, será desbloqueado permanentemente.",
+        "ru-RU": "Приватный каталог - это расширенная функция, которая будет разблокирована навсегда после приглашения {count} друзей скачать и установить приложение.",
+        "ja-JP": "プライベートディレクトリは高度な機能であり、{count}人の友達にアプリをダウンロード・インストールしてもらうことで永続的にアンロックできます。",
+        "de-DE": "Der Private Ordner ist eine Premium-Funktion, die durch Einladen von {count} Freunden, die die App herunterladen und installieren, dauerhaft freigeschaltet werden kann.",
+        "fr-FR": "Le répertoire privé est une fonctionnalité avancée, invitez {count} amis à télécharger et installer l'application pour la débloquer de manière permanente.",
+        "ko-KR": "개인 디렉토리는 고급 기능으로, {count}명의 친구를 초대하여 앱을 다운로드하고 설치하면 영구적으로 잠금 해제할 수 있습니다.",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(2018-2061)"
+        ],
+        "$id": 2989
+    },
+    "当前进度": {
+        "en-US": "Current progress",
+        "es-ES": "Progreso actual",
+        "ar-EG": "التقدم الحالي",
+        "pt-PT": "Progresso atual",
+        "ru-RU": "Текущий прогресс",
+        "ja-JP": "現在の進捗状況",
+        "de-DE": "Aktueller Fortschritt",
+        "fr-FR": "Progression actuelle",
+        "ko-KR": "현재 진행 상황",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(2353-2361)"
+        ],
+        "$id": 3017
+    },
+    "您的专属邀请链接：": {
+        "en-US": "Your exclusive invitation link:",
+        "es-ES": "Tu enlace de invitación exclusivo:",
+        "ar-EG": "رابط الدعوة الخاص بك:",
+        "pt-PT": "O seu link de convite exclusivo:",
+        "ru-RU": "Ваша персональная ссылка для приглашения:",
+        "ja-JP": "あなたの専用招待リンク：",
+        "de-DE": "Ihr persönlicher Einladungslink:",
+        "fr-FR": "Votre lien d'invitation personnalisé :",
+        "ko-KR": "귀하의 전용 초대 링크:",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(2888-2901)"
+        ],
+        "$id": 3018
+    },
+    "开始使用": {
+        "en-US": "Get Started",
+        "es-ES": "Comenzar a usar",
+        "ar-EG": "ابدأ الاستخدام",
+        "pt-PT": "Começar a utilizar",
+        "ru-RU": "Начать использование",
+        "ja-JP": "開始する",
+        "de-DE": "Erste Schritte",
+        "fr-FR": "Commencer à utiliser",
+        "ko-KR": "시작하기",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(3505-3513)"
+        ],
+        "$id": 3026
+    },
+    "刷新进度": {
+        "en-US": "Refresh Progress",
+        "es-ES": "Actualizar progreso",
+        "ar-EG": "تحديث التقدم",
+        "pt-PT": "Atualizar progresso",
+        "ru-RU": "Обновить прогресс",
+        "ja-JP": "進行状況を更新",
+        "de-DE": "Fortschritt aktualisieren",
+        "fr-FR": "Actualiser la progression",
+        "ko-KR": "진행 상황 새로 고침",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(3998-4006)"
+        ],
+        "$id": 3067
+    },
+    "复制链接": {
+        "en-US": "Copy Link",
+        "es-ES": "Copiar enlace",
+        "ar-EG": "نسخ الرابط",
+        "pt-PT": "Copiar link",
+        "ru-RU": "Скопировать ссылку",
+        "ja-JP": "リンクをコピー",
+        "de-DE": "Link kopieren",
+        "fr-FR": "Copier le lien",
+        "ko-KR": "링크 복사",
+        "$files": [
+            "renderer/components/invitation/InvitationModal.tsx(4201-4209)"
+        ],
+        "$id": 3068
+    }
+}

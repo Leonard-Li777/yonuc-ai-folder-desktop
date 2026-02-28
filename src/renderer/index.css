@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ============================================
+   精致配色系统 - 亮色与暗色模式
+   设计理念：柔和舒适、层次分明、专业优雅
+   ============================================ */
+
+/* 亮色模式 - 柔和清新 */
+:root {
+  /* 背景层次 */
+  --background: hsl(0 0% 100%);
+  /* 纯白背景 */
+  --card: hsl(220 20% 98%);
+  /* 卡片 - 微微灰 */
+  --popover: hsl(0 0% 100%);
+  /* 弹出层 - 纯白 */
+  --muted: hsl(220 15% 96%);
+  /* 静音区域 - 浅灰 */
+
+  /* 前景色 */
+  --foreground: hsl(220 20% 15%);
+  /* 主文字 - 深灰而非纯黑 */
+  --card-foreground: hsl(220 20% 15%);
+  --popover-foreground: hsl(220 20% 15%);
+  --muted-foreground: hsl(220 10% 45%);
+  /* 次要文字 */
+
+  /* 主色调 - 清新蓝 */
+  --primary: hsl(217 75% 52%);
+  /* 主色 */
+  --primary-foreground: hsl(0 0% 100%);
+  /* 主色上的文字 - 白色 */
+
+  /* 次要色 */
+  --secondary: hsl(220 15% 92%);
+  /* 次要按钮背景 */
+  --secondary-foreground: hsl(220 20% 20%);
+  /* 次要按钮文字 - 深色 */
+
+  /* 强调色 */
+  --accent: hsl(220 15% 94%);
+  /* 悬停背景 */
+  --accent-foreground: hsl(220 20% 15%);
+
+  /* 破坏性操作 */
+  --destructive: hsl(0 70% 50%);
+  --destructive-foreground: hsl(0 0% 100%);
+
+  /* 边框 - 极其柔和 */
+  --border: hsl(220 15% 88%);
+  /* 柔和边框 - 不刺眼 */
+  --input: hsl(220 15% 94%);
+  --ring: hsl(217 75% 52%);
+
+  --radius: 0.5rem;
+}
+
+/* 暗色模式 - 优雅舒适 */
+.dark {
+  /* 背景层次（从深到浅）*/
+  --background: hsl(220 20% 10%);
+  /* 最深背景 */
+  --card: hsl(220 18% 14%);
+  /* 卡片 */
+  --popover: hsl(220 16% 18%);
+  /* 弹出层 */
+  --muted: hsl(220 14% 16%);
+  /* 工具栏/侧边栏 */
+
+  /* 前景色 */
+  --foreground: hsl(220 15% 92%);
+  /* 主文字 - 柔和白 */
+  --card-foreground: hsl(220 15% 92%);
+  --popover-foreground: hsl(220 15% 92%);
+  --muted-foreground: hsl(220 10% 60%);
+  /* 次要文字 */
+
+  /* 主色调 - 柔和蓝 */
+  --primary: hsl(217 70% 58%);
+  /* 主色 */
+  --primary-foreground: hsl(220 15% 98%);
+  /* 主色上的文字 - 亮白 */
+
+  /* 次要色 */
+  --secondary: hsl(220 16% 20%);
+  /* 次要按钮背景 */
+  --secondary-foreground: hsl(220 15% 90%);
+  /* 次要按钮文字 - 亮色 */
+
+  /* 强调色 */
+  --accent: hsl(220 16% 22%);
+  /* 悬停背景 */
+  --accent-foreground: hsl(220 15% 92%);
+
+  /* 破坏性操作 */
+  --destructive: hsl(0 65% 55%);
+  /* 柔和红 */
+  --destructive-foreground: hsl(220 15% 98%);
+
+  /* 边框 - 微妙 */
+  --border: hsl(220 14% 22%);
+  /* 柔和边框 */
+  --input: hsl(220 16% 20%);
+  --ring: hsl(217 70% 58%);
+
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   全局样式
+   ============================================ */
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   主题切换动画过渡
+   ============================================ */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 禁用某些元素的过渡 */
+button,
+a,
+input,
+textarea,
+select {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 150ms;
+}
+
+/* 禁用动画的元素 */
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}
+
+/* 主题切换时的淡入淡出 */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   滚动条美化
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.dark:hover {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 2px solid hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+}
+
+.light:hover {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    border: 2px solid hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted)) 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ============================================
+   响应式优化
+   ============================================ */
+@media (max-width: 768px) {
+  :root {
+    --radius: 0.375rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+/* ============================================
+   打印样式
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
