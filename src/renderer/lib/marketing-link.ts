@@ -108,54 +108,82 @@ export function getInviteLink(machineId: string): string {
 }
 
 /**
- * 构造并打开官网营销站定价/购买页面
+ * 构造官网营销站定价/购买页面的完整 URL (Promise<string>)
  * 自动在 URL query 中携带 44 位 Base64 标识码 (ident_code)，实现免密绑定设备
- * 在开发环境（import.meta.env.DEV）下自动拦截重定向至本地开发服务器（默认端口 38800）
+ * 在开发环境（import.meta.env.DEV）下默认拦截重定向至本地开发服务器（默认端口 38800）
+ * 
+ * @param action 可选的行为参数 (upgrade_pro | buy_firecores | enterprise)
+ * @param options 可选配置，例如 forceProductionDomain 在离线复制链接场景下强制输出公网生产域名
+ */
+export async function getMarketingPricingUrl(
+  action?: MarketingAction,
+  options?: { forceProductionDomain?: boolean }
+): Promise<string> {
+  let identCode = ''
+
+  // 1. 获取机器码并生成统一的 44 位 Base64 标识码 ident_code
+  if (window.electronAPI?.license?.getIdentCode) {
+    identCode = await window.electronAPI.license.getIdentCode()
+  }
+  if (!identCode) {
+    const machineId = await window.electronAPI?.getMachineId?.()
+    if (machineId) {
+      identCode = encodeMachineIdToBase64(machineId)
+    }
+  }
+
+  const config = (window as any).__APP_CONFIG__ || {}
+  const baseUrl =
+    config?.PAYMENT_INFO?.pricing_url ||
+    config?.PAYMENT_INFO?.official_site_url ||
+    'https://www.aifolder.net/pricing'
+
+  let url = new URL(baseUrl)
+
+  // 2. URL 严格仅携带 44 位 Base64 标识码 ident_code
+  if (identCode) {
+    url.searchParams.set('ident_code', identCode)
+  }
+  if (action) {
+    url.searchParams.set('action', action)
+    // 若是购买萤火点数，附加 #firecores 锚点直接定位到萤火加油包；若是企业版，定位到企业版方案
+    if (action === 'buy_firecores') {
+      url.hash = '#firecores'
+    } else if (action === 'enterprise') {
+      url.hash = '#enterprise'
+    }
+  }
+
+  // 3. 携带 worktree 与环境标识，方便官网支付成功后精准单实例唤起对应分支客户端
+  try {
+    const worktreeInfo = await window.electronAPI?.getWorktreeInfo?.()
+    if (worktreeInfo?.worktreeName) {
+      url.searchParams.set('worktree', worktreeInfo.worktreeName)
+      url.searchParams.set('env', worktreeInfo.isProd ? 'prod' : 'dev')
+    }
+  } catch {}
+
+  // 4. 开发环境自动拦截并替换至本地营销服务（若未强制生产域名）
+  if (!options?.forceProductionDomain) {
+    url = resolveDevMarketingUrl(url)
+  }
+
+  return url.toString()
+}
+
+/**
+ * 构造并打开官网营销站定价/购买页面
  * 
  * @param action 可选的行为参数 (upgrade_pro | buy_firecores | enterprise)
  */
 export async function openMarketingPricingUrl(action?: MarketingAction) {
   try {
-    let identCode = ''
-
-    // 1. 获取机器码并生成统一的 44 位 Base64 标识码 ident_code
-    if (window.electronAPI?.license?.getIdentCode) {
-      identCode = await window.electronAPI.license.getIdentCode()
-    }
-    if (!identCode) {
-      const machineId = await window.electronAPI.getMachineId()
-      if (machineId) {
-        identCode = encodeMachineIdToBase64(machineId)
-      }
-    }
-
-    const config = (window as any).__APP_CONFIG__ || {}
-    const baseUrl =
-      config?.PAYMENT_INFO?.pricing_url ||
-      config?.PAYMENT_INFO?.official_site_url ||
-      'https://www.aifolder.net/pricing'
-
-    let url = new URL(baseUrl)
-
-    // 2. URL 严格仅携带 44 位 Base64 标识码 ident_code
-    if (identCode) {
-      url.searchParams.set('ident_code', identCode)
-    }
-    if (action) {
-      url.searchParams.set('action', action)
-      // 若是购买萤火点数，附加 #firecores 锚点直接定位到萤火加油包
-      if (action === 'buy_firecores') {
-        url.hash = '#firecores'
-      }
-    }
-
-    // 4. 开发环境自动拦截并替换至本地营销服务
-    url = resolveDevMarketingUrl(url)
-
-    console.log('[MarketingLink] Opening marketing pricing page:', url.toString())
-    await openExternalLink(url.toString())
+    const urlStr = await getMarketingPricingUrl(action)
+    console.log('[MarketingLink] Opening marketing pricing page:', urlStr)
+    await openExternalLink(urlStr)
   } catch (error) {
     console.error('[MarketingLink] Failed to open marketing url:', error)
   }
 }
+
 

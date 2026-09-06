@@ -428,6 +428,22 @@ declare global {
       // 系统日志
       onLogForwarded: (callback: (payload: { category: LogCategory, level: string, message: string, data?: any, origin: 'backend' | 'frontend' }) => void) => () => void
 
+      // 深度链接（URL Scheme）
+      onDeepLink?: (
+        callback: (payload: {
+          url: string
+          action: string
+          tab?: string
+          params?: Record<string, string>
+        }) => void
+      ) => () => void
+      getPendingDeepLink?: () => Promise<{
+        url: string
+        action: string
+        tab?: string
+        params?: Record<string, string>
+      } | null>
+
       // 文件操作
       getAllFiles: () => Promise<FileInfo[]>
       addFile: (file: FileInfo) => Promise<void>
@@ -704,6 +720,19 @@ declare global {
 
       // 获取 Omni 引擎版本号
       getOmniVersion: () => Promise<string>
+
+      // 深链接与实例路由
+      onDeepLink?: (callback: (payload: any) => void) => () => void
+      getPendingDeepLink?: () => Promise<any>
+
+      // 获取当前 Worktree 环境信息
+      getWorktreeInfo?: () => Promise<{
+        worktreeName: string
+        region: string
+        isProd: boolean
+        appName: string
+        userDataDir: string
+      }>
     }
 
     // 其他全局对象

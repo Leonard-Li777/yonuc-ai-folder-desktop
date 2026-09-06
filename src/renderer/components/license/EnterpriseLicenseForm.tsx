@@ -109,9 +109,13 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
     // 如果已经成功或正在激活，不触发
     if (isSuccess || isActivating || isCheckingInitialStatus) return
 
-    const code = licenseCode.trim()
+    const code = licenseCode.replace(/\s+/g, '')
     if (!code) {
       setError(null)
+      return
+    }
+
+    if (code.length < 50) {
       return
     }
 
@@ -160,13 +164,14 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
   }
 
   const handleActivate = async (code: string) => {
-    if (!code) return
+    const cleanCode = code.replace(/\s+/g, '')
+    if (!cleanCode) return
 
     setIsActivating(true)
     setError(null)
 
     try {
-      const result = await window.electronAPI!.license.activate(code)
+      const result = await window.electronAPI!.license.activate(cleanCode)
       if (result.success) {
         setIsSuccess(true)
         // 重新获取状态以更新过期时间
@@ -315,11 +320,7 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
           <div className="relative">
             <Input
               id="license"
-              placeholder={
-                tier === 'pro'
-                  ? t('粘贴您购买的 Pro 版授权码...')
-                  : t('粘贴管理员发送给您的企业版授权码...')
-              }
+              placeholder={t('在此粘贴离线授权码...')}
               value={licenseCode}
               onChange={e => {
                 setLicenseCode(e.target.value)

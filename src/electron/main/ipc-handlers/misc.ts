@@ -472,6 +472,11 @@ export function registerMiscIPCHandlers() {
     }
   )
 
+  ipcMain.handle('app:getWorktreeInfo', async () => {
+    const { initWorktreeEnvironment } = await import('../worktree-env')
+    return initWorktreeEnvironment()
+  })
+
   ipcMain.handle('open-file-with-default-app', async (event, filePath: string) => {
     const result = await shell.openPath(filePath)
     if (result) throw new Error(result)

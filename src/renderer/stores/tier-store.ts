@@ -1,7 +1,7 @@
 import { t } from '@app/languages'
 import { create } from 'zustand'
 import { subscribeWithSelector } from 'zustand/middleware'
-import { UserTier, ComputedLimits } from '@firefly/types'
+import { UserTier, ComputedLimits, UserSubscription } from '@firefly/types'
 import { toast } from '../components/common/Toast'
 
 interface TierState {
@@ -13,13 +13,14 @@ interface TierState {
   current_counts: Record<string, number>
   isLoading: boolean
   consumptionDetails: any[]
-  subscription?: {
-    status: string
-    expires_at?: string
-    plan_id: string
-  }
+  subscription?: UserSubscription
+  isRulesOpen: boolean
+  rulesDefaultTab: string | undefined
 
+  openRulesDialog: (tab?: string) => void
+  closeRulesDialog: () => void
   fetchProfile: () => Promise<void>
+  syncFromCloud: () => Promise<void>
   fetchConsumptionDetails: () => Promise<void>
   getRemaining: (type: string) => number
   hasEnoughFirecores: (firecores: number) => boolean
@@ -54,6 +55,15 @@ export const useTierStore = create<TierState>()(
     isLoading: false,
     consumptionDetails: [],
     subscription: undefined,
+    isRulesOpen: false,
+    rulesDefaultTab: undefined,
+
+    openRulesDialog: (tab?: string) => {
+      set({ isRulesOpen: true, rulesDefaultTab: tab })
+    },
+    closeRulesDialog: () => {
+      set({ isRulesOpen: false, rulesDefaultTab: undefined })
+    },
 
     fetchProfile: async () => {
       set({ isLoading: true })
@@ -70,6 +80,27 @@ export const useTierStore = create<TierState>()(
         })
       } catch (error) {
         console.error('Failed to fetch user profile:', error)
+        set({ isLoading: false })
+      }
+    },
+
+    syncFromCloud: async () => {
+      set({ isLoading: true })
+      try {
+        const profile = await window.electronAPI.userTier.syncFromCloud()
+        if (profile) {
+          set({
+            tier: profile.tier as UserTier,
+            firecores: profile.firecores,
+            entitlements: profile.entitlements,
+            counters: profile.counters || {},
+            computed_limits: profile.computed_limits,
+            subscription: profile.subscription,
+            isLoading: false
+          })
+        }
+      } catch (error) {
+        console.error('Failed to sync user tier from cloud:', error)
         set({ isLoading: false })
       }
     },
@@ -124,6 +155,8 @@ export const useTierStore = create<TierState>()(
 
         window.electronAPI.userTier.onFirecoreTransactionsUpdated?.((cloudData: any[]) => {
           set({ consumptionDetails: cloudData, isLoading: false })
+          // 云端流水更新后联动刷新 Profile，确保萤火余额与最新流水同步
+          get().fetchProfile()
         })
       } catch (error) {
         console.error('Failed to fetch consumption details:', error)

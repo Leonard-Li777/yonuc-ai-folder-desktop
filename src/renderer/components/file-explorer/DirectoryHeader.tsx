@@ -51,6 +51,7 @@ export const DirectoryHeader: React.FC<DirectoryHeaderProps> = React.memo(
     const currentPath = location.pathname
     const [isMaximized, setIsMaximized] = useState(false)
     const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false)
+    const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
     const { hasNewFiles, setHasNewFiles, newFilesCount } = useAnalyzedDirectoryStore()
     const { computed_limits } = useTierStore()
     const [licenseType, setLicenseType] = useState<string | null>(null)
@@ -226,7 +227,8 @@ export const DirectoryHeader: React.FC<DirectoryHeaderProps> = React.memo(
     }
 
     // 当任何下拉菜单打开时，禁用拖拽，以便点击事件可以正常传播到关闭逻辑
-    const isAnyDropdownOpen = showDirectoryDropdown || isSearchDropdownOpen || isNewsDropdownOpen
+    const isAnyDropdownOpen =
+      showDirectoryDropdown || isSearchDropdownOpen || isNewsDropdownOpen || isUserMenuOpen
 
     return (
       <header
@@ -671,8 +673,8 @@ export const DirectoryHeader: React.FC<DirectoryHeaderProps> = React.memo(
           />
 
           {/* User Avatar Menu */}
-          <div style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
-            <UserAvatarMenu />
+          <div data-no-drag className="no-drag" style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+            <UserAvatarMenu onOpenChange={setIsUserMenuOpen} />
           </div>
 
           {/* Window Controls */}

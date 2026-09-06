@@ -201,3 +201,11 @@ html:lang(es) :where(.btn),
 html:lang(fr) :where(.btn) {
   min-width: 120px; /* 仅作为防挤压 fallback，不影响图标、滑动开关和复选框按钮 */
 }
+
+/* 彻底杜绝 Electron 窗口拖拽 (drag) 拦截菜单、弹窗与交互按钮的点击事件 */
+.no-drag,
+.no-drag *,
+[data-no-drag],
+[data-no-drag] * {
+  -webkit-app-region: no-drag !important;
+}

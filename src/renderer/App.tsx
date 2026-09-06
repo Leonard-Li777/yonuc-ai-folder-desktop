@@ -41,6 +41,7 @@ import { useInvitation } from './hooks/useInvitation'
 import { useAnalyzedDirectoryStore } from './stores/analyzed-directory-store'
 import { useVirtualDirectoryStore } from './stores/virtual-directory-store'
 import { useTierStore } from './stores/tier-store'
+import { FirecoresRulesDialog } from './components/tier/FirecoresRulesDialog'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -58,6 +59,8 @@ type StartupPhase = 'determining' | 'setup' | 'config' | 'licensing' | 'initiali
 const App: React.FC = () => {
   // Initialize invitation system
   useInvitation()
+
+  const { isRulesOpen, rulesDefaultTab, openRulesDialog, closeRulesDialog } = useTierStore()
 
   const location = useLocation()
   const currentPath = location.pathname
@@ -100,6 +103,48 @@ const App: React.FC = () => {
       cleanup?.()
     }
   }, [navigate])
+
+  // 监听深链接跳转（如 firefly://rules?tab=consumption）
+  useEffect(() => {
+    const handleDeepLinkPayload = async (payload: {
+      url: string
+      action: string
+      tab?: string
+      params?: Record<string, string>
+    }) => {
+      logger.info(LogCategory.RENDERER, '[DeepLink] 收到深链接请求:', payload)
+      if (payload.action === 'rules' || payload.action === 'consumption' || payload.action === 'transactions') {
+        try {
+          const tierStore = useTierStore.getState()
+          // 优先从云端全量同步最新资产与流水记录（降级读本地缓存）
+          await Promise.all([
+            tierStore.syncFromCloud().catch(() => tierStore.fetchProfile().catch(() => {})),
+            tierStore.fetchConsumptionDetails().catch(() => {})
+          ])
+          // 打开萤火规则弹层并定位到对应 Tab（默认 consumption）
+          tierStore.openRulesDialog(payload.tab || 'consumption')
+        } catch (e) {
+          logger.error(LogCategory.RENDERER, '[DeepLink] 处理 rules 深链接失败:', e)
+        }
+      }
+    }
+
+    // 1. 处理冷启动暂存的深链接
+    window.electronAPI?.getPendingDeepLink?.().then(pending => {
+      if (pending) {
+        handleDeepLinkPayload(pending)
+      }
+    })
+
+    // 2. 监听运行中的深链接事件
+    const cleanup = window.electronAPI?.onDeepLink?.(payload => {
+      handleDeepLinkPayload(payload)
+    })
+
+    return () => {
+      cleanup?.()
+    }
+  }, [])
 
   // 同步两个 store 中的 currentWorkspaceDirectory 和 workspaceDirectories，确保所有页面数据一致
   useEffect(() => {
@@ -1065,6 +1110,11 @@ const App: React.FC = () => {
         <AnalysisConfirmModal />
         <ToastContainer />
         <SettingsDialog />
+        <FirecoresRulesDialog
+          open={isRulesOpen}
+          onOpenChange={open => (open ? openRulesDialog() : closeRulesDialog())}
+          defaultTab={rulesDefaultTab}
+        />
 
         {/* AI服务错误对话框 */}
         <AIServiceErrorDialog
