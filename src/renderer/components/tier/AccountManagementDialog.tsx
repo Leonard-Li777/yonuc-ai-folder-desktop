@@ -17,7 +17,8 @@ import {
   Clock,
   Flame as Firecores,
   MessageCircle,
-  Sparkle
+  Sparkle,
+  Layers
 } from 'lucide-react'
 import { useTierStore } from '../../stores/tier-store'
 import { useConfigStore } from '../../stores/config-store'
@@ -175,6 +176,17 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
   const isExpiringSoon = expiryDate
     ? !isExpired && expiryDate.getTime() - Date.now() < 30 * 24 * 60 * 60 * 1000
     : false
+  // 多档位独立有效期管理：判断当前是否是企业版并持有未过期的 Pro 版接续期
+  const tierPeriods = subscription?.tier_periods
+  const proPeriod = tierPeriods?.pro
+  const proExpiresAt = proPeriod?.expires_at
+  const hasProReserve =
+    tier === UserTier.ENTERPRISE &&
+    Boolean(
+      proExpiresAt &&
+        new Date(proExpiresAt).getTime() > Date.now() &&
+        proPeriod?.status !== 'refunded'
+    )
 
   const handleOpenBillingPortal = () => {
     openExternalLink(resolveDevCreemUrl(portalUrl))
@@ -304,6 +316,11 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
                         ? t('永久免费')
                         : t('永久有效')}
                   </span>
+                  {hasProReserve && (
+                    <span className="text-[10px] text-purple-600 dark:text-purple-400 font-bold block truncate mt-0.5">
+                      {t('到期后接续 Pro')}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -393,6 +410,32 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
               </div>
             </div>
           </div>
+
+          {/* ── 多档位权益接续保障：已保留的 Pro 版有效期 ── */}
+          {hasProReserve && proExpiresAt && (
+            <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/30 space-y-2.5 relative overflow-hidden">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs font-black text-foreground">
+                  <Layers className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
+                  <span>{t('多档位接续保障：已保留的 Pro 版有效期')}</span>
+                </div>
+                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/25">
+                  {t('待接续生效')}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-xs py-1.5 px-3 rounded-xl bg-background/70 border border-border/50">
+                <span className="text-muted-foreground font-medium">{t('Pro 版保留到期日：')}</span>
+                <span className="font-mono font-black text-foreground tabular-nums">
+                  {formatDateOnly(proExpiresAt)}
+                </span>
+              </div>
+              <p className="text-[11px] text-muted-foreground leading-relaxed">
+                {t(
+                  '由于企业版与 Pro 版权益有所差异，充值企业版后已立即生效独立计算；您原有的 Pro 版有效期已被完整保留，待企业版到期后，系统将自动恢复并开始您的 Pro 版有效期，期间权益不受任何损耗。'
+                )}
+              </p>
+            </div>
+          )}
 
           {/* ── 账单与自动续订管理模块 ── */}
           {paymentInfo?.method === 'creem' ? (

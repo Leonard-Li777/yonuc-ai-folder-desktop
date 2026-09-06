@@ -137,6 +137,18 @@ export const UserAvatarMenu: React.FC<UserAvatarMenuProps> = ({ onOpenChange }) 
       ? 'text-amber-600 dark:text-amber-400 font-semibold'
       : 'text-muted-foreground font-medium'
 
+  // 多档位独立有效期管理：判断当前是否是企业版并持有未过期的 Pro 版接续期
+  const tierPeriods = subscription?.tier_periods
+  const proPeriod = tierPeriods?.pro
+  const proExpiresAt = proPeriod?.expires_at
+  const hasProReserve =
+    tier === UserTier.ENTERPRISE &&
+    Boolean(
+      proExpiresAt &&
+        new Date(proExpiresAt).getTime() > Date.now() &&
+        proPeriod?.status !== 'refunded'
+    )
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -347,6 +359,11 @@ export const UserAvatarMenu: React.FC<UserAvatarMenuProps> = ({ onOpenChange }) 
                           {isExpiringSoon && (
                             <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold shrink-0">
                               {t('即将到期')}
+                            </span>
+                          )}
+                          {hasProReserve && (
+                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400 font-bold shrink-0" title={t('企业版到期后自动接续 Pro 版')}>
+                              {t('接续 Pro')}
                             </span>
                           )}
                         </div>
