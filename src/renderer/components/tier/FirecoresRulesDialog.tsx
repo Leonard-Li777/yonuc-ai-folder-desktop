@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 import { t } from '@app/languages'
@@ -23,7 +23,8 @@ import {
   Trophy,
   Infinity as InfinityIcon,
   Zap,
-  Crown
+  Crown,
+  RotateCcw
 } from 'lucide-react'
 import { MaterialIcon, cn, formatPrice } from '../../lib/utils'
 import { Input } from '../ui/input'
@@ -38,6 +39,11 @@ import type { TierConstants } from '@firefly/types'
 import { EmptyState } from '../common/EmptyState'
 import { UpgradeAccountDialog } from './UpgradeAccountDialog'
 import { openMarketingPricingUrl, getInviteLink } from '../../lib/marketing-link'
+
+// 懒加载解锁弹层：避免与 UnlockPrivateQuotaModal 形成反向循环依赖（其内部会打开本弹层）
+const UnlockPrivateQuotaModal = lazy(() =>
+  import('../invitation/UnlockPrivateQuotaModal').then(m => ({ default: m.UnlockPrivateQuotaModal }))
+)
 
 interface FirecoresRulesDialogProps {
   open: boolean
@@ -55,7 +61,8 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
   const [isRedeeming, setIsRedeeming] = useState(false)
   const [hasCopied, setHasCopied] = useState(false)
   const [isUpgradeOpen, setIsUpgradeOpen] = useState(false)
-  const { counters, firecores = 0 } = useTierStore()
+  const [showUnlockModal, setShowUnlockModal] = useState(false)
+  const { counters, firecores = 0, computed_limits } = useTierStore()
   const wasInvited = counters?.is_invited === 1
 
   const config = useConfigStore(state => state.config)
@@ -65,6 +72,9 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
   const inviteFirecoreReward = tierConstants?.inviteFirecoreReward || 100
   const inviteFirecoreRewardInvitee = tierConstants?.inviteFirecoreRewardInvitee || 45
   const unlockThreshold = tierConstants?.prices?.spend_unlock_analysis || 300
+
+  // 当前私有目录分析额度（供解锁弹层统计展示）
+  const unlockQuota = computed_limits?.analysis_quota_total ?? 0
 
   // 邀请人数统计（若后端无邀请人数，可由已获邀请奖励或萤火刻度推算展示）
   const invitedCount = Number(counters?.invite_count ?? counters?.invited_count ?? 0)
@@ -399,6 +409,23 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
                             </span>
                           </div>
                         </div>
+
+                        {/* 立即兑换 CTA：点击打开消费萤火兑换无限额度弹层 */}
+                        {firecores >= 300 || isUnlockedUnlimited ? (
+                          <div className="mt-2.5 w-full flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl py-2">
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            {t('已解锁无限额度')}
+                          </div>
+                        ) : (
+                          <Button
+                            size="sm"
+                            onClick={() => setShowUnlockModal(true)}
+                            className="mt-2.5 w-full font-bold shadow-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-95"
+                          >
+                            <Unlock className="w-3.5 h-3.5" />
+                            <span>{t('兑换无限额度 ({cost} 萤火)', { cost: unlockThreshold })}</span>
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -634,6 +661,17 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
           setIsUpgradeOpen(open)
         }}
       />
+      <Suspense fallback={null}>
+        <UnlockPrivateQuotaModal
+          isOpen={showUnlockModal}
+          onClose={() => setShowUnlockModal(false)}
+          quota={unlockQuota}
+          onRefresh={() => {
+            // 刷新额度解锁状态与萤火余额
+            useTierStore.getState().fetchProfile()
+          }}
+        />
+      </Suspense>
     </>
   )
 }
@@ -742,6 +780,10 @@ const ConsumptionDetailTab: React.FC = () => {
         return t('重新生成虚拟目录')
       case 'upload_earn':
         return t('上传收益')
+      case 'refund_firecores':
+        return t('萤火充值退款')
+      case 'refund_subscription':
+        return t('会员订阅退款')
       case 'admin_adjust':
         return t('管理员调整')
       default:
@@ -784,6 +826,11 @@ const ConsumptionDetailTab: React.FC = () => {
                 item.type === 'purchase_firecores' ||
                 item.metadata?.income_operation?.type === 'purchase_firecores'
 
+              const isRefund =
+                item.type === 'refund_firecores' ||
+                item.type === 'refund_subscription' ||
+                String(item.type).startsWith('refund')
+
               const isIncome = item.firecores > 0
               const isZero = item.firecores === 0
 
@@ -808,9 +855,11 @@ const ConsumptionDetailTab: React.FC = () => {
                   className={`flex items-center justify-between p-4 rounded-2xl border transition-colors group ${
                     isUpgrade
                       ? 'bg-amber-500/[0.04] border-amber-500/25 hover:bg-amber-500/[0.08]'
-                      : isIncome
-                        ? 'bg-green-500/[0.03] border-green-500/15 hover:bg-green-500/[0.06]'
-                        : 'bg-muted/30 border-border/40 hover:bg-muted/50'
+                      : isRefund
+                        ? 'bg-rose-500/[0.04] border-rose-500/25 hover:bg-rose-500/[0.08]'
+                        : isIncome
+                          ? 'bg-green-500/[0.03] border-green-500/15 hover:bg-green-500/[0.06]'
+                          : 'bg-muted/30 border-border/40 hover:bg-muted/50'
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
@@ -818,15 +867,19 @@ const ConsumptionDetailTab: React.FC = () => {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${
                         isUpgrade
                           ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400 ring-1 ring-amber-500/30'
-                          : isIncome
-                            ? 'bg-green-500/15 text-green-600'
-                            : isZero
-                              ? 'bg-muted text-muted-foreground'
-                              : 'bg-red-500/10 text-red-500'
+                          : isRefund
+                            ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 ring-1 ring-rose-500/30'
+                            : isIncome
+                              ? 'bg-green-500/15 text-green-600'
+                              : isZero
+                                ? 'bg-muted text-muted-foreground'
+                                : 'bg-red-500/10 text-red-500'
                       }`}
                     >
                       {isUpgrade ? (
                         <Crown className="w-5 h-5 animate-pulse" />
+                      ) : isRefund ? (
+                        <RotateCcw className="w-4 h-4" />
                       ) : isIncome ? (
                         <span className="text-base font-black">+</span>
                       ) : isZero ? (
@@ -853,10 +906,18 @@ const ConsumptionDetailTab: React.FC = () => {
                             {incomeOp.tier?.toUpperCase() === 'ENTERPRISE' ? 'Enterprise' : 'PRO VIP'}
                           </Badge>
                         )}
+                        {isRefund && (
+                          <Badge
+                            variant="outline"
+                            className="text-[10px] font-black px-1.5 py-0 h-4 rounded-md border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-400"
+                          >
+                            {t('已退款')}
+                          </Badge>
+                        )}
                       </div>
 
                       {/* 丰富详细的操作详情 */}
-                      {(isUpgrade || isPurchaseFirecores || item.type === 'admin_adjust' || incomeOp.type) && (
+                      {(isUpgrade || isPurchaseFirecores || isRefund || item.type === 'admin_adjust' || incomeOp.type) && (
                         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] font-bold text-muted-foreground/90">
                           {isUpgrade && (
                             <>
@@ -896,6 +957,41 @@ const ConsumptionDetailTab: React.FC = () => {
                                     currency: incomeOp.currency || 'CNY',
                                     amount: incomeOp.amount
                                   })}
+                                </span>
+                              )}
+                            </>
+                          )}
+
+                          {isRefund && (
+                            <>
+                              {item.metadata?.refund_amount != null && item.metadata.refund_amount > 0 && (
+                                <span className="text-rose-600 dark:text-rose-400 font-medium">
+                                  {t('退款金额')}: {formatPrice({
+                                    currency: item.metadata?.currency || 'USD',
+                                    amount:
+                                      item.metadata.refund_amount > 10000 && item.metadata.refund_amount % 100 === 0
+                                        ? item.metadata.refund_amount / 100
+                                        : item.metadata.refund_amount
+                                  })}
+                                </span>
+                              )}
+                              {item.type === 'refund_subscription' && (
+                                <>
+                                  <span className="text-rose-600 dark:text-rose-400/90 font-medium">
+                                    {t('扣减时长')}: -{formatPeriodLabel(item.metadata?.period_unit || 'monthly', item.metadata?.period_count || 1)}
+                                  </span>
+                                  {item.metadata?.new_expires && (
+                                    <span className="text-amber-600/90 dark:text-amber-400/90 font-medium">
+                                      {t('有效期至: {date}', {
+                                        date: formatDateTime(item.metadata.new_expires, { showSeconds: false })
+                                      })}
+                                    </span>
+                                  )}
+                                </>
+                              )}
+                              {item.firecores < 0 && (
+                                <span className="text-rose-600 dark:text-rose-400/90">
+                                  {t('扣减点数')}: {item.firecores} {t('萤火')}
                                 </span>
                               )}
                             </>
@@ -943,11 +1039,13 @@ const ConsumptionDetailTab: React.FC = () => {
                       ) : (
                         <span
                           className={`text-sm font-black tabular-nums ${
-                            isIncome
-                              ? 'text-green-600 dark:text-green-500'
-                              : isZero
-                                ? 'text-muted-foreground'
-                                : 'text-red-500'
+                            isRefund
+                              ? 'text-rose-600 dark:text-rose-400'
+                              : isIncome
+                                ? 'text-green-600 dark:text-green-500'
+                                : isZero
+                                  ? 'text-muted-foreground'
+                                  : 'text-red-500'
                           }`}
                         >
                           {isIncome ? '+' : ''}
