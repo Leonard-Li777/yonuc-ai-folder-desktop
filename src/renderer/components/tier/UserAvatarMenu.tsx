@@ -200,11 +200,11 @@ export const UserAvatarMenu: React.FC<UserAvatarMenuProps> = ({ onOpenChange }) 
         }
       case UserTier.PRO:
         return {
-          label: t('升级企业版'),
-          icon: <Building2 className="w-4 h-4 shrink-0 text-white" />,
-          action: () => openMarketingPricingUrl('enterprise'),
+          label: t('充值萤火'),
+          icon: <Firecores className="w-4 h-4 shrink-0 text-white" />,
+          action: () => openMarketingPricingUrl('buy_firecores'),
           className:
-            'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-indigo-500/20 hover:from-indigo-600 hover:to-purple-700'
+            'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-amber-500/20 hover:from-amber-600 hover:to-orange-700'
         }
       case UserTier.AGENT:
         return {
