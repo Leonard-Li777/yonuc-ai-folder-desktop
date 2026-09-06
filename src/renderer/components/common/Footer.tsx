@@ -27,6 +27,35 @@ import { PersistentTooltip } from '@/renderer/components/common/PersistentToolti
 
 import { getStageLabel } from '@/renderer/components/analysis/AnalysisQueueContent'
 
+/** 区域 → 中文显示名 */
+const REGION_LABELS: Record<string, string> = { CN: '国内版', INTL: '国际版' }
+/** 构建环境 → 中文显示名 */
+const ENV_LABELS: Record<string, string> = {
+  development: '开发',
+  canary: '灰度',
+  production: '生产'
+}
+
+/**
+ * 构建时注入的环境标识原始值（"区域 - 环境 - 分支"）
+ * 使用 typeof 守卫：配置变更后 dev server 未重启时 define 未注入，
+ * 裸标识符会抛 ReferenceError，typeof 检查则安全返回空串
+ */
+const DEV_BUILD_LABEL_RAW: string = typeof __BUILD_LABEL__ !== 'undefined' ? __BUILD_LABEL__ : ''
+
+/**
+ * 将构建时注入的 __BUILD_LABEL__ 映射为中文显示文案
+ * 例如 "INTL - development - pay" → "国际版 - 开发 - pay"
+ */
+function getDevBuildLabel(): string {
+  const parts = (DEV_BUILD_LABEL_RAW || '').split(' - ')
+  if (parts.length < 3) return DEV_BUILD_LABEL_RAW
+  const region = REGION_LABELS[parts[0]] || parts[0]
+  const env = ENV_LABELS[parts[1]] || parts[1]
+  const branch = parts.slice(2).join(' - ')
+  return `${region} - ${env} - ${branch}`
+}
+
 /**
  * 应用底部状态栏组件
  */
@@ -724,6 +753,18 @@ export function Footer() {
         </button>
         <span className="text-xs text-muted-foreground/30 mx-1.5">|</span>
         <span className="text-xs text-muted-foreground opacity-50 pr-2">v{__APP_VERSION__}</span>
+        {__IS_DEV__ && (
+          <>
+            <span className="text-xs text-muted-foreground/30 mx-1.5">|</span>
+            {/* 开发模式标识：区域 - 环境 - Worktree/分支名，便于区分多 Worktree 并发实例 */}
+            <span
+              className="text-xs px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium pr-2"
+              title={t('开发模式标识：区域 - 环境 - 分支')}
+            >
+              {getDevBuildLabel()}
+            </span>
+          </>
+        )}
         {hasUpdate && (
           <button
             onClick={() => setShowUpdateModal(true)}

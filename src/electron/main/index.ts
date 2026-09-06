@@ -24,8 +24,10 @@ if (process.platform === 'darwin') {
 // 后续逻辑...
 import { app, BrowserWindow, ipcMain, net, dialog, shell } from 'electron'
 import * as path from 'node:path'
-import { initWorktreeEnvironment } from './worktree-env'
+import { initWorktreeEnvironment, touchActiveWorktree } from './worktree-env'
 import { processReaper } from './process-reaper'
+import { createWindow, getMainWindow } from './window'
+import { deepLinkManager } from './deep-link'
 
 // 1. 初始化 Worktree 实例环境与 userData 隔离
 const worktreeInfo = initWorktreeEnvironment()
@@ -33,6 +35,37 @@ console.log(`🚀 [Worktree] 启动实例: ${worktreeInfo.appName}, 数据目录
 
 // 2. 启动前清理历史遗留的僵尸子进程
 processReaper.cleanupStaleProcesses()
+
+// 3. 检查单实例锁，避免重复打开多个应用实例
+const gotSingleInstanceLock = app.requestSingleInstanceLock()
+if (!gotSingleInstanceLock) {
+  console.log(`[App] 检测到已有实例正在运行 (${worktreeInfo.appName})，本实例直接退出。`)
+  app.quit()
+  process.exit(0)
+}
+
+// 记录本 Worktree 实例活跃状态
+touchActiveWorktree(worktreeInfo.worktreeName)
+
+app.on('second-instance', (_event, commandLine) => {
+  touchActiveWorktree(worktreeInfo.worktreeName)
+  const win = getMainWindow()
+  if (win && !win.isDestroyed()) {
+    if (win.isMinimized()) win.restore()
+    win.show()
+    win.focus()
+  }
+
+  const deepLinkArg = commandLine.find(arg => arg.startsWith('firefly://'))
+  if (deepLinkArg) {
+    deepLinkManager.dispatch(deepLinkArg)
+  }
+})
+
+app.on('open-url', (event, url) => {
+  event.preventDefault()
+  deepLinkManager.dispatch(url)
+})
 
 // 执行双应用数据目录隔离与迁移（用于改名 yonuc-ai-folder -> firefly-ai-folder 的无缝升级）
 ;(() => {
@@ -305,7 +338,6 @@ import {
   initializeLlamaServer,
   initDatabaseAndDependentServices
 } from './initialization'
-import { createWindow } from './window'
 import { trayService } from '../runtime-services/system/tray-service'
 import { setupIPCHandlers } from './ipc-handlers'
 import { t } from '@app/languages'
@@ -634,6 +666,7 @@ app.on('ready', async () => {
 
   // 注册 IPC 处理器，确保在任何窗口创建及前端加载之前 IPC 响应就绪
   await setupIPCHandlers()
+  deepLinkManager.init()
 
   const orchestrator = ConfigOrchestrator.getInstance()
 

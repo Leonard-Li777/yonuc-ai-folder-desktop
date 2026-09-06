@@ -22,7 +22,8 @@ import {
   CheckCircle2,
   Trophy,
   Infinity as InfinityIcon,
-  Zap
+  Zap,
+  Crown
 } from 'lucide-react'
 import { MaterialIcon, cn, formatPrice } from '../../lib/utils'
 import { Input } from '../ui/input'
@@ -642,13 +643,15 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
  * 展示用户的萤火收入与支出记录，切到该 Tab 时自动拉取最新数据
  */
 const ConsumptionDetailTab: React.FC = () => {
-  const { consumptionDetails, fetchConsumptionDetails, isLoading } = useTierStore()
+  const { consumptionDetails, fetchConsumptionDetails, isLoading, subscription } = useTierStore()
 
   useEffect(() => {
     fetchConsumptionDetails()
     // 打开流水页面时从云端同步等级数据并检查授权
     if (window.electronAPI?.userTier?.syncFromCloud) {
       window.electronAPI.userTier.syncFromCloud().then(profile => {
+        // 同步后立即刷新全局 Profile 状态，确保萤火余额与会员信息即时更新
+        useTierStore.getState().fetchProfile()
         if (profile.tier !== 'enterprise' && profile.tier !== 'pro' && profile.tier !== 'agent') {
           // 等级降级（到期/取消），通知前端刷新
           if (window.electronAPI?.license?.getStatus) {
@@ -701,6 +704,14 @@ const ConsumptionDetailTab: React.FC = () => {
 
   const getTypeLabel = (type: string) => {
     switch (type) {
+      case 'upgrade':
+        return t('开通/续费会员')
+      case 'purchase_firecores':
+        return t('充值萤火点数')
+      case 'creem_purchase':
+        return t('在线购买')
+      case 'payment_income':
+        return t('支付入账')
       case 'welcome_grant':
         return t('首次使用，欢迎赠送')
       case 'invitation_earn':
@@ -738,6 +749,20 @@ const ConsumptionDetailTab: React.FC = () => {
     }
   }
 
+  const formatPeriodLabel = (unit?: string, count?: number) => {
+    const periodCount = count || 1
+    if (unit === 'yearly' || unit === 'year') {
+      return `${t('年付')} (${periodCount}${t('年')})`
+    }
+    if (unit === 'quarterly' || unit === 'quarter') {
+      return `${t('季付')} (${periodCount * 3}${t('个月')})`
+    }
+    if (unit === 'half_year' || unit === 'half_yearly') {
+      return `${t('半年付')} (${periodCount * 6}${t('个月')})`
+    }
+    return `${t('月付')} (${periodCount}${t('个月')})`
+  }
+
   return (
     <div className="flex-1 flex flex-col p-1">
       {isLoading ? (
@@ -750,96 +775,186 @@ const ConsumptionDetailTab: React.FC = () => {
           {[...consumptionDetails]
             .sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
             .map((item: any, index: number) => {
+              const isUpgrade =
+                item.type === 'upgrade' ||
+                item.metadata?.income_operation?.type === 'upgrade' ||
+                item.metadata?.type === 'upgrade'
+
+              const isPurchaseFirecores =
+                item.type === 'purchase_firecores' ||
+                item.metadata?.income_operation?.type === 'purchase_firecores'
+
               const isIncome = item.firecores > 0
+              const isZero = item.firecores === 0
+
+              const incomeOp = item.metadata?.income_operation || {}
+              const orderId =
+                item.metadata?.order_id ||
+                item.metadata?.extra?.order_id ||
+                item.metadata?.extra?.creem_order_id ||
+                ''
+
+              // 会员有效期优先从流水读取，兜底读取当前 store 订阅到期时间
+              const expiresAt =
+                item.metadata?.expires_at ||
+                incomeOp.expires_at ||
+                (isUpgrade && subscription?.status === 'active'
+                  ? subscription?.expires_at
+                  : null)
+
               return (
                 <div
                   key={index}
-                  className={`flex items-center justify-between p-4 rounded-2xl border transition-colors group ${isIncome
-                      ? 'bg-green-500/[0.03] border-green-500/15 hover:bg-green-500/[0.06]'
-                      : 'bg-muted/30 border-border/40 hover:bg-muted/50'
-                    }`}
+                  className={`flex items-center justify-between p-4 rounded-2xl border transition-colors group ${
+                    isUpgrade
+                      ? 'bg-amber-500/[0.04] border-amber-500/25 hover:bg-amber-500/[0.08]'
+                      : isIncome
+                        ? 'bg-green-500/[0.03] border-green-500/15 hover:bg-green-500/[0.06]'
+                        : 'bg-muted/30 border-border/40 hover:bg-muted/50'
+                  }`}
                 >
-                  <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex items-center gap-3.5 min-w-0">
                     <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${isIncome ? 'bg-green-500/15 text-green-600' : 'bg-red-500/10 text-red-500'
-                        }`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${
+                        isUpgrade
+                          ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400 ring-1 ring-amber-500/30'
+                          : isIncome
+                            ? 'bg-green-500/15 text-green-600'
+                            : isZero
+                              ? 'bg-muted text-muted-foreground'
+                              : 'bg-red-500/10 text-red-500'
+                      }`}
                     >
-                      <span className="text-sm font-black">{isIncome ? '+' : '-'}</span>
+                      {isUpgrade ? (
+                        <Crown className="w-5 h-5 animate-pulse" />
+                      ) : isIncome ? (
+                        <span className="text-base font-black">+</span>
+                      ) : isZero ? (
+                        <span className="text-xs font-black">●</span>
+                      ) : (
+                        <span className="text-base font-black">-</span>
+                      )}
                     </div>
-                    <div className="flex flex-col gap-0.5 min-w-0">
-                      <span className="text-sm font-black tracking-tight truncate">
-                        {getTypeLabel(item.type)}
-                      </span>
-                      {/* admin_adjust 显示操作详情 */}
-                      {item.type === 'admin_adjust' && item.metadata?.income_operation && (
-                        <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-[11px] font-bold text-muted-foreground/80">
-                          {item.metadata.income_operation.type === 'upgrade' && (
+
+                    <div className="flex flex-col gap-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-sm font-black tracking-tight text-foreground">
+                          {isUpgrade
+                            ? incomeOp.tier?.toUpperCase() === 'ENTERPRISE'
+                              ? t('开通企业版')
+                              : t('开通 Pro 专业版')
+                            : getTypeLabel(item.type)}
+                        </span>
+                        {isUpgrade && (
+                          <Badge
+                            variant="outline"
+                            className="text-[10px] font-black px-1.5 py-0 h-4 rounded-md border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                          >
+                            {incomeOp.tier?.toUpperCase() === 'ENTERPRISE' ? 'Enterprise' : 'PRO VIP'}
+                          </Badge>
+                        )}
+                      </div>
+
+                      {/* 丰富详细的操作详情 */}
+                      {(isUpgrade || isPurchaseFirecores || item.type === 'admin_adjust' || incomeOp.type) && (
+                        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] font-bold text-muted-foreground/90">
+                          {isUpgrade && (
                             <>
                               <span>
-                                {item.metadata.income_operation.tier?.toUpperCase() === 'PRO'
-                                  ? t('升级 PRO')
-                                  : item.metadata.income_operation.tier?.toUpperCase() ===
-                                    'ENTERPRISE'
-                                    ? t('升级 Enterprise')
-                                    : item.metadata.income_operation.tier || ''}
+                                {formatPeriodLabel(incomeOp.period_unit, incomeOp.period_count)}
                               </span>
-                              {item.metadata.income_operation.plan && (
-                                <span>
-                                  {item.metadata.income_operation.plan}
-                                  {item.metadata.income_operation.period_count
-                                    ? ` (${item.metadata.income_operation.period_count}${item.metadata.income_operation.period_unit === 'month' ? t('个月') : t('年')})`
-                                    : ''}
+                              {incomeOp.quantity && incomeOp.quantity > 1 && (
+                                <span>x{incomeOp.quantity}</span>
+                              )}
+                              {incomeOp.amount != null && incomeOp.amount > 0 && (
+                                <span className="text-foreground/90">
+                                  {formatPrice({
+                                    currency: incomeOp.currency || 'CNY',
+                                    amount: incomeOp.amount
+                                  })}
                                 </span>
                               )}
-                              {item.metadata.income_operation.quantity &&
-                                item.metadata.income_operation.quantity > 1 && (
-                                  <span>x{item.metadata.income_operation.quantity}</span>
-                                )}
-                              {item.metadata.income_operation.amount != null && (
-                                <span>
-                                  {formatPrice({
-                                    currency: 'CNY',
-                                    amount: item.metadata.income_operation.amount
+                              {expiresAt && (
+                                <span className="text-amber-600 dark:text-amber-400/90 font-medium">
+                                  {t('有效期至: {date}', {
+                                    date: formatDateTime(expiresAt, { showSeconds: false })
                                   })}
                                 </span>
                               )}
                             </>
                           )}
-                          {item.metadata.income_operation.type === 'purchase_firecores' && (
+
+                          {isPurchaseFirecores && (
                             <>
-                              <span>{t('充值萤火')}</span>
-                              {item.metadata.income_operation.firecore_key && (
+                              <span>{t('点数入账')}</span>
+                              {incomeOp.firecores && (
+                                <span>+{incomeOp.firecores} {t('萤火')}</span>
+                              )}
+                              {incomeOp.amount != null && incomeOp.amount > 0 && (
                                 <span>
-                                  {t('档位')}: {item.metadata.income_operation.firecore_key}
+                                  {formatPrice({
+                                    currency: incomeOp.currency || 'CNY',
+                                    amount: incomeOp.amount
+                                  })}
                                 </span>
                               )}
-                              {item.metadata.income_operation.quantity &&
-                                item.metadata.income_operation.quantity > 1 && (
-                                  <span>x{item.metadata.income_operation.quantity}</span>
-                                )}
                             </>
+                          )}
+
+                          {orderId && (
+                            <span
+                              onClick={e => {
+                                e.stopPropagation()
+                                navigator.clipboard.writeText(orderId)
+                                toast.success(t('订单号已复制'))
+                              }}
+                              title={t('点击复制订单号: {orderId}', { orderId })}
+                              className="text-muted-foreground/60 hover:text-foreground text-[10px] font-mono transition-colors cursor-pointer inline-flex items-center gap-1 select-all"
+                            >
+                              <span>{t('订单')}: {orderId}</span>
+                              <Copy className="w-2.5 h-2.5 opacity-50 hover:opacity-100" />
+                            </span>
                           )}
                         </div>
                       )}
-                      <div className="flex items-center gap-2 text-[11px] font-bold text-muted-foreground">
+
+                      <div className="flex items-center gap-2.5 text-[11px] font-bold text-muted-foreground">
                         <span>{formatDateTime(item.time, { showSeconds: true })}</span>
                         {item.balance_after != null && (
-                          <span className="text-muted-foreground/60">
-                            {t('余额')}: {item.balance_after}
+                          <span className="text-muted-foreground/70">
+                            {t('萤火余额')}: <span className="tabular-nums font-extrabold">{item.balance_after}</span>
                           </span>
                         )}
                       </div>
                     </div>
                   </div>
+
                   <div className="flex items-center gap-3 shrink-0">
                     <div className="flex flex-col items-end gap-1">
-                      <span
-                        className={`text-sm font-black tabular-nums ${isIncome ? 'text-green-600' : 'text-red-500'
+                      {isUpgrade && isZero ? (
+                        <div className="flex flex-col items-end">
+                          <span className="text-xs font-black text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                            {t('会员权益生效')}
+                          </span>
+                          <span className="text-[11px] font-medium text-muted-foreground/60 mt-0.5">
+                            0 {t('萤火')}
+                          </span>
+                        </div>
+                      ) : (
+                        <span
+                          className={`text-sm font-black tabular-nums ${
+                            isIncome
+                              ? 'text-green-600 dark:text-green-500'
+                              : isZero
+                                ? 'text-muted-foreground'
+                                : 'text-red-500'
                           }`}
-                      >
-                        {isIncome ? '+' : ''}
-                        {item.firecores} {t('萤火')}
-                      </span>
+                        >
+                          {isIncome ? '+' : ''}
+                          {item.firecores} {t('萤火')}
+                        </span>
+                      )}
+
                       {item.status !== 'completed' && (
                         <Badge
                           variant="outline"

@@ -1150,6 +1150,13 @@ const config: ForgeConfig = {
     productName: APP_NAME,
     // 显式指定可执行文件名，防止 Linux 打包时找不到二进制文件
     executableName: EXECUTABLE_NAME,
+    // 注册自定义协议（URL Schemes）
+    protocols: [
+      {
+        name: 'Firefly Protocol',
+        schemes: ['firefly']
+      }
+    ],
     // ASAR 打包配置
     asar: {
       unpack: '**/*.node',

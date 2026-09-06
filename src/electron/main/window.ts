@@ -39,6 +39,15 @@ const getSplashHtml = (imagePath: string) => `
 </html>
 `
 
+let mainWindowInstance: BrowserWindow | null = null
+
+export const getMainWindow = (): BrowserWindow | null => {
+  if (mainWindowInstance && !mainWindowInstance.isDestroyed()) {
+    return mainWindowInstance
+  }
+  return null
+}
+
 export const createWindow = () => {
   logger.info(LogCategory.MAIN, '[createWindow] 开始创建主浏览器窗口...')
 
@@ -203,6 +212,11 @@ export const createWindow = () => {
       event.preventDefault()
       mainWindow.hide()
     }
+  })
+
+  mainWindowInstance = mainWindow
+  mainWindow.on('closed', () => {
+    mainWindowInstance = null
   })
 
   return mainWindow
