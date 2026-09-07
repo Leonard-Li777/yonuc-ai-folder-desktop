@@ -484,10 +484,10 @@ export class PerformanceOptimizer extends EventEmitter {
 
       const executionTime = performance.now() - startTime
 
-      loggingService.debug(
+      // trace 级别：仅在全量跟踪日志时查看，避免每轮定时检查刷屏
+      loggingService.trace(
         LogCategory.PERFORMANCE_OPTIMIZER,
-        `性能指标获取完成，耗时: ${executionTime.toFixed(2)}ms`,
-        metrics
+        `性能指标获取完成，耗时: ${executionTime.toFixed(2)}ms`
       )
 
       return metrics
@@ -537,8 +537,13 @@ export class PerformanceOptimizer extends EventEmitter {
 
   /**
    * 执行性能优化
+   * @param forceOptimization 是否强制优化（忽略冷却时间）
+   * @param metrics 已获取的性能指标（由调用方传入可避免重复获取，为空时内部获取）
    */
-  async optimizePerformance(forceOptimization = false): Promise<{
+  async optimizePerformance(
+    forceOptimization = false,
+    metrics?: IPerformanceMetrics
+  ): Promise<{
     executed: string[]
     skipped: string[]
     errors: string[]
@@ -556,8 +561,8 @@ export class PerformanceOptimizer extends EventEmitter {
       loggingService.info(LogCategory.PERFORMANCE_OPTIMIZER, '开始性能优化')
       this.emit('optimization-started')
 
-      // 获取当前性能指标
-      const currentMetrics = await this.getCurrentMetrics()
+      // 获取当前性能指标（复用调用方已获取的指标，避免重复计算）
+      const currentMetrics = metrics ?? (await this.getCurrentMetrics())
 
       // 选择适用的优化策略
       const applicableStrategies = this.optimizationStrategies
@@ -756,10 +761,10 @@ export class PerformanceOptimizer extends EventEmitter {
       // 发送性能指标更新事件
       this.emit('metrics-updated', metrics)
 
-      // 检查是否需要自动优化
+      // 检查是否需要自动优化（复用本次已获取的指标，避免重复计算）
       if (this.shouldTriggerAutoOptimization(metrics)) {
         try {
-          await this.optimizePerformance()
+          await this.optimizePerformance(false, metrics)
         } catch (error) {
           loggingService.warn(LogCategory.PERFORMANCE_OPTIMIZER, '自动性能优化失败', error)
         }
@@ -940,12 +945,16 @@ export class PerformanceOptimizer extends EventEmitter {
     }
   }
 
-  /**
-   * 判断是否应该触发自动优化
+/**
+   * 是否存在可立即执行的自动优化策略（触发条件满足且已过冷却期）
    */
   private shouldTriggerAutoOptimization(metrics: IPerformanceMetrics): boolean {
+    const now = Date.now()
     return this.optimizationStrategies.some(
-      strategy => strategy.enabled && strategy.trigger(metrics)
+      strategy =>
+        strategy.enabled &&
+        strategy.trigger(metrics) &&
+        now - strategy.lastExecuted >= strategy.cooldown
     )
   }
 
