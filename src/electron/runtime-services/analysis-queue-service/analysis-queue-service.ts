@@ -17,6 +17,7 @@ import {
 } from '@firefly/core-engine'
 import type { EnqueueInput, IErrorRecoveryConfig } from './types'
 import { LogCategory, logger, PerformanceTimer } from '@firefly/shared'
+import { loggingService } from '../system/logging-service'
 import { systemHealthService } from '../system'
 import { loadIgnoreRules } from '../analysis/analysis-ignore-service'
 import { LlamaIndexAIService } from '@firefly/electron-llamaIndex-service'
@@ -158,7 +159,7 @@ export class AnalysisQueueService {
         this.processNewDimensionSuggestions(suggestions, fileFingerprint)
     )
 
-    logger.info(LogCategory.ANALYSIS_QUEUE, '[分析队列] 服务实例已创建')
+    loggingService.info(LogCategory.ANALYSIS_QUEUE, '[分析队列] 服务实例已创建')
   }
 
   async initialize(): Promise<void> {

@@ -9,7 +9,7 @@ if (process.platform !== 'win32') {
       fixPathFunc()
     }
   } catch (e) {
-    console.error('Failed to fix PATH in main/index.ts:', e)
+    loggingService.error(LogCategory.SYSTEM, 'Failed to fix PATH in main/index.ts:', e)
   }
 }
 
@@ -24,12 +24,14 @@ if (process.platform === 'darwin') {
 // 后续逻辑...
 import { app, BrowserWindow, ipcMain, net, dialog, shell } from 'electron'
 import * as path from 'node:path'
+import { logger, LogCategory, ErrorNormalizer, APP_PORTS, getWorktreeDebugPortBase } from '@firefly/shared'
+import { loggingService } from '../runtime-services/system/logging-service'
 import { initWorktreeEnvironment } from './worktree-env'
 import { processReaper } from './process-reaper'
 
 // 1. 初始化 Worktree 实例环境与 userData 隔离
 const worktreeInfo = initWorktreeEnvironment()
-console.log(`🚀 [Worktree] 启动实例: ${worktreeInfo.appName}, 数据目录: ${worktreeInfo.userDataDir}`)
+loggingService.info(LogCategory.STARTUP, `[Worktree] 启动实例: ${worktreeInfo.appName}, 数据目录: ${worktreeInfo.userDataDir}`)
 
 // 2. 启动前清理历史遗留的僵尸子进程
 processReaper.cleanupStaleProcesses()
@@ -56,11 +58,14 @@ processReaper.cleanupStaleProcesses()
         .readdirSync(newDir)
         .some(f => f.endsWith('.db') && !f.includes('-shm') && !f.includes('-wal'))
 
-    console.log(`[Migration] 旧数据库存在: ${hasOldDb}, 新数据库存在: ${hasNewDb}`)
+    loggingService.info(
+      LogCategory.DATABASE,
+      `[Migration] 旧数据库存在: ${hasOldDb}, 新数据库存在: ${hasNewDb}`
+    )
 
     // 如果旧数据库存在，新数据库不存在，则执行迁移
     if (hasOldDb && !hasNewDb) {
-      console.log('[Migration] 开始执行迁移...')
+      loggingService.info(LogCategory.DATABASE, '[Migration] 开始执行迁移...')
 
       // 1. 确保新数据目录存在
       if (!fs.existsSync(newDir)) {
@@ -69,7 +74,7 @@ processReaper.cleanupStaleProcesses()
 
       // 2. 复制配置文件与数据库相关文件（秒级完成）
       const files = fs.readdirSync(oldDir)
-      console.log(`[Migration] 旧目录文件列表: ${files.join(', ')}`)
+      loggingService.info(LogCategory.DATABASE, `[Migration] 旧目录文件列表: ${files.join(', ')}`)
       for (const file of files) {
         // 白名单过滤：只拷贝这两个配置文件以及数据库相关文件 (*.db, *.db-shm, *.db-wal 等)
         const isConfigFile =
@@ -87,7 +92,10 @@ processReaper.cleanupStaleProcesses()
           const stat = fs.statSync(oldFilePath)
           if (stat.isFile()) {
             fs.copyFileSync(oldFilePath, newFilePath)
-            console.log(`[Migration] 成功复制并更名: ${file} -> ${newFileName}`)
+            loggingService.info(
+              LogCategory.DATABASE,
+              `[Migration] 成功复制并更名: ${file} -> ${newFileName}`
+            )
 
             // 3. 修改 firefly-unified-config.json 中的版本号 VERSION 为当前软件版本号
             if (newFileName === 'firefly-unified-config.json') {
@@ -98,32 +106,35 @@ processReaper.cleanupStaleProcesses()
                   const currentVersion = app.getVersion()
                   configObj.app.VERSION = currentVersion
                   fs.writeFileSync(newFilePath, JSON.stringify(configObj, null, 2), 'utf-8')
-                  console.log(
+                  loggingService.info(
+                    LogCategory.DATABASE,
                     `[Migration] 已成功将 firefly-unified-config.json 中的 VERSION 更新为 ${currentVersion}`
                   )
                 }
               } catch (innerErr) {
-                console.error('[Migration] 修改版本号失败:', innerErr)
+                loggingService.error(LogCategory.DATABASE, '[Migration] 修改版本号失败:', innerErr)
               }
             }
           }
         } catch (e) {
-          console.error(`[Migration] 复制文件 ${file} 失败:`, e)
+          loggingService.error(LogCategory.DATABASE, `[Migration] 复制文件 ${file} 失败:`, e)
         }
       }
-      console.log('[Migration] 双应用数据隔离与继承迁移完成')
+      loggingService.info(LogCategory.DATABASE, '[Migration] 双应用数据隔离与继承迁移完成')
       // 验证迁移结果
       const newFiles = fs.readdirSync(newDir)
-      console.log(`[Migration] 新目录文件列表: ${newFiles.join(', ')}`)
+      loggingService.info(LogCategory.DATABASE, `[Migration] 新目录文件列表: ${newFiles.join(', ')}`)
     } else {
-      console.log('[Migration] 跳过迁移: 旧数据库不存在或新数据库已存在')
+      loggingService.info(
+        LogCategory.DATABASE,
+        '[Migration] 跳过迁移: 旧数据库不存在或新数据库已存在'
+      )
     }
   } catch (err) {
-    console.error('[Migration] 初始化新版数据目录失败:', err)
+    loggingService.error(LogCategory.DATABASE, '[Migration] 初始化新版数据目录失败:', err)
   }
 })()
-
-import { logger, LogCategory, ErrorNormalizer, APP_PORTS, getWorktreeDebugPortBase } from '@firefly/shared'
+ 
 
 // 为不同平台或命令行指定的参数设置远程调试端口，每个 Worktree 独立专属滑动段
 const debuggingPortArg = process.argv.find(arg => arg.includes('--remote-debugging-port'))
@@ -158,7 +169,10 @@ if (debuggingPortArg) {
     }
   }
   app.commandLine.appendSwitch('remote-debugging-port', String(debugPort))
-  console.log(`🔍 [Chromium] Worktree: ${worktreeInfo.worktreeName} 独占远程调试端口: ${debugPort} (段: ${worktreePortBase}~${worktreePortBase + APP_PORTS.REMOTE_DEBUGGING_SLOT_SIZE - 1})`)
+  loggingService.info(
+    LogCategory.STARTUP,
+    `[Chromium] Worktree: ${worktreeInfo.worktreeName} 独占远程调试端口: ${debugPort} (段: ${worktreePortBase}~${worktreePortBase + APP_PORTS.REMOTE_DEBUGGING_SLOT_SIZE - 1})`
+  )
 }
 
 // 检测代理环境变量并配置 Electron Chromium 网络栈
@@ -173,7 +187,10 @@ if (proxyRules && !process.argv.some(arg => arg.includes('--proxy-server'))) {
   if (noProxy) {
     app.commandLine.appendSwitch('proxy-bypass-rules', noProxy)
   }
-  console.log(`[native-network] 已通过命令行开关配置 Chromium 代理: ${proxyRules}`)
+  loggingService.info(
+    LogCategory.STARTUP,
+    `[native-network] 已通过命令行开关配置 Chromium 代理: ${proxyRules}`
+  )
 }
 
 // 为 Node.js 环境提供 DOMMatrix 全局变量
@@ -283,7 +300,6 @@ import {
   ConfigOrchestrator as AIPackageConfigOrchestrator,
   LlamaIndexAIService
 } from '@firefly/electron-llamaIndex-service'
-import { loggingService } from '../runtime-services/system/logging-service'
 import { systemHealthService } from '../runtime-services/system/system-health-service'
 import { fileWatcherService } from '../runtime-services/filesystem/file-watcher-service'
 import { analysisQueueService } from '../runtime-services/analysis-queue-service'
@@ -437,6 +453,12 @@ logger.on(
     }
   }
 )
+
+// logger 的日志已由上方监听器转发给 loggingService 统一输出到控制台与文件，
+// 当 loggingService 的控制台输出启用时（debug/E2E 模式），关闭 logger 自身的控制台输出，避免同一消息重复打印
+if (loggingService.getConfig().enableConsole) {
+  logger.setConsoleOutputEnabled(false)
+}
 
 // =================================================================
 // 早期服务初始化

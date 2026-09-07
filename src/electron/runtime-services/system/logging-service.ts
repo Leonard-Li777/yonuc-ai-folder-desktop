@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { platformAdapter } from '@firefly/electron-llamaIndex-service'
 import { LogLevel, LogEntry, AppError, ErrorType } from '@firefly/types'
-import { LogCategory, maskSensitiveInfo, isE2ETestEnvironment } from '@firefly/shared'
+import { LogCategory, LogCategoryColors, maskSensitiveInfo, isE2ETestEnvironment } from '@firefly/shared'
 
 /**
  * 日志服务类
@@ -320,13 +320,28 @@ export class LoggingService {
     const formattedData = this.formatDataForOutput(logEntry.data)
 
     if (this.config.enableStructuredLogging) {
-      console.log(
-        `${timestamp} [${levelName}] [${logEntry.category}] ${logEntry.message}`,
-        formattedData
-      )
+      console.log(this.formatConsolePrefix(logEntry, timestamp, levelName), formattedData)
     } else {
-      console.log(`${timestamp} [${levelName}] [${logEntry.category}] ${logEntry.message}`)
+      console.log(this.formatConsolePrefix(logEntry, timestamp, levelName))
     }
+  }
+
+  /**
+   * 格式化彩色控制台日志前缀（时间戳 + 级别 + 分类）
+   */
+  private formatConsolePrefix(logEntry: LogEntry, timestamp: string, levelName: string): string {
+    const reset = '\x1b[0m'
+    const levelColor =
+      logEntry.level === LogLevel.ERROR
+        ? '\x1b[31m'
+        : logEntry.level === LogLevel.WARN
+          ? '\x1b[33m'
+          : logEntry.level === LogLevel.DEBUG
+            ? '\x1b[90m'
+            : '\x1b[32m'
+    const categoryColor = LogCategoryColors[logEntry.category as LogCategory] || '\x1b[37m'
+
+    return `${timestamp} ${levelColor}[${levelName}]${reset} ${categoryColor}[${logEntry.category}]${reset} ${logEntry.message}`
   }
 
   /**

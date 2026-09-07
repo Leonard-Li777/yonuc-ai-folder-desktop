@@ -19,6 +19,7 @@ import {
   isCategory,
   BROWSER_NATIVE_IMAGE_EXTS
 } from '@firefly/shared'
+import { loggingService } from '../system/logging-service'
 import { ConfigOrchestrator } from '@app/electron/config/config-orchestrator'
 import sharp from 'sharp'
 import { t } from '@app/languages'
@@ -82,12 +83,12 @@ export class ThumbnailService {
     try {
       sharp.cache({ memory: 32, files: 20, items: 100 })
       sharp.concurrency(Math.max(1, Math.floor(os.cpus().length / 2)))
-      logger.info(
+      loggingService.info(
         LogCategory.FILE_PROCESSOR,
         `[缩略图服务] 初始化 Sharp 配置: memory=32MB, files=20, items=100, concurrency=${Math.max(1, Math.floor(os.cpus().length / 2))}`
       )
     } catch (error) {
-      logger.warn(LogCategory.FILE_PROCESSOR, `[缩略图服务] 初始化 Sharp 配置失败:`, error)
+      loggingService.warn(LogCategory.FILE_PROCESSOR, `[缩略图服务] 初始化 Sharp 配置失败:`, error)
     }
   }
 

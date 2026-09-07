@@ -1,4 +1,5 @@
 import { logger, LogCategory } from '@firefly/shared'
+import { loggingService } from '../system/logging-service'
 import type { CloudModelConfig, CloudModelConfigService, ProviderModel } from '@firefly/types'
 import { t } from '@app/languages'
 import { ConfigOrchestrator } from '../../config/config-orchestrator'
@@ -16,9 +17,7 @@ export class CloudModelConfigServiceImpl implements CloudModelConfigService {
 
   private constructor() {
     this.configOrchestrator = ConfigOrchestrator.getInstance()
-    if (logger) {
-      logger.info(LogCategory.AI_CONFIG, '云端模型配置服务已初始化')
-    }
+    loggingService.info(LogCategory.AI_CONFIG, '云端模型配置服务已初始化')
   }
 
   static getInstance(): CloudModelConfigServiceImpl {
