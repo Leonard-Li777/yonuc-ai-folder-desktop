@@ -87,7 +87,8 @@
     "restartApp:win": "node pro/scripts/run.js restart-app.js win",
     "restartApp:linux": "node pro/scripts/run.js restart-app.js linux",
     "restartApp:mac": "node pro/scripts/run.js restart-app.js mac",
-    "clear:user-data": "node pro/scripts/run.js clear-user-data.js"
+    "clear:user-data": "node pro/scripts/run.js clear-user-data.js",
+    "clear:user-data:intl": "cross-env BUILD_REGION=INTL node pro/scripts/run.js clear-user-data.js"
   },
   "keywords": [],
   "author": {
