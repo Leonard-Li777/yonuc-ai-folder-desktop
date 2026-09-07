@@ -84,6 +84,11 @@ export default defineConfig({
       '@firefly/server': existsSync(resolve(__dirname, 'pro/packages/server/src'))
         ? resolve(__dirname, 'pro/packages/server/src')
         : resolve(__dirname, '../server/src'),
+      '@firefly/i18n-content/languages/paragraphs': existsSync(
+        resolve(__dirname, 'pro/packages/i18n-content/src/languages/paragraphs/index.ts')
+      )
+        ? resolve(__dirname, 'pro/packages/i18n-content/src/languages/paragraphs/index.ts')
+        : resolve(__dirname, '../../packages/i18n-content/src/languages/paragraphs/index.ts'),
       '@firefly/i18n-content': existsSync(resolve(__dirname, 'pro/packages/i18n-content/src'))
         ? resolve(__dirname, 'pro/packages/i18n-content/src')
         : resolve(__dirname, '../../packages/i18n-content/src'),
