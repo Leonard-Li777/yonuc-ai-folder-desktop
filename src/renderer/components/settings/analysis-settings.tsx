@@ -135,9 +135,6 @@ export const AnalysisSettings: React.FC = () => {
   const [localMaxDocOcrItems, setLocalMaxDocOcrItems] = useState<number>(
     getConfigValue<number>('MAX_DOCUMENT_OCR_ITEMS') ?? 0
   )
-  const [localEnableImageOcr, setLocalEnableImageOcr] = useState<boolean>(
-    getConfigValue<boolean>('ENABLE_IMAGE_OCR') ?? true
-  )
   const [showAdvancedPrompts, setShowAdvancedPrompts] = useState(false)
   const [showLibreOfficeHelp, setShowLibreOfficeHelp] = useState(false)
 
@@ -229,17 +226,6 @@ export const AnalysisSettings: React.FC = () => {
       captureEvent('切换Office封面截图', { enabled: localEnableOfficeCover })
     }
   }, [localEnableOfficeCover])
-
-  /**
-   * 图片OCR开关同步
-   */
-  useEffect(() => {
-    const currentConfigValue = getConfigValue<boolean>('ENABLE_IMAGE_OCR') ?? false
-    if (localEnableImageOcr !== currentConfigValue) {
-      updateConfigValue('ENABLE_IMAGE_OCR', localEnableImageOcr)
-      captureEvent('切换图片OCR识别', { enabled: localEnableImageOcr })
-    }
-  }, [localEnableImageOcr])
 
   /**
    * 监听外部配置变更（如重置或同步），更新本地显示
@@ -903,34 +889,10 @@ export const AnalysisSettings: React.FC = () => {
                 })()}
               </div>
 
-              {/* 图片 OCR 开关 */}
-              <div className="p-3 rounded-lg border bg-card">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-1">
-                      <Label htmlFor="image-ocr-switch" className="text-sm font-medium">
-                        {t('启用图片OCR文字识别')}
-                      </Label>
-                      <HelpTooltip
-                        content={t(
-                          '开启后会对PNG、JPG、WebP、BMP、TIFF等图片文件进行OCR文字识别'
-                        )}
-                      />
-                    </div>
-                    <p className="text-xs text-muted-foreground">{t('开启会让分析耗时增加1~4秒')}</p>
-                  </div>
-                  <Switch
-                    id="image-ocr-switch"
-                    checked={localEnableImageOcr}
-                    onCheckedChange={setLocalEnableImageOcr}
-                  />
-                </div>
-              </div>
             </div>
 
-            {/* 联动：只有当文档 OCR 开启 (数量 != 0) 或图片 OCR 开启时，才显示 OCR 识别精度 */}
-            {(localMaxDocOcrItems !== 0 || localEnableImageOcr) && (
-              <div className="pt-2">
+            {/* OCR 识别精度选择（支持图片与文档 OCR） */}
+            <div className="pt-2">
                 <div className="flex items-center gap-1.5 mb-2.5">
                   <Label className="text-sm font-medium">{t('OCR识别精度')}</Label>
                   <HelpTooltip
@@ -1016,7 +978,6 @@ export const AnalysisSettings: React.FC = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
 
           {/* 复用数据开关（始终显示，占满整行，位于其它项之后、插件安装之前） */}

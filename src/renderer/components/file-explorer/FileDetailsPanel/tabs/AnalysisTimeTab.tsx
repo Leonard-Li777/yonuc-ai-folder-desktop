@@ -32,6 +32,7 @@ function getBenchmarkItems(): Array<{
 }> {
   return [
     { key: 'magikaMs', label: t('类型识别'), color: '#10b981' }, // 翡翠绿 (Magika 模型)
+    { key: 'tagMs', label: t('标签'), color: '#38bdf8' }, // 天蓝 (视觉/语义多模态标签最大耗时)
     { key: 'textMs', label: t('文本'), color: '#a855f7' }, // 炫紫 (原生/anydoc 文本层)
     { key: 'ocrMs', label: t('OCR'), color: '#e11d48' }, // 艳红 (单图/分页 OCR 合计)
     { key: 'metadataMs', label: t('元数据'), color: '#ec4899' }, // 玫红 (Exif/Lofty)
