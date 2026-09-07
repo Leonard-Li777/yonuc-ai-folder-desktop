@@ -1034,8 +1034,9 @@ export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = ({
         const isTagExpanded = !collapsedTags.has(tag.tagValue)
         const currentChain = ancestorChain ? [...ancestorChain, tag.tagValue] : [tag.tagValue]
 
+        const rowId = `tag-${depth}-${currentChain.join('/')}-${tag.dimensionId}-${tag.tagValue}`
         rows.push({
-          id: `tag-${tag.dimensionId}-${tag.tagValue}-${parentTagValue || ''}`,
+          id: rowId,
           type: 'tag',
           node,
           tag,
@@ -1067,13 +1068,79 @@ export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = ({
     handleVisibleAndHiddenTags
   ])
 
-  const ITEM_HEIGHT = 28
-  const visibleCount = Math.ceil(containerHeight / ITEM_HEIGHT) + 6
-  const startIndex = Math.max(0, Math.floor(scrollTop / ITEM_HEIGHT) - 3)
-  const endIndex = Math.min(flatRows.length, startIndex + visibleCount)
-  const visibleRows = flatRows.slice(startIndex, endIndex)
-  const paddingTop = startIndex * ITEM_HEIGHT
-  const paddingBottom = Math.max(0, (flatRows.length - endIndex) * ITEM_HEIGHT)
+  // 精准虚拟滚动计算：Header 36px, Tag 26px
+  const HEADER_HEIGHT = 36
+  const TAG_HEIGHT = 26
+
+  const { rowOffsets, totalContentHeight } = useMemo(() => {
+    const offsets: number[] = new Array(flatRows.length + 1)
+    let currentOffset = 0
+    offsets[0] = 0
+    for (let i = 0; i < flatRows.length; i++) {
+      const h = flatRows[i].type === 'header' ? HEADER_HEIGHT : TAG_HEIGHT
+      currentOffset += h
+      offsets[i + 1] = currentOffset
+    }
+    return { rowOffsets: offsets, totalContentHeight: currentOffset }
+  }, [flatRows])
+
+  // 二分查找当前 scrollTop 对应的起始行索引
+  const { startIndex, endIndex, paddingTop, paddingBottom } = useMemo(() => {
+    const count = flatRows.length
+    if (count === 0) {
+      return { startIndex: 0, endIndex: 0, paddingTop: 0, paddingBottom: 0 }
+    }
+
+    // 关键保护：回滚到顶部（scrollTop <= 5）时绝对强制重置到索引 0
+    if (scrollTop <= 5) {
+      const end = Math.min(count, Math.ceil(containerHeight / TAG_HEIGHT) + 10)
+      const top = 0
+      const bottom = Math.max(0, totalContentHeight - rowOffsets[end])
+      return { startIndex: 0, endIndex: end, paddingTop: top, paddingBottom: bottom }
+    }
+
+    // 二分查找第一个 offset + itemHeight > scrollTop 的位置
+    let low = 0
+    let high = count - 1
+    let target = 0
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2)
+      if (rowOffsets[mid + 1] > scrollTop) {
+        target = mid
+        high = mid - 1
+      } else {
+        low = mid + 1
+      }
+    }
+
+    // 向上缓冲 5 行
+    const start = Math.max(0, target - 5)
+
+    // 二分查找视口底部对应索引，加上向下缓冲 8 行
+    const viewBottom = scrollTop + containerHeight
+    let endTarget = count
+    low = start
+    high = count - 1
+    while (low <= high) {
+      const mid = Math.floor((low + high) / 2)
+      if (rowOffsets[mid] >= viewBottom) {
+        endTarget = mid
+        high = mid - 1
+      } else {
+        low = mid + 1
+      }
+    }
+    const end = Math.min(count, endTarget + 8)
+
+    const top = rowOffsets[start]
+    const bottom = Math.max(0, totalContentHeight - rowOffsets[end])
+
+    return { startIndex: start, endIndex: end, paddingTop: top, paddingBottom: bottom }
+  }, [flatRows.length, rowOffsets, totalContentHeight, scrollTop, containerHeight])
+
+  const visibleRows = useMemo(() => {
+    return flatRows.slice(startIndex, endIndex)
+  }, [flatRows, startIndex, endIndex])
 
   const handleUnionModeChangeInternal = useCallback(
     (mode: UnionMode) => {
