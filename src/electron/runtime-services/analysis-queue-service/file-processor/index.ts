@@ -27,7 +27,8 @@ import {
   calculateFileFingerprint,
   cleanSmartName,
   createSecretHmac,
-  toBase62
+  toBase62,
+  isGibberishOcrText
 } from '@firefly/shared'
 import { ConfigOrchestrator } from '../../../config/config-orchestrator'
 import { databaseService } from '../../database/database-service'
@@ -41,10 +42,14 @@ import {
   FileDimensionService,
   TextFileProcessor,
   extractPureLyrics,
-  type FileInfoInput,
-  PreflightFeaturePipeline,
-  TagReconciliationArbiter
+  type FileInfoInput
 } from '@firefly/core-engine'
+import {
+  executeProPreflight,
+  executeProTagReconciliation,
+  executeProVisualTagging,
+  executeProTextTagging
+} from '@pro'
 import { omniService } from '../../system/omni-service'
 import { thumbnailService } from '../../filesystem/thumbnail-service'
 import { anydocService, AnydocAsset, AnydocResult } from '../../system/anydoc-service'
@@ -685,16 +690,33 @@ export class FileProcessor {
           }
         }
 
-        const preflightContext = PreflightFeaturePipeline.run({
+        const effectiveMimeType = existingBasicData.category?.mime_type || getMimeType(enhancedInfo.fileType)
+        const visualTags = await executeProVisualTagging({
+          filePath,
+          mimeType: effectiveMimeType,
+          language
+        })
+        const textTags = await executeProTextTagging({
+          filePath,
+          content: existingBasicData.content,
+          fileName: item.name,
+          mimeType: effectiveMimeType,
+          language
+        })
+
+        const preflightContext = executeProPreflight({
           filePath,
           fileName: item.name,
           fileSize: currentStats.size,
           fileCategory: enhancedInfo.fileType,
-          mimeType: existingBasicData.category?.mime_type || getMimeType(enhancedInfo.fileType),
+          mimeType: effectiveMimeType,
           contentPreview: existingBasicData.content ? existingBasicData.content.slice(0, 1000) : undefined,
           metadata: baseMetadata,
-          stats: currentStats
+          stats: currentStats,
+          visualTags,
+          textTags
         })
+
         baseMetadata = preflightContext.flattenedMetadata
 
         const fileInfo: FileInfoInput = {
@@ -884,7 +906,12 @@ export class FileProcessor {
         this.saveBasicMagikaTags(fileFingerprint, existingBasicData.category || null, filePath, db)
 
         // 运行找补裁决器：将 CPU 既定事实标签与 AI 推理标签合并，物理事实绝对覆盖，全量无损入库（打破 8 个上限限制）
-        this.reconcileAndSaveTags(db, fileFingerprint, preflightContext, dimResult)
+        executeProTagReconciliation({
+          db,
+          fileFingerprint,
+          preflightContext,
+          dimResult
+        })
 
         databaseService.syncFTSTags(fileFingerprint)
 
@@ -1168,8 +1195,6 @@ export class FileProcessor {
       const extractPages = ConfigOrchestrator.getInstance().getValue<number>('EXTRACT_PAGES') ?? 2
       const maxDocOcrItems =
         ConfigOrchestrator.getInstance().getValue<number>('MAX_DOCUMENT_OCR_ITEMS') ?? 0
-      const enableImageOcr =
-        ConfigOrchestrator.getInstance().getValue<boolean>('ENABLE_IMAGE_OCR') ?? false
       const ocrModelSize =
         ConfigOrchestrator.getInstance().getValue<string>('OCR_MODEL_SIZE') ?? 'tiny'
       const maxContentSizeKb =
@@ -1341,6 +1366,17 @@ export class FileProcessor {
       // 组装内容：完全统一使用 Omni 提取的内容 (已在 Rust 原生端内完成文本层与 PP-OCRv6 融合)
       let combinedContent = anydocResult?.content?.trim() || ''
 
+      // OCR 视觉噪点与幻觉乱码清洗拦截（特别是图片 OCR 或无意义字符流）
+      if (isImage && combinedContent) {
+        if (isGibberishOcrText(combinedContent)) {
+          logger.warn(
+            LogCategory.ANALYSIS_QUEUE,
+            `[FileProcessor] OCR 识别文本判定为视觉噪点/乱码，已自动丢弃: ${item.name}`
+          )
+          combinedContent = ''
+        }
+      }
+
       // 复用数据：Omni 未返回内容时（完全跳过或仅按需请求了缺失指标），回退到已有内容
       if (!combinedContent.trim() && existingBasicData.content && !isImage) {
         combinedContent = existingBasicData.content
@@ -1393,14 +1429,18 @@ export class FileProcessor {
 
       const stage2MagikaMs = omniBm?.magika_ms
       const stage2MetadataMs = omniBm?.metadata_ms
-      const stage2TextMs = omniBm?.text_ms ?? (anydocDurationMs > 0 ? anydocDurationMs : (localTextMs || 0))
+      const stage2TagMs = omniBm?.tag_ms
+      const stage2TextMs = anydocResult?.content?.trim()
+        ? (omniBm?.text_ms ?? (localTextMs || undefined))
+        : undefined
       const stage2OcrMs = omniBm?.ocr_ms
       const stage2ThumbMs = omniBm?.thumbnail_ms
 
-      // 阶段 2 耗时为各项并行任务的最大耗时
+      // 阶段 2 耗时为各项并行任务的最大耗时 (含标签多模态最大耗时)
       const calculatedMaxParallelTotalMs = Math.max(
         stage2MagikaMs || 0,
         stage2MetadataMs || 0,
+        stage2TagMs || 0,
         stage2TextMs || 0,
         stage2OcrMs || 0,
         stage2ThumbMs || 0
@@ -1411,7 +1451,8 @@ export class FileProcessor {
         officePrePdfMs: undefined,
         magikaMs: stage2MagikaMs,
         metadataMs: stage2MetadataMs,
-        textMs: stage2TextMs > 0 ? stage2TextMs : undefined,
+        tagMs: stage2TagMs,
+        textMs: stage2TextMs,
         documentMs: undefined, // 彻底移除冗余正文
         ocrMs: stage2OcrMs,
         htmlMs: omniBm?.html_ms,
@@ -1501,18 +1542,35 @@ export class FileProcessor {
 
       const stats = currentStats || fs.statSync(filePath)
 
+      const effectiveMimeType = magikaCategory?.mime_type || getMimeType(enhancedFileType)
+      const visualTags = await executeProVisualTagging({
+        filePath,
+        mimeType: effectiveMimeType,
+        language
+      })
+      const textTags = await executeProTextTagging({
+        filePath,
+        content: contentResult.content,
+        fileName: item.name,
+        mimeType: effectiveMimeType,
+        language
+      })
+
       // 运行 CPU 阶段预计算特征流水线 (PreflightFeaturePipeline, ADR 0030)
-      const preflightContext = PreflightFeaturePipeline.run({
+      const preflightContext = executeProPreflight({
         filePath,
         fileName: item.name,
         fileSize: stats.size,
         fileCategory: enhancedFileType,
-        mimeType: magikaCategory?.mime_type || getMimeType(enhancedFileType),
+        mimeType: effectiveMimeType,
         contentPreview: contentResult.content ? contentResult.content.slice(0, 1000) : undefined,
         metadata: contentResult.metadata,
         stats,
-        omniPerception: anydocResult?.perception
+        omniPerception: anydocResult?.perception,
+        visualTags,
+        textTags
       })
+
 
       // 平铺注入 metadata（更新 contentResult.metadata 与 fileInfo.metadata，供后续所有模式使用）
       contentResult.metadata = preflightContext.flattenedMetadata
@@ -1732,7 +1790,12 @@ export class FileProcessor {
         this.saveBasicMagikaTags(fileFingerprint, magikaCategory, filePath, db)
 
         // 运行找补裁决器：全量无损写入 CPU 既定事实标签（文件来源、处理状态、安全等级、水印、打码等），打破 8 个上限限制
-        this.reconcileAndSaveTags(db, fileFingerprint, preflightContext, null)
+        executeProTagReconciliation({
+          db,
+          fileFingerprint,
+          preflightContext,
+          dimResult: null
+        })
 
         // 从元数据直接提取作者/语言标签并保存（标签 + 专用字段）
         if (processResult.metadata) {
@@ -1838,7 +1901,12 @@ export class FileProcessor {
       this.saveBasicMagikaTags(fileFingerprint, magikaCategory, filePath, db)
 
       // 运行找补裁决器：将 CPU 既定事实标签与 AI 推理标签合并，物理事实绝对覆盖，全量无损入库（打破 8 个上限限制）
-      this.reconcileAndSaveTags(db, fileFingerprint, preflightContext, dimResult)
+      executeProTagReconciliation({
+        db,
+        fileFingerprint,
+        preflightContext,
+        dimResult
+      })
 
       databaseService.syncFTSTags(fileFingerprint)
 
@@ -2011,56 +2079,7 @@ export class FileProcessor {
     }
   }
 
-  /**
-   * 将 CPU 既定事实标签与 AI 推理标签进行仲裁并全量无损持久化
-   * 遵循 ADR 0030 物理事实绝对覆盖律与无损入库规范
-   */
-  private reconcileAndSaveTags(
-    db: any,
-    fileFingerprint: string,
-    preflightContext: any,
-    dimResult?: any
-  ): void {
-    if (!preflightContext?.groundTruthTags || !db) return
 
-    try {
-      const aiInferenceTags: Array<{ dimensionName: string; tagName: string }> = []
-      if (dimResult?.dimensionTags && typeof dimResult.dimensionTags === 'object') {
-        for (const [dimName, tags] of Object.entries(dimResult.dimensionTags)) {
-          if (Array.isArray(tags)) {
-            for (const tag of tags) {
-              if (typeof tag === 'string' && tag.trim()) {
-                aiInferenceTags.push({ dimensionName: dimName, tagName: tag.trim() })
-              }
-            }
-          } else if (typeof tags === 'string' && (tags as string).trim()) {
-            aiInferenceTags.push({ dimensionName: dimName, tagName: (tags as string).trim() })
-          }
-        }
-      }
-      if (Array.isArray(dimResult?.tags)) {
-        for (const t of dimResult.tags) {
-          if (typeof t === 'string' && t.trim()) {
-            aiInferenceTags.push({ dimensionName: '内容标签', tagName: t.trim() })
-          }
-        }
-      }
-
-      TagReconciliationArbiter.reconcileAndSave({
-        db,
-        fileFingerprint,
-        groundTruthTags: preflightContext.groundTruthTags,
-        aiInferenceTags,
-        syncStatus: 0
-      })
-    } catch (error) {
-      logger.error(
-        LogCategory.ANALYSIS_QUEUE,
-        `[找补裁决器] 标签裁决入库失败: ${fileFingerprint}`,
-        error
-      )
-    }
-  }
 
   /**
    * 保存云端分析结果到数据库

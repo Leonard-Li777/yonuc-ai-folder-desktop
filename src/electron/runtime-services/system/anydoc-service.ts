@@ -79,7 +79,11 @@ export class AnydocService {
           benchmark: perception.benchmark
             ? {
                 total_ms: perception.benchmark.total_ms,
-                text_ms: perception.benchmark.extract_ms
+                magika_ms: perception.benchmark.magika_ms,
+                metadata_ms: perception.benchmark.metadata_ms,
+                tag_ms: perception.benchmark.tag_ms,
+                text_ms: perception.benchmark.text_ms,
+                ocr_ms: perception.benchmark.ocr_ms
               }
             : undefined,
           perception

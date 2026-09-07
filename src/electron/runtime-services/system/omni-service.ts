@@ -19,6 +19,7 @@ export interface OmniBenchmarkResponse {
   total_ms: number
   magika_ms?: number
   metadata_ms?: number
+  tag_ms?: number
   text_ms?: number
   document_ms?: number
   ocr_ms?: number
@@ -75,6 +76,20 @@ export interface OmniPerceptionBenchmarkResponse {
   vision_ms?: number
   audio_ms?: number
   geo_ms?: number
+
+  // 细分任务独立耗时
+  magika_ms?: number
+  metadata_ms?: number
+  tag_ms?: number
+  text_ms?: number
+  ocr_ms?: number
+  text_detect_ms?: number
+  clip_ms?: number
+  nsfw_ms?: number
+  watermark_ms?: number
+  mosaic_ms?: number
+  aesthetic_ms?: number
+  bw_ms?: number
 }
 
 export interface OmniPerceptionResponse {
@@ -99,9 +114,22 @@ export interface OmniPerceptionResponse {
   has_mosaic?: boolean
   mosaic_level?: number
   mosaic_status?: string
+  has_text?: boolean
+  aesthetic_score?: number
+  quality_score?: number
+  photo_type?: string
+  quality_issues?: string[]
 
-  // 多模态直出字段
+  // 多模态直出字段与三大引擎标签
   visual_tags: string[]
+  mobilenet_tags?: string[]
+  clip_tags?: string[]
+  nsfw_tags?: string[]
+  mobilenet_high_confidence_tags?: string[]
+  clip_high_confidence_tags?: string[]
+  nsfw_high_confidence_tags?: string[]
+  sensitive_types?: string[]
+  content_rating?: string
   audio_transcript?: string
   audio_events: string[]
   geo_address?: string
@@ -499,7 +527,7 @@ export class OmniService {
     try {
       const { ConfigOrchestrator } = await import('../../config/config-orchestrator')
       const orchestrator = ConfigOrchestrator.getInstance()
-      const enableImageOcr = orchestrator.getValue<boolean>('ENABLE_IMAGE_OCR') ?? false
+      const enableImageOcr = orchestrator.getValue<boolean>('ENABLE_IMAGE_OCR') ?? true
       const enableOfficeCover = orchestrator.getValue<boolean>('ENABLE_OFFICE_COVER') ?? false
       const maxDocOcrItems = orchestrator.getValue<number>('MAX_DOCUMENT_OCR_ITEMS') ?? 0
       const ocrModelSize = (orchestrator.getValue<string>('OCR_MODEL_SIZE') || 'tiny').toLowerCase()
@@ -842,7 +870,7 @@ export class OmniService {
     const reqBody = {
       file_path: filePath,
       language: options?.language,
-      enable_visual_tags: options?.enableVisualTags,
+      enable_visual_tags: options?.enableVisualTags ?? true,
       enable_audio_transcript: options?.enableAudioTranscript,
       enable_geo_reverse: options?.enableGeoReverse ?? true,
       max_content_size_kb: options?.maxContentSizeKb
@@ -882,7 +910,17 @@ export class OmniService {
           security_level: json.security_level,
           has_watermark: json.has_watermark,
           has_mosaic: json.has_mosaic,
+          has_text: json.has_text,
+          visual_tags: json.visual_tags || [],
           visual_tags_count: json.visual_tags?.length || 0,
+          mobilenet_tags: json.mobilenet_tags || [],
+          clip_tags: json.clip_tags || [],
+          nsfw_tags: json.nsfw_tags || [],
+          mobilenet_high_confidence_tags: json.mobilenet_high_confidence_tags || [],
+          clip_high_confidence_tags: json.clip_high_confidence_tags || [],
+          nsfw_high_confidence_tags: json.nsfw_high_confidence_tags || [],
+          sensitive_types: json.sensitive_types || [],
+          content_rating: json.content_rating,
           has_audio_transcript: !!json.audio_transcript,
           geo_address: json.geo_address
         })
