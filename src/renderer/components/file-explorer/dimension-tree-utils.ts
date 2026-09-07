@@ -90,9 +90,14 @@ export function buildDimensionTree(
         } as DimensionTreeNode
       })
       .sort((a, b) => {
+        // 文件类型 (ID 1) 永远排在最首位
+        if (a.id === 1) return -1
+        if (b.id === 1) return 1
+        // 内容标签 (ID 28) 永远排在最后位
         if (a.id === 28) return 1
         if (b.id === 28) return -1
-        return a.level - b.level
+        if (a.level !== b.level) return a.level - b.level
+        return a.id - b.id
       })
   }
 
