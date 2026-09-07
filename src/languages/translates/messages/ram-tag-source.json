@@ -16461,30 +16461,30 @@
     "$id": 24897
   },
   "酒": {
-    "en-US": "酒",
-    "es-ES": "酒",
-    "ar-EG": "酒",
-    "pt-PT": "酒",
-    "ru-RU": "酒",
-    "ja-JP": "酒",
-    "de-DE": "酒",
-    "fr-FR": "酒",
-    "ko-KR": "酒",
+    "en-US": "Alcohol",
+    "es-ES": "Vino",
+    "ar-EG": "الخمر",
+    "pt-PT": "Bebida alcoólica",
+    "ru-RU": "Вино",
+    "ja-JP": "お酒",
+    "de-DE": "Alkohol",
+    "fr-FR": "Alcool",
+    "ko-KR": "술",
     "$files": [
       "src/electron/config/ram-tag-source.ts(14546-14551)"
     ],
     "$id": 24898
   },
   "威尔士矮脚狗": {
-    "en-US": "威尔士矮脚狗",
-    "es-ES": "威尔士矮脚狗",
-    "ar-EG": "威尔士矮脚狗",
-    "pt-PT": "威尔士矮脚狗",
-    "ru-RU": "威尔士矮脚狗",
-    "ja-JP": "威尔士矮脚狗",
-    "de-DE": "威尔士矮脚狗",
-    "fr-FR": "威尔士矮脚狗",
-    "ko-KR": "威尔士矮脚狗",
+    "en-US": "Welsh Corgi",
+    "es-ES": "Perro de raza Welsh Corgi",
+    "ar-EG": "كلب ويلز قصير الأرجل",
+    "pt-PT": "Cão de pernas curtas do País de Gales",
+    "ru-RU": "Уэльский коротконогий пес",
+    "ja-JP": "ウェルシュ・コッティ",
+    "de-DE": "Welsh Corgi",
+    "fr-FR": "Chien nain du Pays de Galles",
+    "ko-KR": "웨일스 숏레그",
     "$files": [
       "src/electron/config/ram-tag-source.ts(14557-14567)"
     ],
