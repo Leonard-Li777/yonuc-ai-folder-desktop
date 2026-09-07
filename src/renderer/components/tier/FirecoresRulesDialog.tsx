@@ -35,7 +35,7 @@ import { toast } from '../common/Toast'
 import { useTierStore } from '../../stores/tier-store'
 import { useConfigStore } from '../../stores/config-store'
 import { getFirecoreRules } from '../../constants/tier-rules'
-import type { TierConstants } from '@firefly/types'
+import { UserTier, TierConstants } from '@firefly/types'
 import { EmptyState } from '../common/EmptyState'
 import { UpgradeAccountDialog } from './UpgradeAccountDialog'
 import { openMarketingPricingUrl, getInviteLink } from '../../lib/marketing-link'
@@ -62,7 +62,7 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
   const [hasCopied, setHasCopied] = useState(false)
   const [isUpgradeOpen, setIsUpgradeOpen] = useState(false)
   const [showUnlockModal, setShowUnlockModal] = useState(false)
-  const { counters, firecores = 0, computed_limits } = useTierStore()
+  const { counters, firecores = 0, computed_limits, tier, subscription } = useTierStore()
   const wasInvited = counters?.is_invited === 1
 
   const config = useConfigStore(state => state.config)
@@ -82,7 +82,15 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
   // 萤火进度与刻度（目标按 300 萤火计算，每 100 萤火一个大刻度）
   const progressPercent = Math.min(100, Math.max(0, Math.round((firecores / unlockThreshold) * 100)))
   const neededFirecores = Math.max(0, unlockThreshold - firecores)
-  const isUnlockedUnlimited = firecores >= unlockThreshold || Boolean(counters?.unlimited_analysis_unlocked)
+
+  // 是否为 Pro / 企业版且在有效期内：会员本身即享无限分析额度，视为「已解锁无限额度」
+  const isActiveProOrEnterprise =
+    (tier === UserTier.PRO || tier === UserTier.ENTERPRISE) &&
+    subscription?.status === 'active' &&
+    (!subscription?.expires_at || new Date(subscription.expires_at).getTime() >= Date.now())
+
+  const isUnlockedUnlimited =
+    firecores >= unlockThreshold || Boolean(counters?.unlimited_analysis_unlocked) || isActiveProOrEnterprise
 
   // getFirecoreRules 的返回类型（earn/spend 规则对象）
   type FirecoreRules = ReturnType<typeof getFirecoreRules>
@@ -398,18 +406,6 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
                           )}
                         </div>
 
-                        {/* 醒目放大的无限额度特权排版 */}
-                        <div className="my-1.5">
-                          <div className="flex items-center gap-2 text-sm sm:text-base font-black tracking-tight text-foreground">
-                            <div className="p-1 rounded-md bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">
-                              <InfinityIcon className="w-4 h-4" />
-                            </div>
-                            <span className="text-emerald-700 dark:text-emerald-300">
-                              {t('解锁私有目录无限额度')}
-                            </span>
-                          </div>
-                        </div>
-
                         {/* 立即兑换 CTA：点击打开消费萤火兑换无限额度弹层 */}
                         {firecores >= 300 || isUnlockedUnlimited ? (
                           <div className="mt-2.5 w-full flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-xl py-2">
@@ -420,10 +416,10 @@ export const FirecoresRulesDialog: React.FC<FirecoresRulesDialogProps> = ({
                           <Button
                             size="sm"
                             onClick={() => setShowUnlockModal(true)}
-                            className="mt-2.5 w-full font-bold shadow-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-95"
+                            className="mt-5 w-full font-bold shadow-sm bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-95"
                           >
                             <Unlock className="w-3.5 h-3.5" />
-                            <span>{t('兑换无限额度 ({cost} 萤火)', { cost: unlockThreshold })}</span>
+                            <span>{t('兑换无限额度')}</span>
                           </Button>
                         )}
                       </div>
@@ -831,6 +827,21 @@ const ConsumptionDetailTab: React.FC = () => {
                 item.type === 'refund_subscription' ||
                 String(item.type).startsWith('refund')
 
+              const isFirecoresRefund =
+                item.type === 'refund_firecores' ||
+                (isRefund &&
+                  (item.metadata?.target_tier === 'firecores' ||
+                    item.metadata?.extra?.creem_data?.checkout?.metadata?.tier === 'firecores' ||
+                    item.metadata?.extra?.creem_data?.order?.metadata?.tier === 'firecores' ||
+                    item.metadata?.extra?.raw_metadata?.tier === 'firecores'))
+
+              const isSubscriptionRefund =
+                isRefund &&
+                !isFirecoresRefund &&
+                (item.type === 'refund_subscription' ||
+                  item.metadata?.target_tier === 'pro' ||
+                  item.metadata?.target_tier === 'enterprise')
+
               const isIncome = item.firecores > 0
               const isZero = item.firecores === 0
 
@@ -851,7 +862,7 @@ const ConsumptionDetailTab: React.FC = () => {
 
               return (
                 <div
-                  key={index}
+                  key={item.id || `${item.type}_${item.time}_${index}`}
                   className={`flex items-center justify-between p-4 rounded-2xl border transition-colors group ${
                     isUpgrade
                       ? 'bg-amber-500/[0.04] border-amber-500/25 hover:bg-amber-500/[0.08]'
@@ -896,7 +907,11 @@ const ConsumptionDetailTab: React.FC = () => {
                             ? incomeOp.tier?.toUpperCase() === 'ENTERPRISE'
                               ? t('开通企业版')
                               : t('开通 Pro 专业版')
-                            : getTypeLabel(item.type)}
+                            : isFirecoresRefund
+                              ? t('萤火充值退款')
+                              : isSubscriptionRefund
+                                ? t('会员订阅退款')
+                                : getTypeLabel(item.type)}
                         </span>
                         {isUpgrade && (
                           <Badge
@@ -927,11 +942,11 @@ const ConsumptionDetailTab: React.FC = () => {
                               {incomeOp.quantity && incomeOp.quantity > 1 && (
                                 <span>x{incomeOp.quantity}</span>
                               )}
-                              {incomeOp.amount != null && incomeOp.amount > 0 && (
+                              {((incomeOp.amount != null && incomeOp.amount > 0) || (item.metadata?.amount != null && item.metadata.amount > 0)) && (
                                 <span className="text-foreground/90">
                                   {formatPrice({
-                                    currency: incomeOp.currency || 'CNY',
-                                    amount: incomeOp.amount
+                                    currency: incomeOp.currency || item.metadata?.currency || 'USD',
+                                    amount: incomeOp.amount != null && incomeOp.amount > 0 ? incomeOp.amount : item.metadata.amount
                                   })}
                                 </span>
                               )}
@@ -975,7 +990,7 @@ const ConsumptionDetailTab: React.FC = () => {
                                   })}
                                 </span>
                               )}
-                              {item.type === 'refund_subscription' && (
+                              {isSubscriptionRefund && (
                                 <>
                                   <span className="text-rose-600 dark:text-rose-400/90 font-medium">
                                     {t('扣减时长')}: -{formatPeriodLabel(item.metadata?.period_unit || 'monthly', item.metadata?.period_count || 1)}
