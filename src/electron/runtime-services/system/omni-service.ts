@@ -90,7 +90,18 @@ export interface OmniPerceptionBenchmarkResponse {
   mosaic_ms?: number
   aesthetic_ms?: number
   bw_ms?: number
+  ram_ms?: number
 }
+
+export interface OmniTagChainItem {
+  tag: string
+  confidence: number
+  dimension_id: number
+  dimension_name: string
+  logic_pan_dimension: string
+}
+
+export type OmniRamTagItem = OmniTagChainItem
 
 export interface OmniPerceptionResponse {
   file_path: string
@@ -120,11 +131,12 @@ export interface OmniPerceptionResponse {
   photo_type?: string
   quality_issues?: string[]
 
-  // 多模态直出字段与三大引擎标签
-  visual_tags: string[]
+  // 多模态直出字段与各大引擎标签 (统一走标签链输出)
+  visual_tags: OmniTagChainItem[]
   mobilenet_tags?: string[]
   clip_tags?: string[]
   nsfw_tags?: string[]
+  ram_tags?: string[]
   mobilenet_high_confidence_tags?: string[]
   clip_high_confidence_tags?: string[]
   nsfw_high_confidence_tags?: string[]
@@ -913,12 +925,10 @@ export class OmniService {
           has_text: json.has_text,
           visual_tags: json.visual_tags || [],
           visual_tags_count: json.visual_tags?.length || 0,
+          ram_tags: json.ram_tags || [],
           mobilenet_tags: json.mobilenet_tags || [],
           clip_tags: json.clip_tags || [],
           nsfw_tags: json.nsfw_tags || [],
-          mobilenet_high_confidence_tags: json.mobilenet_high_confidence_tags || [],
-          clip_high_confidence_tags: json.clip_high_confidence_tags || [],
-          nsfw_high_confidence_tags: json.nsfw_high_confidence_tags || [],
           sensitive_types: json.sensitive_types || [],
           content_rating: json.content_rating,
           has_audio_transcript: !!json.audio_transcript,

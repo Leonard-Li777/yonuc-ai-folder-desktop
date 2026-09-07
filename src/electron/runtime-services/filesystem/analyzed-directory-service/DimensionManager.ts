@@ -16,11 +16,99 @@ import {
 import { ConfigOrchestrator } from '../../../config/config-orchestrator'
 import Database from 'better-sqlite3'
 import path from 'node:path'
+import fs from 'node:fs'
+
+export interface LogicPanItem {
+  zh: string
+  en: string
+  dimensionId: number
+  dimensionName: string
+  logicPanDimension: string
+}
 
 export class DimensionManager {
   private _extensionMap: Map<string, string[]> | null = null
+  private static _logicPanProjectionsCache: {
+    byDimensionAndAnchor: Map<string, LogicPanItem[]>
+    allByDimension: Map<number, Set<string>>
+  } | null = null
 
   constructor(private db: Database.Database) {}
+
+  /**
+   * 加载离线 RAM++ 细粒度实体与逻辑泛维度投影关系表
+   * 优先从 pro / presetResources / extraResources 多级目录检索
+   */
+  private loadLogicPanProjections(): {
+    byDimensionAndAnchor: Map<string, LogicPanItem[]>
+    allByDimension: Map<number, Set<string>>
+  } {
+    if (DimensionManager._logicPanProjectionsCache) {
+      return DimensionManager._logicPanProjectionsCache
+    }
+
+    const byDimensionAndAnchor = new Map<string, LogicPanItem[]>()
+    const allByDimension = new Map<number, Set<string>>()
+
+    const candidatePaths = [
+      path.resolve(__dirname, '../../../../build/presetResources/ram/ram_pan_projection.json'),
+      path.resolve(__dirname, '../../../../build/extraResources/models/ram/ram_pan_projection.json'),
+      path.resolve(process.cwd(), 'apps/desktop/build/presetResources/ram/ram_pan_projection.json'),
+      path.resolve(process.cwd(), 'apps/desktop/build/extraResources/models/ram/ram_pan_projection.json'),
+      path.resolve(process.cwd(), 'build/presetResources/ram/ram_pan_projection.json'),
+      path.resolve(process.cwd(), 'build/extraResources/models/ram/ram_pan_projection.json')
+    ]
+
+    let projectionFilePath = ''
+    for (const p of candidatePaths) {
+      if (fs.existsSync(p)) {
+        projectionFilePath = p
+        break
+      }
+    }
+
+    if (projectionFilePath) {
+      try {
+        const content = fs.readFileSync(projectionFilePath, 'utf-8')
+        const items = JSON.parse(content) as Array<{
+          zh: string
+          en: string
+          dimensionId: number
+          dimensionName: string
+          logicPanDimension: string
+        }>
+
+        if (Array.isArray(items)) {
+          for (const item of items) {
+            if (!item.zh || !item.dimensionId || !item.logicPanDimension) continue
+            const dimId = Number(item.dimensionId)
+            const anchor = item.logicPanDimension.trim()
+
+            // 1. 索引 key: `${dimId}:${anchor.toLowerCase()}`
+            const key = `${dimId}:${anchor.toLowerCase()}`
+            if (!byDimensionAndAnchor.has(key)) {
+              byDimensionAndAnchor.set(key, [])
+            }
+            byDimensionAndAnchor.get(key)!.push(item)
+
+            // 2. 维度级别合法实体标签池 (不分大小写)
+            if (!allByDimension.has(dimId)) {
+              allByDimension.set(dimId, new Set())
+            }
+            allByDimension.get(dimId)!.add(item.zh.toLowerCase().trim())
+          }
+        }
+      } catch (err) {
+        logger.warn(LogCategory.VIRTUAL_DIRECTORY, '加载 ram_pan_projection.json 异常:', err)
+      }
+    }
+
+    DimensionManager._logicPanProjectionsCache = {
+      byDimensionAndAnchor,
+      allByDimension
+    }
+    return DimensionManager._logicPanProjectionsCache
+  }
 
   /**
    * 从 L3 扩展名维度动态构建 tagValue → extensions 映射
@@ -324,6 +412,7 @@ export class DimensionManager {
         panDimensionIds = [4, 28]
       }
       const panIdSet = new Set([4, 28, ...panDimensionIds.map(Number)])
+      const { byDimensionAndAnchor, allByDimension } = this.loadLogicPanProjections()
 
       // 2. 处理每个维度并构建结果
       for (const dim of rawDimensions) {
@@ -350,12 +439,19 @@ export class DimensionManager {
           }
         })
 
-        // 仅对泛维度展示所有动态标签；非泛维度只保留属于预设列表的标签（且映射至预设规范大小写，彻底杜绝 Office/office 等重复）
+        // 仅对泛维度展示所有动态标签；非泛维度保留预设列表标签 + 属于该维度的合法逻辑泛维度实体标签
+        const dimValidEntities = allByDimension.get(dim.id)
         const validExistingTagNames = isPanDim
           ? existingTagNames
           : existingTagNames
-              .filter(t => presetTagMap.has(t.toLowerCase().trim()))
-              .map(t => presetTagMap.get(t.toLowerCase().trim())!)
+              .filter(t => {
+                const norm = t.toLowerCase().trim()
+                return presetTagMap.has(norm) || (dimValidEntities && dimValidEntities.has(norm))
+              })
+              .map(t => {
+                const norm = t.toLowerCase().trim()
+                return presetTagMap.get(norm) || t
+              })
 
         const tagSet = new Set<string>(validExistingTagNames)
         // 有子维度的维度（如 L2 "视频细分"），或指定 includeAllPresetTags 时，始终包含其完整预设标签列表
@@ -539,32 +635,84 @@ export class DimensionManager {
           }
         }
 
-        groups.push({
+        // 区分标准受控标签与挂载在受控锚点下的实体标签
+        const normalTags: DimensionTag[] = []
+        const entityTagsByAnchor = new Map<string, DimensionTag[]>()
+
+        for (const tag of tagStrings) {
+          let count = tagCounts.get(tag) || 0
+          if (count === 0) {
+            const lower = tag.toLowerCase()
+            for (const [k, v] of tagCounts) {
+              if (k.toLowerCase() === lower) {
+                count += v
+              }
+            }
+          }
+
+          const dimTagObj: DimensionTag = {
+            dimensionId: dim.id,
+            dimensionName: dim.name,
+            tagValue: tag,
+            fileCount: count,
+            level: dim.level
+          }
+
+          // 判断该标签是否为该维度下属于某个逻辑泛维度的实体
+          let anchor = ''
+          const normTag = tag.toLowerCase().trim()
+          for (const [key, items] of byDimensionAndAnchor) {
+            if (key.startsWith(`${dim.id}:`)) {
+              if (items.some(it => it.zh.toLowerCase().trim() === normTag)) {
+                anchor = items[0].logicPanDimension
+                break
+              }
+            }
+          }
+
+          // 若属于某个已存在的标准受控锚点（如"宠物照"、"各地美食"、"设计稿"）且不是锚点本身
+          if (anchor && anchor.toLowerCase().trim() !== normTag) {
+            if (!entityTagsByAnchor.has(anchor)) {
+              entityTagsByAnchor.set(anchor, [])
+            }
+            entityTagsByAnchor.get(anchor)!.push(dimTagObj)
+          } else {
+            normalTags.push(dimTagObj)
+          }
+        }
+
+        // 构建当前维度的 Group，顶层 tags 为标准受控标签
+        const mainGroup: DimensionGroup = {
           id: dim.id,
           name: dim.name,
           level: dim.level,
-          tags: tagStrings.map(tag => {
-            let count = tagCounts.get(tag) || 0
-            if (count === 0) {
-              const lower = tag.toLowerCase()
-              for (const [k, v] of tagCounts) {
-                if (k.toLowerCase() === lower) {
-                  count += v
-                }
-              }
-            }
-            return {
-              dimensionId: dim.id,
-              dimensionName: dim.name,
-              tagValue: tag,
-              fileCount: count,
-              level: dim.level
-            }
-          }),
+          tags: normalTags,
           contextualTags: Object.keys(contextualTags).length > 0 ? contextualTags : undefined,
           parentDimensionIds: parentDimensionIds.length > 0 ? parentDimensionIds : undefined,
           triggerConditions: triggerConditions || undefined
-        })
+        }
+        groups.push(mainGroup)
+
+        // 为具有细粒度实体的受控锚点生成逻辑子维度虚拟节点，使 buildDimensionTree 能通过 triggerConditions 自动挂入锚点下
+        let subVirtualCounter = 1
+        for (const [anchorName, subEntities] of entityTagsByAnchor) {
+          if (subEntities.length === 0) continue
+
+          const virtualSubId = dim.id * 1000 + subVirtualCounter++
+          groups.push({
+            id: virtualSubId,
+            name: `${anchorName}`,
+            level: (dim.level || 1) + 1,
+            tags: subEntities,
+            parentDimensionIds: [dim.id],
+            triggerConditions: [
+              {
+                parentDimension: dim.name,
+                triggerTags: [anchorName]
+              }
+            ]
+          })
+        }
       }
 
       // 递归移除零计数标签
