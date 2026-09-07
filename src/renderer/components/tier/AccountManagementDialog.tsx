@@ -17,6 +17,7 @@ import {
   Clock,
   Flame as Firecores,
   MessageCircle,
+  RefreshCw,
   Sparkle,
   Layers
 } from 'lucide-react'
@@ -37,12 +38,28 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
   open,
   onOpenChange
 }) => {
-  const { tier, subscription, firecores } = useTierStore()
+  const { tier, subscription, firecores, syncFromCloud, fetchProfile } = useTierStore()
   const config = useConfigStore(state => state.config)
   const paymentInfo = (config as any)?.PAYMENT_INFO
 
   const [identCode, setIdentCode] = useState<string>('')
   const [copiedKey, setCopiedKey] = useState<string | null>(null)
+  const [isSyncing, setIsSyncing] = useState<boolean>(false)
+
+  const handleSyncStatus = async () => {
+    setIsSyncing(true)
+    try {
+      if (syncFromCloud) {
+        await syncFromCloud()
+      } else if (fetchProfile) {
+        await fetchProfile()
+      }
+    } catch (err) {
+      console.warn('[AccountManagementDialog] 同步最新状态失败:', err)
+    } finally {
+      setIsSyncing(false)
+    }
+  }
 
   useEffect(() => {
     const fetchIdent = async () => {
@@ -62,6 +79,8 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
     }
     if (open) {
       fetchIdent()
+      // 打开账户管理弹窗时，主动触发一次云端最新订阅状态同步
+      handleSyncStatus()
     }
   }, [open])
 
@@ -257,7 +276,7 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
                 </div>
               </div>
 
-              <div className="shrink-0">
+              <div className="shrink-0 flex items-center gap-1.5">
                 {isExpired ? (
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 shadow-2xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
@@ -288,6 +307,15 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
                     <span>{t('正常生效中')}</span>
                   </span>
                 )}
+                <button
+                  type="button"
+                  onClick={handleSyncStatus}
+                  disabled={isSyncing}
+                  className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-background/80 transition-colors cursor-pointer"
+                  title={t('从云端立即刷新最新订阅状态')}
+                >
+                  <RefreshCw className={cn('w-3 h-3', isSyncing && 'animate-spin text-primary')} />
+                </button>
               </div>
             </div>
 
@@ -457,15 +485,27 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
                 </div>
               </div>
 
-              <Button
-                onClick={handleOpenBillingPortal}
-                variant="outline"
-                className="w-full flex items-center justify-center gap-2 font-bold text-xs h-10 rounded-xl border border-primary/25 bg-background/80 hover:bg-accent hover:border-primary/50 text-foreground transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer"
-              >
-                <CreditCard className="w-4 h-4 text-primary" />
-                <span>{t('前往国际结算门户管理账单与续订')}</span>
-                <ExternalLink className="w-3.5 h-3.5 opacity-60 ml-0.5" />
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button
+                  onClick={handleOpenBillingPortal}
+                  variant="outline"
+                  className="flex-1 flex items-center justify-center gap-2 font-bold text-xs h-10 rounded-xl border border-primary/25 bg-background/80 hover:bg-accent hover:border-primary/50 text-foreground transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer"
+                >
+                  <CreditCard className="w-4 h-4 text-primary" />
+                  <span>{t('前往国际结算门户管理账单与续订')}</span>
+                  <ExternalLink className="w-3.5 h-3.5 opacity-60 ml-0.5" />
+                </Button>
+                <Button
+                  onClick={handleSyncStatus}
+                  disabled={isSyncing}
+                  variant="outline"
+                  className="h-10 px-3 flex items-center justify-center gap-1.5 font-bold text-xs rounded-xl border border-border/60 bg-background/80 hover:bg-accent text-foreground transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer shrink-0"
+                  title={t('从云端立即刷新最新订阅状态')}
+                >
+                  <RefreshCw className={cn('w-3.5 h-3.5 text-primary', isSyncing && 'animate-spin')} />
+                  <span>{isSyncing ? t('同步中...') : t('刷新状态')}</span>
+                </Button>
+              </div>
             </div>
           ) : (
             <div className="p-4 bg-muted/40 rounded-2xl space-y-2 border border-border/50 text-xs">
