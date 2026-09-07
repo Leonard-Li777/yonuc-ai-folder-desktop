@@ -1028,7 +1028,7 @@
       "company": "XHToken",
       "parameterSize": "1.7B",
       "totalSize": "3.19GB",
-      "description": "Spark X2.5 1.7B 文本模型，轻量高效，仅支持文本分析。",
+      "description": "سبارك إكس 2.5 نموذج نص 1.7 ب ، خفيف الوزن وفعال ، يدعم فقط تحليل النص.",
       "source": "huggingface",
       "quantization": "",
       "disabled": true,
