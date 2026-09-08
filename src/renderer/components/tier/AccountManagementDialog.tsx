@@ -195,17 +195,146 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
   const isExpiringSoon = expiryDate
     ? !isExpired && expiryDate.getTime() - Date.now() < 30 * 24 * 60 * 60 * 1000
     : false
-  // 多档位独立有效期管理：判断当前是否是企业版并持有未过期的 Pro 版接续期
-  const tierPeriods = subscription?.tier_periods
+  // 解析各个扣费渠道的订阅项
+  const channelSubs = (subscription?.channel_subscriptions || {}) as Record<string, any>
+  const tierPeriods = (subscription?.tier_periods || {}) as Record<string, any>
+
+  // 辅助函数：根据 plan 字符串解析周期标签
+  const getPeriodLabel = (planStr: string) => {
+    const s = planStr.toLowerCase()
+    if (s.includes('yearly') || s.includes('annual')) return t('年付周期')
+    if (s.includes('half_year') || s.includes('semi_annual') || s.includes('6_month')) return t('半年付周期')
+    if (s.includes('quarterly') || s.includes('3_month') || s.includes('season')) return t('季付周期')
+    if (s.includes('monthly')) return t('月付周期')
+    return t('周期授权')
+  }
+
+  // 构建多行订阅列表数据：区分「执行中」、「休眠中」与「已退款」
+  type FormattedSubItem = {
+    id: string
+    name: string
+    tier: 'enterprise' | 'pro'
+    isCurrentExecuting: boolean
+    status: string // 'active' | 'canceled' | 'refunded' | 'expired'
+    periodLabel: string
+    expiresAt: string | null
+    isAutoRenew: boolean
+  }
+
+  const subscriptionRows: FormattedSubItem[] = []
+
+  // 1. 获取所有在 channelSubs 中登记的条目（包括 active、canceled、refunded 等）
+  const allChannelEntries = Object.entries(channelSubs).filter(([_, item]: [string, any]) => Boolean(item))
+
+  // 判定条目是否已被退款（支持 status === 'refunded' 或含有 refunded_at 标记）
+  const isItemRefunded = (item: any, planIdStr?: string) => {
+    if (!item && !planIdStr) return false
+    if (item?.status === 'refunded' || item?.refunded_at) return true
+    if (subscription?.status === 'refunded') return true
+    // 若特定 planId 在 channelSubs 或 tier_periods 中标记为退款
+    const keyPlan = String(item?.plan || item?.product_id || planIdStr || '').toLowerCase()
+    if (keyPlan.includes('enterprise') && tierPeriods?.enterprise?.status === 'refunded') return true
+    if (keyPlan.includes('pro') && tierPeriods?.pro?.status === 'refunded') return true
+    return false
+  }
+
+  // 过滤出未退款的有效订阅渠道
+  const activeChannelEntries = allChannelEntries.filter(([_, item]: [string, any]) => !isItemRefunded(item))
+
+  // 查找是否有未退款的 Enterprise 方案和 Pro 方案
+  const validEnterpriseEntry = activeChannelEntries.find(([_, item]: [string, any]) => {
+    const plan = String(item.plan || item.product_id || '').toLowerCase()
+    return plan.includes('enterprise')
+  })
+  const validProEntries = activeChannelEntries.filter(([_, item]: [string, any]) => {
+    const plan = String(item.plan || item.product_id || '').toLowerCase()
+    return plan.includes('pro') || item.provider === 'creem'
+  })
+
+  // 确定真实当前执行中等级与执行渠道对象
+  // 规则：未退款的 Enterprise 优先执行；若 Enterprise 已退款或无 Enterprise，则按未退款的 Pro 执行
+  let executingChannelEntry: [string, any] | null = null
+  let executingTier: 'enterprise' | 'pro' | null = null
+
+  if (validEnterpriseEntry) {
+    executingChannelEntry = validEnterpriseEntry
+    executingTier = 'enterprise'
+  } else if (validProEntries.length > 0) {
+    executingChannelEntry = validProEntries[0]
+    executingTier = 'pro'
+  } else if (tier !== UserTier.FREE && !isItemRefunded(null, subscription?.plan_id)) {
+    executingTier = tier === UserTier.ENTERPRISE ? 'enterprise' : 'pro'
+  }
+
+  const existingCardIds = new Set<string>()
+
+  // 2. 首先放入当前「执行中」卡片
+  if (executingTier) {
+    const isEnterprise = executingTier === 'enterprise'
+    const execChannel = executingChannelEntry ? executingChannelEntry[1] : null
+    const execKey = executingChannelEntry ? executingChannelEntry[0] : ''
+    const cardId = execChannel?.sub_id ? `sub_${execChannel.sub_id}` : (execKey ? `sub_${execKey}` : 'current_executing')
+
+    const mainPlanId = execChannel?.plan || subscription?.plan_id || (isEnterprise ? 'enterprise' : 'pro')
+    const isExecChannelCanceled = execChannel?.status === 'canceled'
+
+    subscriptionRows.push({
+      id: cardId,
+      name: isEnterprise ? t('Firefly Enterprise 企业版') : t('Firefly Pro 专业版'),
+      tier: executingTier,
+      isCurrentExecuting: true,
+      status: isExecChannelCanceled ? 'canceled' : 'active',
+      periodLabel: getPeriodLabel(mainPlanId),
+      expiresAt: subscription?.expires_at || null,
+      isAutoRenew: execChannel ? execChannel.status === 'active' : (subscription?.auto_renew ?? false)
+    })
+    existingCardIds.add(cardId)
+  }
+
+  // 3. 遍历 channel_subscriptions 中的其他条目
+  allChannelEntries.forEach(([key, item]: [string, any]) => {
+    const subId = String(item.sub_id || key)
+    const cardId = `sub_${subId}`
+    if (existingCardIds.has(cardId)) return
+
+    const planStr = String(item.plan || item.product_id || '').toLowerCase()
+    const isEnt = planStr.includes('enterprise')
+    const itemTier: 'enterprise' | 'pro' = isEnt ? 'enterprise' : 'pro'
+    const refunded = isItemRefunded(item, planStr)
+
+    subscriptionRows.push({
+      id: cardId,
+      name: isEnt ? t('Firefly Enterprise 企业版') : t('Firefly Pro 专业版'),
+      tier: itemTier,
+      isCurrentExecuting: false,
+      status: refunded ? 'refunded' : (item.status || 'active'),
+      periodLabel: getPeriodLabel(planStr),
+      expiresAt: null, // 非执行中（休眠或已退款）绝对不显示到期时间
+      isAutoRenew: !refunded && item.status === 'active'
+    })
+    existingCardIds.add(cardId)
+  })
+
+  // 4. 若有独立的 Pro 接续储备且未在列表显示
   const proPeriod = tierPeriods?.pro
-  const proExpiresAt = proPeriod?.expires_at
-  const hasProReserve =
-    tier === UserTier.ENTERPRISE &&
-    Boolean(
-      proExpiresAt &&
-        new Date(proExpiresAt).getTime() > Date.now() &&
-        proPeriod?.status !== 'refunded'
-    )
+  if (
+    executingTier === 'enterprise' &&
+    proPeriod &&
+    proPeriod.status !== 'refunded' &&
+    !subscriptionRows.some(r => !r.isCurrentExecuting && r.tier === 'pro' && r.status !== 'refunded')
+  ) {
+    const proPlanId = String(proPeriod.plan_id || '')
+    subscriptionRows.push({
+      id: 'pro_tier_period_reserve',
+      name: t('Firefly Pro 专业版'),
+      tier: 'pro',
+      isCurrentExecuting: false,
+      status: 'active',
+      periodLabel: proPlanId ? getPeriodLabel(proPlanId) : t('接续保障权益'),
+      expiresAt: null, // 休眠中绝不显示到期时间
+      isAutoRenew: true
+    })
+  }
 
   const handleOpenBillingPortal = () => {
     openExternalLink(resolveDevCreemUrl(portalUrl))
@@ -214,256 +343,244 @@ export const AccountManagementDialog: React.FC<AccountManagementDialogProps> = (
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-xl p-0 overflow-hidden border border-border/80 shadow-2xl bg-background/98 backdrop-blur-2xl rounded-3xl no-drag">
-        {/* 顶部视觉装饰微光背景 */}
-        <div className="relative pt-7 pb-4 px-6 text-center overflow-hidden">
+        {/* 顶部简明标题 */}
+        <div className="relative pt-6 pb-2 px-6 text-center overflow-hidden">
           <div
             className={cn(
-              'absolute top-0 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full blur-3xl pointer-events-none opacity-40',
+              'absolute top-0 left-1/2 -translate-x-1/2 w-64 h-24 rounded-full blur-3xl pointer-events-none opacity-25',
               theme.glowClass
             )}
           />
 
           <div className="relative z-10 flex flex-col items-center">
-            <div
-              className={cn(
-                'p-3 rounded-2xl ring-4 shadow-sm mb-3 flex items-center justify-center transition-transform duration-300 hover:scale-105',
-                theme.ringClass
-              )}
-            >
-              {theme.icon}
-            </div>
-
             <DialogTitle className="text-xl md:text-2xl font-black tracking-tight text-foreground">
               {t('账户与订阅中心')}
             </DialogTitle>
-            <DialogDescription className="text-xs font-semibold text-muted-foreground mt-1 max-w-sm">
-              {t('管理您当前生效的会员权益、计费周期与自动续订设置')}
+            <DialogDescription className="text-xs font-medium text-muted-foreground mt-1 max-w-md text-center">
+              {t('管理您的多方案会员权益、独立计费周期与自动续费状态')}
             </DialogDescription>
           </div>
         </div>
 
-        <div className="px-6 pb-6 space-y-4 relative z-10 max-h-[75vh] overflow-y-auto">
-          {/* ── VIP 会员凭证卡面 (Membership Card) ── */}
-          <div
-            className={cn(
-              'rounded-2xl border p-4.5 relative overflow-hidden transition-all duration-300 shadow-sm',
-              theme.cardBgClass
+        <div className="px-6 pb-6 space-y-3.5 relative z-10 max-h-[75vh] overflow-y-auto">
+          {/* ── 订阅方案通栏卡片列表（每个订阅一个独立的通栏卡片） ── */}
+          <div className="space-y-3">
+            {subscriptionRows.length > 0 ? (
+              subscriptionRows.map((row) => {
+                const isEnterprise = row.tier === 'enterprise'
+                const tierTheme = getTierTheme(isEnterprise ? UserTier.ENTERPRISE : UserTier.PRO)
+
+                return (
+                  <div
+                    key={row.id}
+                    className={cn(
+                      'p-4 rounded-2xl border transition-all duration-200 relative overflow-hidden shadow-xs',
+                      row.isCurrentExecuting
+                        ? isEnterprise
+                          ? 'bg-gradient-to-br from-purple-500/[0.08] via-purple-500/[0.02] to-transparent border-purple-500/35 ring-1 ring-purple-500/25'
+                          : 'bg-gradient-to-br from-amber-500/[0.08] via-amber-500/[0.02] to-transparent border-amber-500/35 ring-1 ring-amber-500/25'
+                        : 'bg-muted/30 border-border/60 hover:bg-muted/50'
+                    )}
+                  >
+                    {/* 卡片头部：图标、方案名称、周期标签与执行/休眠状态徽标 */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div
+                          className={cn(
+                            'p-2 rounded-xl border shrink-0',
+                            row.isCurrentExecuting
+                              ? isEnterprise
+                                ? 'bg-purple-500/15 border-purple-500/30 text-purple-600 dark:text-purple-400'
+                                : 'bg-amber-500/15 border-amber-500/30 text-amber-600 dark:text-amber-400'
+                              : 'bg-muted border-border/60 text-muted-foreground'
+                          )}
+                        >
+                          {isEnterprise ? (
+                            <Building2 className="w-4 h-4" />
+                          ) : (
+                            <Crown className="w-4 h-4" />
+                          )}
+                        </div>
+
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span
+                              className={cn(
+                                'font-black text-sm tracking-tight truncate',
+                                row.isCurrentExecuting
+                                  ? isEnterprise
+                                    ? 'text-purple-600 dark:text-purple-400'
+                                    : 'text-amber-600 dark:text-amber-400'
+                                  : 'text-foreground'
+                              )}
+                            >
+                              {row.name}
+                            </span>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-background/90 border border-border/70 text-muted-foreground shrink-0 shadow-2xs">
+                              {row.periodLabel}
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground font-medium truncate mt-0.5">
+                            {tierTheme.subName}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* 执行状态徽章：执行中 / 休眠中 / 已退款 */}
+                      <div className="shrink-0">
+                        {row.isCurrentExecuting ? (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 shadow-2xs">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                            <span>{t('执行中')}</span>
+                          </span>
+                        ) : row.status === 'refunded' ? (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-muted/60 text-muted-foreground/80 border border-border/60 shadow-2xs">
+                            <span className="w-2 h-2 rounded-full bg-muted-foreground/40" />
+                            <span>{t('已退款')}</span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-muted text-muted-foreground border border-border/80 shadow-2xs">
+                            <span className="w-2 h-2 rounded-full bg-muted-foreground/60" />
+                            <span>{t('休眠中')}</span>
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* 卡片详情行：有效期 / 封存提示 / 退款说明，以及自动续订状态 */}
+                    <div className="mt-3.5 pt-3 border-t border-border/40 flex items-center justify-between text-xs gap-3">
+                      {/* 左侧：执行中显示明确到期日；休眠中绝不显示到期日，显示完整封存提示；已退款显示退款终止提示 */}
+                      <div className="flex items-center gap-1.5 text-muted-foreground font-medium min-w-0">
+                        {row.isCurrentExecuting ? (
+                          <>
+                            <Calendar className="w-3.5 h-3.5 text-muted-foreground/80 shrink-0" />
+                            <span className="shrink-0">{t('有效期至：')}</span>
+                            <span className="font-mono font-bold text-foreground tabular-nums truncate">
+                              {row.expiresAt ? formatDateOnly(row.expiresAt) : t('永久有效')}
+                            </span>
+                          </>
+                        ) : row.status === 'refunded' ? (
+                          <>
+                            <Clock className="w-3.5 h-3.5 text-muted-foreground/60 shrink-0" />
+                            <span className="truncate text-muted-foreground/80">
+                              {t('款项已原路退回，方案权益已终止')}
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <Clock className="w-3.5 h-3.5 text-muted-foreground/80 shrink-0" />
+                            <span className="truncate">
+                              {t('权益已完整封存保留，待执行计划到期后起算')}
+                            </span>
+                          </>
+                        )}
+                      </div>
+
+                      {/* 右侧：续订扣费状态 */}
+                      <div className="shrink-0 font-bold text-[11px]">
+                        {row.status === 'refunded' ? (
+                          <span className="inline-flex items-center gap-1 text-muted-foreground/70">
+                            <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50" />
+                            {t('订阅已终结')}
+                          </span>
+                        ) : row.isAutoRenew ? (
+                          <span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            {t('自动续订中')}
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                            {t('已关闭自动续费')}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* 方案专属特权标签 */}
+                    <div className="mt-2.5 flex items-center gap-1.5 flex-wrap">
+                      {tierTheme.features.slice(0, 4).map((feat, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-background/60 border border-border/40 text-muted-foreground"
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )
+              })
+            ) : (
+              /* 免费版用户单个通栏卡 */
+              <div className="p-4 rounded-2xl border border-border/60 bg-muted/20 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5 text-muted-foreground" />
+                    <span className="font-black text-sm text-foreground">{t('免费版方案')}</span>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-muted text-muted-foreground border border-border/60">
+                    {t('基础服务')}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {t('当前正在使用基础版服务，您可以通过升级 Pro 或 Enterprise 解锁全功能与无限文件处理。')}
+                </p>
+                <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                  {theme.features.slice(0, 4).map((feat, idx) => (
+                    <span
+                      key={idx}
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-background/60 border border-border/40 text-muted-foreground"
+                    >
+                      {feat}
+                    </span>
+                  ))}
+                </div>
+              </div>
             )}
-          >
-            {/* 卡片装饰水印徽标 */}
-            <div className="absolute -right-4 -bottom-6 opacity-5 pointer-events-none select-none">
-              <Sparkle className="w-36 h-36" />
-            </div>
+          </div>
 
-            {/* 卡片顶部：方案名称与生效状态指示器 */}
-            <div className="flex items-center justify-between gap-3 pb-3 border-b border-border/40 relative z-10">
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-base font-black tracking-tight text-foreground">
-                    {theme.name}
-                  </span>
-                  <span
-                    className={cn(
-                      'text-[10px] font-black uppercase px-2 py-0.5 rounded-full border shadow-2xs',
-                      theme.badgeClass
-                    )}
-                  >
-                    {t('当前计划')}
-                  </span>
-                </div>
-                <div className="text-[11px] text-muted-foreground font-medium mt-0.5 truncate">
-                  {theme.subName}
-                </div>
-              </div>
-
-              <div className="shrink-0 flex items-center gap-1.5">
-                {isExpired ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 shadow-2xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-                    <span>{t('已过期')}</span>
-                  </span>
-                ) : isExpiringSoon ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shadow-2xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                    <span>
-                      {subscription?.auto_renew === false
-                        ? t('即将到期 (不自动续费)')
-                        : t('即将到期')}
-                    </span>
-                  </span>
-                ) : subscription?.auto_renew === false ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shadow-2xs" title={t('当前周期享有完整权益，到期后将不再自动扣费')}>
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                    <span>{t('正常生效中 · 到期不自动续费')}</span>
-                  </span>
-                ) : subscription?.auto_renew ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs" title={t('到期后将自动续订')}>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>{t('正常生效中 · 自动续费中')}</span>
-                  </span>
-                ) : (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>{t('正常生效中')}</span>
-                  </span>
-                )}
-                <button
-                  type="button"
-                  onClick={handleSyncStatus}
-                  disabled={isSyncing}
-                  className="p-1 rounded-full text-muted-foreground hover:text-foreground hover:bg-background/80 transition-colors cursor-pointer"
-                  title={t('从云端立即刷新最新订阅状态')}
-                >
-                  <RefreshCw className={cn('w-3 h-3', isSyncing && 'animate-spin text-primary')} />
-                </button>
-              </div>
-            </div>
-
-            {/* 卡片中部：关键属性三列栅格 */}
-            <div className="grid grid-cols-3 gap-2.5 py-3 relative z-10">
-              {/* 有效期至 */}
-              <div className="p-2.5 rounded-xl bg-background/60 border border-border/40 backdrop-blur-xs flex flex-col justify-between">
-                <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1">
-                  <Calendar className="w-3 h-3 text-primary/70" />
-                  <span>{t('有效期至')}</span>
+          {/* ── 机器标识与萤火余额通栏 ── */}
+          <div className="p-3 bg-muted/20 rounded-xl border border-border/40 flex items-center justify-between gap-3 text-xs">
+            {identCode ? (
+              <div className="flex items-center gap-2 min-w-0">
+                <ShieldCheck className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+                <span className="text-[11px] font-medium text-muted-foreground shrink-0">
+                  {t('设备标识码：')}
                 </span>
-                <div className="mt-1.5">
-                  <span
-                    className={cn(
-                      'text-xs font-black tabular-nums tracking-tight',
-                      isExpired
-                        ? 'text-red-500'
-                        : isExpiringSoon
-                          ? 'text-amber-500'
-                          : 'text-foreground'
-                    )}
-                  >
-                    {subscription?.expires_at
-                      ? formatDateOnly(subscription.expires_at)
-                      : tier === UserTier.FREE
-                        ? t('永久免费')
-                        : t('永久有效')}
-                  </span>
-                  {hasProReserve && (
-                    <span className="text-[10px] text-purple-600 dark:text-purple-400 font-bold block truncate mt-0.5">
-                      {t('到期后接续 Pro')}
-                    </span>
-                  )}
-                </div>
+                <span className="font-mono text-[11px] text-foreground font-semibold truncate select-all">
+                  {identCode}
+                </span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1.5 text-muted-foreground">
+                <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+                <span className="text-[11px] font-medium">{t('设备已受安全授权保护')}</span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="flex items-center gap-1 text-[11px] font-bold text-foreground">
+                <Firecores className="w-3.5 h-3.5 text-amber-500" />
+                <span>{firecores.toLocaleString()}</span>
               </div>
 
-              {/* 方案周期 */}
-              <div className="p-2.5 rounded-xl bg-background/60 border border-border/40 backdrop-blur-xs flex flex-col justify-between">
-                <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-primary/70" />
-                  <span>{t('方案周期')}</span>
-                </span>
-                <div className="mt-1.5">
-                  <span className="text-xs font-black text-foreground truncate block">
-                    {subscription?.plan_id?.includes('yearly')
-                      ? t('年付周期')
-                      : subscription?.plan_id?.includes('half_year')
-                        ? t('半年付周期')
-                        : subscription?.plan_id?.includes('quarterly')
-                          ? t('季付周期')
-                          : subscription?.plan_id?.includes('monthly')
-                            ? t('月付周期')
-                            : tier !== UserTier.FREE
-                              ? t('标准授权')
-                              : t('基础版')}
-                  </span>
-                </div>
-              </div>
-
-              {/* 萤火点数 */}
-              <div className="p-2.5 rounded-xl bg-background/60 border border-border/40 backdrop-blur-xs flex flex-col justify-between">
-                <span className="text-[10px] text-muted-foreground font-semibold uppercase tracking-wider flex items-center gap-1">
-                  <Firecores className="w-3 h-3 text-amber-500" />
-                  <span>{t('萤火余额')}</span>
-                </span>
-                <div className="mt-1.5">
-                  <span className="text-xs font-black tabular-nums text-foreground">
-                    {firecores.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* 卡片下部：当前绑定的设备标识码 */}
-            {identCode && (
-              <div className="flex items-center justify-between px-3 py-1.5 rounded-xl bg-background/50 border border-border/40 text-[11px] relative z-10 mb-3">
-                <span className="text-muted-foreground flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-primary/70 shrink-0" />
-                  <span>{t('授权绑定标识：')}</span>
-                  <span className="font-mono text-foreground font-bold tracking-wider">
-                    {identCode.slice(0, 6)}...{identCode.slice(-6)}
-                  </span>
-                </span>
+              {identCode && (
                 <button
                   type="button"
                   onClick={() => copyToClipboard(identCode, 'ident')}
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-primary hover:underline cursor-pointer transition-colors"
+                  className="p-1 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                  title={t('复制设备识别码')}
                 >
                   {copiedKey === 'ident' ? (
-                    <>
-                      <Check className="w-3 h-3 text-emerald-500" />
-                      <span className="text-emerald-500">{t('已复制')}</span>
-                    </>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
                   ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      <span>{t('复制完整标识码')}</span>
-                    </>
+                    <Copy className="w-3.5 h-3.5" />
                   )}
                 </button>
-              </div>
-            )}
-
-            {/* 包含的核心特权标签 */}
-            <div className="pt-2.5 border-t border-border/30 relative z-10">
-              <div className="text-[10px] text-muted-foreground/80 font-semibold mb-1.5 flex items-center gap-1">
-                <Sparkles className="w-3 h-3 text-primary/70" />
-                <span>{t('当前方案生效的专属权益：')}</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {theme.features.map((feature, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-[10px] font-bold bg-background/70 border border-border/40 text-foreground/80 shadow-2xs"
-                  >
-                    <Check className="w-2.5 h-2.5 text-primary" />
-                    <span>{feature}</span>
-                  </span>
-                ))}
-              </div>
+              )}
             </div>
           </div>
-
-          {/* ── 多档位权益接续保障：已保留的 Pro 版有效期 ── */}
-          {hasProReserve && proExpiresAt && (
-            <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/30 space-y-2.5 relative overflow-hidden">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-black text-foreground">
-                  <Layers className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
-                  <span>{t('多档位接续保障：已保留的 Pro 版有效期')}</span>
-                </div>
-                <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/25">
-                  {t('待接续生效')}
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-xs py-1.5 px-3 rounded-xl bg-background/70 border border-border/50">
-                <span className="text-muted-foreground font-medium">{t('Pro 版保留到期日：')}</span>
-                <span className="font-mono font-black text-foreground tabular-nums">
-                  {formatDateOnly(proExpiresAt)}
-                </span>
-              </div>
-              <p className="text-[11px] text-muted-foreground leading-relaxed">
-                {t(
-                  '由于企业版与 Pro 版权益有所差异，充值企业版后已立即生效独立计算；您原有的 Pro 版有效期已被完整保留，待企业版到期后，系统将自动恢复并开始您的 Pro 版有效期，期间权益不受任何损耗。'
-                )}
-              </p>
-            </div>
-          )}
 
           {/* ── 账单与自动续订管理模块 ── */}
           {paymentInfo?.method === 'creem' ? (
