@@ -35,6 +35,7 @@ export async function processLocalAnalysis(
     isSpeedy: boolean
     initialStage?: number
     forceReanalyze?: boolean
+    lrc?: string | null
   },
   updateItemStatus: (
     itemId: number,
@@ -120,10 +121,13 @@ export async function processLocalAnalysis(
           qualityScore: 3,
           qualityConfidence: 0.5,
           multimodalContent: undefined,
-          lrc: undefined,
+          lrc: options.lrc ?? undefined,
           qualityReasoning: undefined,
           qualityCriteria: undefined
         }
+  }
+  if (!processResult.lrc && options.lrc) {
+    processResult.lrc = options.lrc
   }
   timer.end('qualityScoring')
 

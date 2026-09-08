@@ -27,6 +27,7 @@ export async function processQuickNameAnalysis(
     isSpeedy: boolean
     initialStage?: number
     forceReanalyze?: boolean
+    lrc?: string | null
   },
   updateItemStatus: (
     itemId: number,
@@ -61,7 +62,7 @@ export async function processQuickNameAnalysis(
     qualityReasoning: undefined,
     qualityCriteria: undefined,
     multimodalContent: undefined,
-    lrc: undefined
+    lrc: options.lrc ?? undefined
   }
 
   timer.start('dimensionAnalysis')

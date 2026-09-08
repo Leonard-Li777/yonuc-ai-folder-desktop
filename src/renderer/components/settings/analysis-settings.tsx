@@ -762,38 +762,36 @@ export const AnalysisSettings: React.FC = () => {
                 )}
               </div>
 
-              {/* 音频分析截取时长（仅AI分析模式整行呈现） */}
-              {(getConfigValue<string>('ANALYSIS_MODE') ?? 'full') === 'full' && (
-                <div className="flex items-center justify-between p-3 rounded-lg border bg-card">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-1">
-                      <Label htmlFor="audio-duration" className="text-sm font-medium">
-                        {t('音频分析截取时长')}
-                      </Label>
-                      <HelpTooltip
-                        content={t('最大值100秒，设置过大会让分析变慢或超时，仅部分大模型支持')}
-                      />
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {t('仅 gemma-4 系列模型支持音频分析。超大会增加耗时甚至超时失败')}
-                    </p>
-                  </div>
-                  <div className="w-24">
-                    <Input
-                      id="audio-duration"
-                      type="number"
-                      min={1}
-                      max={100}
-                      value={localAudioDuration}
-                      onChange={e => {
-                        const value = parseInt(e.target.value) || 0
-                        setLocalAudioDuration(value)
-                      }}
-                      className="h-8 text-xs text-right"
+              {/* 音频分析截取时长（常驻呈现，用于音视频语音转录与大模型分析） */}
+              <div className="flex items-center justify-between p-3 rounded-lg border bg-card">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1">
+                    <Label htmlFor="audio-duration" className="text-sm font-medium">
+                      {t('音频分析截取时长')}
+                    </Label>
+                    <HelpTooltip
+                      content={t('截取音视频前N秒进行降噪与语音转录提取，最大值100秒，设置过大会增加耗时')}
                     />
                   </div>
+                  <p className="text-xs text-muted-foreground">
+                    {t('截取音视频前N秒进行语音转录，超大会增加分析耗时甚至超时失败')}
+                  </p>
                 </div>
-              )}
+                <div className="w-24">
+                  <Input
+                    id="audio-duration"
+                    type="number"
+                    min={1}
+                    max={100}
+                    value={localAudioDuration}
+                    onChange={e => {
+                      const value = parseInt(e.target.value) || 0
+                      setLocalAudioDuration(value)
+                    }}
+                    className="h-8 text-xs text-right"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 

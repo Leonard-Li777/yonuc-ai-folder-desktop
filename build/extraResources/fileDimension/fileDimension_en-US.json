@@ -156,8 +156,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -191,8 +190,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -225,8 +223,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -269,8 +266,7 @@
       ],
       "metadata": {
         "flag": {
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -305,9 +301,7 @@
         }
       ],
       "metadata": {
-        "flag": {
-          "isExtensionSubdivision": true
-        }
+        "flag": {}
       }
     },
     {
@@ -341,8 +335,7 @@
       ],
       "metadata": {
         "flag": {
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -374,8 +367,7 @@
       ],
       "metadata": {
         "flag": {
-          "isRuleSubdivision": true,
-          "isExtensionSubdivision": true
+          "isRuleSubdivision": true
         }
       }
     },
@@ -409,8 +401,7 @@
       ],
       "metadata": {
         "flag": {
-          "isRuleSubdivision": true,
-          "isExtensionSubdivision": true
+          "isRuleSubdivision": true
         }
       }
     },
@@ -497,8 +488,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -598,8 +588,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -632,8 +621,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -799,8 +787,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -1171,8 +1158,7 @@
       ],
       "metadata": {
         "flag": {
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },
@@ -1386,8 +1372,7 @@
       "metadata": {
         "flag": {
           "isRuleSubdivision": true,
-          "singleSelect": true,
-          "isExtensionSubdivision": true
+          "singleSelect": true
         }
       }
     },

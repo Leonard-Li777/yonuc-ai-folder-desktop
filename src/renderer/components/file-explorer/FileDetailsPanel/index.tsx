@@ -308,34 +308,36 @@ const FileDetailsPanelComponent: React.FC<any> = ({
 
     // 从 file-constants.ts 获取文件分类，用于判断各 tab 的显示类型
     const fileCategory = getFileCategory(analysisResult.name || analysisResult.path || '')
-    // 文档文本类：DOCUMENT / TEXT / OFFICE / CODE / EBOOK
-    const isDocumentText = [
-      FileCategory.DOCUMENT,
-      FileCategory.TEXT,
-      FileCategory.OFFICE,
-      FileCategory.CODE,
-      FileCategory.EBOOK
-    ].includes(fileCategory)
-    // OCR/语音/歌词 支持的类型：图片（OCR）、音频（语音/歌词）
-    const isOcrSupported =
-      fileCategory === FileCategory.IMAGE || fileCategory === FileCategory.AUDIO
-
     const isImageFile = fileCategory === FileCategory.IMAGE
-    const hasOcr =
-      isOcrSupported &&
-      Boolean(
-        analysisResult.lrc?.trim() ||
-          analysisResult.ocrContent?.trim() ||
-          (isImageFile && analysisResult.content?.trim()) ||
-          (analysisResult.content &&
-            (analysisResult.content.includes('OCR') ||
-              analysisResult.content.includes('图片内提取文字')))
-      )
+    const isAudioVideo = fileCategory === FileCategory.AUDIO || fileCategory === FileCategory.VIDEO
 
-    if (hasOcr) tabs.push({ id: 'ocr', label: t('OCR/语音/歌词'), icon: 'graphic_eq' })
-    // 内容摘要：只要存在提取的文本内容（且非仅 OCR 图片），均显示内容摘要
-    if (analysisResult.content?.trim() && (!isImageFile || !hasOcr))
+    // 1. 图片类：若有提取文字（ocrContent 或 content），展示【OCR】Tab
+    const hasImageOcr =
+      isImageFile &&
+      Boolean(
+        analysisResult.ocrContent?.trim() ||
+          analysisResult.content?.trim()
+      )
+    if (hasImageOcr) {
+      tabs.push({ id: 'ocr', label: t('OCR'), icon: 'document_scanner' })
+    }
+
+    // 2. 音视频类：
+    // - 若有转录文本（content），展示【音频文本】Tab
+    // - 若有纯正元数据歌词（lrc），展示【歌词】Tab
+    if (isAudioVideo) {
+      if (analysisResult.content?.trim()) {
+        tabs.push({ id: 'audio_transcript', label: t('音频文本'), icon: 'record_voice_over' })
+      }
+      if (analysisResult.lrc?.trim()) {
+        tabs.push({ id: 'lrc', label: t('歌词'), icon: 'music_note' })
+      }
+    }
+
+    // 3. 文档/文本类或其他非音视频非图片：若有提取文本，展示【内容摘要】Tab
+    if (!isImageFile && !isAudioVideo && analysisResult.content?.trim()) {
       tabs.push({ id: 'summary', label: t('内容摘要'), icon: 'summarize' })
+    }
     // 元数据 tab：仅当存在实际元数据内容（file_contents.metadata）或 Magika 类型识别信息（files.category）时显示，
     // 避免清空分析数据后仍残留空 tab
     const hasCategoryContent = Boolean(

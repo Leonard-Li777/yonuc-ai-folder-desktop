@@ -12,6 +12,8 @@ export interface AnydocAsset {
 export interface AnydocResult {
   content: string
   assets: AnydocAsset[]
+  ocrText?: string
+  audioTranscript?: string
   metadata?: any
   phash?: string
   benchmark?: import('./omni-service').OmniBenchmarkResponse
@@ -74,6 +76,8 @@ export class AnydocService {
         return {
           content: isBinaryNulSkip ? '' : rawContent,
           assets: [],
+          ocrText: perception.ocr_text || undefined,
+          audioTranscript: perception.audio_transcript || undefined,
           metadata: perception.metadata,
           phash: perception.phash,
           benchmark: perception.benchmark

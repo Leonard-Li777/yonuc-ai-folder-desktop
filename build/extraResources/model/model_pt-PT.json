@@ -1050,36 +1050,6 @@
         "numCtx": 8192,
         "numPredict": 2048
       }
-    },
-    {
-      "id": "sugiv/cardvaultplus-500m-gguf:Q4_K_M",
-      "name": "CardVault 500M（Reconhecimento de imagem leve）",
-      "company": "sugiv",
-      "parameterSize": "500M",
-      "totalSize": "479MB",
-      "description": "Modelo multimodal ultraleve, compatível com a análise de texto e imagens, adequado para ambientes com configurações de hardware muito modestas.",
-      "source": "huggingface",
-      "quantization": "Q4_K_M",
-      "isMultiModal": true,
-      "contextLength": 32768,
-      "capabilities": [
-        "TEXT",
-        "IMAGE"
-      ],
-      "performance": {
-        "speed": "extreme",
-        "quality": "medium"
-      },
-      "tags": [
-        "Leve",
-        "Suporte à operação da CPU",
-        "Multimodal",
-        "Ultra-rápido"
-      ],
-      "recommendedConfig": {
-        "numCtx": 4096,
-        "numPredict": 1024
-      }
     }
   ]
 }

@@ -1050,36 +1050,6 @@
         "numCtx": 8192,
         "numPredict": 2048
       }
-    },
-    {
-      "id": "sugiv/cardvaultplus-500m-gguf:Q4_K_M",
-      "name": "CardVault 500M（경량 이미지 인식）",
-      "company": "sugiv",
-      "parameterSize": "500M",
-      "totalSize": "479MB",
-      "description": "초경량 다모달 모델로, 텍스트 및 이미지 분석을 지원하며, 매우 낮은 사양의 환경에도 적합합니다.",
-      "source": "huggingface",
-      "quantization": "Q4_K_M",
-      "isMultiModal": true,
-      "contextLength": 32768,
-      "capabilities": [
-        "TEXT",
-        "IMAGE"
-      ],
-      "performance": {
-        "speed": "extreme",
-        "quality": "medium"
-      },
-      "tags": [
-        "경량",
-        "CPU 작동 지원",
-        "다중 모드",
-        "초고속"
-      ],
-      "recommendedConfig": {
-        "numCtx": 4096,
-        "numPredict": 1024
-      }
     }
   ]
 }

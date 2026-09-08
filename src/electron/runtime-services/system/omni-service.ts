@@ -66,6 +66,7 @@ export interface OmniPerceptionOptions {
   enableAudioTranscript?: boolean
   enableGeoReverse?: boolean
   maxContentSizeKb?: number
+  audioAnalysisDuration?: number
   timeoutMs?: number
 }
 
@@ -109,6 +110,7 @@ export interface OmniPerceptionResponse {
   file_size: number
   category?: string
   markdown_content: string
+  ocr_text?: string
   metadata: Record<string, any>
 
   // 物理事实特征
@@ -174,6 +176,13 @@ export interface OmniAudioTranscribeResponse {
   transcript?: string
   events: string[]
   language?: string
+  duration_ms: number
+}
+
+export interface OmniAudioConvertResponse {
+  file_path: string
+  output_path: string
+  duration_seconds: number
   duration_ms: number
 }
 
@@ -570,6 +579,7 @@ export class OmniService {
       const maxFileSizeMb = orchestrator.getValue<number>('MAX_FILE_SIZE') ?? 100
       const analysisMode = (orchestrator.getValue<string>('ANALYSIS_MODE') || 'full').toLowerCase()
       const reuseBasic = orchestrator.getValue<boolean>('REUSE_BASIC_ANALYSIS_DATA') ?? true
+      const audioAnalysisDuration = orchestrator.getValue<number>('AUDIO_ANALYSIS_DURATION') ?? 30
 
       // 提取最新的受保护排除项清单 (来自 IGNORE_RULES 中 isCzkawka 标记)
       const { duplicateDetectionService } = await import('../filesystem')
@@ -584,6 +594,7 @@ export class OmniService {
         max_file_size_mb: maxFileSizeMb,
         analysis_mode: analysisMode,
         reuse_basic_analysis_data: reuseBasic,
+        audio_analysis_duration: audioAnalysisDuration,
         excluded_items: excludedItems
       })
 
@@ -597,7 +608,7 @@ export class OmniService {
       if (res.ok) {
         logger.info(
           LogCategory.SYSTEM,
-          `[OmniService] 已向 Omni 引擎同步配置: enable_office_cover=${enableOfficeCover}, max_document_ocr_items=${maxDocOcrItems}, enable_image_ocr=${enableImageOcr}, ocr_model_size=${ocrModelSize}, excluded_items_count=${excludedItems.length}`
+          `[OmniService] 已向 Omni 引擎同步配置: enable_office_cover=${enableOfficeCover}, max_document_ocr_items=${maxDocOcrItems}, enable_image_ocr=${enableImageOcr}, ocr_model_size=${ocrModelSize}, audio_analysis_duration=${audioAnalysisDuration}s, excluded_items_count=${excludedItems.length}`
         )
         return true
       }
@@ -908,7 +919,8 @@ export class OmniService {
       enable_visual_tags: options?.enableVisualTags ?? true,
       enable_audio_transcript: options?.enableAudioTranscript,
       enable_geo_reverse: options?.enableGeoReverse ?? true,
-      max_content_size_kb: options?.maxContentSizeKb
+      max_content_size_kb: options?.maxContentSizeKb,
+      audio_analysis_duration: options?.audioAnalysisDuration
     }
     logger.debug(
       LogCategory.SYSTEM,
@@ -979,6 +991,11 @@ export class OmniService {
           sensitive_types: json.sensitive_types || [],
           content_rating: json.content_rating,
           has_audio_transcript: !!json.audio_transcript,
+          audio_transcript_length: json.audio_transcript?.length || 0,
+          ocr_text_length: json.ocr_text?.length || 0,
+          markdown_content_length: json.markdown_content?.length || 0,
+          has_metadata: !!json.metadata && Object.keys(json.metadata).length > 0,
+          benchmark: json.benchmark,
           geo_address: json.geo_address
         })
       )
@@ -1038,6 +1055,51 @@ export class OmniService {
       return await doFetch()
     } catch (err: any) {
       logger.debug(LogCategory.SYSTEM, `[OmniService] transcribeAudio 异常 (${filePath}):`, err.message)
+      const restarted = await this.start()
+      if (restarted) {
+        try {
+          return await doFetch()
+        } catch {}
+      }
+      return null
+    }
+  }
+
+  /**
+   * 单指标：转换标准音频并降噪 (16kHz, mono, pcm_s16le WAV)
+   * POST /api/audio/convert
+   */
+  public async convertToStandardAudio(
+    filePath: string,
+    durationSeconds?: number,
+    timeoutMs: number = 60000
+  ): Promise<OmniAudioConvertResponse | null> {
+    await this.ensureRunning()
+    const tStart = Date.now()
+    const reqBody = {
+      file_path: filePath,
+      duration_seconds: durationSeconds
+    }
+
+    const doFetch = async () => {
+      const res = await fetch(`${this.baseUrl}/api/audio/convert`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reqBody),
+        signal: AbortSignal.timeout(timeoutMs)
+      })
+      if (!res.ok) return null
+      return (await res.json()) as OmniAudioConvertResponse
+    }
+
+    try {
+      return await doFetch()
+    } catch (err: any) {
+      logger.debug(
+        LogCategory.SYSTEM,
+        `[OmniService] convertToStandardAudio 异常 (${filePath}, 耗时: ${Date.now() - tStart}ms):`,
+        err.message
+      )
       const restarted = await this.start()
       if (restarted) {
         try {

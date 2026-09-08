@@ -1269,11 +1269,22 @@ export class FileProcessor {
       const extractFileCategory = getFileCategory(effectiveVirtualPath)
       const isPlainTextOrCode =
         extractFileCategory === FileCategory.TEXT || extractFileCategory === FileCategory.CODE
+      // 音视频文件：需传递 enableAudioTranscript + audioAnalysisDuration 给 Omni，触发 SenseVoice 转录
+      const isAudioOrVideo =
+        extractFileCategory === FileCategory.AUDIO || extractFileCategory === FileCategory.VIDEO
+      const audioAnalysisDuration = isAudioOrVideo
+        ? (ConfigOrchestrator.getInstance().getValue<number>('AUDIO_ANALYSIS_DURATION') ?? 30)
+        : undefined
 
       // 0. 统一调用 Omni 原生引擎进行端到端内容与元数据提取（覆盖文档、图片、纯文本、代码、音视频、字体等所有格式并输出真实 Benchmark）
       const anydocStartTime = Date.now()
       const anydocResult: AnydocResult = await anydocService
-        .perceive(filePath, { language })
+        .perceive(filePath, {
+          language,
+          // 音视频文件启用 SenseVoice 语音转录，并传递配置的截取时长
+          enableAudioTranscript: isAudioOrVideo ? true : undefined,
+          audioAnalysisDuration: audioAnalysisDuration
+        })
         .catch(err => {
           logger.warn(LogCategory.ANALYSIS_QUEUE, `[Omni/anydoc] 提取失败: ${err.message}`)
           return { content: '', assets: [], metadata: undefined, benchmark: undefined }
@@ -1636,17 +1647,17 @@ export class FileProcessor {
       // 实时保存 CPU 提取完成阶段状态：写入内容、元数据、歌词及阶段状态
       // 分析模式决定 CPU 完成 stage：Sample 在 1 结束，Document/Full 在 2 结束
       const cpuCompletionStage = analysisMode === 'simple' ? 1 : 2
+      const detectedOcrText =
+        anydocResult?.ocrText ||
+        (isImage && contentResult.content ? contentResult.content : undefined)
+      const detectedAudioTranscript = anydocResult?.audioTranscript
+      let activeLrc: string | null = null
       try {
         const metadataLyrics = getFallbackLyrics(fileInfo.metadata)
-        const isImageOrMedia =
-          enhancedFileType === 'image' ||
-          (magikaCategory?.mime_type && magikaCategory.mime_type.startsWith('image/'))
-        const ocrOrExtractedText =
-          (isImageOrMedia && contentResult.content) ||
-          (contentResult.content && contentResult.content.includes('OCR')
-            ? contentResult.content
-            : null)
-        const finalLrc = metadataLyrics ?? ocrOrExtractedText ?? null
+        // 遵循设计规范：file_contents.lrc 字段仅保存从音频元数据（ID3/FLAC）提取的真实歌词/字幕，
+        // 严禁再混入 OCR 文本或音频转录文本（它们已作为一级公民存入 content 字段）
+        const finalLrc = metadataLyrics ?? null
+        activeLrc = finalLrc
 
         db.prepare(
           `
@@ -1763,7 +1774,7 @@ export class FileProcessor {
           qualityScore: null,
           qualityConfidence: null,
           multimodalContent: undefined,
-          lrc: undefined,
+          lrc: activeLrc || undefined,
           qualityReasoning: undefined,
           qualityCriteria: undefined
         }
@@ -1854,7 +1865,8 @@ export class FileProcessor {
             magikaCategory,
             isSpeedy,
             initialStage,
-            forceReanalyze: item.forceReanalyze === true
+            forceReanalyze: item.forceReanalyze === true,
+            lrc: activeLrc
           },
           this.updateItemStatus.bind(this),
           this.processNewDimensionSuggestions.bind(this)
@@ -1876,7 +1888,8 @@ export class FileProcessor {
             magikaCategory,
             isSpeedy,
             initialStage,
-            forceReanalyze: item.forceReanalyze === true
+            forceReanalyze: item.forceReanalyze === true,
+            lrc: activeLrc
           },
           this.updateItemStatus.bind(this),
           this.processNewDimensionSuggestions.bind(this)

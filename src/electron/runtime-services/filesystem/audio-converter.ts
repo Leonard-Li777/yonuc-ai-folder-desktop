@@ -44,22 +44,42 @@ export class AudioConverter {
   }
 
   /**
-   * 转换为标准 AI 音频格式 (16kHz, mono, pcm_s16le WAV)
+   * 转换为标准 AI 音频格式 (16kHz, mono, pcm_s16le WAV + 频域降噪)
    * 限制输出时长以避免 AI 上下文超限
+   * 优先下沉至 Rust Omni 引擎 /api/audio/convert 完成
    * @param inputPath 输入文件路径
    * @returns 转换后的文件路径
    */
   async convertToStandard(inputPath: string): Promise<string> {
+    // 从配置中获取截取时长，默认为 30 秒
+    const DURATION_LIMIT =
+      ConfigOrchestrator.getInstance().getValue<number>('AUDIO_ANALYSIS_DURATION') || 30
+
+    // 1. 优先调用 Omni 原生引擎进行降噪与标准重采样
+    try {
+      const { omniService } = await import('../system/omni-service')
+      const omniRes = await omniService.convertToStandardAudio(inputPath, DURATION_LIMIT)
+      if (omniRes && omniRes.output_path && fs.existsSync(omniRes.output_path)) {
+        logger.info(
+          LogCategory.FILE_PROCESSOR,
+          `[AudioConverter] Omni 原生引擎标准音频转换完成: ${inputPath} -> ${omniRes.output_path} (耗时: ${omniRes.duration_ms}ms)`
+        )
+        return omniRes.output_path
+      }
+    } catch (omniErr: any) {
+      logger.debug(
+        LogCategory.FILE_PROCESSOR,
+        `[AudioConverter] Omni 原生转换降级至本地执行: ${omniErr?.message || omniErr}`
+      )
+    }
+
+    // 2. 本地 FFmpeg 降级处理
     const ffmpegPath = ffmpegService.getFfmpegPath()
     if (!ffmpegPath) {
       throw new Error(t('FFmpeg 未就绪（未检测到系统 FFmpeg），无法转换音频'))
     }
 
-    // 从配置中获取截取时长，默认为 30 秒
-    const DURATION_LIMIT =
-      ConfigOrchestrator.getInstance().getValue<number>('AUDIO_ANALYSIS_DURATION') || 30
-
-    // 1. 生成基于路径和截断参数的哈希文件名
+    // 2.1 生成基于路径和截断参数的哈希文件名
     const hash = crypto
       .createHash('md5')
       .update(inputPath)
@@ -67,20 +87,22 @@ export class AudioConverter {
       .digest('hex')
     const outputPath = path.join(this.tempDir, `${hash}.wav`)
 
-    // 2. 如果文件已存在，直接复用
+    // 2.2 如果文件已存在，直接复用
     if (fs.existsSync(outputPath)) {
       logger.debug(LogCategory.FILE_PROCESSOR, `[AudioConverter] 复用已有的转换文件: ${outputPath}`)
       return outputPath
     }
 
-    // 3. 执行转换
-    // -t 参数限制输出时长，从而控制文件大小
+    // 2.3 执行本地转换与降噪
+    // -t 参数限制输出时长，-af 添加降噪滤波链
     return new Promise((resolve, reject) => {
       const args = [
         '-i',
         inputPath,
         '-t',
         DURATION_LIMIT.toString(),
+        '-af',
+        'highpass=f=80,lowpass=f=7800,afftdn=nf=-25dB',
         '-ar',
         '16000',
         '-ac',
@@ -93,7 +115,7 @@ export class AudioConverter {
 
       logger.info(
         LogCategory.FILE_PROCESSOR,
-        `[AudioConverter] 开始转换音频(截断时长 ${DURATION_LIMIT}s): ${inputPath} -> ${outputPath}`
+        `[AudioConverter] 开始转换音频(降噪并截断时长 ${DURATION_LIMIT}s): ${inputPath} -> ${outputPath}`
       )
 
       execFile(ffmpegPath, args, (error, stdout, stderr) => {

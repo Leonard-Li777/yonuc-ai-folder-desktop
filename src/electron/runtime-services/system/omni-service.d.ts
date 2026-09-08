@@ -58,6 +58,7 @@ export interface OmniPerceptionOptions {
     enableAudioTranscript?: boolean;
     enableGeoReverse?: boolean;
     maxContentSizeKb?: number;
+    audioAnalysisDuration?: number;
     timeoutMs?: number;
 }
 export interface OmniPerceptionBenchmarkResponse {
@@ -95,6 +96,7 @@ export interface OmniPerceptionResponse {
     file_size: number;
     category?: string;
     markdown_content: string;
+    ocr_text?: string;
     metadata: Record<string, any>;
     file_source?: string;
     file_source_code?: string;
@@ -152,6 +154,12 @@ export interface OmniAudioTranscribeResponse {
     transcript?: string;
     events: string[];
     language?: string;
+    duration_ms: number;
+}
+export interface OmniAudioConvertResponse {
+    file_path: string;
+    output_path: string;
+    duration_seconds: number;
     duration_ms: number;
 }
 export interface OmniVisionTagsResponse {
@@ -264,6 +272,11 @@ export declare class OmniService {
         language?: string;
         timeoutMs?: number;
     }): Promise<OmniAudioTranscribeResponse | null>;
+    /**
+     * 单指标：转换标准音频并降噪 (16kHz, mono, pcm_s16le WAV)
+     * POST /api/audio/convert
+     */
+    convertToStandardAudio(filePath: string, durationSeconds?: number, timeoutMs?: number): Promise<OmniAudioConvertResponse | null>;
     /**
      * 单指标：提取视觉标签 (CLIP 图像特征向量)
      * POST /api/vision/tags

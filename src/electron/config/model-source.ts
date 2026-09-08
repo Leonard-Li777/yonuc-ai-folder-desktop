@@ -797,28 +797,6 @@ export const MODEL_CONFIG_SOURCE = () => ({
         numCtx: 8192,
         numPredict: 2048
       }
-    },
-    {
-      id: 'sugiv/cardvaultplus-500m-gguf:Q4_K_M',
-      name: `CardVault 500M（${t('轻量识图')}）`,
-      company: 'sugiv',
-      parameterSize: '500M',
-      totalSize: '479MB',
-      description: t('超轻量多模态模型，支持文本与图像分析，适合极低配置环境。'),
-      source: 'huggingface',
-      quantization: 'Q4_K_M',
-      isMultiModal: true,
-      contextLength: 32768,
-      capabilities: ['TEXT', 'IMAGE'],
-      performance: {
-        speed: 'extreme',
-        quality: 'medium'
-      },
-      tags: [t('轻量'), t('支持CPU运行'), t('多模态'), t('极速')],
-      recommendedConfig: {
-        numCtx: 4096,
-        numPredict: 1024
-      }
     }
   ]
 })
