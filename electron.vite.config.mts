@@ -634,7 +634,7 @@ export default defineConfig(({ command, mode }) => {
         tailwindcss(),
         voerkai18nVitePlugin(),
         react(),
-        isProd &&
+        isProd && // 如果开启会导致开发模式启动非常慢
           fileViewerRenderers({
             preset: 'standard',
             autoPresets: false,

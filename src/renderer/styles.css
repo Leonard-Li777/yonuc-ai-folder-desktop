@@ -162,6 +162,9 @@ html:lang(fr) :where(body) {
    注意：
    - 排除 role="checkbox" 的复选框按钮。
    - 排除带有 w-8/p-0/rounded-full 类名特征的纯图标按钮，以防破坏窗口控制和导航等小控件的排版尺寸。
+   - 排除 text-xs 小字号按钮（如分析队列头部工具栏按钮 Pause/Retry/Clear 等），
+     这类按钮已是紧凑型设计，不应被强制 120px，否则多个按钮叠加会导致容器横向溢出。
+   - 排除 h-7 高度按钮（shadcn size="sm" 覆写场景，同为紧凑工具栏按钮）。
 */
 html:lang(en)
   :where(
@@ -169,7 +172,7 @@ html:lang(en)
         [class*='w-10']
       ):not([class*='size-']):not([class*='p-0']):not([class*='p-1']):not([class*='p-2']):not(
         [class*='rounded-full']
-      ):not(:has(.sr-only)):not([class*='material-icons'])
+      ):not(:has(.sr-only)):not([class*='material-icons']):not([class*='text-xs']):not([class*='h-7'])
   ),
 html:lang(de)
   :where(
@@ -177,7 +180,7 @@ html:lang(de)
         [class*='w-10']
       ):not([class*='size-']):not([class*='p-0']):not([class*='p-1']):not([class*='p-2']):not(
         [class*='rounded-full']
-      ):not(:has(.sr-only)):not([class*='material-icons'])
+      ):not(:has(.sr-only)):not([class*='material-icons']):not([class*='text-xs']):not([class*='h-7'])
   ),
 html:lang(es)
   :where(
@@ -185,7 +188,7 @@ html:lang(es)
         [class*='w-10']
       ):not([class*='size-']):not([class*='p-0']):not([class*='p-1']):not([class*='p-2']):not(
         [class*='rounded-full']
-      ):not(:has(.sr-only)):not([class*='material-icons'])
+      ):not(:has(.sr-only)):not([class*='material-icons']):not([class*='text-xs']):not([class*='h-7'])
   ),
 html:lang(fr)
   :where(
@@ -193,7 +196,7 @@ html:lang(fr)
         [class*='w-10']
       ):not([class*='size-']):not([class*='p-0']):not([class*='p-1']):not([class*='p-2']):not(
         [class*='rounded-full']
-      ):not(:has(.sr-only)):not([class*='material-icons'])
+      ):not(:has(.sr-only)):not([class*='material-icons']):not([class*='text-xs']):not([class*='h-7'])
   ),
 html:lang(en) :where(.btn),
 html:lang(de) :where(.btn),
@@ -208,4 +211,46 @@ html:lang(fr) :where(.btn) {
 [data-no-drag],
 [data-no-drag] * {
   -webkit-app-region: no-drag !important;
+}
+
+/* ==========================================================================
+   5. 通用文本容器多语言兼容方案 (特异性为 0，全局安全降级)
+   ========================================================================== */
+
+/*
+ * 5.1 西文长文本容器断行兜底
+ * 在英文、德文、西文、法文、葡文等语种下，对常规文本标签启用
+ * overflow-wrap: break-word，防止单个超长单词（如 URL、错误信息）撑破容器。
+ * 注意：不对 pre/code/kbd 等代码容器生效，不影响 whitespace-nowrap 的声明。
+ */
+html:lang(en) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small),
+html:lang(de) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small),
+html:lang(es) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small),
+html:lang(fr) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small),
+html:lang(pt) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small),
+html:lang(ru) :where(p, span:not(.whitespace-nowrap), li, td, th, label:not(.form-label), dd, dt, caption, figcaption, blockquote, cite, small) {
+  overflow-wrap: break-word;
+  word-break: break-word; /* Safari 兜底 */
+}
+
+/*
+ * 5.2 flex 容器内文字截断保护
+ * 在任何语言下，当 flex 容器内的直接文本子元素宽度受限时，
+ * 通过 min-w-0 防止 flex 子项撑破父容器（Flexbox 默认 min-width: auto 的已知问题）。
+ * 仅对带有 .truncate（即 overflow: hidden; text-overflow: ellipsis）的元素生效，
+ * 配合 Tailwind 的 truncate 类使用，不影响无截断需求的元素。
+ */
+:where(.truncate) {
+  min-width: 0;
+}
+
+/*
+ * 5.3 英文等长文本语言：标签/标题类元素的字号安全微降（对 label.form-label 下的纯文本）
+ * 已在第 2 条覆盖 button span，此处补充 label 自身的文本节点场景。
+ */
+html:lang(en) :where(label.form-label),
+html:lang(de) :where(label.form-label),
+html:lang(es) :where(label.form-label),
+html:lang(fr) :where(label.form-label) {
+  font-size: calc(1em - 0.5px);
 }
