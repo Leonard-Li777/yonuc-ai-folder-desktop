@@ -3,8 +3,7 @@ import {
   logger,
   isExtensionDimension,
   isPanDimension,
-  filterDimensionTags,
-  DIMS_CONTAINING_TRAILING_EXTENSION_TAG
+  filterDimensionTags
 } from '@firefly/shared'
 import {
   DimensionGroup,

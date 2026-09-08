@@ -1572,6 +1572,13 @@ export class FileProcessor {
       })
 
 
+      // 优先采用 Omni 原生多模态感知 / 级联仲裁给出的建议智能命名与内容描述
+      const omniSmartName = anydocResult?.perception?.smart_name
+      const omniDescription = anydocResult?.perception?.content_description
+      if (omniSmartName && omniSmartName.trim().length > 0) {
+        enhancedSmartName = omniSmartName.trim()
+      }
+
       // 平铺注入 metadata（更新 contentResult.metadata 与 fileInfo.metadata，供后续所有模式使用）
       contentResult.metadata = preflightContext.flattenedMetadata
 
@@ -1600,17 +1607,19 @@ export class FileProcessor {
         fileFingerprint = await calculateFileFingerprint(filePath)
       }
 
-      // 无论文件是否已存在，都使用 UPSERT 写入/更新 Magika 分类（category）：
+      // 无论文件是否已存在，都使用 UPSERT 写入/更新 Magika 分类（category）及 description（来自多模态感知兜底）：
       // - simple 模式下 magikaCategory 来自本地 Magika CLI
       // - document/full 模式下 magikaCategory 来自 MarkitdownServer 的 serverResult.magika（或本地兜底）
       // 否则并行 CPU 阶段提前返回时，从 Server 获取的 magika 数据将无法落库，
       // 导致文件属性面板元数据 Tab 的 Magika 字段缺失
       db.prepare(
         `
-        INSERT INTO files (file_fingerprint, smart_name, size, type, category, created_at, modified_at, accessed_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO files (file_fingerprint, smart_name, size, type, category, description, created_at, modified_at, accessed_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(file_fingerprint) DO UPDATE SET
-          category = excluded.category
+          category = excluded.category,
+          smart_name = COALESCE(excluded.smart_name, files.smart_name),
+          description = COALESCE(excluded.description, files.description)
         `
       ).run(
         fileFingerprint,
@@ -1618,6 +1627,7 @@ export class FileProcessor {
         stats.size,
         enhancedFileType,
         JSON.stringify(magikaCategory || { mime_type: getMimeType(enhancedFileType) }),
+        omniDescription || null,
         new Date(stats.birthtime).toISOString(),
         new Date(stats.mtime).toISOString(),
         new Date(stats.atime).toISOString()
@@ -1745,10 +1755,11 @@ export class FileProcessor {
 
       // ========== 简单分类模式 (simple/document)：跳过AI分析，完成内容/元数据/Magika标签提取在 Stage 1/2 结束 ==========
       if (analysisMode !== 'full' && analysisMode !== 'quick_name') {
-        // 简单分类模式：跳过AI分析，仅保留内容/元数据/Magika标签
+        // 简单分类模式：跳过AI分析，仅保留内容/元数据/Magika标签，并补充 Omni 级联仲裁的内容摘要描述
         const processResult = {
           content: contentResult.content,
           metadata: contentResult.metadata,
+          description: omniDescription || undefined,
           qualityScore: null,
           qualityConfidence: null,
           multimodalContent: undefined,
@@ -1872,6 +1883,11 @@ export class FileProcessor {
         )
         processResult = fullRes.processResult
         dimResult = fullRes.dimResult
+      }
+
+      // 若 AI 生成的 description 为空，回退使用 Omni 原生多模态感知给出的内容描述
+      if (!processResult.description && omniDescription) {
+        processResult.description = omniDescription
       }
 
       this.updateItemStatus(item.id, 'analyzing', 98)

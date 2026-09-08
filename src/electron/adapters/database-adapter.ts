@@ -158,8 +158,8 @@ export class DatabaseAdapter implements IDatabaseAdapter {
         const stmt = db.prepare(`
           INSERT INTO file_dimensions (
             id, level, tags, trigger_conditions,
-            is_ai_generated, description, applicable_file_types, context_hints
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            is_ai_generated, description, applicable_file_types, context_hints, metadata
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `)
         stmt.run(
           dimension.id,
@@ -169,7 +169,8 @@ export class DatabaseAdapter implements IDatabaseAdapter {
           dimension.isAIGenerated ? 1 : 0,
           dimension.description || null,
           JSON.stringify(dimension.applicableFileTypes || []),
-          JSON.stringify(dimension.contextHints || [])
+          JSON.stringify(dimension.contextHints || []),
+          dimension.metadata ? JSON.stringify(dimension.metadata) : null
         )
       },
 

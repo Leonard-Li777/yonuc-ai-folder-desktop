@@ -146,6 +146,24 @@ export interface OmniPerceptionResponse {
   audio_events: string[]
   geo_address?: string
 
+  // 级联提示词合成与语义仲裁终局结果
+  candidate_hypotheses?: Array<{
+    id: string
+    prompt_text: string
+    confidence: number
+    is_winner: boolean
+    slots: Record<string, any>
+    bound_tags: OmniTagChainItem[]
+  }>
+  winning_hypothesis?: {
+    prompt_text: string
+    confidence: number
+  }
+  activated_dimension_tags?: OmniTagChainItem[]
+  smart_name?: string
+  content_description?: string
+  pruned_ambiguous_words?: string[]
+
   phash?: string
   is_corrupted: boolean
   benchmark?: OmniPerceptionBenchmarkResponse
@@ -373,7 +391,11 @@ export class OmniService {
       }
 
       logger.info(LogCategory.SYSTEM, `[OmniService] 正在拉起 firefly-omni 守护进程 (Port: ${port}): ${exePath}`)
-      const env = { ...process.env, OMNI_PORT: String(port) }
+      const env = {
+        ...process.env,
+        OMNI_PORT: String(port),
+        RUST_LOG: process.env.RUST_LOG || 'info,omni_vision=info,omni_server=info'
+      }
       const child = spawn(exePath, ['serve', '-a', `127.0.0.1:${port}`], {
         env,
         stdio: ['pipe', 'pipe', 'pipe'],
@@ -399,6 +421,7 @@ export class OmniService {
       child.stdout?.on('data', data => {
         const str = data.toString().trim()
         if (str && !isCzkawkaDump(str)) {
+          // 级联仲裁日志以 debug 级别输出到 Desktop 控制台 (pnpm start:debug 可见)
           logger.debug(LogCategory.SYSTEM, `[Omni] ${str}`)
         }
       })
@@ -912,6 +935,23 @@ export class OmniService {
       }
 
       const json = (await res.json()) as OmniPerceptionResponse
+
+      // 级联仲裁终局结果显式输出至 Desktop 控制台 (debug 级别，使用 pnpm start:debug 可查验)
+      if (json.winning_hypothesis || (json.candidate_hypotheses && json.candidate_hypotheses.length > 0)) {
+        logger.debug(
+          LogCategory.SYSTEM,
+          `[级联仲裁:Desktop] 终局胜出: "${json.winning_hypothesis?.prompt_text || '无'}" (置信度: ${json.winning_hypothesis?.confidence ?? 'N/A'}) | 建议命名: ${json.smart_name || '无'}`
+        )
+        if (json.candidate_hypotheses && json.candidate_hypotheses.length > 0) {
+          for (const cand of json.candidate_hypotheses) {
+            logger.debug(
+              LogCategory.SYSTEM,
+              `[级联仲裁:Desktop] 候选假设 id=${cand.id} winner=${cand.is_winner ? '★YES' : ' NO '} conf=${cand.confidence} prompt="${cand.prompt_text}"`
+            )
+          }
+        }
+      }
+
       logger.debug(
         LogCategory.SYSTEM,
         `[OmniService] <<< POST /api/perceive 响应成功 (${filePath}, 耗时: ${Date.now() - tStart}ms):`,
@@ -923,6 +963,13 @@ export class OmniService {
           has_watermark: json.has_watermark,
           has_mosaic: json.has_mosaic,
           has_text: json.has_text,
+          aesthetic_score: json.aesthetic_score,
+          quality_score: json.quality_score,
+          photo_type: json.photo_type,
+          smart_name: json.smart_name,
+          content_description: json.content_description,
+          winning_hypothesis: json.winning_hypothesis,
+          candidate_hypotheses_count: json.candidate_hypotheses?.length || 0,
           visual_tags: json.visual_tags || [],
           visual_tags_count: json.visual_tags?.length || 0,
           ram_tags: json.ram_tags || [],

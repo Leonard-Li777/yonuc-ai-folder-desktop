@@ -576,6 +576,13 @@ export const migrations: IMigrationConfig[] = [
         );
     `,
     down: `-- 无需反向回退`
+  },
+  {
+    version: 9,
+    name: 'add_file_dimensions_metadata',
+    description: 'file_dimensions 新增 metadata 列（存储维度功能标识 flag：isPanDimension/singleSelect/isMicroService/isRuleSubdivision 等）',
+    up: `ALTER TABLE file_dimensions ADD COLUMN metadata TEXT;`,
+    down: `ALTER TABLE file_dimensions DROP COLUMN metadata;`
   }
 ]
 /**

@@ -30,7 +30,12 @@
         "MIME类型",
         "文件签名"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true
+        }
+      }
     },
     {
       "id": 2,
@@ -46,7 +51,8 @@
         "设计素材",
         "系统维护",
         "学术科研",
-        "个人笔记"
+        "个人笔记",
+        "家庭生活"
       ],
       "description": "文件的核心使用场景",
       "applicableFileTypes": [
@@ -57,7 +63,10 @@
         "命名模式",
         "关联应用"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 3,
@@ -81,7 +90,13 @@
         "路径特征",
         "传输日志"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 4,
@@ -103,7 +118,12 @@
         "数字签名",
         "水印"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 100,
@@ -132,7 +152,14 @@
             "文本"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 101,
@@ -160,7 +187,14 @@
             "文档"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 5,
@@ -187,7 +221,14 @@
             "应用数据"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 6,
@@ -225,7 +266,13 @@
             "图片"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 7,
@@ -256,7 +303,12 @@
             "视频"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 8,
@@ -286,7 +338,13 @@
             "音频"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 9,
@@ -313,7 +371,13 @@
             "压缩包"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 10,
@@ -342,7 +406,13 @@
             "程序"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 11,
@@ -388,7 +458,13 @@
             "视频"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 12,
@@ -417,7 +493,14 @@
             "系统文件"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 13,
@@ -476,7 +559,13 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 14,
@@ -505,7 +594,14 @@
             "数据库"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 15,
@@ -532,7 +628,14 @@
             "磁盘映像"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 102,
@@ -583,7 +686,13 @@
             "应用数据扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 103,
@@ -612,7 +721,13 @@
             "数据库扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 104,
@@ -645,7 +760,13 @@
             "磁盘映像扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 105,
@@ -674,7 +795,14 @@
             "源代码"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 16,
@@ -705,7 +833,13 @@
             "创意项目"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 17,
@@ -736,7 +870,13 @@
             "财务档案"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 18,
@@ -768,7 +908,53 @@
             "创意项目"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
+    },
+    {
+      "id": 29,
+      "name": "家庭生活细分",
+      "level": 2,
+      "tags": [
+        "房屋居住",
+        "家居购物",
+        "家庭医疗",
+        "家庭证件",
+        "子女教育",
+        "家政日常",
+        "家常饮食"
+      ],
+      "description": "家庭场景下的具体生活事项",
+      "applicableFileTypes": [
+        "text",
+        "document",
+        "ebook",
+        "image",
+        "video",
+        "audio",
+        "design"
+      ],
+      "contextHints": [
+        "存储路径",
+        "命名模式",
+        "关联应用"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件用途",
+          "triggerTags": [
+            "家庭生活"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 19,
@@ -798,7 +984,10 @@
             "程序"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 20,
@@ -829,7 +1018,10 @@
             "旅行记录"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 21,
@@ -858,7 +1050,10 @@
             "财务档案"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 22,
@@ -899,7 +1094,10 @@
             "游戏娱乐"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 23,
@@ -937,7 +1135,10 @@
             "学习资料"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 24,
@@ -967,7 +1168,13 @@
             "电子书"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 25,
@@ -1056,7 +1263,10 @@
             "游戏娱乐"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 26,
@@ -1095,7 +1305,10 @@
             "音乐"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 27,
@@ -1115,7 +1328,13 @@
         "技术质量",
         "美学质量"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 28,
@@ -1131,7 +1350,12 @@
         "视觉描述",
         "语音转录"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 106,
@@ -1158,7 +1382,14 @@
             "字体"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 107,
@@ -1187,7 +1418,13 @@
             "系统文件扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 108,
@@ -1234,7 +1471,13 @@
             "文档扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 109,
@@ -1268,7 +1511,13 @@
             "文本扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 110,
@@ -1322,7 +1571,13 @@
             "图片扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 111,
@@ -1364,7 +1619,13 @@
             "视频扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 112,
@@ -1412,7 +1673,13 @@
             "音频扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 113,
@@ -1468,7 +1735,13 @@
             "压缩包扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 114,
@@ -1594,7 +1867,13 @@
             "源代码扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 115,
@@ -1631,7 +1910,13 @@
             "程序扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 116,
@@ -1664,7 +1949,13 @@
             "电子书扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 117,
@@ -1690,7 +1981,13 @@
             "字体扩展名"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 118,
@@ -1739,7 +2036,10 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 119,
@@ -1779,14 +2079,16 @@
             "游戏娱乐"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 120,
       "name": "作品来源",
       "level": 2,
       "tags": [
-        "AI生成",
         "原创",
         "同人",
         "翻译",
@@ -1840,7 +2142,12 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 121,
@@ -1907,7 +2214,10 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 122,
@@ -1944,7 +2254,13 @@
             "图片"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 123,
@@ -1980,7 +2296,13 @@
             "色情"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 124,
@@ -2019,7 +2341,13 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 125,
@@ -2059,7 +2387,13 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 126,
@@ -2095,7 +2429,10 @@
             "摄影照片"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 127,
@@ -2133,7 +2470,10 @@
             "摄影照片"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 128,
@@ -2169,7 +2509,10 @@
             "合同票据"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 129,
@@ -2208,7 +2551,10 @@
             "证照"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 130,
@@ -2265,7 +2611,10 @@
             "漫画"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 131,
@@ -2301,7 +2650,10 @@
             "血腥"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 132,
@@ -2336,7 +2688,10 @@
             "涉政"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 133,
@@ -2373,7 +2728,10 @@
             "违规"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 134,
@@ -2409,7 +2767,10 @@
             "色情"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 135,
@@ -2447,7 +2808,530 @@
             "截图"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
+    },
+    {
+      "id": 136,
+      "name": "生成载体",
+      "level": 2,
+      "tags": [
+        "实拍",
+        "手绘",
+        "CG渲染",
+        "AI生成"
+      ],
+      "description": "图像与视觉内容的物理生成方式与载体",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "生成方式",
+        "渲染类型",
+        "载体识别"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片",
+            "视频"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 137,
+      "name": "景别",
+      "level": 3,
+      "tags": [
+        "特写",
+        "半身",
+        "全身",
+        "全景",
+        "微距"
+      ],
+      "description": "摄影与美术作品的画幅取景范围与景别",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "取景范围",
+        "画幅构图",
+        "人物景别"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片",
+            "漫画",
+            "绘画"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 138,
+      "name": "光照",
+      "level": 3,
+      "tags": [
+        "日光",
+        "日落",
+        "夜景",
+        "暗光",
+        "室内光"
+      ],
+      "description": "摄影照片的环境光线与拍摄时间氛围",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "光线分析",
+        "拍摄时间",
+        "氛围识别"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 139,
+      "name": "背景",
+      "level": 2,
+      "tags": [
+        "透明背景",
+        "纯色背景",
+        "实景背景"
+      ],
+      "description": "图像设计资产与素材的背景通道与环境类型",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Alpha通道",
+        "背景抠图",
+        "设计素材"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 140,
+      "name": "视角",
+      "level": 3,
+      "tags": [
+        "平视",
+        "俯视",
+        "仰视",
+        "第一人称"
+      ],
+      "description": "拍摄与绘制镜头的透视角度与观察视角",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "拍摄视角",
+        "镜头透视",
+        "观察角度"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片",
+            "截图"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 141,
+      "name": "版面",
+      "level": 2,
+      "tags": [
+        "纯文字",
+        "图表为主",
+        "图文混合",
+        "手写笔记"
+      ],
+      "description": "文档与页面视觉版式排版构成",
+      "applicableFileTypes": [
+        "document",
+        "image"
+      ],
+      "contextHints": [
+        "排版结构",
+        "版面分析",
+        "图文比例"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "文档",
+            "图片"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 142,
+      "name": "系统生态",
+      "level": 3,
+      "tags": [
+        "Windows截图",
+        "macOS截图",
+        "iOS截图",
+        "Android截图",
+        "Linux截图"
+      ],
+      "description": "操作系统界面与终端设备生态来源细分",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "操作系统",
+        "界面风格",
+        "设备来源"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "截图"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 143,
+      "name": "画幅",
+      "level": 2,
+      "tags": [
+        "横屏",
+        "竖屏",
+        "正方形",
+        "超宽长条"
+      ],
+      "description": "画面的长宽比例与构图画幅走向",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "宽高比",
+        "分辨率分析",
+        "画幅走向"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片",
+            "视频"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 144,
+      "name": "主体数量",
+      "level": 3,
+      "tags": [
+        "单人",
+        "双人",
+        "多人合影",
+        "无人空镜"
+      ],
+      "description": "画面中人物或核心主体的数量构成",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "主体计数",
+        "人像检测",
+        "场景构成"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片",
+            "漫画",
+            "绘画"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 145,
+      "name": "主体类型",
+      "level": 2,
+      "tags": [
+        "人物主体",
+        "动物宠物",
+        "植物花草",
+        "静物商品",
+        "环境建筑"
+      ],
+      "description": "画面中最核心的前景视觉焦点类型",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "目标检测",
+        "主体识别",
+        "视觉焦点"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": false,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 146,
+      "name": "文字密度",
+      "level": 2,
+      "tags": [
+        "微量文本",
+        "图文标题",
+        "密集排版"
+      ],
+      "description": "图像或页面中包含的文字量与版面密集度",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "OCR识别",
+        "文本覆盖率",
+        "文字排版"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "有字图"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 147,
+      "name": "质感风格",
+      "level": 3,
+      "tags": [
+        "扁平极简",
+        "写实拟真",
+        "复古胶片",
+        "赛博朋克",
+        "水彩水墨"
+      ],
+      "description": "视觉作品的美术基调与画面质感风格",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "色彩风格",
+        "质感渲染",
+        "艺术格调"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片",
+            "绘画"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true,
+          "singleSelect": false,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 148,
+      "name": "时间季节",
+      "level": 3,
+      "tags": [
+        "春季花景",
+        "夏季绿荫",
+        "秋季金黄",
+        "冬季雪景"
+      ],
+      "description": "自然风光与户外旅行照片的季节时序特征",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "时序色彩",
+        "季节植物",
+        "气候特征"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "图片细分",
+          "triggerTags": [
+            "摄影照片"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 149,
+      "name": "主色调",
+      "level": 2,
+      "tags": [
+        "暖色调",
+        "冷色调",
+        "中性黑白灰",
+        "高饱和鲜艳",
+        "红色",
+        "橙色",
+        "黄色",
+        "绿色",
+        "青色",
+        "蓝色",
+        "紫色",
+        "粉色",
+        "棕色",
+        "白色",
+        "黑色",
+        "灰色"
+      ],
+      "description": "画面的整体主导色温与色彩基调倾向",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "色温分析",
+        "色彩直方图",
+        "色调倾向"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "文件类型",
+          "triggerTags": [
+            "图片",
+            "视频"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
     }
   ]
 }

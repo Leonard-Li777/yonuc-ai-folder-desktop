@@ -30,7 +30,12 @@
         "Tipo MIME",
         "Firma de archivo"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true
+        }
+      }
     },
     {
       "id": 2,
@@ -46,7 +51,8 @@
         "Recursos de diseño",
         "Mantenimiento del sistema",
         "Investigación académica",
-        "Notas personales"
+        "Notas personales",
+        "Vida familiar"
       ],
       "description": "Escenarios principales de uso de archivos",
       "applicableFileTypes": [
@@ -57,7 +63,10 @@
         "Patrón de nombres",
         "Aplicaciones asociadas"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 3,
@@ -81,7 +90,13 @@
         "Características de la ruta",
         "Registro de transferencia"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 4,
@@ -103,7 +118,12 @@
         "Firma digital",
         "Filigrana"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 100,
@@ -132,7 +152,14 @@
             "Texto"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 101,
@@ -160,7 +187,14 @@
             "Documento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 5,
@@ -187,7 +221,14 @@
             "Datos de aplicación"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 6,
@@ -196,19 +237,19 @@
       "tags": [
         "Extensión de imagen",
         "Fotografía",
-        "合同票据",
-        "证照",
+        "Documentos contractuales",
+        "Licencias y certificados",
         "Captura de pantalla",
         "Borrador de diseño",
-        "海报宣发",
+        "Promoción y difusión de carteles",
         "Icono de aplicación",
         "Emoticones",
         "Imágenes medicas",
         "Dibujo",
         "Historietas",
         "Cuadro",
-        "有字图",
-        "无字图"
+        "Imágenes con texto",
+        "Imagen sin texto"
       ],
       "description": "Clasificación profesional del contenido de la imagen.",
       "applicableFileTypes": [
@@ -225,7 +266,13 @@
             "Imagen"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 7,
@@ -256,7 +303,12 @@
             "Vídeo"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 8,
@@ -286,7 +338,13 @@
             "Audio"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 9,
@@ -313,7 +371,13 @@
             "Archivo comprimido"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 10,
@@ -342,7 +406,13 @@
             "Programa ejecutable"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 11,
@@ -388,7 +458,13 @@
             "Vídeo"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 12,
@@ -417,7 +493,14 @@
             "Archivos del sistema"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 13,
@@ -476,7 +559,13 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 14,
@@ -505,7 +594,14 @@
             "Base de datos"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 15,
@@ -532,7 +628,14 @@
             "Imagen de disco"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 102,
@@ -583,7 +686,13 @@
             "Extensión de datos de la aplicación"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 103,
@@ -612,7 +721,13 @@
             "Extensión de base de datos"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 104,
@@ -645,7 +760,13 @@
             "Extensión de imagen de disco"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 105,
@@ -674,7 +795,14 @@
             "Código fuente"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 16,
@@ -705,7 +833,13 @@
             "Proyectos creativos"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 17,
@@ -736,7 +870,13 @@
             "Archivos financieros"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 18,
@@ -768,7 +908,53 @@
             "Proyectos creativos"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
+    },
+    {
+      "id": 29,
+      "name": "Segmentación de la vida familiar",
+      "level": 2,
+      "tags": [
+        "Casa para vivir",
+        "Compras desde casa",
+        "Medicina familiar",
+        "Documentos familiares",
+        "Educación infantil",
+        "Limpieza diaria",
+        "Comidas caseras"
+      ],
+      "description": "Asuntos de vida específicos en situaciones familiares",
+      "applicableFileTypes": [
+        "text",
+        "document",
+        "ebook",
+        "image",
+        "video",
+        "audio",
+        "design"
+      ],
+      "contextHints": [
+        "Ruta de almacenamiento",
+        "Patrón de nombres",
+        "Aplicaciones asociadas"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Propósito del archivo",
+          "triggerTags": [
+            "Vida familiar"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 19,
@@ -798,7 +984,10 @@
             "Programa ejecutable"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 20,
@@ -829,7 +1018,10 @@
             "Registros de viaje"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 21,
@@ -858,7 +1050,10 @@
             "Archivos financieros"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 22,
@@ -899,7 +1094,10 @@
             "Juegos y entretenimiento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 23,
@@ -937,7 +1135,10 @@
             "Materiales de estudio"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 24,
@@ -967,7 +1168,13 @@
             "Libro electrónico"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 25,
@@ -1056,7 +1263,10 @@
             "Juegos y entretenimiento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 26,
@@ -1095,7 +1305,10 @@
             "Música"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 27,
@@ -1115,7 +1328,13 @@
         "Calidad técnica",
         "Calidad estetica"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 28,
@@ -1131,7 +1350,12 @@
         "Descripción visual",
         "Transcripción de discurso"
       ],
-      "triggerConditions": []
+      "triggerConditions": [],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true
+        }
+      }
     },
     {
       "id": 106,
@@ -1158,7 +1382,14 @@
             "Tipo de letra"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true,
+          "isExtensionSubdivision": true
+        }
+      }
     },
     {
       "id": 107,
@@ -1187,7 +1418,13 @@
             "Extensión de archivo del sistema"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 108,
@@ -1234,7 +1471,13 @@
             "Extensión del documento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 109,
@@ -1268,7 +1511,13 @@
             "Extensión de texto"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 110,
@@ -1322,7 +1571,13 @@
             "Extensión de imagen"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 111,
@@ -1364,7 +1619,13 @@
             "Extensión de vídeo"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 112,
@@ -1412,7 +1673,13 @@
             "Extensión de audio"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 113,
@@ -1468,7 +1735,13 @@
             "Extensión del paquete comprimido"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 114,
@@ -1594,7 +1867,13 @@
             "Extensión del código fuente"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 115,
@@ -1631,7 +1910,13 @@
             "Extensión del programa"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 116,
@@ -1664,7 +1949,13 @@
             "Extensión de libro electrónico"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 117,
@@ -1690,7 +1981,13 @@
             "Extensión de fuente"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "isExtensionDimension": true
+        }
+      }
     },
     {
       "id": 118,
@@ -1739,7 +2036,10 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 119,
@@ -1779,14 +2079,16 @@
             "Juegos y entretenimiento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 120,
       "name": "Fuente de trabajo",
       "level": 2,
       "tags": [
-        "IA generada",
         "Original",
         "Doujin",
         "Traducir",
@@ -1840,7 +2142,12 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 121,
@@ -1907,7 +2214,10 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 122,
@@ -1944,7 +2254,13 @@
             "Imagen"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 123,
@@ -1975,12 +2291,18 @@
       ],
       "triggerConditions": [
         {
-          "parentDimension": "敏感内容",
+          "parentDimension": "Contenido sensible",
           "triggerTags": [
             "Pornografía"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 124,
@@ -2019,7 +2341,13 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 125,
@@ -2059,34 +2387,40 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {
+          "isRuleSubdivision": true,
+          "singleSelect": true
+        }
+      }
     },
     {
       "id": 126,
-      "name": "摄影照片细分",
+      "name": "Categorización de fotografías",
       "level": 3,
       "tags": [
-        "风景照",
-        "人物照",
-        "婚纱照",
-        "静物照",
-        "宠物照",
-        "微距摄影",
-        "夜景照",
-        "建筑摄影",
-        "旅行照",
-        "街拍抓拍",
-        "人像写真",
-        "航空航拍"
+        "Fotografías de paisajes",
+        "Fotografías de personas",
+        "Fotos de boda",
+        "Fotografía de naturaleza muerta",
+        "Fotos de mascotas",
+        "Fotografía macro",
+        "Fotografías nocturnas",
+        "Fotografía arquitectónica",
+        "Fotos de viaje",
+        "Fotografías espontáneas en la calle",
+        "Fotografía de retratos",
+        "Fotografía aérea"
       ],
-      "description": "摄影照片的内容与题材专业细分",
+      "description": "Clasificación profesional del contenido y los temas de la fotografía",
       "applicableFileTypes": [
         "image"
       ],
       "contextHints": [
         "Datos EXIF",
-        "题材识别",
-        "场景感知"
+        "Identificación de temas",
+        "Detección de entornos"
       ],
       "triggerConditions": [
         {
@@ -2095,36 +2429,39 @@
             "Fotografía"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 127,
-      "name": "照片质量",
+      "name": "Calidad de las fotografías",
       "level": 3,
       "tags": [
-        "优质精选",
-        "曝光正常",
-        "暗光欠曝",
-        "逆光死白",
-        "高ISO噪点",
-        "模糊废片",
-        "虚焦",
-        "抖动",
-        "脱焦",
-        "运动抖动",
-        "构图不良",
-        "色偏严重",
-        "方向错误",
-        "画面倾斜"
+        "Selección de primera calidad",
+        "Exposición correcta",
+        "Subexposición en condiciones de poca luz",
+        "Blanco cegador a contraluz",
+        "Ruido a ISO alto",
+        "Fotografías borrosas y inservibles",
+        "Enfoque falso",
+        "Temblor",
+        "Descoquización",
+        "Temblor por movimiento",
+        "Composición deficiente",
+        "Grave desviación cromática",
+        "Dirección incorrecta",
+        "La imagen está inclinada"
       ],
-      "description": "摄影照片的技术与画质状态评估",
+      "description": "Técnicas fotográficas y evaluación de la calidad de imagen",
       "applicableFileTypes": [
         "image"
       ],
       "contextHints": [
-        "画质检测",
-        "曝光分析",
-        "清晰度评估"
+        "Comprobación de la calidad de la imagen",
+        "Análisis de la exposición",
+        "Evaluación de la nitidez"
       ],
       "triggerConditions": [
         {
@@ -2133,94 +2470,103 @@
             "Fotografía"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 128,
-      "name": "合同票据细分",
+      "name": "Desglose de los efectos contractuales",
       "level": 3,
       "tags": [
         "Contrato",
         "Factura",
-        "红头文件",
-        "论文",
-        "收据",
-        "对账单",
-        "银行回单",
-        "采购订单",
-        "报销凭证",
-        "保函协议",
-        "投标文件"
+        "Documento oficial",
+        "Tesis",
+        "Recibo",
+        "Extracto de cuenta",
+        "Recibo bancario",
+        "Orden de compra",
+        "Justificantes de reembolso",
+        "Acuerdo de garantía",
+        "Documentación de licitación"
       ],
-      "description": "商务票据与法律文书的版式专业分类",
+      "description": "Clasificación profesional de los formatos de los documentos comerciales y jurídicos",
       "applicableFileTypes": [
         "image",
         "document"
       ],
       "contextHints": [
-        "版式识别",
-        "公章印鉴",
-        "财务表格"
+        "Reconocimiento de maquetación",
+        "Sello oficial",
+        "Formularios financieros"
       ],
       "triggerConditions": [
         {
           "parentDimension": "Segmentación de imágenes",
           "triggerTags": [
-            "合同票据"
+            "Documentos contractuales"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 129,
-      "name": "证照细分",
+      "name": "Clasificación de las licencias y certificados",
       "level": 3,
       "tags": [
-        "身份证",
-        "房产证",
-        "护照",
-        "驾驶证",
-        "行驶证",
-        "车牌",
-        "银行卡",
-        "营业执照",
-        "户口本",
-        "毕业证",
-        "学位证",
-        "工作证",
-        "结婚证",
-        "社保卡"
+        "Documento de identidad",
+        "Título de propiedad",
+        "Pasaporte",
+        "Permiso de conducir",
+        "Permiso de circulación",
+        "Matrícula",
+        "Tarjeta bancaria",
+        "Licencia comercial",
+        "Libro de empadronamiento",
+        "Certificado de graduación",
+        "Título universitario",
+        "Tarjeta de identificación laboral",
+        "Certificado de matrimonio",
+        "Tarjeta de la Seguridad Social"
       ],
-      "description": "公民身份与官方凭证资质卡证分类",
+      "description": "Clasificación de los documentos de identidad y las tarjetas de acreditación oficiales",
       "applicableFileTypes": [
         "image",
         "document"
       ],
       "contextHints": [
-        "卡证边框",
-        "防伪底纹",
-        "官方证件"
+        "Marco para tarjetas",
+        "Fondo de seguridad",
+        "Documentos oficiales"
       ],
       "triggerConditions": [
         {
           "parentDimension": "Segmentación de imágenes",
           "triggerTags": [
-            "证照"
+            "Licencias y certificados"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 130,
-      "name": "敏感内容",
+      "name": "Contenido sensible",
       "level": 2,
       "tags": [
-        "血腥",
-        "涉政",
-        "违规",
+        "Sangriento",
+        "Relacionado con la política",
+        "Infracción",
         "Pornografía"
       ],
-      "description": "文件内容的敏感与合规安全审查分类",
+      "description": "Clasificación de los documentos según el grado de confidencialidad y el cumplimiento normativo",
       "applicableFileTypes": [
         "ebook",
         "image",
@@ -2228,9 +2574,9 @@
         "archive"
       ],
       "contextHints": [
-        "敏感内容审查",
-        "合规安全检测",
-        "违规过滤"
+        "Censura de contenidos sensibles",
+        "Comprobación de seguridad y cumplimiento normativo",
+        "Filtrado indebido"
       ],
       "triggerConditions": [
         {
@@ -2265,24 +2611,27 @@
             "Historietas"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 131,
-      "name": "血腥细分",
+      "name": "Segmentación sangrienta",
       "level": 3,
       "tags": [
-        "断头斩首",
-        "肢解碎尸",
-        "血腥虐杀",
-        "尸体残骸",
-        "酷刑折磨",
-        "血肉模糊",
-        "重口猎奇",
-        "暴恐惨案",
-        "自残放血"
+        "Decapitación",
+        "Desmembrar y trocear un cadáver",
+        "Masacre sangrienta",
+        "Restos de cadáveres",
+        "Tortura y maltrato",
+        "Hecho un amasijo de carne y sangre",
+        "Contenido extremo y morboso",
+        "Tragedia provocada por un atentado terrorista",
+        "Autolesiones con sangrado"
       ],
-      "description": "血腥、暴力与重口猎奇题材细分",
+      "description": "Subgéneros relacionados con la sangre, la violencia y el morbo extremo",
       "applicableFileTypes": [
         "ebook",
         "image",
@@ -2290,34 +2639,37 @@
         "archive"
       ],
       "contextHints": [
-        "暴力审查",
-        "血腥评级",
-        "猎奇检测"
+        "Censura violenta",
+        "Clasificación por violencia",
+        "Pruebas de curiosidades"
       ],
       "triggerConditions": [
         {
-          "parentDimension": "敏感内容",
+          "parentDimension": "Contenido sensible",
           "triggerTags": [
-            "血腥"
+            "Sangriento"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 132,
-      "name": "涉政细分",
+      "name": "Subcategorías relacionadas con la política",
       "level": 3,
       "tags": [
-        "反党反政",
-        "颠覆政权",
-        "分裂国家",
-        "恐怖主义",
-        "邪教组织",
-        "暴乱动乱",
-        "宗教极端",
-        "极端思潮"
+        "Contrario al Partido y al Gobierno",
+        "Derrocar al Gobierno",
+        "División del país",
+        "Terrorismo",
+        "Sectas",
+        "Disturbios y revueltas",
+        "Extremismo religioso",
+        "Corrientes de pensamiento extremistas"
       ],
-      "description": "政治敏感、国家安全与意识形态违规分类",
+      "description": "Clasificación de infracciones relacionadas con cuestiones políticas delicadas, seguridad nacional e ideología",
       "applicableFileTypes": [
         "ebook",
         "image",
@@ -2325,36 +2677,39 @@
         "archive"
       ],
       "contextHints": [
-        "政治合规",
-        "敏感人物",
-        "意识形态审查"
+        "Cumplimiento normativo en materia política",
+        "Personas delicadas",
+        "Censura ideológica"
       ],
       "triggerConditions": [
         {
-          "parentDimension": "敏感内容",
+          "parentDimension": "Contenido sensible",
           "triggerTags": [
-            "涉政"
+            "Relacionado con la política"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 133,
-      "name": "违规细分",
+      "name": "Clasificación de infracciones",
       "level": 3,
       "tags": [
-        "毒品交易",
-        "走私贩私",
-        "枪支弹药",
-        "洗钱黑产",
-        "电信诈骗",
-        "暗网交易",
-        "网络赌博",
-        "假冒伪劣",
-        "侵害未成年",
-        "违禁物品"
+        "Tráfico de drogas",
+        "Contrabando",
+        "Armas de fuego y munición",
+        "Industria ilegal del blanqueo de dinero",
+        "Estafas telefónicas",
+        "Transacciones en la dark web",
+        "Apuestas en línea",
+        "Productos falsificados y de mala calidad",
+        "Abuso de menores",
+        "Artículos prohibidos"
       ],
-      "description": "法律法规禁止流通的违法违规物品与行为分类",
+      "description": "Clasificación de los artículos y conductas ilegales cuya circulación está prohibida por la legislación",
       "applicableFileTypes": [
         "ebook",
         "image",
@@ -2362,35 +2717,38 @@
         "archive"
       ],
       "contextHints": [
-        "违法检测",
-        "违禁品识别",
-        "黑产过滤"
+        "Pruebas ilegales",
+        "Identificación de artículos prohibidos",
+        "Filtrado de actividades ilícitas"
       ],
       "triggerConditions": [
         {
-          "parentDimension": "敏感内容",
+          "parentDimension": "Contenido sensible",
           "triggerTags": [
-            "违规"
+            "Infracción"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 134,
-      "name": "色情细分",
+      "name": "Subgéneros del porno",
       "level": 3,
       "tags": [
-        "露骨性行为",
-        "自慰高潮",
-        "情色文娱",
-        "擦边诱惑",
-        "暴露走光",
-        "调教拘束",
-        "私房写真",
-        "偷拍窥视",
-        "违背意愿"
+        "Actos sexuales explícitos",
+        "Orgasmo mediante la masturbación",
+        "Entretenimiento erótico",
+        "Tentación al límite",
+        "Exposición accidental",
+        "Domesticación y sujeción",
+        "Fotos privadas",
+        "Grabaciones clandestinas y espionaje",
+        "Contra su voluntad"
       ],
-      "description": "成人色情、情色文娱与擦边暴露题材细分",
+      "description": "Segmentación del mercado de la pornografía para adultos, el entretenimiento erótico y los contenidos que rozan los límites de la desnudez",
       "applicableFileTypes": [
         "ebook",
         "image",
@@ -2398,47 +2756,50 @@
         "archive"
       ],
       "contextHints": [
-        "成人审查",
-        "性行为检测",
-        "色情分类"
+        "Control de contenido para adultos",
+        "Pruebas de relaciones sexuales",
+        "Categorías eróticas"
       ],
       "triggerConditions": [
         {
-          "parentDimension": "敏感内容",
+          "parentDimension": "Contenido sensible",
           "triggerTags": [
             "Pornografía"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
     },
     {
       "id": 135,
-      "name": "截图细分",
+      "name": "Desglose de capturas de pantalla",
       "level": 3,
       "tags": [
-        "网页长截图",
-        "UI界面截图",
-        "聊天截图",
-        "代码截图",
-        "游戏截图",
-        "支付凭证截图",
-        "系统报错截图",
-        "社交动态截图",
-        "影视视频截图",
-        "文档截图",
-        "地图导航截图",
-        "终端控制台截图",
-        "订单物流截图",
-        "桌面全屏截图"
+        "Captura de pantalla larga de una página web",
+        "Captura de pantalla de la interfaz de usuario",
+        "Capturas de pantalla de la conversación",
+        "Captura de pantalla del código",
+        "Capturas de pantalla del juego",
+        "Captura de pantalla del comprobante de pago",
+        "Captura de pantalla del error del sistema",
+        "Captura de pantalla de una publicación en redes sociales",
+        "Capturas de pantalla de películas y series",
+        "Captura de pantalla del documento",
+        "Captura de pantalla del mapa de navegación",
+        "Captura de pantalla de la consola de terminal",
+        "Captura de pantalla de la logística del pedido",
+        "Captura de pantalla a pantalla completa del escritorio"
       ],
-      "description": "各类屏幕捕获与截图内容的专业细分",
+      "description": "Clasificación profesional de los distintos tipos de capturas de pantalla y su contenido",
       "applicableFileTypes": [
         "image"
       ],
       "contextHints": [
-        "屏幕捕获",
-        "界面分析",
-        "截图识别"
+        "Captura de pantalla",
+        "Análisis de la interfaz",
+        "Reconocimiento de capturas de pantalla"
       ],
       "triggerConditions": [
         {
@@ -2447,7 +2808,530 @@
             "Captura de pantalla"
           ]
         }
-      ]
+      ],
+      "metadata": {
+        "flag": {}
+      }
+    },
+    {
+      "id": 136,
+      "name": "Generar vector",
+      "level": 2,
+      "tags": [
+        "Tiro real",
+        "Dibujado a mano",
+        "Representación generada por computadora",
+        "IA generada"
+      ],
+      "description": "Métodos de generación física y soportes de imágenes y contenidos visuales.",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "Método de generación",
+        "Tipo de renderizado",
+        "Identificación del transportista"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Imagen",
+            "Vídeo"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 137,
+      "name": "Despedida del paisaje",
+      "level": 3,
+      "tags": [
+        "Primer plano",
+        "Medio cuerpo",
+        "Todo el cuerpo",
+        "Vista panorámica",
+        "Macro"
+      ],
+      "description": "Rango de encuadre y escenografía de fotografías y obras de arte.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Rango de visión",
+        "Composición del marco",
+        "Escena del personaje"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía",
+            "Historietas",
+            "Cuadro"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 138,
+      "name": "Iluminación",
+      "level": 3,
+      "tags": [
+        "Luz solar",
+        "Puesta de sol",
+        "Vista nocturna",
+        "Luz tenue",
+        "Luz interior"
+      ],
+      "description": "Luz ambiental y atmósfera del momento de la toma de fotografías fotográficas.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Análisis de luz",
+        "Tiempo de disparo",
+        "Reconocimiento de atmósfera"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 139,
+      "name": "Antecedentes",
+      "level": 2,
+      "tags": [
+        "Fondo transparente",
+        "Fondo de color sólido",
+        "Fondo en vivo"
+      ],
+      "description": "Canales de fondo y tipos de entorno para recursos y materiales de diseño de imágenes.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Canal alfa",
+        "Recorte de fondo",
+        "Recursos de diseño"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Imagen"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 140,
+      "name": "Perspectiva",
+      "level": 3,
+      "tags": [
+        "Nivel de los ojos",
+        "Mirando hacia abajo",
+        "Buscar",
+        "Primera persona"
+      ],
+      "description": "Ángulos de perspectiva y ángulos de visión para disparar y dibujar tomas.",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "ángulo de tiro",
+        "Perspectiva de la lente",
+        "ángulo de visión"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía",
+            "Captura de pantalla"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 141,
+      "name": "Disposición",
+      "level": 2,
+      "tags": [
+        "Texto plano",
+        "Basado en gráficos",
+        "Gráficos y texto mixtos.",
+        "Notas escritas a mano"
+      ],
+      "description": "Composición del diseño visual de documentos y páginas.",
+      "applicableFileTypes": [
+        "document",
+        "image"
+      ],
+      "contextHints": [
+        "Estructura tipográfica",
+        "Análisis de diseño",
+        "Proporción de imagen y texto"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Documento",
+            "Imagen"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 142,
+      "name": "Ecología del sistema",
+      "level": 3,
+      "tags": [
+        "Captura de pantalla de Windows",
+        "Capturas de pantalla de macOS",
+        "Capturas de pantalla de iOS",
+        "Captura de pantalla de Android",
+        "Captura de pantalla de linux"
+      ],
+      "description": "Interfaz del sistema operativo y segmentación de fuentes ecológicas del dispositivo terminal.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Sistema operativo",
+        "Estilo de interfaz",
+        "Fuente del equipo"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Captura de pantalla"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 143,
+      "name": "Marco",
+      "level": 2,
+      "tags": [
+        "Pantalla horizontal",
+        "Pantalla vertical",
+        "Cuadrado",
+        "Tira extra ancha"
+      ],
+      "description": "La relación de aspecto de la imagen y la dirección de la composición.",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "Relación de aspecto",
+        "Análisis de resolución",
+        "Dirección del marco"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Imagen",
+            "Vídeo"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 144,
+      "name": "Número de sujetos",
+      "level": 3,
+      "tags": [
+        "Soltero",
+        "Doble",
+        "Foto de grupo",
+        "Espejo aéreo no tripulado"
+      ],
+      "description": "El número y composición de personajes o temas centrales de la imagen.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Recuento de sujetos",
+        "Detección de retratos",
+        "Composición de la escena"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía",
+            "Historietas",
+            "Cuadro"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 145,
+      "name": "Tipo de tema",
+      "level": 2,
+      "tags": [
+        "Asunto del personaje",
+        "Mascotas animales",
+        "Plantas y flores",
+        "Mercancía de bodegones",
+        "Arquitectura ambiental"
+      ],
+      "description": "El tipo principal de enfoque visual en primer plano en la imagen.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Detección de objetivos",
+        "Identificación del sujeto",
+        "Enfoque visual"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Imagen"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": false,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 146,
+      "name": "Densidad del texto",
+      "level": 2,
+      "tags": [
+        "Microtexto",
+        "Título de imagen y texto.",
+        "Tipografía densa"
+      ],
+      "description": "La cantidad de texto y la densidad del diseño contenida en una imagen o página.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Reconocimiento OCR",
+        "Cobertura de texto",
+        "Diseño de texto"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Imágenes con texto"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 147,
+      "name": "Estilo de textura",
+      "level": 3,
+      "tags": [
+        "Plano y minimalista",
+        "Realista",
+        "Película antigua",
+        "Ciberpunk",
+        "Tinta de acuarela"
+      ],
+      "description": "El tono artístico y el estilo de textura de la imagen de las obras visuales.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Estilo de color",
+        "Renderizado de textura",
+        "Estilo artístico"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía",
+            "Cuadro"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": true,
+          "singleSelect": false,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 148,
+      "name": "Temporada de tiempo",
+      "level": 3,
+      "tags": [
+        "Escena de flores de primavera",
+        "Sombra de verano",
+        "Otoño dorado",
+        "Escena de nieve de invierno"
+      ],
+      "description": "Características temporales estacionales de paisajes naturales y fotografías de viajes al aire libre.",
+      "applicableFileTypes": [
+        "image"
+      ],
+      "contextHints": [
+        "Color de serie temporal",
+        "Plantas estacionales",
+        "Características climáticas"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Segmentación de imágenes",
+          "triggerTags": [
+            "Fotografía"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
+    },
+    {
+      "id": 149,
+      "name": "Color principal",
+      "level": 2,
+      "tags": [
+        "Colores cálidos",
+        "Colores fríos",
+        "Negro neutro, blanco y gris.",
+        "Altamente saturado y vívido.",
+        "Rojo",
+        "Color naranja",
+        "Amarillo",
+        "Verde",
+        "Azul",
+        "Azul",
+        "Púrpura",
+        "Rosa",
+        "Marrón",
+        "Blanco",
+        "Negro",
+        "Gris"
+      ],
+      "description": "La temperatura de color dominante general y la tendencia del tono de color de la imagen.",
+      "applicableFileTypes": [
+        "image",
+        "video"
+      ],
+      "contextHints": [
+        "Análisis de temperatura de color",
+        "Histograma de color",
+        "Tendencia de tono"
+      ],
+      "triggerConditions": [
+        {
+          "parentDimension": "Tipo de archivo",
+          "triggerTags": [
+            "Imagen",
+            "Vídeo"
+          ]
+        }
+      ],
+      "metadata": {
+        "flag": {
+          "isPanDimension": false,
+          "singleSelect": true,
+          "isMicroService": true
+        }
+      }
     }
   ]
 }

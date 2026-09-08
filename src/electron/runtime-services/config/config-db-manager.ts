@@ -301,8 +301,8 @@ export class ConfigDbManager {
       const insertStmt = db.prepare(`
         INSERT INTO file_dimensions (
           id, name, level, tags, trigger_conditions, is_ai_generated, description,
-          applicable_file_types, context_hints, sync_status, created_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?)
+          applicable_file_types, context_hints, sync_status, metadata, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?, ?)
       `)
 
       db.transaction(() => {
@@ -327,6 +327,8 @@ export class ConfigDbManager {
               ? rawCH
               : JSON.stringify(rawCH)
             : null
+          const rawMetadata = dim.metadata
+          const metadata = rawMetadata ? JSON.stringify(rawMetadata) : null
 
           insertStmt.run(
             dim.id,
@@ -338,6 +340,7 @@ export class ConfigDbManager {
             dim.description || null,
             applicableFileTypes,
             contextHints,
+            metadata,
             dim.created_at || new Date().toISOString()
           )
         }
@@ -584,8 +587,8 @@ export class ConfigDbManager {
             const dimInsert = db.prepare(`
               INSERT INTO file_dimensions (
                 id, name, level, tags, trigger_conditions, is_ai_generated, description,
-                applicable_file_types, context_hints, sync_status, created_at
-              ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?)
+                applicable_file_types, context_hints, sync_status, metadata, created_at
+              ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 2, ?, ?)
             `)
             const now = new Date().toISOString()
             dimensionData.forEach(dim => {
@@ -608,6 +611,7 @@ export class ConfigDbManager {
                   : dim.context_hints
                     ? JSON.stringify(dim.context_hints)
                     : null
+              const metadata = dim.metadata ? JSON.stringify(dim.metadata) : null
 
               dimInsert.run(
                 dim.id,
@@ -619,6 +623,7 @@ export class ConfigDbManager {
                 dim.description || null,
                 applicable_file_types,
                 context_hints,
+                metadata,
                 dim.created_at || now
               )
             })
