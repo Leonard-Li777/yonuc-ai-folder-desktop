@@ -511,27 +511,31 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-card border-t border-border px-6 py-3 flex justify-between items-center text-sm text-foreground">
-      <div className="flex items-center gap-4">
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2 group">
+    <footer className="bg-card border-t border-border px-6 py-3 flex justify-between items-center text-sm text-foreground overflow-hidden gap-2">
+      {/* 左侧AI状态区：min-w-0+shrink 允许在空间不足时收缩，防止撑破footer布局 */}
+      <div className="flex items-center gap-4 min-w-0 shrink">
+        <div className="flex items-center space-x-6 min-w-0">
+          <div className="flex items-center space-x-2 group min-w-0">
             <MaterialIcon
               icon={aiServiceInfo.icon}
               className={`${aiServiceInfo.color} ${aiServiceInfo.animate || ''} text-sm`}
             />
-            <div>
+            {/* min-w-0 允许内部文字截断 */}
+            <div className="min-w-0">
               <button
                 className={`${
                   aiServiceInfo.color
-                } transition-all duration-200 hover:underline cursor-pointer`}
+                } transition-all duration-200 hover:underline cursor-pointer truncate max-w-[480px] block`}
                 onClick={() => openSettings(SettingsCategory.AI_MODEL)}
+                title={aiServiceInfo.text}
               >
                 {' '}
                 {aiServiceInfo.text}
               </button>
-              <div>
+              {/* min-w-0 保护：次级提示行在西文语种下可能很长，需允许截断而非撑破footer */}
+              <div className="min-w-0">
                 {showAiError && (
-                  <div className="mt-0.5">
+                  <div className="mt-0.5 truncate max-w-[480px] block">
                     <PersistentTooltip
                       id={`ai_footer_error_${error?.code || (error as any)?.type || 'general'}`}
                       content={t('AI服务出现异常，点击查看详情与修复方案')}
@@ -544,7 +548,7 @@ export function Footer() {
                         title={t('点击查看AI服务错误详情')}
                       >
                         <MaterialIcon icon="error_outline" className="text-xs shrink-0 animate-pulse" />
-                        <span className="truncate max-w-[320px]">
+                        <span className="">
                           {errorMessageDisplay}，{t('点击查看原因')}
                         </span>
                       </button>
@@ -553,8 +557,9 @@ export function Footer() {
                 )}
                 {showRecommendation && (
                   <button
-                    className="text-xs leading-tight text-red-500/90 font-medium transition-all duration-200  hover:underline cursor-pointer block"
+                    className="text-xs leading-tight text-red-500/90 font-medium transition-all duration-200 hover:underline cursor-pointer block truncate max-w-[480px]"
                     onClick={() => openSettings(SettingsCategory.AI_MODEL)}
+                    title={t('检测到您有高性能显卡，请切换更聪明的AI模型，立即设置')}
                   >
                     {t('检测到您有高性能显卡，请切换更聪明的AI模型，立即设置')}
                   </button>
@@ -562,8 +567,11 @@ export function Footer() {
                 {accelerationBelowBest && (
                   <button
                     onClick={() => openSettings(SettingsCategory.AI_ENGINE_CONFIG)}
-                    className="text-yellow-500 text-xs hover:underline cursor-pointer block"
-                    title={t('点击前往引擎管理设置最佳可用加速引擎')}
+                    className="text-yellow-500 text-xs hover:underline cursor-pointer block truncate max-w-[480px]"
+                    title={t('警告：{current}非最佳可用引擎，请点击切换{best}！', {
+                      current: currentAcceleration,
+                      best: bestAcceleration
+                    })}
                   >
                     {t('警告：{current}非最佳可用引擎，请点击切换{best}！', {
                       current: currentAcceleration,
@@ -624,7 +632,8 @@ export function Footer() {
         </DialogContent>
       </Dialog>
 
-      <div className="flex items-center">
+      {/* 右侧按钮组：shrink-0 防止被左侧内容挤压换行 */}
+      <div className="flex items-center shrink-0">
         <button
           className="relative overflow-hidden rounded-lg px-2.5 py-1 text-xs font-medium cursor-pointer transition-all border border-border/60 bg-muted/30 hover:bg-muted/60 hover:border-primary/40 dark:border-border/40 dark:bg-card/40 dark:hover:bg-muted/40 shadow-xs flex items-center group"
           onClick={handleQueueButtonClick}

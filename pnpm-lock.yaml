@@ -1572,7 +1572,7 @@ packages:
     hasBin: true
 
   '@file-viewer/assets-data@3.0.0':
-    resolution: {integrity: sha512-6FTYWEEzr5gsBwpQ6vqiwHQLV5ljQ6y4OV4MVp8amzSefw3MSWmotsqYgOssPP/Nwgs8zPoorFJ5w0n0p4CKjw==, tarball: https://registry.npmjs.org/@file-viewer/assets-data/-/assets-data-3.0.0.tgz}
+    resolution: {integrity: sha512-6FTYWEEzr5gsBwpQ6vqiwHQLV5ljQ6y4OV4MVp8amzSefw3MSWmotsqYgOssPP/Nwgs8zPoorFJ5w0n0p4CKjw==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -1639,7 +1639,7 @@ packages:
     resolution: {integrity: sha512-x0m/rARIYM9pl5rrZtPLJF7mGiISfJwAU5C5qxQCTao80yOj80Mw43nybbQ+3t5PV0B2dsVRj0qY0Mrrki26+Q==}
 
   '@file-viewer/renderer-dicom@3.0.0':
-    resolution: {integrity: sha512-Pi3xTztxGM1k9xggHseWOXmL/vjgEPnK08DrMjyfh7Sslpu2dMrGjxEZphgJgcihMw5+HTd5/HMPPEIhkGbhJw==, tarball: https://registry.npmjs.org/@file-viewer/renderer-dicom/-/renderer-dicom-3.0.0.tgz}
+    resolution: {integrity: sha512-Pi3xTztxGM1k9xggHseWOXmL/vjgEPnK08DrMjyfh7Sslpu2dMrGjxEZphgJgcihMw5+HTd5/HMPPEIhkGbhJw==}
 
   '@file-viewer/renderer-drawing@3.0.0':
     resolution: {integrity: sha512-eWrMT5t8UpipFtt2pvJEJ43uGpKNIQCt2QcFdwY86dfeTt1WALZRqTT8da45xfALG/CsZt4Ev3FjaUisH4VNdw==}
@@ -1680,7 +1680,7 @@ packages:
     resolution: {integrity: sha512-crzBqog20MKhPIPpw/OetS9NmUTTfKt7MJG/cvL7rdJWpoHsyTojd2SqhrP3hvdoQx+IVKp6+qypmVW8FpgCtw==}
 
   '@file-viewer/renderer-signature@3.0.0':
-    resolution: {integrity: sha512-FxAX9xklfx5vtxe1DOliyF9Ox/ag5d0v180EydoTG2CBQEEhTopxJpkz849NX3xfsLWytsp7E7nhtx3aenlGmw==, tarball: https://registry.npmjs.org/@file-viewer/renderer-signature/-/renderer-signature-3.0.0.tgz}
+    resolution: {integrity: sha512-FxAX9xklfx5vtxe1DOliyF9Ox/ag5d0v180EydoTG2CBQEEhTopxJpkz849NX3xfsLWytsp7E7nhtx3aenlGmw==}
 
   '@file-viewer/renderer-spreadsheet@3.0.0':
     resolution: {integrity: sha512-uEx/+F8T2NybC9q5hnZcMtzRGSgvyAy/dcVSdzhlUEvrI78za+QGwmGjjXt3DOr7z+kSlxakNrLrwlzqeTVAgg==}
