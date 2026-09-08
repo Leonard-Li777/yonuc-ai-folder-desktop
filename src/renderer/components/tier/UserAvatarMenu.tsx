@@ -375,8 +375,8 @@ export const UserAvatarMenu: React.FC<UserAvatarMenuProps> = ({ onOpenChange }) 
                     </div>
                   )}
 
-                  {/* 3. 萤火资产大卡：左侧大数值 + 右侧显式流水入口 */}
-                  <div className="mt-3 pt-3 border-t border-border/40 flex items-center justify-between gap-3 relative z-10">
+                  {/* 3. 萤火资产大卡：大数值余额与收支流水 */}
+                  <div className="mt-3 pt-3 border-t border-border/40 relative z-10">
                     <button
                       type="button"
                       onClick={() =>
@@ -384,39 +384,31 @@ export const UserAvatarMenu: React.FC<UserAvatarMenuProps> = ({ onOpenChange }) 
                           openRulesDialog('consumption')
                         })
                       }
-                      className="flex items-center gap-3 text-left group cursor-pointer transition-transform duration-200 hover:scale-[1.01] min-w-0"
+                      className="w-full flex items-center justify-between gap-3 text-left group cursor-pointer transition-transform duration-200 hover:scale-[1.01]"
                       title={t('点击查看收支流水')}
                     >
-                      <div className="p-2.5 bg-amber-500/10 rounded-xl ring-1 ring-amber-500/20 shrink-0 transition-all duration-200 group-hover:ring-amber-500/40 group-hover:bg-amber-500/15">
-                        <Firecores className="w-5 h-5 text-amber-500 animate-pulse" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider leading-tight break-words">
-                          {t('萤火余额')}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="p-2.5 bg-amber-500/10 rounded-xl ring-1 ring-amber-500/20 shrink-0 transition-all duration-200 group-hover:ring-amber-500/40 group-hover:bg-amber-500/15">
+                          <Firecores className="w-5 h-5 text-amber-500 animate-pulse" />
                         </div>
-                        <div className="text-2xl font-black tabular-nums leading-tight tracking-tight mt-0.5 text-foreground truncate">
-                          {firecores.toLocaleString()}
+                        <div className="min-w-0">
+                          <div className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider leading-tight">
+                            {t('萤火余额')}
+                          </div>
+                          <div className="text-2xl font-black tabular-nums leading-tight tracking-tight mt-0.5 text-foreground truncate">
+                            {firecores.toLocaleString()}
+                          </div>
                         </div>
                       </div>
-                    </button>
 
-                    {/* 显式流水明细胶囊按钮 */}
-                    {/* 胶囊按钮：[图标]+[文字] 结构，英文等长文案按单词自然换行（text-balance 均衡分行），
-                        不再用固定 maxWidth + overflow-hidden 硬截断，图标与文字、文字与边框均保留间隙 */}
-                    <button
-                      type="button"
-                      onClick={() =>
-                        handleMenuClick(() => {
-                          openRulesDialog('consumption')
-                        })
-                      }
-                      className="inline-flex shrink-0 items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground bg-background/60 hover:bg-accent/80 border border-border/50 hover:border-border transition-all cursor-pointer select-none group shadow-2xs text-left max-w-[128px]"
-                      title={t('点击查看收支流水')}
-                    >
-                      <ReceiptText className="w-3.5 h-3.5 text-amber-500/80 group-hover:text-amber-500 transition-colors shrink-0" />
-                      <span className="text-[11px] leading-tight text-balance break-words">
-                        {t('收支流水')}
-                      </span>
+                      {/* 显式流水明细入口：右侧胶囊，空间充裕且自然展开 */}
+                      <div className="inline-flex shrink-0 max-w-[150px] items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-muted-foreground group-hover:text-foreground bg-background/60 group-hover:bg-accent/80 border border-border/50 group-hover:border-border transition-all select-none shadow-2xs">
+                        <ReceiptText className="w-3.5 h-3.5 text-amber-500/80 group-hover:text-amber-500 transition-colors shrink-0" />
+                        <span className="text-[11px] font-medium truncate">
+                          {t('收支流水')}
+                        </span>
+                        <ChevronRight className="w-3 h-3 text-muted-foreground/60 group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
+                      </div>
                     </button>
                   </div>
 
