@@ -289,7 +289,7 @@ export class DimensionManager {
       const dbStartTime = performance.now()
       let rawDimensions = this.db
         .prepare(
-          'SELECT id, name, tags, trigger_conditions, level FROM file_dimensions ORDER BY level ASC'
+          'SELECT id, name, tags, trigger_conditions, level, metadata FROM file_dimensions ORDER BY level ASC'
         )
         .all() as any[]
       dbQueryTime += performance.now() - dbStartTime
@@ -402,15 +402,6 @@ export class DimensionManager {
 
       const groups: DimensionGroup[] = []
 
-      let panDimensionIds: number[] = [4, 28]
-      try {
-        panDimensionIds = ConfigOrchestrator.getInstance().getValue<number[]>(
-          'PAN_DIMENSION_IDS'
-        ) || [4, 28]
-      } catch {
-        panDimensionIds = [4, 28]
-      }
-      const panIdSet = new Set([4, 28, ...panDimensionIds.map(Number)])
       const { byDimensionAndAnchor, allByDimension } = this.loadLogicPanProjections()
 
       // 2. 处理每个维度并构建结果
@@ -423,7 +414,7 @@ export class DimensionManager {
           .all(dim.id) as { name: string }[]
         const existingTagNames = existingTags.map(t => t.name)
 
-        const isPanDim = isPanDimension(dim, Array.from(panIdSet))
+        const isPanDim = isPanDimension(dim)
 
         let presetTagsList: string[] = JSON.parse(dim.tags || '[]')
         // 若排除扩展名维度，对于含有末尾扩展名触发标签的 L2 维度自动剔除该预设扩展名标签
@@ -688,7 +679,8 @@ export class DimensionManager {
           tags: normalTags,
           contextualTags: Object.keys(contextualTags).length > 0 ? contextualTags : undefined,
           parentDimensionIds: parentDimensionIds.length > 0 ? parentDimensionIds : undefined,
-          triggerConditions: triggerConditions || undefined
+          triggerConditions: triggerConditions || undefined,
+          metadata: dim.metadata ?? undefined
         }
         groups.push(mainGroup)
 

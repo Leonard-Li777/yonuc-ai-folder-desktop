@@ -1,4 +1,5 @@
-import { LogCategory, logger, getIsDebugMode, sanitizeObject, toUTCString } from '@firefly/shared'
+import { LogCategory, logger, getIsDebugMode, sanitizeObject, toUTCString, isPanDimension } from '@firefly/shared'
+import type { DimensionMetadata } from '@firefly/types'
 import { net, powerMonitor } from 'electron'
 
 import { cloudAnalysisService } from '@firefly/server'
@@ -302,9 +303,15 @@ export class CloudSyncWorker {
 
       const language =
         ConfigOrchestrator.getInstance().getValue<string>('DEFAULT_LANGUAGE') || 'zh-CN'
-      const panDimensionIds =
-        ConfigOrchestrator.getInstance().getValue<number[]>('PAN_DIMENSION_IDS') || []
-      const panSet = new Set(panDimensionIds.map(id => Number(id)))
+      // 泛维度判定：以 file_dimensions.metadata 为唯一事实源（已退役 PAN_DIMENSION_IDS 配置）
+      const panDimRows = db
+        .prepare('SELECT id, metadata FROM file_dimensions')
+        .all() as Array<{ id: number; metadata?: DimensionMetadata | string | null }>
+      const panSet = new Set(
+        panDimRows
+          .filter(d => isPanDimension({ id: d.id, metadata: d.metadata }))
+          .map(d => Number(d.id))
+      )
 
       // ==================================================================================
       // Phase 0: 同步提案数据 (Expansions) - 本地单向推送至云端，ID 不同步

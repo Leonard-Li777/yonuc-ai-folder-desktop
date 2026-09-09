@@ -688,6 +688,36 @@
       }
     },
     {
+      "id": "openbmb/MiniCPM5-2B-GGUF:Q4_K_M",
+      "name": "MiniCPM5 2B（الممتاز）",
+      "company": "OpenBMB",
+      "parameterSize": "2B",
+      "totalSize": "1.45GB",
+      "recommended": true,
+      "description": "2B 级开源 SOTA 文本模型，代码推理、数学与长上下文能力突出，支持思维链推理，仅支持文本分析。",
+      "source": "huggingface",
+      "quantization": "Q4_K_M",
+      "isMultiModal": false,
+      "contextLength": 131072,
+      "capabilities": [
+        "TEXT"
+      ],
+      "performance": {
+        "speed": "very_fast",
+        "quality": "very_high"
+      },
+      "tags": [
+        "النص فقط",
+        "تحسين البرمجة",
+        "سلسلة الفكر",
+        "الصينية أفضل"
+      ],
+      "recommendedConfig": {
+        "numCtx": 16384,
+        "numPredict": 4096
+      }
+    },
+    {
       "id": "Abiray/Nanbeige4.2-3B-GGUF:Q4_K_S",
       "name": "نانبيج 4.2 3 ب (ما بعد 9 ب)",
       "company": "Abiray",

@@ -27,7 +27,6 @@ export const SYSTEM_CONFIG_SOURCE = () => ({
     forceUpdate: false
   },
   lastUpdated: '2026-08-31T13:31:00.000Z',
-  panDimensionIds: [4, 16, 28],
   latestNews: [
     {
       text: `V3.5 ${t('新增批量更名、批量标签、批量清理')}`

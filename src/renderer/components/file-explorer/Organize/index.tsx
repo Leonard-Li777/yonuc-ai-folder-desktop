@@ -42,8 +42,6 @@ export const Organize: React.FC = () => {
   useVoerkaI18n(i18nScope)
   const navigate = useNavigate()
   const { setAnalyzedDirectoryKeyword } = useSearchStore()
-  const panDimensionIds =
-    useSettingsStore(s => s.getConfigValue<number[]>('PAN_DIMENSION_IDS')) || [4, 28]
 
   const config = useSettingsStore(s => s.config)
   const isLocalMode = (config?.aiServiceMode || 'local') !== 'cloud'
@@ -794,7 +792,6 @@ export const Organize: React.FC = () => {
                             <BatchTagView
                               files={toOrganizeFiles}
                               dimensionGroups={dimensionGroups}
-                              panDimensionIds={panDimensionIds}
                               onSaveTags={saveBatchTags}
                               onDeleteTagGlobally={deleteTagGlobally}
                               isSaving={isSavingTags}

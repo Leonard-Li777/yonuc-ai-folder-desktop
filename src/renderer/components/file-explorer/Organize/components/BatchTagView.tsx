@@ -21,7 +21,6 @@ export { isExtensionDimension }
 interface BatchTagViewProps {
   files: any[]
   dimensionGroups: DimensionGroup[]
-  panDimensionIds?: number[]
   onSaveTags: (changes: BatchTagOperation) => Promise<void>
   onDeleteTagGlobally?: (dimensionId: number, tagName: string) => Promise<boolean>
   isSaving?: boolean
@@ -379,7 +378,6 @@ DimensionGroupCard.displayName = 'DimensionGroupCard'
 export const BatchTagView: React.FC<BatchTagViewProps> = ({
   files,
   dimensionGroups = [],
-  panDimensionIds = [4, 28],
   onSaveTags,
   isSaving = false,
   inspectedFile = null,
@@ -583,7 +581,7 @@ export const BatchTagView: React.FC<BatchTagViewProps> = ({
       )
 
       // 如果是泛维度，预先排序好 tags，避免每次组件渲染都重复执行 Array.sort
-      const isPan = checkIsPanDimension(group, panDimensionIds)
+      const isPan = checkIsPanDimension(group)
       if (isPan) {
         validTags.sort((a, b) => {
           const countA = tagFileCounts[a.tagValue] ?? a.fileCount ?? 0
@@ -597,15 +595,10 @@ export const BatchTagView: React.FC<BatchTagViewProps> = ({
         tags: validTags
       }
     })
-  }, [fullPresetGroups, dimensionGroups, fileCustomTags, tagFileCounts, deletedTagKeys, panDimensionIds])
+  }, [fullPresetGroups, dimensionGroups, fileCustomTags, tagFileCounts, deletedTagKeys])
 
-  // 判断是否为泛维度（使用共享纯 ID 集合判定）
-  const isPanDimension = useCallback(
-    (group: DimensionGroup) => {
-      return checkIsPanDimension(group, panDimensionIds)
-    },
-    [panDimensionIds]
-  )
+  // 判断是否为泛维度（metadata 驱动，维度自身属性单源判定）
+  const isPanDimension = useCallback((group: DimensionGroup) => checkIsPanDimension(group), [])
 
   // 提取选中聚焦文件所拥有的所有标签集合（兼容数组或单个对象、各种字段名与维度ID）
   const inspectedTagSet = useMemo(() => {

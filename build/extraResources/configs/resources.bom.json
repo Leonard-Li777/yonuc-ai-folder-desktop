@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-09-08T16:43:49.965Z",
+  "generatedAt": "2026-09-09T07:00:15.268Z",
   "resourcePackage": {
     "repo": "Leonard-Li777/firefly-resources",
     "containerTag": "resources"
@@ -121,7 +121,7 @@
       "source": "shared",
       "asset": {
         "name": "chinese-clip-int8.zip",
-        "sha256": "1785a0a0fd41312c3a713989d9dae0ecfadb0e7b6debaf3592d084a18c744153",
+        "sha256": "01ba662f98aa8c68da41f196098cf28d6be18010db6034b9fd0c215a46ff95f0",
         "size": 60385235,
         "url": "https://github.com/Leonard-Li777/firefly-resources/releases/download/resources/chinese-clip-int8.zip"
       }

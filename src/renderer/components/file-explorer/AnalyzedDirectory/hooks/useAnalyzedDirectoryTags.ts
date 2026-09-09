@@ -23,8 +23,6 @@ export const useAnalyzedDirectoryTags = (
   parentTagMap?: Map<string, string[]>
 ) => {
   const showEmptyTags = useSettingsStore(s => s.getConfigValue<boolean>('SHOW_EMPTY_TAGS')) ?? false
-  const panDimensionIds =
-    useSettingsStore(s => s.getConfigValue<number[]>('PAN_DIMENSION_IDS')) || []
 
   const getSelectedTagsFromSetMemo = useMemo(() => {
     return getSelectedTagsFromSet(selectedTagsForAnalyzedDir, dimensionGroups, parentTagMap)
@@ -39,16 +37,15 @@ export const useAnalyzedDirectoryTags = (
 
   const getVisibleAndHiddenTagsCallback = useCallback(
     (group: DimensionGroup, childTags?: any) => {
-      return getVisibleAndHiddenTags(group, showEmptyTags, panDimensionIds, childTags)
+      return getVisibleAndHiddenTags(group, showEmptyTags, childTags)
     },
-    [showEmptyTags, panDimensionIds]
+    [showEmptyTags]
   )
 
   return {
     getSelectedTagsFromSet: getSelectedTagsFromSetMemo,
     buildDimensionTree: buildDimensionTreeCallback,
     getVisibleAndHiddenTags: getVisibleAndHiddenTagsCallback,
-    showEmptyTags,
-    panDimensionIds
+    showEmptyTags
   }
 }

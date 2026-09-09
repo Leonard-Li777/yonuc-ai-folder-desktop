@@ -1,4 +1,5 @@
 import { DimensionGroup, DimensionTag, SelectedTag } from '@firefly/types'
+import { isPanDimension } from '@firefly/shared'
 import { DimensionTreeNode } from './AnalyzedDirectory/types'
 
 /**
@@ -110,7 +111,6 @@ export function buildDimensionTree(
 export function getVisibleAndHiddenTags(
   group: DimensionGroup,
   showEmptyTags: boolean,
-  panDimensionIds: number[],
   childTags?: Map<string, DimensionTreeNode[]>
 ) {
   let visibleTags = group.tags.filter((tag: DimensionTag) => tag.fileCount > 0)
@@ -137,7 +137,7 @@ export function getVisibleAndHiddenTags(
     })
   }
 
-  if (panDimensionIds.includes(group.id)) {
+  if (isPanDimension(group)) {
     visibleTags = visibleTags.sort((a, b) => b.fileCount - a.fileCount)
   }
 

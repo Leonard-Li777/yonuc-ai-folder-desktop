@@ -153,7 +153,6 @@ export class ConfigDbManager {
           // 映射为全大写字段
           const mappings: Record<string, string> = {
             nextVersion: 'NEXT_VERSION',
-            panDimensionIds: 'PAN_DIMENSION_IDS',
             latestNews: 'LATEST_NEWS'
           }
 

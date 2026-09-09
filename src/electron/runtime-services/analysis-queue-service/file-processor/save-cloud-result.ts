@@ -1,4 +1,5 @@
 import { AnalysisQueueItem } from '@firefly/types'
+import type { DimensionMetadata } from '@firefly/types'
 import {
   LogCategory,
   logger,
@@ -7,13 +8,13 @@ import {
   sanitizeFilename,
   cleanSmartName,
   sanitizeAITagValue,
-  isValidAITag
+  isValidAITag,
+  isPanDimension
 } from '@firefly/shared'
 import { t } from '@app/languages'
 import { databaseService } from '../../database/database-service'
 import { magikaService } from '../../system/magika-service'
 import { thumbnailService } from '../../filesystem/thumbnail-service'
-import { ConfigOrchestrator } from '../../../config/config-orchestrator'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -268,13 +269,19 @@ export async function saveCloudResult(
 
       if (data.tags && Array.isArray(data.tags)) {
         // 预取所有正式维度名及预设标签，用于过滤和路由校验
-        const allDimRows = db.prepare('SELECT id, name, tags FROM file_dimensions').all() as Array<{
+        const allDimRows = db
+          .prepare('SELECT id, name, tags, metadata FROM file_dimensions')
+          .all() as Array<{
           id: number
           name: string
           tags: string
+          metadata?: DimensionMetadata | string | null
         }>
         const officialDimNames = new Set(allDimRows.map(d => d.name))
-        const dimMap = new Map<number, { name: string; tags: Set<string> }>()
+        const dimMap = new Map<
+          number,
+          { name: string; tags: Set<string>; metadata?: DimensionMetadata | string | null }
+        >()
         for (const row of allDimRows) {
           let tagList: string[] = []
           try {
@@ -284,19 +291,10 @@ export async function saveCloudResult(
           }
           dimMap.set(row.id, {
             name: row.name,
-            tags: new Set(tagList.map(t => (typeof t === 'string' ? t.toLowerCase().trim() : '')))
+            tags: new Set(tagList.map(t => (typeof t === 'string' ? t.toLowerCase().trim() : ''))),
+            metadata: row.metadata ?? undefined
           })
         }
-
-        let panDimensionIds: number[] = [4, 28]
-        try {
-          panDimensionIds = ConfigOrchestrator.getInstance().getValue<number[]>(
-            'PAN_DIMENSION_IDS'
-          ) || [4, 28]
-        } catch {
-          panDimensionIds = [4, 28]
-        }
-        const panIdSet = new Set([4, 28, ...panDimensionIds.map(Number)])
 
         for (const tag of data.tags) {
           if (typeof tag?.name !== 'string') continue
@@ -309,13 +307,15 @@ export async function saveCloudResult(
             let localDimId = 28
             const dimInfo = dimMap.get(cloudDimId)
             const lowerCleanName = cleanName.toLowerCase()
+            const isDimPan = (id: number, info?: { name: string; metadata?: DimensionMetadata | string | null }) =>
+              info
+                ? isPanDimension({ id, metadata: info.metadata }) ||
+                  info.name === t('作者') ||
+                  info.name === t('内容标签')
+                : false
 
             if (dimInfo) {
-              if (
-                panIdSet.has(cloudDimId) ||
-                dimInfo.name === '作者' ||
-                dimInfo.name === '内容标签'
-              ) {
+              if (isDimPan(cloudDimId, dimInfo)) {
                 localDimId = cloudDimId
               } else if (dimInfo.tags.has(lowerCleanName)) {
                 localDimId = cloudDimId
@@ -323,12 +323,7 @@ export async function saveCloudResult(
                 // 检查是否命中其他非泛维度的预设标签
                 let foundOtherDimId: number | null = null
                 for (const [otherId, otherInfo] of dimMap) {
-                  if (
-                    panIdSet.has(otherId) ||
-                    otherInfo.name === '作者' ||
-                    otherInfo.name === '内容标签'
-                  )
-                    continue
+                  if (isDimPan(otherId, otherInfo)) continue
                   if (otherInfo.tags.has(lowerCleanName)) {
                     foundOtherDimId = otherId
                     break

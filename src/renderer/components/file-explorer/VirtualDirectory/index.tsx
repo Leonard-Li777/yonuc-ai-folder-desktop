@@ -64,7 +64,6 @@ export const VirtualDirectory: React.FC = () => {
     setAnalyzedDirectoryKeyword,
     computed_limits,
     entitlements,
-    config,
     vdirSlotLimit,
     treeData,
     selectedNode,
@@ -256,7 +255,6 @@ export const VirtualDirectory: React.FC = () => {
                   setRenamingId={id => id && dirModalsRef.current?.rename(id)}
                   handleRegenerate={handleRegenerate}
                   handleDelete={id => dirModalsRef.current?.confirmDelete(id)}
-                  config={config}
                   vdirMultiSelectMode={vdirMultiSelectMode}
                   setVdirMultiSelectMode={setVdirMultiSelectMode}
                   vdirSidebarTab={vdirSidebarTab}

@@ -190,7 +190,6 @@ export class ConfigOrchestrator extends EventEmitter {
     const showEmptyTags = this.getValue('SHOW_EMPTY_TAGS') as boolean
     const nextVersion = this.getValue('NEXT_VERSION') as any
     const latestNews = this.getValue('LATEST_NEWS') as any
-    const panDimensionIds = this.getValue('PAN_DIMENSION_IDS') as any
 
     return {
       ...config,
@@ -201,7 +200,6 @@ export class ConfigOrchestrator extends EventEmitter {
       modelPath,
       nextVersion,
       LATEST_NEWS: latestNews,
-      PAN_DIMENSION_IDS: panDimensionIds,
       ui: {
         ...(config.ui || {}),
         showEmptyTags

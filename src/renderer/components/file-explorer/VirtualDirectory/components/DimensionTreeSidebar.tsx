@@ -56,7 +56,6 @@ interface DimensionTreeSidebarProps {
   setRenamingId: (id: number | null) => void
   handleRegenerate: (vd: VirtualDirectoryType) => Promise<void>
   handleDelete: (id: number) => void
-  config: any
   vdirMultiSelectMode: boolean
   setVdirMultiSelectMode: (mode: boolean) => void
   vdirSidebarTab: 'directory' | 'dimensions'
@@ -96,7 +95,6 @@ export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = React.m
     setRenamingId,
     handleRegenerate,
     handleDelete,
-    config,
     vdirMultiSelectMode,
     setVdirMultiSelectMode,
     vdirSidebarTab,
@@ -410,7 +408,6 @@ export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = React.m
                 <SharedDimensionTreeSidebar
                   dimensionGroups={dimensionGroups}
                   showEmptyTags={false}
-                  panDimensionIds={config?.PAN_DIMENSION_IDS || [4, 28]}
                   isExportMode={isExportMode || vdirMultiSelectMode}
                   showSelectAll={isExportMode || vdirMultiSelectMode}
                   storageKey="vdir"

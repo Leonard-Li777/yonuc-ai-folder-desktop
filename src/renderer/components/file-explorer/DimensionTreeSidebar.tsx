@@ -15,7 +15,6 @@ import {
 interface DimensionTreeSidebarProps {
   dimensionGroups: DimensionGroup[]
   showEmptyTags: boolean
-  panDimensionIds: number[]
   isExportMode?: boolean
   showSelectAll?: boolean
   storageKey?: string
@@ -38,7 +37,6 @@ interface DimensionTreeNodeProps {
   parentTagValue?: string
   ancestorChain?: string[]
   isExportMode: boolean
-  panDimensionIds: number[]
   collapsedDimensionGroups: Set<number>
   toggleDimensionGroupCollapsed: (groupId: number) => void
   isTagSelected: (dimensionId: number, tagValue: string, parentTagValue?: string) => boolean
@@ -66,7 +64,6 @@ const DimensionTreeNodeComponent: React.FC<DimensionTreeNodeProps> = React.memo(
     parentTagValue,
     ancestorChain,
     isExportMode,
-    panDimensionIds,
     collapsedDimensionGroups,
     toggleDimensionGroupCollapsed,
     isTagSelected,
@@ -487,7 +484,6 @@ const getAllKeys = (
 export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = ({
   dimensionGroups,
   showEmptyTags,
-  panDimensionIds,
   isExportMode = false,
   showSelectAll = false,
   storageKey,
@@ -925,9 +921,9 @@ export const DimensionTreeSidebar: React.FC<DimensionTreeSidebarProps> = ({
 
   const handleVisibleAndHiddenTags = useCallback(
     (group: DimensionGroup, childTags?: Map<string, DimensionTreeNode[]>) => {
-      return getVisibleAndHiddenTags(group, showEmptyTags, panDimensionIds, childTags)
+      return getVisibleAndHiddenTags(group, showEmptyTags, childTags)
     },
-    [showEmptyTags, panDimensionIds]
+    [showEmptyTags]
   )
 
   const [collapsedTags, setCollapsedTags] = useState<Set<string>>(() => new Set())

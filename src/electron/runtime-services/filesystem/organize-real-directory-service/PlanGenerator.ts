@@ -1,4 +1,4 @@
-import { LogCategory, logger } from '@firefly/shared'
+import { LogCategory, logger, isPanDimension } from '@firefly/shared'
 import { QuickOrganizeOptions, QuickOrganizeService } from '@firefly/core-engine'
 
 import { AIDirectoryStructure } from '@firefly/types/organize-types'
@@ -160,12 +160,9 @@ export class PlanGenerator {
     try {
       const dimensions = this.db
         .prepare(
-          'SELECT id, name, level, tags, trigger_conditions FROM file_dimensions ORDER BY level ASC'
+          'SELECT id, name, level, tags, trigger_conditions, metadata FROM file_dimensions ORDER BY level ASC'
         )
         .all() as any[]
-      const panDimensionIds =
-        ConfigOrchestrator.getInstance().getValue<number[]>('PAN_DIMENSION_IDS') || []
-      const panIdSet = new Set(panDimensionIds)
 
       const specialDimensions = ['题材']
       let sharedDefinitions = ''
@@ -209,7 +206,7 @@ export class PlanGenerator {
 
       const collectDirectories = (dim: any, parentTag = '', depth = 0) => {
         if (depth > 5) return
-        const isPan = panIdSet.has(dim.id)
+        const isPan = isPanDimension({ id: dim.id, metadata: dim.metadata })
         const safeParent = parentTag || ''
 
         if (extractedDimNames.has(dim.name)) {

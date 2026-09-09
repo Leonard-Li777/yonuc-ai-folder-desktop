@@ -110,8 +110,6 @@ export const AnalyzedDirectory: React.FC<AnalyzedDirectoryProps> = () => {
   const dropdownRef = useRef<HTMLDivElement>(null!)
 
   const showEmptyTags = useSettingsStore(s => s.getConfigValue<boolean>('SHOW_EMPTY_TAGS')) ?? false
-  const panDimensionIds =
-    useSettingsStore(s => s.getConfigValue<number[]>('PAN_DIMENSION_IDS')) || []
 
   // Initialize modular hooks
   const state = useAnalyzedDirectoryState(
@@ -555,7 +553,6 @@ export const AnalyzedDirectory: React.FC<AnalyzedDirectoryProps> = () => {
                         <DimensionTreeSidebar
                           dimensionGroups={dimensionGroups}
                           showEmptyTags={showEmptyTags}
-                          panDimensionIds={panDimensionIds}
                           isExportMode={isMultiSelectMode}
                           showSelectAll={isMultiSelectMode}
                           storageKey="analyzedDir"

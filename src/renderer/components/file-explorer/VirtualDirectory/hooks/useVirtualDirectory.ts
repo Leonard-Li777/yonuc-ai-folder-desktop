@@ -11,7 +11,6 @@ import {
 } from '@firefly/types'
 import { useSearchStore } from '../../../../stores/search-store'
 import { useTierStore } from '../../../../stores/tier-store'
-import { useConfigStore } from '../../../../stores/config-store'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useVirtualDirectoryStore } from '../../../../stores/virtual-directory-store'
 import { sanitizeDirectoryName, getFileNameFromPath, logger, LogCategory } from '@firefly/shared'
@@ -93,7 +92,6 @@ export const useVirtualDirectory = () => {
   const { virtualDirectoryKeyword, setVirtualDirectoryKeyword, setAnalyzedDirectoryKeyword } =
     useSearchStore()
   const { computed_limits, entitlements } = useTierStore()
-  const config = useConfigStore(state => state.config)
 
   const vdirSlotLimit = useMemo(() => {
     const wsId = currentWorkspaceDirectory?.id
@@ -773,7 +771,6 @@ export const useVirtualDirectory = () => {
     setAnalyzedDirectoryKeyword,
     computed_limits,
     entitlements,
-    config,
     vdirSlotLimit,
     treeData,
     selectedNode,
