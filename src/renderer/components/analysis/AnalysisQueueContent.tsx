@@ -664,21 +664,21 @@ export function AnalysisQueueContent({
     <div className="flex flex-col h-full w-full bg-background text-foreground overflow-hidden">
       {/* 顶部控制头 */}
       <div
-        className="flex items-center justify-between px-4 py-2 border-b border-border select-none shrink-0 bg-card/60 cursor-default"
+        className="flex items-center justify-between px-4 py-2 border-b border-border select-none shrink-0 bg-card/60 cursor-default min-w-0"
         style={mode === 'window' ? ({ WebkitAppRegion: 'drag' } as React.CSSProperties) : undefined}
         onMouseDown={onHeaderMouseDown}
       >
-        {/* 左侧标题与统计信息 (允许拖拽) */}
-        <div className="flex items-center gap-2">
-          <h2 className="text-sm font-semibold flex items-center gap-2">
-            <span>{t('文件分析队列')}</span>
+        {/* 左侧标题与统计信息 (允许拖拽)，min-w-0 允许在空间不足时收缩 */}
+        <div className="flex items-center gap-2 min-w-0 shrink">
+          <h2 className="text-sm font-semibold flex items-center gap-2 min-w-0">
+            <span className="whitespace-nowrap">{t('文件分析队列')}</span>
             {!isCurrentWsRunning && (
-              <span className="text-xs font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
+              <span className="text-xs font-normal text-muted-foreground bg-muted px-2 py-0.5 rounded-full whitespace-nowrap">
                 {snapshot.activeRunningWorkspaceId ? t('【排队中】') : t('【已暂停】')}
               </span>
             )}
           </h2>
-          <span className="text-xs text-muted-foreground ml-2">
+          <span className="text-xs text-muted-foreground ml-2 whitespace-nowrap hidden sm:inline">
             {t('{count1} 项 · {count2} 单元', {
               count1: items.length,
               count2: unitCount
@@ -686,8 +686,9 @@ export function AnalysisQueueContent({
           </span>
         </div>
 
+        {/* shrink-0 防止按钮区域被挤压收缩，flex-wrap 允许在极小宽度下换行而不溢出 */}
         <div
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 shrink-0 flex-wrap justify-end"
           style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
         >
           {/* 操作按钮反向顺序 */}

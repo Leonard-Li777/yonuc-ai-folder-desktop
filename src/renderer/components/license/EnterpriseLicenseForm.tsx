@@ -29,7 +29,7 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
   onActivated,
   tier = 'enterprise'
 }) => {
-  const [invitationCode, setInvitationCode] = useState<string>('')
+  const [identCode, setIdentCode] = useState<string>('')
   const [licenseCode, setLicenseCode] = useState<string>('')
   const [isActivating, setIsActivating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -93,8 +93,8 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
     const init = async () => {
       if (window.electronAPI?.license) {
         // 获取我的标识码（Base64 编码，可逆）
-        const code = await window.electronAPI.license.getBase64Code()
-        setInvitationCode(code)
+        const code = await window.electronAPI.license.getIdentCode()
+        setIdentCode(code)
 
         // 用户已主动进入离线授权表单，无需调用 getStatus() 触发网络检测
         // 直接标记初始化完成，显示表单
@@ -109,9 +109,13 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
     // 如果已经成功或正在激活，不触发
     if (isSuccess || isActivating || isCheckingInitialStatus) return
 
-    const code = licenseCode.trim()
+    const code = licenseCode.replace(/\s+/g, '')
     if (!code) {
       setError(null)
+      return
+    }
+
+    if (code.length < 50) {
       return
     }
 
@@ -151,7 +155,7 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
   }
 
   const handleCopyRequestCode = () => {
-    navigator.clipboard.writeText(invitationCode)
+    navigator.clipboard.writeText(identCode)
     toast.success(t('标识码已复制到剪贴板'))
   }
 
@@ -160,13 +164,14 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
   }
 
   const handleActivate = async (code: string) => {
-    if (!code) return
+    const cleanCode = code.replace(/\s+/g, '')
+    if (!cleanCode) return
 
     setIsActivating(true)
     setError(null)
 
     try {
-      const result = await window.electronAPI!.license.activate(code)
+      const result = await window.electronAPI!.license.activate(cleanCode)
       if (result.success) {
         setIsSuccess(true)
         // 重新获取状态以更新过期时间
@@ -259,7 +264,7 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
           <div className="relative group">
             <Input
               readOnly
-              value={invitationCode}
+              value={identCode}
               className="font-mono text-lg bg-muted/40 border-2 border-border/60 h-16 pr-28 focus-visible:ring-primary/30 transition-all rounded-2xl shadow-sm"
             />
             <Button
@@ -315,11 +320,7 @@ export const EnterpriseLicenseForm: React.FC<EnterpriseLicenseFormProps> = ({
           <div className="relative">
             <Input
               id="license"
-              placeholder={
-                tier === 'pro'
-                  ? t('粘贴您购买的 Pro 版授权码...')
-                  : t('粘贴管理员发送给您的企业版授权码...')
-              }
+              placeholder={t('在此粘贴离线授权码...')}
               value={licenseCode}
               onChange={e => {
                 setLicenseCode(e.target.value)

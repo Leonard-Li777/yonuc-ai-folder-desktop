@@ -136,6 +136,27 @@ const electronAPI = {
     return () => ipcRenderer.removeListener('app:navigate-route', handler)
   },
 
+  // 深度链接（URL Schemes，如 firefly://rules?tab=consumption）
+  onDeepLink: (
+    callback: (payload: {
+      url: string
+      action: string
+      tab?: string
+      params?: Record<string, string>
+    }) => void
+  ) => {
+    const handler = (_event: any, payload: any) => callback(payload)
+    ipcRenderer.on('app:deep-link', handler)
+    return () => ipcRenderer.removeListener('app:deep-link', handler)
+  },
+
+  getPendingDeepLink: (): Promise<{
+    url: string
+    action: string
+    tab?: string
+    params?: Record<string, string>
+  } | null> => ipcRenderer.invoke('app:get-pending-deep-link'),
+
   getStartupFlags: (): Promise<{ forceConfigStage: boolean }> =>
     ipcRenderer.invoke('startup/get-flags'),
 
@@ -376,7 +397,8 @@ const electronAPI = {
     checkOnline: (): Promise<{ status: string; expiry?: string; error?: string; type?: string }> =>
       ipcRenderer.invoke('license/check-online'),
     getInvitationCode: (): Promise<string> => ipcRenderer.invoke('license/get-invitation-code'),
-    getBase64Code: (): Promise<string> => ipcRenderer.invoke('license/get-base64-code'),
+    getIdentCode: (): Promise<string> => ipcRenderer.invoke('license/get-ident-code'),
+    getBase64Code: (): Promise<string> => ipcRenderer.invoke('license/get-ident-code'),
     activate: (licenseCode: string): Promise<{ success: boolean; error?: string }> =>
       ipcRenderer.invoke('license/activate', licenseCode),
     onUnauthorized: (callback: (result: any) => void) => {
@@ -1404,28 +1426,16 @@ const electronAPI = {
   },
 
   // 获取 Omni 引擎版本号
-  getOmniVersion: (): Promise<string> => ipcRenderer.invoke('omni/getVersion')
+  getOmniVersion: (): Promise<string> => ipcRenderer.invoke('omni/getVersion'),
 
-  // FFmpeg 事件监听器
-  /*
-  onFfmpegInstallProgress: (callback: (data: { message: string; percent?: number }) => void) => {
-    const handler = (_event: any, payload: { message: string; percent?: number }) => callback(payload)
-    ipcRenderer.on('ffmpeg:install-progress', handler)
-    return () => ipcRenderer.removeListener('ffmpeg:install-progress', handler)
-  },
-
-  onFfmpegInstallComplete: (callback: (data: { path: string }) => void) => {
-    const handler = (_event: any, payload: { path: string }) => callback(payload)
-    ipcRenderer.on('ffmpeg:install-complete', handler)
-    return () => ipcRenderer.removeListener('ffmpeg:install-complete', handler)
-  },
-
-  onFfmpegInstallError: (callback: (data: { error: string }) => void) => {
-    const handler = (_event: any, payload: { error: string }) => callback(payload)
-    ipcRenderer.on('ffmpeg:install-error', handler)
-    return () => ipcRenderer.removeListener('ffmpeg:install-error', handler)
-  },
-  */
+  // 获取当前 Worktree 环境信息
+  getWorktreeInfo: (): Promise<{
+    worktreeName: string
+    region: string
+    isProd: boolean
+    appName: string
+    userDataDir: string
+  }> => ipcRenderer.invoke('app:getWorktreeInfo')
 }
 
 // 类型定义

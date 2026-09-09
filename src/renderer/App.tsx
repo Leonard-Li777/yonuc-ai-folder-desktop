@@ -27,8 +27,6 @@ import { Organize } from './components/file-explorer/Organize/index'
 import { WelcomeWizard } from './components/welcome/WelcomeWizard'
 import { InitialSetupOverlay } from './components/welcome/InitialSetupOverlay'
 import { LicenseGateway } from './components/license/LicenseGateway'
-import { ProActivationPage } from './components/tier/ProActivationPage'
-import { EnterpriseActivationPage } from './components/tier/EnterpriseActivationPage'
 import { Loader2 } from 'lucide-react'
 import { Card } from './components/ui/card'
 import { t, i18nScope } from '@app/languages'
@@ -43,6 +41,7 @@ import { useInvitation } from './hooks/useInvitation'
 import { useAnalyzedDirectoryStore } from './stores/analyzed-directory-store'
 import { useVirtualDirectoryStore } from './stores/virtual-directory-store'
 import { useTierStore } from './stores/tier-store'
+import { FirecoresRulesDialog } from './components/tier/FirecoresRulesDialog'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -61,6 +60,8 @@ const App: React.FC = () => {
   // Initialize invitation system
   useInvitation()
 
+  const { isRulesOpen, rulesDefaultTab, openRulesDialog, closeRulesDialog } = useTierStore()
+
   const location = useLocation()
   const currentPath = location.pathname
   const navigate = useNavigate()
@@ -70,8 +71,6 @@ const App: React.FC = () => {
   const [hasMountedAnalyzed, setHasMountedAnalyzed] = useState(false)
   const [hasMountedOrganize, setHasMountedOrganize] = useState(false)
   const [hasMountedVirtual, setHasMountedVirtual] = useState(false)
-  const [hasMountedProActivation, setHasMountedProActivation] = useState(false)
-  const [hasMountedEnterpriseActivation, setHasMountedEnterpriseActivation] = useState(false)
 
   useEffect(() => {
     if (currentPath === '/' || currentPath === '/real-directory') {
@@ -82,10 +81,6 @@ const App: React.FC = () => {
       setHasMountedOrganize(true)
     } else if (currentPath.startsWith('/virtual-directory')) {
       setHasMountedVirtual(true)
-    } else if (currentPath === '/pro-activation') {
-      setHasMountedProActivation(true)
-    } else if (currentPath === '/enterprise-activation') {
-      setHasMountedEnterpriseActivation(true)
     }
   }, [currentPath])
 
@@ -108,6 +103,48 @@ const App: React.FC = () => {
       cleanup?.()
     }
   }, [navigate])
+
+  // 监听深链接跳转（如 firefly://rules?tab=consumption）
+  useEffect(() => {
+    const handleDeepLinkPayload = async (payload: {
+      url: string
+      action: string
+      tab?: string
+      params?: Record<string, string>
+    }) => {
+      logger.info(LogCategory.RENDERER, '[DeepLink] 收到深链接请求:', payload)
+      if (payload.action === 'rules' || payload.action === 'consumption' || payload.action === 'transactions') {
+        try {
+          const tierStore = useTierStore.getState()
+          // 优先从云端全量同步最新资产与流水记录（降级读本地缓存）
+          await Promise.all([
+            tierStore.syncFromCloud().catch(() => tierStore.fetchProfile().catch(() => {})),
+            tierStore.fetchConsumptionDetails().catch(() => {})
+          ])
+          // 打开萤火规则弹层并定位到对应 Tab（默认 consumption）
+          tierStore.openRulesDialog(payload.tab || 'consumption')
+        } catch (e) {
+          logger.error(LogCategory.RENDERER, '[DeepLink] 处理 rules 深链接失败:', e)
+        }
+      }
+    }
+
+    // 1. 处理冷启动暂存的深链接
+    window.electronAPI?.getPendingDeepLink?.().then(pending => {
+      if (pending) {
+        handleDeepLinkPayload(pending)
+      }
+    })
+
+    // 2. 监听运行中的深链接事件
+    const cleanup = window.electronAPI?.onDeepLink?.(payload => {
+      handleDeepLinkPayload(payload)
+    })
+
+    return () => {
+      cleanup?.()
+    }
+  }, [])
 
   // 同步两个 store 中的 currentWorkspaceDirectory 和 workspaceDirectories，确保所有页面数据一致
   useEffect(() => {
@@ -1054,34 +1091,6 @@ const App: React.FC = () => {
 
 
 
-          {/* Pro 开通页面 - KeepAlive */}
-          {hasMountedProActivation && (
-            <div
-              className={cn(
-                'absolute inset-0 flex flex-col overflow-hidden transition-opacity duration-200',
-                currentPath === '/pro-activation'
-                  ? 'opacity-100 z-[60]'
-                  : 'opacity-0 pointer-events-none z-0'
-              )}
-            >
-              <ProActivationPage />
-            </div>
-          )}
-
-          {/* 企业版开通页面 - KeepAlive */}
-          {hasMountedEnterpriseActivation && (
-            <div
-              className={cn(
-                'absolute inset-0 flex flex-col overflow-hidden transition-opacity duration-200',
-                currentPath === '/enterprise-activation'
-                  ? 'opacity-100 z-[60]'
-                  : 'opacity-0 pointer-events-none z-0'
-              )}
-            >
-              <EnterpriseActivationPage />
-            </div>
-          )}
-
           {/* 基础路由占位，确保路由系统正常工作 */}
           <Routes>
             <Route path="/" element={null} />
@@ -1091,8 +1100,6 @@ const App: React.FC = () => {
             <Route path="/virtual-directory" element={null} />
             <Route path="/virtual-directory/export" element={null} />
             <Route path="/preview-window" element={null} />
-            <Route path="/pro-activation" element={null} />
-            <Route path="/enterprise-activation" element={null} />
             <Route path="/queue-window" element={<QueueWindowPage />} />
           </Routes>
         </div>
@@ -1103,6 +1110,11 @@ const App: React.FC = () => {
         <AnalysisConfirmModal />
         <ToastContainer />
         <SettingsDialog />
+        <FirecoresRulesDialog
+          open={isRulesOpen}
+          onOpenChange={open => (open ? openRulesDialog() : closeRulesDialog())}
+          defaultTab={rulesDefaultTab}
+        />
 
         {/* AI服务错误对话框 */}
         <AIServiceErrorDialog

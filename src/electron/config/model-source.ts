@@ -526,6 +526,31 @@ export const MODEL_CONFIG_SOURCE = () => ({
       }
     },
     {
+      id: 'openbmb/MiniCPM5-2B-GGUF:Q4_K_M',
+      name: `MiniCPM5 2B（${t('顶级')}）`,
+      company: 'OpenBMB',
+      parameterSize: '2B',
+      totalSize: '1.45GB',
+      recommended: true,
+      description: t(
+        '2B 级开源 SOTA 文本模型，代码推理、数学与长上下文能力突出，支持思维链推理，仅支持文本分析。'
+      ),
+      source: 'huggingface',
+      quantization: 'Q4_K_M',
+      isMultiModal: false,
+      contextLength: 131072,
+      capabilities: ['TEXT'],
+      performance: {
+        speed: 'very_fast',
+        quality: 'very_high'
+      },
+      tags: [t('仅文本'), t('编程优化'), t('思维链'), t('中文更佳')],
+      recommendedConfig: {
+        numCtx: 16384,
+        numPredict: 4096
+      }
+    },
+    {
       id: 'Abiray/Nanbeige4.2-3B-GGUF:Q4_K_S',
       name: t('Nanbeige 4.2 3B（超越9B）'),
       company: 'Abiray',

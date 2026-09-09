@@ -182,6 +182,46 @@ export default defineConfig(({ command, mode }) => {
     console.log(`🔧 [electron-vite] 已加载 Worktree 专属配置: ${worktreeEnvPath}`)
   }
 
+  // 构建环境标识：区域 - 环境 - Worktree/分支名
+  // 供渲染进程 Footer 在开发模式下显示，便于区分多 Worktree 并发的当前实例
+  const detectWorktreeBranch = (): string => {
+    const sanitize = (name: string) => name.replace(/[^a-zA-Z0-9_-]/g, '-').toLowerCase()
+    if (process.env.WORKTREE_NAME && process.env.WORKTREE_NAME.trim()) {
+      return sanitize(process.env.WORKTREE_NAME.trim())
+    }
+    try {
+      let currentDir = __dirname
+      for (let i = 0; i < 4; i++) {
+        const gitPath = path.join(currentDir, '.git')
+        if (fs.existsSync(gitPath)) {
+          const stat = fs.statSync(gitPath)
+          if (stat.isFile()) {
+            // worktree 检出目录的 .git 为文件，内容指向主仓库 worktrees/<name>
+            const content = fs.readFileSync(gitPath, 'utf-8').trim()
+            const match = content.match(/worktrees[/\\]([^/\r\n\\]+)/i)
+            if (match && match[1]) return sanitize(match[1])
+            return sanitize(path.basename(currentDir))
+          }
+          // 主仓库（.git 为目录）：检查目录本身是否位于 worktrees 下
+          const topMatch = currentDir.match(/worktrees[/\\]([^/\r\n\\]+)/i)
+          if (topMatch && topMatch[1]) return sanitize(topMatch[1])
+          return 'main'
+        }
+        const parent = path.dirname(currentDir)
+        if (parent === currentDir) break
+        currentDir = parent
+      }
+    } catch {
+      // ignore
+    }
+    return 'main'
+  }
+  const buildEnvLabel = ['development', 'canary', 'production'].includes(mode)
+    ? mode
+    : env.APP_ENV
+  const regionLabel = (process.env.BUILD_REGION || 'CN').toUpperCase()
+  const __BUILD_LABEL__ = `${regionLabel} - ${buildEnvLabel} - ${detectWorktreeBranch()}`
+
   const isPortFreeSync = (port: number): boolean => {
     try {
       const net = require('net')
@@ -343,6 +383,7 @@ export default defineConfig(({ command, mode }) => {
         __AI_ENGINE__: JSON.stringify(process.env.AI_ENGINE || env.AI_ENGINE || 'llama.cpp'),
         __APP_VERSION__: JSON.stringify(pkg.version),
         __BUILD_REGION__: JSON.stringify(process.env.BUILD_REGION || 'CN'),
+        __BUILD_LABEL__: JSON.stringify(__BUILD_LABEL__),
         'process.env.APP_ENV': JSON.stringify(env.APP_ENV || mode),
         'process.env.AI_ENGINE': JSON.stringify(
           process.env.AI_ENGINE || env.AI_ENGINE || 'llama.cpp'
@@ -499,6 +540,7 @@ export default defineConfig(({ command, mode }) => {
         __IS_PROD__: JSON.stringify(isProd),
         __APP_VERSION__: JSON.stringify(pkg.version),
         __BUILD_REGION__: JSON.stringify(process.env.BUILD_REGION || 'CN'),
+        __BUILD_LABEL__: JSON.stringify(__BUILD_LABEL__),
         'process.env.APP_ENV': JSON.stringify(env.APP_ENV || mode),
         'process.env.BUILD_REGION': JSON.stringify(process.env.BUILD_REGION || 'CN')
       },
@@ -592,7 +634,7 @@ export default defineConfig(({ command, mode }) => {
         tailwindcss(),
         voerkai18nVitePlugin(),
         react(),
-        isProd &&
+        isProd && // 如果开启会导致开发模式启动非常慢
           fileViewerRenderers({
             preset: 'standard',
             autoPresets: false,
@@ -647,6 +689,7 @@ export default defineConfig(({ command, mode }) => {
         __AI_ENGINE__: JSON.stringify(process.env.AI_ENGINE || env.AI_ENGINE || 'llama.cpp'),
         __APP_VERSION__: JSON.stringify(pkg.version),
         __BUILD_REGION__: JSON.stringify(process.env.BUILD_REGION || 'CN'),
+        __BUILD_LABEL__: JSON.stringify(__BUILD_LABEL__),
         'process.env.BUILD_REGION': JSON.stringify(process.env.BUILD_REGION || 'CN'),
         'process.env.APP_ENV': JSON.stringify(env.APP_ENV || mode),
         'process.env.AI_ENGINE': JSON.stringify(

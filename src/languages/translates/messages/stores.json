@@ -48,7 +48,7 @@
       "src/renderer/stores/ai-service-store.ts(10053-10061)",
       "src/renderer/stores/ai-service-store.ts(13708-13716)",
       "src/renderer/stores/ai-service-store.ts(17239-17247)",
-      "src/renderer/stores/tier-store.ts(3860-3868)"
+      "src/renderer/stores/tier-store.ts(4953-4961)"
     ],
     "$id": 8872
   },
@@ -335,7 +335,7 @@
     "de-DE": "Die Transaktion ist fehlgeschlagen und die abgezogenen Firecores wurden zurückgegeben. Grund: {reason}",
     "fr-FR": "La transaction a échoué et les pièces déduites ont été restituées. Raison: {reason}",
     "ko-KR": "거래가 실패하여 차감된 코인이 반환되었습니다. 이유: {reason}",
-    "$files": ["src/renderer/stores/tier-store.ts(4875-4901)"],
+    "$files": ["src/renderer/stores/tier-store.ts(6048-6074)"],
     "$id": 8873
   }
 }

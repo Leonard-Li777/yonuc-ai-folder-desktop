@@ -39,7 +39,7 @@
     "de-DE": "Das System konfiguriert den öffentlichen Schlüssel nicht",
     "fr-FR": "Le système ne configure pas la clé publique",
     "ko-KR": "시스템이 공개 키를 구성하지 않습니다.",
-    "$files": ["src/electron/runtime-services/system/license-service.ts(16372-16383)"],
+    "$files": ["src/electron/runtime-services/system/license-service.ts(16504-16515)"],
     "$id": 11064
   },
   "该授权码不适用于当前机器": {
@@ -52,7 +52,7 @@
     "de-DE": "Der Autorisierungscode gilt nicht für die aktuelle Maschine",
     "fr-FR": "Le code d'autorisation ne s'applique pas à la machine actuelle",
     "ko-KR": "인증 코드는 현재 기기에 적용되지 않습니다",
-    "$files": ["src/electron/runtime-services/system/license-service.ts(16783-16799)"],
+    "$files": ["src/electron/runtime-services/system/license-service.ts(16914-16930)"],
     "$id": 11065
   },
   "该授权码已过期": {
@@ -66,8 +66,8 @@
     "fr-FR": "Le code d'autorisation a expiré",
     "ko-KR": "인증 코드가 만료되었습니다",
     "$files": [
-      "src/electron/runtime-services/system/license-service.ts(17283-17294)",
-      "src/electron/runtime-services/system/license-service.ts(17503-17514)"
+      "src/electron/runtime-services/system/license-service.ts(17414-17425)",
+      "src/electron/runtime-services/system/license-service.ts(17634-17645)"
     ],
     "$id": 11066
   },
@@ -81,7 +81,7 @@
     "de-DE": "Die Schreibberechtigung ist fehlgeschlagen",
     "fr-FR": "L'autorisation d'écriture a échoué",
     "ko-KR": "쓰기 승인 실패",
-    "$files": ["src/electron/runtime-services/system/license-service.ts(18838-18848)"],
+    "$files": ["src/electron/runtime-services/system/license-service.ts(18969-18979)"],
     "$id": 11067
   },
   "性能优化正在进行中": {
@@ -94,7 +94,7 @@
     "de-DE": "Leistungsoptimierung läuft",
     "fr-FR": "L'optimisation des performances est en cours",
     "ko-KR": "성능 최적화 진행 중",
-    "$files": ["src/electron/runtime-services/system/performance-optimizer.ts(14441-14454)"],
+    "$files": ["src/electron/runtime-services/system/performance-optimizer.ts(14272-14285)"],
     "$id": 8141
   },
   "不支持的资源类型: {type}": {

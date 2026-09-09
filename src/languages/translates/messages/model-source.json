@@ -51,8 +51,7 @@
       "src/electron/config/model-source.ts(17666-17672)",
       "src/electron/config/model-source.ts(20393-20399)",
       "src/electron/config/model-source.ts(22556-22562)",
-      "src/electron/config/model-source.ts(22978-22984)",
-      "src/electron/config/model-source.ts(23603-23609)"
+      "src/electron/config/model-source.ts(22978-22984)"
     ],
     "$id": 9607
   },
@@ -75,8 +74,7 @@
       "src/electron/config/model-source.ts(15129-15140)",
       "src/electron/config/model-source.ts(17675-17686)",
       "src/electron/config/model-source.ts(20402-20413)",
-      "src/electron/config/model-source.ts(22987-22998)",
-      "src/electron/config/model-source.ts(23612-23623)"
+      "src/electron/config/model-source.ts(22987-22998)"
     ],
     "$id": 9608
   },
@@ -92,8 +90,7 @@
     "ko-KR": "극한의 속도",
     "$files": [
       "src/electron/config/model-source.ts(957-963)",
-      "src/electron/config/model-source.ts(1620-1626)",
-      "src/electron/config/model-source.ts(23636-23642)"
+      "src/electron/config/model-source.ts(1620-1626)"
     ],
     "$id": 11221
   },
@@ -137,10 +134,7 @@
     "de-DE": "Leichte Bilderkennung",
     "fr-FR": "Reconnaissance d'image légère",
     "ko-KR": "경량 이미지 인식",
-    "$files": [
-      "src/electron/config/model-source.ts(1823-1831)",
-      "src/electron/config/model-source.ts(23195-23203)"
-    ],
+    "$files": ["src/electron/config/model-source.ts(1823-1831)"],
     "$id": 9475
   },
   "极致运行速度，适合极低配置环境，且支持图片分析，欠精准。": {
@@ -196,8 +190,7 @@
       "src/electron/config/model-source.ts(19074-19081)",
       "src/electron/config/model-source.ts(19747-19754)",
       "src/electron/config/model-source.ts(21701-21708)",
-      "src/electron/config/model-source.ts(22349-22356)",
-      "src/electron/config/model-source.ts(23626-23633)"
+      "src/electron/config/model-source.ts(22349-22356)"
     ],
     "$id": 9613
   },
@@ -1203,18 +1196,5 @@
     "ko-KR": "가볍고 효율적인 텍스트 모델은 텍스트 분석 만 지원합니다.",
     "$files": ["src/electron/config/model-source.ts(22673-22711)"],
     "$id": 11395
-  },
-  "超轻量多模态模型，支持文本与图像分析，适合极低配置环境。": {
-    "en-US": "An ultra-lightweight multimodal model that supports text and image analysis and is suitable for environments with very low system requirements.",
-    "es-ES": "Modelo multimodal ultraligero que admite el análisis de texto e imágenes, ideal para entornos con una configuración muy básica.",
-    "ar-EG": "نموذج متعدد الوسائط خفيف الوزن للغاية، يدعم تحليل النصوص والصور، ومناسب للبيئات ذات المواصفات المنخفضة للغاية.",
-    "pt-PT": "Modelo multimodal ultraleve, compatível com a análise de texto e imagens, adequado para ambientes com configurações de hardware muito modestas.",
-    "ru-RU": "Сверхлегкая мультимодальная модель, поддерживающая анализ текста и изображений, подходящая для систем с крайне низкими системными требованиями.",
-    "ja-JP": "超軽量のマルチモーダルモデルで、テキストと画像の分析に対応しており、極めて低スペックな環境に適しています。",
-    "de-DE": "Ein extrem leichtes multimodales Modell, das Text- und Bildanalysen unterstützt und sich für Umgebungen mit sehr geringen Systemanforderungen eignet.",
-    "fr-FR": "Modèle multimodal ultra-léger, prenant en charge l'analyse de texte et d'images, adapté aux environnements aux ressources très limitées.",
-    "ko-KR": "초경량 다모달 모델로, 텍스트 및 이미지 분석을 지원하며, 매우 낮은 사양의 환경에도 적합합니다.",
-    "$files": ["src/electron/config/model-source.ts(23311-23343)"],
-    "$id": 16361
   }
 }
